@@ -88,7 +88,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/14/My-New-Post/" data-id="cjn8cck9d00005kvxydvetsv1" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/14/My-New-Post/" data-id="cjnbt7wro0000vkvxflyqmp2a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -133,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/14/hello-world/" data-id="cjn8cck9l00025kvx26i0fpxu" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/14/hello-world/" data-id="cjnbt7wrx0002vkvxz70d5pb2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,12 +176,37 @@
 <li>install</li>
 <li>environment configuration setting:</li>
 <li>Compter&gt; System&gt;Advance System Settings&gt;Environment&gt;Path</li>
+<li>Check python installed or not， input python</li>
 </ol>
-<h3 id="Java-install"><a href="#Java-install" class="headerlink" title="Java install"></a>Java install</h3>
+<h3 id="Java-install"><a href="#Java-install" class="headerlink" title="Java install"></a>Java install</h3><ol>
+<li>download package from <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></li>
+<li>install </li>
+<li>environment configuration setting:</li>
+<li>same as java</li>
+<li>Check java installed or not， input java -version in cmd</li>
+</ol>
+<h3 id="Tomcat-installation"><a href="#Tomcat-installation" class="headerlink" title="Tomcat installation"></a>Tomcat installation</h3><ol>
+<li>Download tomcat</li>
+<li><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi</a></li>
+</ol>
+<h3 id="Jenkins-installation"><a href="#Jenkins-installation" class="headerlink" title="Jenkins installation"></a>Jenkins installation</h3><ol>
+<li>download : <a href="https://jenkins.io/download/" target="_blank" rel="noopener">https://jenkins.io/download/</a></li>
+<li><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></li>
+<li>install the plungins which are recommanded, and set administors </li>
+<li>login</li>
+</ol>
+<h3 id="Allure-installation"><a href="#Allure-installation" class="headerlink" title="Allure installation"></a>Allure installation</h3><h2 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h2><ol>
+<li>Cannot run the software mainly due to the paths are not correct</li>
+<li>Jenkins can not run always due to the port is occupied</li>
+<li>If you forget you‘re jenkins’ administors password, you can do the following steps</li>
+</ol>
+<p>One situation: password isn’t changed<br>A}Enter in  ..\Jenkins\secrets, open initialAdminPassword file, copy password<br>B}Visit Jenkins webpage, enter admin and the password<br>C}Login and change the password </p>
+<p>Second situation: password is changed<br>A)Delete config.xml under Jenkins file and save<br>  <usesecurity>true</usesecurity><br>  <authorizationstrategy class="hudson.security.AuthorizationStrategy$Unsecured"><br>  <securityrealm class="hudson.security.HudsonPrivateSecurityRealm"><br>    <disablesignup>false</disablesignup><br>    <enablecaptcha>false</enablecaptcha><br>  </securityrealm><br>B} Rebbot Jenkins service<br>C} Enter main page&gt; “System Management” &gt; “Configure Global Security”<br>D} Enable “Enable Security”<br>E} Check “Jenkins’ user database”, save<br>F} Enter main page&gt; “System Management” &gt; “Manage Users”<br>G} Enter “User list”<br>H} Modify password, then login again</authorizationstrategy></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/09/23/Pytest-Jenkins/" data-id="cjn8cck9i00015kvx8hyuf1zp" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/09/23/Pytest-Jenkins/" data-id="cjnbt7wrt0001vkvx60r8rtrv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li></ul>
@@ -268,7 +293,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 ying<br>
+      &copy; 2018 Ying<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
