@@ -5,19 +5,19 @@
   
 
   
-  <title>MYSQL_Study1 | Ying&#39;s Blog</title>
+  <title>MYSQL Study Framework - Basic logical | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Framework  In general, MYSQL include Server Layer and Storage Engine Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function,">
 <meta name="keywords" content="QA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MYSQL_Study1">
+<meta property="og:title" content="MYSQL Study Framework - Basic logical">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
 <meta property="og:description" content="Framework  In general, MYSQL include Server Layer and Storage Engine Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-15T02:27:10.779Z">
+<meta property="og:updated_time" content="2018-12-16T07:55:52.282Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MYSQL_Study1">
+<meta name="twitter:title" content="MYSQL Study Framework - Basic logical">
 <meta name="twitter:description" content="Framework  In general, MYSQL include Server Layer and Storage Engine Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function,">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
@@ -83,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MYSQL_Study1
+      MYSQL Study Framework - Basic logical
     </h1>
   
 
@@ -96,11 +96,31 @@
 </ol>
 <p>In general, MYSQL include Server Layer and Storage Engine</p>
 <p>Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which contain<br>most of the core service function, and all the built-in functions(such as date, time,mathmatics and encryption functions),<br>all the cross-storage engine functionality are realized on this layer, like storage process, trigger and view</p>
+<p>Storage Engine Layer charges the storage and extract of data, whose framework is plug-in type, which support multiple storage engine such as InnoDB,MylSAM, Memory etc.<br>Currently, InnoDB is mainly used, it as default storage engine after MYSQL 5.5.5.<br>That means without defining an engine type, the default one is InnoDB when you create a table.<br>However you can assign other engines too, system would use memory engine if you used engine= memory when create table.<br>Different data storage methods are difference with using different storage engines, as well as function support.</p>
+<p>From the picture, it’s clear that all the storage engines share the same Server Layer.</p>
+<h4 id="Connectors"><a href="#Connectors" class="headerlink" title="Connectors"></a>Connectors</h4><p>First step, when you connect to the DataBase, connectors are meet firstly, which are getting connect, acquiring limitations, maintains and managing connection.<br>Command as:</p>
+<p>mysql -h$ip -P$port -u$user -p</p>
+<p>After finished this, input password in the interact dialogue, password can also behind -p, but it may lead your password leaked.<br>连接命令中，mysql 是客户端工具，用来与服务器建立连接。<br>完成TCP 握手之后，连接器开始认证身份，使用的就是刚输入的用户名和密码。</p>
+<p>.If account/password isn’t correct, you will received error info “Access denied for user”, then end execution by client program.<br>.If you passed the verification, connector will figure out your limitation. Permissions your account have are depend  on the limitations found now.</p>
+<p>这意味着，一个用户成功建立连接之后， 即便你使用管理员账号对其进行了修改，也无法影响已存在的连接权限。 修改完成后，需要再次建立连接，权限才可生效。</p>
+<p>连接完成后，如果没有后续动作，这个连接就处于空闲状态。你可以在show processlist 看到。 ， 其中。 command 列显示的是其状态。</p>
+<p>如果客户端太长时间没动静，连接器就会自动断开，这个时间由参数 wait_timeout 控制的，默认值是8小时。<br>若连接断开之后，客户端再次发送请求得话，会收到一个错误提醒：Lost connection to Mysql server during query。</p>
+<p>数据库里面，长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。<br>短连接，指每次执行完很少得几次查询就断开连接，下次查询再重新建立一个。</p>
+<p>建立连接得过程通常是比较复杂得，所以需要尽量减少建立连接得动作，也就是尽量使用长连接。<br>全部使用长连接后得可能问题， 有时候， MYSQL 占用内存涨得特别快，因为MYSQL 在执行过程中临时使用的内存是管理在连接对象里面的。<br>这些资源只有在断开连接才会释放， 长时间积累下来，可能会导致内存占用太大，被系统强行杀掉（OOM）， 从现象看就是MYSQL 异常重启。</p>
+<p>解决方案：</p>
+<ol>
+<li><p>定期断开长连接。 使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接， 之后要查询再重连接。</p>
+</li>
+<li><p>若使用的是MYSQL 5.7 或更新版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源。 这个过程不需要重连和重新做权限验证，但会将连接恢复到刚刚创建完成时的状态。</p>
+</li>
+</ol>
+<h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><p>建立完连接后，可以执行select 语句。 执行逻辑就会来到第二步： 查询缓存。</p>
+<p>mysql拿到查询请求后，会先到查询缓存看看，查看是否之前执行过这条语句</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjpq8yzok0005ocvxbb5vb8ti" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjpqlj54e000a68vxe9xjty4x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -172,7 +192,7 @@
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL_Study1</a>
+            <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL Study Framework - Basic logical</a>
           </li>
         
           <li>

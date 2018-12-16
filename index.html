@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL_Study1</a>
+      <a class="article-title" href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL Study Framework - Basic logical</a>
     </h1>
   
 
@@ -93,11 +93,31 @@
 </ol>
 <p>In general, MYSQL include Server Layer and Storage Engine</p>
 <p>Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which contain<br>most of the core service function, and all the built-in functions(such as date, time,mathmatics and encryption functions),<br>all the cross-storage engine functionality are realized on this layer, like storage process, trigger and view</p>
+<p>Storage Engine Layer charges the storage and extract of data, whose framework is plug-in type, which support multiple storage engine such as InnoDB,MylSAM, Memory etc.<br>Currently, InnoDB is mainly used, it as default storage engine after MYSQL 5.5.5.<br>That means without defining an engine type, the default one is InnoDB when you create a table.<br>However you can assign other engines too, system would use memory engine if you used engine= memory when create table.<br>Different data storage methods are difference with using different storage engines, as well as function support.</p>
+<p>From the picture, it’s clear that all the storage engines share the same Server Layer.</p>
+<h4 id="Connectors"><a href="#Connectors" class="headerlink" title="Connectors"></a>Connectors</h4><p>First step, when you connect to the DataBase, connectors are meet firstly, which are getting connect, acquiring limitations, maintains and managing connection.<br>Command as:</p>
+<p>mysql -h$ip -P$port -u$user -p</p>
+<p>After finished this, input password in the interact dialogue, password can also behind -p, but it may lead your password leaked.<br>连接命令中，mysql 是客户端工具，用来与服务器建立连接。<br>完成TCP 握手之后，连接器开始认证身份，使用的就是刚输入的用户名和密码。</p>
+<p>.If account/password isn’t correct, you will received error info “Access denied for user”, then end execution by client program.<br>.If you passed the verification, connector will figure out your limitation. Permissions your account have are depend  on the limitations found now.</p>
+<p>这意味着，一个用户成功建立连接之后， 即便你使用管理员账号对其进行了修改，也无法影响已存在的连接权限。 修改完成后，需要再次建立连接，权限才可生效。</p>
+<p>连接完成后，如果没有后续动作，这个连接就处于空闲状态。你可以在show processlist 看到。 ， 其中。 command 列显示的是其状态。</p>
+<p>如果客户端太长时间没动静，连接器就会自动断开，这个时间由参数 wait_timeout 控制的，默认值是8小时。<br>若连接断开之后，客户端再次发送请求得话，会收到一个错误提醒：Lost connection to Mysql server during query。</p>
+<p>数据库里面，长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。<br>短连接，指每次执行完很少得几次查询就断开连接，下次查询再重新建立一个。</p>
+<p>建立连接得过程通常是比较复杂得，所以需要尽量减少建立连接得动作，也就是尽量使用长连接。<br>全部使用长连接后得可能问题， 有时候， MYSQL 占用内存涨得特别快，因为MYSQL 在执行过程中临时使用的内存是管理在连接对象里面的。<br>这些资源只有在断开连接才会释放， 长时间积累下来，可能会导致内存占用太大，被系统强行杀掉（OOM）， 从现象看就是MYSQL 异常重启。</p>
+<p>解决方案：</p>
+<ol>
+<li><p>定期断开长连接。 使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接， 之后要查询再重连接。</p>
+</li>
+<li><p>若使用的是MYSQL 5.7 或更新版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源。 这个过程不需要重连和重新做权限验证，但会将连接恢复到刚刚创建完成时的状态。</p>
+</li>
+</ol>
+<h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><p>建立完连接后，可以执行select 语句。 执行逻辑就会来到第二步： 查询缓存。</p>
+<p>mysql拿到查询请求后，会先到查询缓存看看，查看是否之前执行过这条语句</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjpq8yzok0005ocvxbb5vb8ti" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjpqlj54e000a68vxe9xjty4x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -197,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/12/writing2018-12-12/" data-id="cjpq8yzph0016ocvxzzt2wpjj" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/12/writing2018-12-12/" data-id="cjpqlj55j001a68vxb7xdpqqf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Writing/">Writing</a></li></ul>
@@ -242,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/11/writing2018-12-11/" data-id="cjpq8yzpm001cocvxjxl4ybwa" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/11/writing2018-12-11/" data-id="cjpqlj55d001468vxgb1g93lo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Writing/">Writing</a></li></ul>
@@ -306,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/08/speakingnotes2018-12-8/" data-id="cjpq8yzpd0010ocvx0infcbuc" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/08/speakingnotes2018-12-8/" data-id="cjpqlj55f001668vx6umpl4ok" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Speaking/">Speaking</a></li></ul>
@@ -394,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/08/writingnotes12-8-2018/" data-id="cjpq8yzpj0019ocvxs4jf3ucq" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/08/writingnotes12-8-2018/" data-id="cjpqlj564001m68vx2qt97g9y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Writing/">Writing</a></li></ul>
@@ -437,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjpq8yzoo000aocvxy20ss2yq" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjpqlj54k000c68vxehljvsop" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
@@ -507,7 +527,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/01/Ielts-Writing-Task2-Summary/" data-id="cjpq8yzoz000hocvxf08zettu" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/01/Ielts-Writing-Task2-Summary/" data-id="cjpqlj54s000h68vx28631z9h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Writing/">Writing</a></li></ul>
@@ -577,7 +597,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/30/Ielts-Writing-Task2-Materials/" data-id="cjpq8yzow000focvx247sozt6" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/30/Ielts-Writing-Task2-Materials/" data-id="cjpqlj54b000668vx7eltmdgr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li></ul>
@@ -622,7 +642,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/30/Ielts-Writing-Task1-Materials/" data-id="cjpq8yzol0006ocvxzhkf8nui" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/30/Ielts-Writing-Task1-Materials/" data-id="cjpqlj547000468vxl4hye04e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li></ul>
@@ -675,7 +695,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/30/How-to-Improve-Ielts-Writing-Task1-2/" data-id="cjpq8yzoa0001ocvxko5346rk" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/30/How-to-Improve-Ielts-Writing-Task1-2/" data-id="cjpqlj53n000068vx39lcapee" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li></ul>
@@ -744,7 +764,7 @@
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL_Study1</a>
+            <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL Study Framework - Basic logical</a>
           </li>
         
           <li>
