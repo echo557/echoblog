@@ -7,18 +7,20 @@
   
   <title>MYSQL Study Framework - Basic logical | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Framework In general, MYSQL include Server Layer and Storage Engine Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function, a">
+  <meta name="description" content="Framework In general, MYSQL include Server Layer and Storage Engine  Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function,">
 <meta name="keywords" content="QA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MYSQL Study Framework - Basic logical">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
-<meta property="og:description" content="Framework In general, MYSQL include Server Layer and Storage Engine Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function, a">
+<meta property="og:description" content="Framework In general, MYSQL include Server Layer and Storage Engine  Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-16T13:03:33.584Z">
+<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/framework.png">
+<meta property="og:updated_time" content="2018-12-16T13:09:55.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MYSQL Study Framework - Basic logical">
-<meta name="twitter:description" content="Framework In general, MYSQL include Server Layer and Storage Engine Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function, a">
+<meta name="twitter:description" content="Framework In general, MYSQL include Server Layer and Storage Engine  Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which containmost of the core service function,">
+<meta name="twitter:image" content="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/framework.png">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -93,6 +95,7 @@
       
         <p>Framework</p>
 <p>In general, MYSQL include Server Layer and Storage Engine</p>
+<p><img src="/echoblog.github.io/2018/12/15/MYSQL-Study1/framework.png" alt="MYSQL-Study1"></p>
 <p>Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which contain<br>most of the core service function, and all the built-in functions(such as date, time,mathmatics and encryption functions),<br>all the cross-storage engine functionality are realized on this layer, like storage process, trigger and view</p>
 <p>Storage Engine Layer charges the storage and extract of data, whose framework is plug-in type, which support multiple storage engine such as InnoDB,MylSAM, Memory etc.<br>Currently, InnoDB is mainly used, it as default storage engine after MYSQL 5.5.5.<br>That means without defining an engine type, the default one is InnoDB when you create a table.<br>However you can assign other engines too, system would use memory engine if you used engine= memory when create table.<br>Different data storage methods are difference with using different storage engines, as well as function support.</p>
 <p>From the picture, it’s clear that all the storage engines share the same Server Layer.</p>
@@ -152,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjpqwk3vr0006vkvxy8jcl0g6" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjpqwr1o2000bi0vxwwsypq0b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
