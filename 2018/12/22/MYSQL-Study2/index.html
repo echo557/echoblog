@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Ying&#39;s Blog">
 <meta property="og:description" content="MYSQL的日志模块简言MYSQL 有两层： Server 层， 主要是完成MYSQL 功能层面得事情；引擎层， 负责存储相关得具体事宜。 创建tabke create table T(ID int primary key, c int) update 的语句：update T set c=c+1 where ID=2; 更新流程的所涉及的模块：连接器》分析器》优化器》 执行器》存储引擎。 不过还">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-22T08:31:30.340Z">
+<meta property="og:updated_time" content="2018-12-22T09:49:21.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MYSQL-Redo log &amp; Binlog">
 <meta name="twitter:description" content="MYSQL的日志模块简言MYSQL 有两层： Server 层， 主要是完成MYSQL 功能层面得事情；引擎层， 负责存储相关得具体事宜。 创建tabke create table T(ID int primary key, c int) update 的语句：update T set c=c+1 where ID=2; 更新流程的所涉及的模块：连接器》分析器》优化器》 执行器》存储引擎。 不过还">
@@ -133,16 +133,19 @@
 </ol>
 <p>不仅误操作后需要用这个过程来恢复数据，需要扩容的时候，也就是需要再多搭建一些备库来增加系统的读能力的时候，<br>现在最常见的做法也是用全量备份加上应用binlog 来实现， 这个“不一致”就会导致你的线上出现主从数据库不一致的情况。</p>
 <p>简单来说， redo log和binlog 都可以用于表示事务的提交状态， 而两阶段提交就是让这两个状态保持逻辑上的一致。</p>
-<p>####小结<br>主要介绍 物理日志 redo log 和 逻辑日志 binlog（归档日志）</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>主要介绍 物理日志 redo log 和 逻辑日志 binlog（归档日志）</p>
 <p>redo log 用于保证 crash-safe 能力。 innodb_flush_log_at_trx_commit 这个参数设置成1的时候，<br>表示每次事务的redo log 都直接持久化到磁盘。 此参数设置为1， 就可以保证MYSQL 异常重启之后数据不会丢失。</p>
 <p>sync_binlog 参数为1 的时候， 表示每次事务的binlog 都持久化到磁盘。也可以保证MYSQL 异常重启后binlog不会丢失。</p>
 <p>两阶段提交时跨系统维持数据逻辑一致性常用的方案， 即使你不做数据库内核开发，日常开发也会使用。</p>
 <p>redo log 是记录这个页“做了什么改动”。<br>binlog 有两种模式， statement格式的话是记sql语句， row 格式会记录行的内容，记两条。更新前和更新后都有。</p>
+<p>1 prepare阶段 2 写binlog 3 commit<br>当在2之前崩溃时<br>重启恢复：后发现没有commit，回滚。备份恢复：没有binlog 。<br>一致<br>当在3之前崩溃<br>重启恢复：虽没有commit，但满足prepare和binlog完整，所以重启后会自动commit。备份：有binlog. 一致</p>
+<p>1.首先客户端通过tcp/ip发送一条sql语句到server层的SQL interface<br>2.SQL interface接到该请求后，先对该条语句进行解析，验证权限是否匹配<br>3.验证通过以后，分析器会对该语句分析,是否语法有错误等<br>4.接下来是优化器器生成相应的执行计划，选择最优的执行计划<br>5.之后会是执行器根据执行计划执行这条语句。在这一步会去open table,如果该table上有MDL，则等待。<br>如果没有，则加在该表上加短暂的MDL(S)<br>(如果opend_table太大,表明open_table_cache太小。需要不停的去打开frm文件)<br>6.进入到引擎层，首先会去innodb_buffer_pool里的data dictionary(元数据信息)得到表信息<br>7.通过元数据信息,去lock info里查出是否会有相关的锁信息，并把这条update语句需要的<br>锁信息写入到lock info里(锁这里还有待补充)<br>8.然后涉及到的老数据通过快照的方式存储到innodb_buffer_pool里的undo page里,并且记录undo log修改的redo<br>(如果data page里有就直接载入到undo page里，如果没有，则需要去磁盘里取出相应page的数据，载入到undo page里)<br>9.在innodb_buffer_pool的data page做update操作。并把操作的物理数据页修改记录到redo log buffer里<br>由于update这个事务会涉及到多个页面的修改，所以redo log buffer里会记录多条页面的修改信息。<br>因为group commit的原因，这次事务所产生的redo log buffer可能会跟随其它事务一同flush并且sync到磁盘上<br>10.同时修改的信息，会按照event的格式,记录到binlog_cache中。(这里注意binlog_cache_size是transaction级别的,不是session级别的参数,<br>一旦commit之后，dump线程会从binlog_cache里把event主动发送给slave的I/O线程)<br>11.之后把这条sql,需要在二级索引上做的修改，写入到change buffer page，等到下次有其他sql需要读取该二级索引时，再去与二级索引做merge<br>(随机I/O变为顺序I/O,但是由于现在的磁盘都是SSD,所以对于寻址来说,随机I/O和顺序I/O差距不大)<br>12.此时update语句已经完成，需要commit或者rollback。这里讨论commit的情况，并且双1<br>13.commit操作，由于存储引擎层与server层之间采用的是内部XA(保证两个事务的一致性,这里主要保证redo log和binlog的原子性),<br>所以提交分为prepare阶段与commit阶段<br>14.prepare阶段,将事务的xid写入，将binlog_cache里的进行flush以及sync操作(大事务的话这步非常耗时)<br>15.commit阶段，由于之前该事务产生的redo log已经sync到磁盘了。所以这步只是在redo log里标记commit<br>16.当binlog和redo log都已经落盘以后，如果触发了刷新脏页的操作，先把该脏页复制到doublewrite buffer里，把doublewrite buffer里的刷新到共享表空间，然后才是通过page cleaner线程把脏页写入到磁盘中<br>老师，你看我的步骤中有什么问题嘛？我感觉第6步那里有点问题,因为第5步已经去open table了，第6步还有没有必要去buffer里查找元数据呢?这元数据是表示的系统的元数据嘛,还是所有表的？谢谢老师指正</p>
+<p>其实在实现上5是调用了6的过程了的，所以是一回事。MySQL server 层和InnoDB层都保存了表结构，所以有书上描述时会拆开说。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjpz7iefg000594vx49q7287p" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjqdtfthf00061ovxj9de4j7a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -152,6 +155,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/echoblog.github.io/2019/01/01/MYSQL-Study3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MYSQL-Study3
+        
+      </div>
+    </a>
   
   
     <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/" id="article-nav-older" class="article-nav-link-wrap">
@@ -201,7 +213,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
     </div>
   </div>
 
@@ -212,6 +224,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/01/01/MYSQL-Study3/">MYSQL-Study3</a>
+          </li>
         
           <li>
             <a href="/echoblog.github.io/2018/12/22/MYSQL-Study2/">MYSQL-Redo log &amp; Binlog</a>
@@ -229,10 +245,6 @@
             <a href="/echoblog.github.io/2018/10/21/Trouble-Shooting3/">Trouble Shooting3</a>
           </li>
         
-          <li>
-            <a href="/echoblog.github.io/2018/10/21/Trouble-Shooting2/">Trouble Shooting2</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -245,7 +257,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 Ying<br>
+      &copy; 2019 Ying<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
