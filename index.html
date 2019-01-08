@@ -91,13 +91,29 @@
         <h3 id="索引上"><a href="#索引上" class="headerlink" title="索引上"></a>索引上</h3><p>索引是为了提高数据库查询的效率， 就像书的目录一样。</p>
 <h4 id="索引的常见模型"><a href="#索引的常见模型" class="headerlink" title="索引的常见模型"></a>索引的常见模型</h4><p>可以用于提高读写效率的数据结构很多，常见的三种数据结构有： 哈希表、有序数组 和搜索树。<br>区别：</p>
 <ol>
-<li>哈希表是一种以键值对（key-value）存储数据的结构，我们只需要输入待查找的值key, j就能找到对应的值value。 哈希的思路： 把值放在数组里， 用一个哈希函数<br>把key 换算成一个确定的位置， 然后把value放在数组的这个位置。</li>
+<li>哈希表是一种以键值对（key-value）存储数据的结构，我们只需要输入待查找的值key, j就能找到对应的值value。 哈希的思路： 把值放在数组里， 用一个哈希函数<br>把key 换算成一个确定的位置， 然后把value放在数组的这个位置。<br>不可避免地， 多个key值经过hash 函数地转换，会出现同一个值得情况。处理这种情况得一种方法是： 拉出一个链表。<br>如一个需要维护得身份证信息和姓名得表，需要根据身份证号找到对应名字，哈希索引示意图：</li>
 </ol>
+<p><img src="/echoblog.github.io/2019/01/07/MYSQL-Study4/hash.png" alt="Hash"><br>图中，User2 和User4根据身份证号算出来得值都是N，但是没关系，后面还有个链表。<br>若你要查出ID_card_n2对应得name,step： 将ID_card_n2通过hash function 算出N， 然后顺序遍历，找到user2.</p>
+<p>主要注意得是， 图中四个ID_card_n得值并不是递增得，这样得好处是增加新user时速度会很快，只需要往后追加。 缺点是： 因为不是有序，<br>所以哈希索引做区间查询得速度是很慢的。<br>所以，哈希表这种结构适用于只有等值查询的场景。 如Memcached 及其他一些NoSQL 引擎。</p>
+<ol start="2">
+<li>而有序数组在等值查询和范围查询场景中的性能就都非常优秀。 如下图：<br><img src="/echoblog.github.io/2019/01/07/MYSQL-Study4/order.png" alt="Order"></li>
+</ol>
+<p>假设身份证号没有重复，此数组就是按照身份证号递增的顺序保存的。这时候要查ID_card_n2 对应的名字， 用二分法就可以很快速得到， 时间复杂度是O(LOG(N)).</p>
+<p>同时很显然，这个索引结构支持范围查询。 若要查询身份证号在[ID_card_X, ID_card_Y]区间的User, 可以先用二分法找到ID_card_X(<br>如果不存在ID_card_X， 就找到大于ID_card__X的第一个User)， 然后向右遍历， 直到找到第一个大于ID_card_Y 的身份证号，退出循环。</p>
+<p>仅看查询效率，有序数组是最好的数据结构。 但更新需要挪动后面所有记录，成本太高。<br>所以，有序数组索引只适用于静态存储引擎， 那些不再修改的数据。</p>
+<ol start="3">
+<li>二叉搜索树，同样例子如图：<br><img src="/echoblog.github.io/2019/01/07/MYSQL-Study4/tree.png" alt="Tree"></li>
+</ol>
+<p>二叉搜索树的特点： 每个节点的左儿子小于父节点， 父节点又小于右儿子。 若要查询ID_card_n2的话， 按照图中搜索顺序就是按照UserA&gt;UserC&gt;UserF&gt;User2此路径<br>得到。 这个时间复杂成都是O（log(N)）。</p>
+<p>当然为了维持O（log(N)）的查询复杂度， 就需要平衡二叉树， 为了保证这个，更新时间复杂度也是O（log(N)）。</p>
+<p>树可以有二叉， 也可以有多叉。 多叉树就是每个节点有多个儿子，儿子之间大小从左到右递增。二叉树的搜索效率是最高的。但是实际上<br>大多数数据库存储却并不使用二叉树。 原因是： 索引不止存在内存中，还要写到磁盘里。</p>
+<p>若一颗100万节点的平衡二叉树，树高20.一次查询可能需要访问20个数据块。在机械硬盘时代，从磁盘随机读一个数据库需要10ms 左右的寻址时间。 对于<br>100万行的表，如果使用二叉树来存储，单独访问一个行可能需要20个10ms。</p>
+<p>为了让一个查询尽量少读磁盘。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjqn09ys60006z8vxxq52d4jd" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjqnvmttd0005oovx3srgbk14" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -176,7 +192,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjqn09ys9000az8vx2tksoifg" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjqnvmttj000boovx2bbdlb87" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -268,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjqn09ys40005z8vxxtrv5n9k" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjqnvmtte0006oovxoli1h1y5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -368,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjqn09yrz0004z8vxdarbvss8" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjqnvmtt30001oovx75r2m4mt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -411,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjqn09ysc000bz8vxzo1wvnu8" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjqnvmtth000aoovx0gl5qtl5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
