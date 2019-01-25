@@ -94,7 +94,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjr70fucx0004wkvx39pjxjo5" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjrbabs0i0001sgvxqczpwjom" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li></ul>
@@ -166,12 +166,24 @@
 </ol>
 <p>因此我们再应用中应尽量使用主键查询。</p>
 <h3 id="索引维护"><a href="#索引维护" class="headerlink" title="索引维护"></a>索引维护</h3><p>B+ 树为了索引有序性， 在插入新值得时候需要做必要得维护。<br>以上图为例，如果插入新的行ID 值为700， 则只需要在R5的记录后面插入一个新记录。如果新插入的ID 值为400，<br>就相对麻烦，需要逻辑上挪动后面的数据，空出位置。更糟糕的是，如果R5 所在数据页已经满了，根据B+树的算法，<br>这时候就需要申请一个新的数据页，然后挪动部分数据过去。此过程叫页分裂，这种状况下啊，性能就会受到影响。</p>
-<p>除了性能外，页分裂操作还影响数据页的利用率。原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。</p>
+<p>除了性能外，页分裂操作还影响数据页的利用率。原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。<br>当相邻两个页由于删除了数据，利用率很低之后，会将数据页做合并。合并的过程，可以认为是分裂过程的逆过程。</p>
+<p>基于上面索引维护过程说明，可以做以下讨论：<br>可能在一些建表规范中见过类似描述， 要求建表语句里一定要有自增主键。那么可以分析以下哪些场景下应该使用自增主键，哪些不该。</p>
+<p>自增主键： 自增列上定义的主键，在建表语句中一般定义：NOT NULL PRIMARY KEY AUTO_INCREMENT<br>插入新记录的时候可以不指定ID 值， 系统会获取当前ID最大值加1作为下一条记录的ID 值。<br>即， 自增主键的插入数据模式，正符合了我们前面提到的递增插入的场景。每次插入一条新记录，都是追加操作，<br>都不涉及到挪动其他记录，也不会触及到叶子节点的分裂。</p>
+<p>而有业务逻辑的字段做主键则往往不容易保证有序插入，这样写数据成本相对较高。</p>
+<p>由于每个非主键索引的叶子节点上都是主键的值。如果用身份证做主键，那么每个二级索引的叶子节点占用约20个字节，如果整型做<br>主键，则只要4个字节，如果长整型(bigint)则是8个字节。</p>
+<p>显然，主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间也就越小。</p>
+<p>所以，从性能和存储空间方面考量，自增主键往往是更合理的选择。</p>
+<p>有没有什么场景适合用业务字段直接做主键的呢？ 如：有些业务场景需求是：</p>
+<ol>
+<li>只有一个索引</li>
+<li>该索引必须是唯一索引<br>KV场景</li>
+</ol>
+<p>需要尽量使用主键查询原则，直接将索引设置为主键，可以避免每次搜索两棵树。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjr70fudi000lwkvxmfvozi1n" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjrbabs0y000bsgvxh3c85wr9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -246,11 +258,24 @@
 <p>可以在informa_schema 库的innodb_trx这个表中查询长事务，如下面的可以查询持续时间超过60s的事务。<br>select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started)) &gt; 60</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在开发过程中，尽可能的减小事务范围，少用长事务，如果无法避免，保证逻辑日志空间足够用，并且支持动态日志空间增长。监控Innodb_trx表，发现长事务报警。</p>
 <p>读未提交：别人改数据的事务尚未提交，我在我的事务中也能读到。<br>读已提交：别人改数据的事务已经提交，我在我的事务中才能读到。<br>可重复读：别人改数据的事务已经提交，我在我的事务中也不去读。<br>串行：我的事务尚未提交，别人就别想改数据。<br>这4种隔离级别，并行性能依次降低，安全性依次提高。</p>
+<p>如何避免长事务对业务的影响？<br>应用开发端：</p>
+<ol>
+<li>确认是否使用了set autocommit = 0. 确认工作可以在测试环境中开展，把MYSQL 的general_log 开起， 然后跑一个业务逻辑。通过general_log的日志<br>来确认。一般框架如果会设置这个值，也会提供参数来控制行为，目标就是把它改成1. </li>
+<li>确认是都有不必要的只读事务。有些框架会习惯不管什么语句先用begin/commit 框起来。 有些业务还会把好几个select语句放到了事务中。这种只读<br>事务可以去掉。</li>
+<li>业务连接数据库的时候， 根据业务本身的预估，通过SET MAX_EXECUTION_TIME命令，来控制每个语句执行的最长时间，避免单个语句意外执行太长</li>
+</ol>
+<p>数据库端：</p>
+<ol>
+<li>监控information_schema.Innodb_trx表，设置长事务阈值，超过就报警或者kill</li>
+<li>Percona 的 pt-kill 工具推荐</li>
+<li>在业务功能测试阶段要求输出所有的general_log， 分析日志行为提前发现问题</li>
+<li>MYSQL 5.6 或者更新版本，innodb_undo_tablespace 设置成2（或者更大值）。 如果真出现大事务导致回滚段过大，这样清理起来会更方便。</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjr70fud8000bwkvx1q04wh3l" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjrbabs0v000asgvxn9wmqtvu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -342,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjr70fud20006wkvx9kazmak9" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjrbabs0s0006sgvxuzrtse2y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -442,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjr70fud00005wkvxymz316se" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjrbabs0r0005sgvxpf47p82e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>

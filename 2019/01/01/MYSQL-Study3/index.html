@@ -17,7 +17,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/affair.png">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/roll-back.png">
-<meta property="og:updated_time" content="2019-01-01T13:55:50.178Z">
+<meta property="og:updated_time" content="2019-01-23T14:22:44.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MYSQL-Study3">
 <meta name="twitter:description" content="####　事务隔离事务是保证一组数据库操作，要么全部成功，要么全部失败。　在ＭySQA中，事务支持是在引擎层实现的。MySQL是一个支持多引擎的系统，但并不是所有的引擎都支持事务。 如 MYSQL原生的MylSAM引擎就不支持事务，这也是MylSAM 被InnoDB 取代的重要原因之一。 隔离性与隔离级别ACID(Atomicity, Consistency, Isolation, Durabil">
@@ -131,11 +131,24 @@
 <p>可以在informa_schema 库的innodb_trx这个表中查询长事务，如下面的可以查询持续时间超过60s的事务。<br>select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started)) &gt; 60</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在开发过程中，尽可能的减小事务范围，少用长事务，如果无法避免，保证逻辑日志空间足够用，并且支持动态日志空间增长。监控Innodb_trx表，发现长事务报警。</p>
 <p>读未提交：别人改数据的事务尚未提交，我在我的事务中也能读到。<br>读已提交：别人改数据的事务已经提交，我在我的事务中才能读到。<br>可重复读：别人改数据的事务已经提交，我在我的事务中也不去读。<br>串行：我的事务尚未提交，别人就别想改数据。<br>这4种隔离级别，并行性能依次降低，安全性依次提高。</p>
+<p>如何避免长事务对业务的影响？<br>应用开发端：</p>
+<ol>
+<li>确认是否使用了set autocommit = 0. 确认工作可以在测试环境中开展，把MYSQL 的general_log 开起， 然后跑一个业务逻辑。通过general_log的日志<br>来确认。一般框架如果会设置这个值，也会提供参数来控制行为，目标就是把它改成1. </li>
+<li>确认是都有不必要的只读事务。有些框架会习惯不管什么语句先用begin/commit 框起来。 有些业务还会把好几个select语句放到了事务中。这种只读<br>事务可以去掉。</li>
+<li>业务连接数据库的时候， 根据业务本身的预估，通过SET MAX_EXECUTION_TIME命令，来控制每个语句执行的最长时间，避免单个语句意外执行太长</li>
+</ol>
+<p>数据库端：</p>
+<ol>
+<li>监控information_schema.Innodb_trx表，设置长事务阈值，超过就报警或者kill</li>
+<li>Percona 的 pt-kill 工具推荐</li>
+<li>在业务功能测试阶段要求输出所有的general_log， 分析日志行为提前发现问题</li>
+<li>MYSQL 5.6 或者更新版本，innodb_undo_tablespace 设置成2（或者更大值）。 如果真出现大事务导致回滚段过大，这样清理起来会更方便。</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjr70fud8000bwkvx1q04wh3l" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjrbabs0v000asgvxn9wmqtvu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>

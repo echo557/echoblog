@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/order.png">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/tree.png">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/InnoDB.png">
-<meta property="og:updated_time" content="2019-01-11T00:22:34.455Z">
+<meta property="og:updated_time" content="2019-01-23T14:07:02.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MYSQL-Study4">
 <meta name="twitter:description" content="索引上索引是为了提高数据库查询的效率， 就像书的目录一样。 索引的常见模型可以用于提高读写效率的数据结构很多，常见的三种数据结构有： 哈希表、有序数组 和搜索树。区别：  哈希表是一种以键值对（key-value）存储数据的结构，我们只需要输入待查找的值key, j就能找到对应的值value。 哈希的思路： 把值放在数组里， 用一个哈希函数把key 换算成一个确定的位置， 然后把value放在数组">
@@ -130,12 +130,24 @@
 </ol>
 <p>因此我们再应用中应尽量使用主键查询。</p>
 <h3 id="索引维护"><a href="#索引维护" class="headerlink" title="索引维护"></a>索引维护</h3><p>B+ 树为了索引有序性， 在插入新值得时候需要做必要得维护。<br>以上图为例，如果插入新的行ID 值为700， 则只需要在R5的记录后面插入一个新记录。如果新插入的ID 值为400，<br>就相对麻烦，需要逻辑上挪动后面的数据，空出位置。更糟糕的是，如果R5 所在数据页已经满了，根据B+树的算法，<br>这时候就需要申请一个新的数据页，然后挪动部分数据过去。此过程叫页分裂，这种状况下啊，性能就会受到影响。</p>
-<p>除了性能外，页分裂操作还影响数据页的利用率。原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。</p>
+<p>除了性能外，页分裂操作还影响数据页的利用率。原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。<br>当相邻两个页由于删除了数据，利用率很低之后，会将数据页做合并。合并的过程，可以认为是分裂过程的逆过程。</p>
+<p>基于上面索引维护过程说明，可以做以下讨论：<br>可能在一些建表规范中见过类似描述， 要求建表语句里一定要有自增主键。那么可以分析以下哪些场景下应该使用自增主键，哪些不该。</p>
+<p>自增主键： 自增列上定义的主键，在建表语句中一般定义：NOT NULL PRIMARY KEY AUTO_INCREMENT<br>插入新记录的时候可以不指定ID 值， 系统会获取当前ID最大值加1作为下一条记录的ID 值。<br>即， 自增主键的插入数据模式，正符合了我们前面提到的递增插入的场景。每次插入一条新记录，都是追加操作，<br>都不涉及到挪动其他记录，也不会触及到叶子节点的分裂。</p>
+<p>而有业务逻辑的字段做主键则往往不容易保证有序插入，这样写数据成本相对较高。</p>
+<p>由于每个非主键索引的叶子节点上都是主键的值。如果用身份证做主键，那么每个二级索引的叶子节点占用约20个字节，如果整型做<br>主键，则只要4个字节，如果长整型(bigint)则是8个字节。</p>
+<p>显然，主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间也就越小。</p>
+<p>所以，从性能和存储空间方面考量，自增主键往往是更合理的选择。</p>
+<p>有没有什么场景适合用业务字段直接做主键的呢？ 如：有些业务场景需求是：</p>
+<ol>
+<li>只有一个索引</li>
+<li>该索引必须是唯一索引<br>KV场景</li>
+</ol>
+<p>需要尽量使用主键查询原则，直接将索引设置为主键，可以避免每次搜索两棵树。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjr70fudi000lwkvxmfvozi1n" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjrbabs0y000bsgvxh3c85wr9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
