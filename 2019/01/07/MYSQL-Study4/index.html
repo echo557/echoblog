@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/order.png">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/tree.png">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/InnoDB.png">
-<meta property="og:updated_time" content="2019-01-23T14:07:02.152Z">
+<meta property="og:updated_time" content="2019-01-26T05:45:54.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MYSQL-Study4">
 <meta name="twitter:description" content="索引上索引是为了提高数据库查询的效率， 就像书的目录一样。 索引的常见模型可以用于提高读写效率的数据结构很多，常见的三种数据结构有： 哈希表、有序数组 和搜索树。区别：  哈希表是一种以键值对（key-value）存储数据的结构，我们只需要输入待查找的值key, j就能找到对应的值value。 哈希的思路： 把值放在数组里， 用一个哈希函数把key 换算成一个确定的位置， 然后把value放在数组">
@@ -143,11 +143,14 @@
 <li>该索引必须是唯一索引<br>KV场景</li>
 </ol>
 <p>需要尽量使用主键查询原则，直接将索引设置为主键，可以避免每次搜索两棵树。</p>
+<h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4><p>通过两个alter 语句重建索引k,以及通过两个alter 语句重建主键索引是否合理。</p>
+<p>为什么要重建索引？<br>索引可能因为删除，或者页分裂等原因，导致数据页有空洞， 重建索引的过程会创建一个新的索引，把数据按顺序插入，可以让页面利用率最高。</p>
+<p>重建索引k的做法是合理的，可以达到省空间的目的。但是，重建主键的过程不合理。 不论是删除主键还是创建主键，都会将整个表重建。<br>所以连着执行两个语句，第一个语句就会白做。所以可以用语句代替： alter table T engine=InnoDB</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjrbabs0y000bsgvxh3c85wr9" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjreairvi000absvxjls1eayl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -228,6 +231,14 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/01/26/MYSQL-Study6/">MYSQL_Study6</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/01/26/MYSQL-Study5/">MYSQL_Study5</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/01/20/LinuxCommand/">Linux Command</a>
           </li>
         
@@ -237,14 +248,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/01/01/MYSQL-Study3/">MYSQL-Study3</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2018/12/22/MYSQL-Study2/">MYSQL-Redo log &amp; Binlog</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL Study Framework - Basic logical</a>
           </li>
         
       </ul>
