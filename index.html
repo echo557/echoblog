@@ -88,7 +88,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study8/" data-id="cjrgzcu4z000ll0vxhbaqc4tp" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study8/" data-id="cjrifj2xe000n94vx6bqn8jdo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,6 +218,15 @@
 <li>以刚刚的影院账户为例，可以考虑放在多条记录上，比如10个记录，影院的账户总额等于这10个记录值得总和。 每次要个影院账户加金额得时候，随机选其中一条记录来加。这样每次冲突概率变成原来得1/10， 可以减少锁等待个数，也就减少了死锁检测得CPU 消耗</li>
 <li>这个方案看起来无损，但是需要根据业务逻辑做详细设计。如果账户余额可能会减少，比如退票逻辑，你这时候就需要考虑当一部分行记录变成0得时候，代码要有特殊处理</li>
 </ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h3><ul>
+<li>原则： 如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度得锁得申请时机尽量往后放</li>
+<li>调整语句顺序比能不能完全避免死锁</li>
+</ul>
+<h3 id="死锁和死锁检测-1"><a href="#死锁和死锁检测-1" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><ul>
+<li>方案1： 直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
+<li>方案2：发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑 </li>
+<li>方案3： 控制并发度。 （主要方向）</li>
+</ul>
 <h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
 <li><p>要删除一个表里面得前10000行数据，三种方法</p>
 <ul>
@@ -234,21 +243,11 @@
 </ul>
 </li>
 </ul>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h3><ul>
-<li>原则： 如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度得锁得申请时机尽量往后放</li>
-<li>调整语句顺序比能不能完全避免死锁</li>
-</ul>
-<h3 id="死锁和死锁检测-1"><a href="#死锁和死锁检测-1" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><ul>
-<li>方案1： 直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
-<li>方案2：发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑 </li>
-<li>方案3： 控制并发度。 （主要方向）</li>
-</ul>
-<p><em>XMind: ZEN - Trial Version</em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study7/" data-id="cjrgzcu53000nl0vxdd4kbwt2" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study7/" data-id="cjrifj2xa000h94vxdo5tychf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -287,7 +286,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="/echoblog.github.io/2019/01/26/MYSQL-Study6/图一.png" alt="图一"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study6/MDL.png" alt="MDL"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study6/全局锁和表锁.png" alt="全局锁和表锁"></p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="多用户共享资源，-并出现并发的时候，数据库需要合理地控制资源地访问规则。-而锁就是用来实现这些访问规则地重要数据结构"><a href="#多用户共享资源，-并出现并发的时候，数据库需要合理地控制资源地访问规则。-而锁就是用来实现这些访问规则地重要数据结构" class="headerlink" title="多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构"></a>多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构</h3><h3 id="三种锁：-全局锁，-表级锁-和行锁"><a href="#三种锁：-全局锁，-表级锁-和行锁" class="headerlink" title="三种锁： 全局锁， 表级锁 和行锁"></a>三种锁： 全局锁， 表级锁 和行锁</h3><h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h4 id="多用户共享资源，-并出现并发的时候，数据库需要合理地控制资源地访问规则。-而锁就是用来实现这些访问规则地重要数据结构"><a href="#多用户共享资源，-并出现并发的时候，数据库需要合理地控制资源地访问规则。-而锁就是用来实现这些访问规则地重要数据结构" class="headerlink" title="多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构"></a>多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构</h4><h4 id="三种锁：-全局锁，-表级锁-和行锁"><a href="#三种锁：-全局锁，-表级锁-和行锁" class="headerlink" title="三种锁： 全局锁， 表级锁 和行锁"></a>三种锁： 全局锁， 表级锁 和行锁</h4><h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
 <li>全局锁就是对整个数据库实例加锁。 </li>
 <li>MySQL提供了一个加全局读锁地方法， 命令： Flush tables with read lock(FTWRL). 如果需要让整个库处于只读状态，可以使用此命令。然后所有语句会被阻塞： 数据库更新（增删改）， 数据定义语句（建表、修改表结构）和更新类事务地语句提交</li>
 </ul>
@@ -384,6 +383,24 @@
 </ul>
 </li>
 </ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="全局锁-1"><a href="#全局锁-1" class="headerlink" title="全局锁"></a>全局锁</h3><ul>
+<li>用途： 逻辑备份中</li>
+<li>如库全是InnoDB, 可选择 -single-transaction 参数</li>
+</ul>
+<h3 id="表锁-1"><a href="#表锁-1" class="headerlink" title="表锁"></a>表锁</h3><ul>
+<li>用途： 数据库引擎不支持行锁的时候才被用到</li>
+<li><p>如果程序里有lock tables 这样的语句， 如何做？</p>
+<ul>
+<li>要么是系统还是MylSAM 这类不支持事务的引擎， 需要升级换引擎</li>
+<li>引擎升级，代码没升级，把lock tables 和unlock tables 改成begin和commit</li>
+</ul>
+</li>
+<li><p>MDL 直到事务提交才释放，表变更需要注意，</p>
+<ul>
+<li>设置超时等待时间，然后循环提交</li>
+</ul>
+</li>
+</ul>
 <h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
 <li>备份一般都会再备份库上执行，再用-single-transaction 方法做逻辑备份的过程Hon个如果主库的一个小表做了DDL， 比如给一个表上加了一列。这时候备库看到的现象是什么？</li>
 </ul>
@@ -412,30 +429,11 @@
 <li>如果再“时刻2”和“时刻3”之间到达，mysqldump 占着t1 的MDL 读锁， binlog 被阻塞，现象： 主从延迟， 直到Q6执行完成</li>
 <li>从“时刻4”开始，mysqldump 释放了MDL 读锁， 现象： 没有影响， 备份拿到的是DDL 前的表结构</li>
 </ul>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="全局锁-1"><a href="#全局锁-1" class="headerlink" title="全局锁"></a>全局锁</h3><ul>
-<li>用途： 逻辑备份中</li>
-<li>如库全是InnoDB, 可选择 -single-transaction 参数</li>
-</ul>
-<h3 id="表锁-1"><a href="#表锁-1" class="headerlink" title="表锁"></a>表锁</h3><ul>
-<li>用途： 数据库引擎不支持行锁的时候才被用到</li>
-<li><p>如果程序里有lock tables 这样的语句， 如何做？</p>
-<ul>
-<li>要么是系统还是MylSAM 这类不支持事务的引擎， 需要升级换引擎</li>
-<li>引擎升级，代码没升级，把lock tables 和unlock tables 改成begin和commit</li>
-</ul>
-</li>
-<li><p>MDL 直到事务提交才释放，表变更需要注意，</p>
-<ul>
-<li>设置超时等待时间，然后循环提交</li>
-</ul>
-</li>
-</ul>
-<p><em>XMind: ZEN - Trial Version</em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjrgzcu4f000bl0vxo6yjxsgr" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjrifj2xc000l94vxzlvuhd19" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -474,7 +472,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引示意图.png" alt="(name,age)索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/InnoDB索引结构.png" alt="InnoDB索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图三.png" alt="图三"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图四.png" alt="图四"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引（下）.png" alt="索引（下）"></p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h3 id="如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？"><a href="#如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？" class="headerlink" title="如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？"></a>如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？</h3><h3 id="初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB"><a href="#初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB" class="headerlink" title="初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;"></a>初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;</h3><h3 id="insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’"><a href="#insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’" class="headerlink" title="insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);"></a>insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);</h3><h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><ul>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h4 id="如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？"><a href="#如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？" class="headerlink" title="如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？"></a>如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？</h4><h4 id="初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB"><a href="#初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB" class="headerlink" title="初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;"></a>初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;</h4><h4 id="insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’"><a href="#insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’" class="headerlink" title="insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);"></a>insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);</h4><h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><ul>
 <li>在k索引树上找到k=3的记录，取得ID=300</li>
 <li>再到ID索引树查到ID=300对应的R3</li>
 <li>在k索引树取下一个值k=5， 取得ID=500</li>
@@ -507,22 +505,7 @@
 <li>那么，如果既有联合查询，又有基于a,b各自的查询呢？查询条件里面只有b语句，时无法使用(a,b)这个联合索引的，这时候不得不维护另外一个索引，即（a,b）, (b)这两个</li>
 <li>空间原则： 如上面的市民表， name 字段大于age 字段，则建议创建一个（name, age）的联合索引和一个（age）的单字段索引</li>
 </ul>
-<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="实际上主键索引也是可以使用多个字段的"><a href="#实际上主键索引也是可以使用多个字段的" class="headerlink" title="实际上主键索引也是可以使用多个字段的"></a>实际上主键索引也是可以使用多个字段的</h3><h3 id="如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB"><a href="#如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB" class="headerlink" title="如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;"></a>如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;</h3><h3 id="这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？"><a href="#这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？" class="headerlink" title="这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？"></a>这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？</h3><h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><ul>
-<li>主键a,b的聚簇索引组织顺序相当于order by a,b,也就是按a排序， 再按b排序，c 无序</li>
-<li>索引ca的组织是先按c排序，再按a排序， 同时记录主键（注意，这里不是ab， 而是只有b。 这个跟索引c的数据是一模一样的</li>
-<li>索引cb的组织是先按c排序，再按b排序，同时记录主键a</li>
-<li>因此 ca 可以去掉， cb需要保留</li>
-</ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><h3 id="覆盖索引-1"><a href="#覆盖索引-1" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><ul>
-<li>select ID from T where k between 3 and 5</li>
-</ul>
-<h3 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h3><ul>
-<li>select ID from T where name like ‘张%’</li>
-</ul>
-<h3 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h3><ul>
-<li>select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
-</ul>
-<h2 id="索引下推-1"><a href="#索引下推-1" class="headerlink" title="索引下推"></a>索引下推</h2><h3 id="引子-2"><a href="#引子-2" class="headerlink" title="引子"></a>引子</h3><ul>
+<h2 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h2><h3 id="引子-2"><a href="#引子-2" class="headerlink" title="引子"></a>引子</h3><ul>
 <li>如果满足最左前缀原则的时候，最左前缀可以用于在索引中定位记录。 如果不符合最左前缀的部分，怎样处理呢？</li>
 <li>如上面的连个索引（name, age）为例。需求： 检索表中“名字第一个字是张，而且年龄是10 的所有男孩”。 SQL：select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
 <li><p>执行步骤</p>
@@ -536,12 +519,26 @@
 </ul>
 </li>
 </ul>
-<p><em>XMind: ZEN - Trial Version</em></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><h3 id="覆盖索引-1"><a href="#覆盖索引-1" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><ul>
+<li>select ID from T where k between 3 and 5</li>
+</ul>
+<h3 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h3><ul>
+<li>select ID from T where name like ‘张%’</li>
+</ul>
+<h3 id="索引下推-1"><a href="#索引下推-1" class="headerlink" title="索引下推"></a>索引下推</h3><ul>
+<li>select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
+</ul>
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="实际上主键索引也是可以使用多个字段的"><a href="#实际上主键索引也是可以使用多个字段的" class="headerlink" title="实际上主键索引也是可以使用多个字段的"></a>实际上主键索引也是可以使用多个字段的</h3><h3 id="如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB"><a href="#如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB" class="headerlink" title="如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;"></a>如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;</h3><h3 id="这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？"><a href="#这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？" class="headerlink" title="这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？"></a>这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？</h3><h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><ul>
+<li>主键a,b的聚簇索引组织顺序相当于order by a,b,也就是按a排序， 再按b排序，c 无序</li>
+<li>索引ca的组织是先按c排序，再按a排序， 同时记录主键（注意，这里不是ab， 而是只有b。 这个跟索引c的数据是一模一样的</li>
+<li>索引cb的组织是先按c排序，再按b排序，同时记录主键a</li>
+<li>因此 ca 可以去掉， cb需要保留</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study5/" data-id="cjrgzcu4n000fl0vxfmnpuabz" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study5/" data-id="cjrifj2x8000f94vxpwwajcx5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -585,7 +582,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjrgzcu3h0004l0vx8ydq441f" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjrifj2wb000494vx90jzrvg9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li></ul>
