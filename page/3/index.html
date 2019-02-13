@@ -62,6 +62,98 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MYSQL-Study2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2018/12/22/MYSQL-Study2/" class="article-date">
+  <time datetime="2018-12-22T03:27:14.000Z" itemprop="datePublished">2018-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2018/12/22/MYSQL-Study2/">MYSQL-Redo log &amp; Binlog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="MYSQL的日志模块"><a href="#MYSQL的日志模块" class="headerlink" title="MYSQL的日志模块"></a>MYSQL的日志模块</h3><h4 id="简言"><a href="#简言" class="headerlink" title="简言"></a>简言</h4><p>MYSQL 有两层： Server 层， 主要是完成MYSQL 功能层面得事情；引擎层， 负责存储相关得具体事宜。</p>
+<p>创建tabke</p>
+<p>create table T(ID int primary key, c int)</p>
+<p>update 的语句：<br>update T set c=c+1 where ID=2;</p>
+<p>更新流程的所涉及的模块：连接器》分析器》优化器》 执行器》存储引擎。 不过还会涉及到另外两个模块： Redo log（重做日志）和<br>binlog（归档日志）</p>
+<h4 id="重要的日志模块-redo-log"><a href="#重要的日志模块-redo-log" class="headerlink" title="重要的日志模块: redo log"></a>重要的日志模块: redo log</h4><p>redo log 是引擎层特有得日志<br>如果每一次的更新操作都需要写进磁盘，然后磁盘也要找到对应的记录，然后再更新，整个过程的IO 成本、<br>查找成本都很高。MYSQL 的解决方案，就是WAL 技术， Write-Ahead Logging， 它的关键点就是先写日志，<br>然后再写磁盘。</p>
+<p>具体来说，就是当有一条记录需要更新的时候，InnoDB 引擎就会先把记录写到redo log 里面，并更新内存，此时更新就算完成。<br>同时InnoDB 引擎会在适当的时候，将这个操作记录更新到此盘里面，此更新过程往往发生再系统比较空闲的时候。</p>
+<p>InnoDB的redo log 是固定大小，比如可以配置一组4个文件，每个文件都是1GB，那么这块“粉板”就能记录4GB 的操作。</p>
+<p>write pos 是记录当前记录的位置，一边写一边后移，写到第三号文件末尾后就回到0号文件开头。checkpoint是<br>当前要擦除的位置，也是往后推移并且循环的，擦除记录前要把记录更新到数据文件。</p>
+<p>write pos 和 checkpoint之间的是“粉板”上空着的部分， 可以用来记录新的操作。如果write pos 追上 checkpoint，<br>表示粉板满了，这时候不能再执行新的操作，得停下来先擦掉一些记录，把checkpoint 推进一下。</p>
+<p>因此，有了redo log, InnoDB就可以保证即使数据库发生异常重启，之前提交得记录都不会丢失，这个能力叫 crash-log</p>
+<h4 id="重要日志模块：-binlog（归档日志）"><a href="#重要日志模块：-binlog（归档日志）" class="headerlink" title="重要日志模块： binlog（归档日志）"></a>重要日志模块： binlog（归档日志）</h4><p>Server 层得日志： binlog（归档日志）</p>
+<p>最开始MYSQL 里并没有InnoDB引擎。 MYSQL 自带得引擎是MylSAM, 但它没有crash-safe的能力， binlog 日志只能用于归档。<br>而InnoDB 是另一个公司以插件形式引入MYSQL的，所以就使用另一套日志系统 redo log 来实现crash-safe 能力</p>
+<p>两个日志的不同点： </p>
+<ol>
+<li>redo log 是InnoDB 引擎特有的，binlog 是MYSQL 的server层实现的，所有引擎都可以使用。</li>
+<li>redo log 是物理日记， 记录的是“在某个数据页上做了什么修改”; binlog 是逻辑日志， 记录的是语句的原始逻辑，<br>比如“给ID=2 这一行的c 字段加1”</li>
+<li>redo log 是循环写的，空间固定会用完，binlog 是可以追加写入的。<br>追加写是指binlog 文件写到一定大小后会切换到下一个，并不会覆盖以前的日志。</li>
+</ol>
+<p>执行器和InnoDB 引擎在执行这个简单的update 语句时的内部流程。</p>
+<ol>
+<li>执行器先找到引擎取ID=2 这一行。 ID 时主键， 引擎直接用树搜索到这一行。 如果ID=2<br>这一行所在的数据页本来就在内存中， 就直接返回给执行器； 否则， 需要先从磁盘读取内存，然后再返回。</li>
+<li>执行器拿到引擎给的行数据，把值加1， 如变成N+1， 得到新一行数据， 再调用引擎接口写入这行新数据。</li>
+<li>引擎将这行新数据更新到内存中，同时将这个更新操作记录到redo log 里， 此时redo log 处于prepare状态。<br>然后告知执行器执行完成了，随时可以提交事务。</li>
+<li>执行器生成这个操作的binlog, 并把binlog 写入磁盘。</li>
+<li>执行器调用引擎的提交事务接口， 引擎把刚写入的redo log 改成提交（commit）状态，更新完成。</li>
+</ol>
+<p>update 语句的执行流程图，图中浅色框表示是在 InnoDB 内部执行， 深色为执行器中执行。</p>
+<p>redo log 的写入有两个步骤： prepare和commit,即两阶段提交。</p>
+<h4 id="两阶段提交"><a href="#两阶段提交" class="headerlink" title="两阶段提交"></a>两阶段提交</h4><p>存在两阶段提交的原因： 为了让两份日志之间的逻辑一致。<br>binlog 会记录所有的逻辑操作， 并且是采用“追加写”的形式。 当需要恢复到指定的某一秒时， 你可以这样做：</p>
+<ol>
+<li>首先， 找到最近的一次全量备份， 如果你运气好，可能就是昨天晚上的一个备份。从这个备份恢复到临时库。</li>
+<li>然后，从备份时间的点开始，将备份的binlog 依次取出， 重放到中午误删表之前的那个时刻。</li>
+</ol>
+<p>这样临时库就和误删之前的线上库一样了，然后把表数据从临时库取出，按需要恢复到线上库。</p>
+<p>为何日志需要“两阶段提交”？<br>由于redo log 和binlog 时两个独立的逻辑， 如果不使用两阶段提交，要么就是先写完redo log 再写<br>binlog， 抑或反过来。可能就会存在以下问题：<br>假设当前ID=2 的行， 字段C 的值时0,再假设执行update语句过程中在写完第一个日志之后， 第二个<br>日志还没有写完期间发生crash,会出现什么？</p>
+<ol>
+<li>先写redo log 后写binlog。 假设 redo log 写完， binlog 还没有写完时， mysql 进程异常重启。<br>由于前面所说，redo log 写完之后，系统即使奔溃，仍然能把数据恢复回来， 所以恢复后这一行c的值是1.<br>但由于binlog没写完就crash, 这时候binlog里面没有记录这个语句。因此，备份日志的时候，<br>存起来的binlog 里面就没有这条语句。如果用binlog 来恢复临时库的话，由于这个语句的binlog 丢失，<br>这个临时库就会少了这一次更新， 恢复处理的这一行c的值就是0， 与原库的值不同。</li>
+<li>先写binlog 后写redo log. 如果在binlog 写完之后crash， 由于redo log还没有写， 崩溃恢复后这个事务无效，<br>所以这一行c的值是0. 但是binlog来恢复的时候就多了一个事务出来， 恢复出来的这一行的值就是1，与原库的值不同。</li>
+</ol>
+<p>不仅误操作后需要用这个过程来恢复数据，需要扩容的时候，也就是需要再多搭建一些备库来增加系统的读能力的时候，<br>现在最常见的做法也是用全量备份加上应用binlog 来实现， 这个“不一致”就会导致你的线上出现主从数据库不一致的情况。</p>
+<p>简单来说， redo log和binlog 都可以用于表示事务的提交状态， 而两阶段提交就是让这两个状态保持逻辑上的一致。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>主要介绍 物理日志 redo log 和 逻辑日志 binlog（归档日志）</p>
+<p>redo log 用于保证 crash-safe 能力。 innodb_flush_log_at_trx_commit 这个参数设置成1的时候，<br>表示每次事务的redo log 都直接持久化到磁盘。 此参数设置为1， 就可以保证MYSQL 异常重启之后数据不会丢失。</p>
+<p>sync_binlog 参数为1 的时候， 表示每次事务的binlog 都持久化到磁盘。也可以保证MYSQL 异常重启后binlog不会丢失。</p>
+<p>两阶段提交时跨系统维持数据逻辑一致性常用的方案， 即使你不做数据库内核开发，日常开发也会使用。</p>
+<p>redo log 是记录这个页“做了什么改动”。<br>binlog 有两种模式， statement格式的话是记sql语句， row 格式会记录行的内容，记两条。更新前和更新后都有。</p>
+<p>1 prepare阶段 2 写binlog 3 commit<br>当在2之前崩溃时<br>重启恢复：后发现没有commit，回滚。备份恢复：没有binlog 。<br>一致<br>当在3之前崩溃<br>重启恢复：虽没有commit，但满足prepare和binlog完整，所以重启后会自动commit。备份：有binlog. 一致</p>
+<p>1.首先客户端通过tcp/ip发送一条sql语句到server层的SQL interface<br>2.SQL interface接到该请求后，先对该条语句进行解析，验证权限是否匹配<br>3.验证通过以后，分析器会对该语句分析,是否语法有错误等<br>4.接下来是优化器器生成相应的执行计划，选择最优的执行计划<br>5.之后会是执行器根据执行计划执行这条语句。在这一步会去open table,如果该table上有MDL，则等待。<br>如果没有，则加在该表上加短暂的MDL(S)<br>(如果opend_table太大,表明open_table_cache太小。需要不停的去打开frm文件)<br>6.进入到引擎层，首先会去innodb_buffer_pool里的data dictionary(元数据信息)得到表信息<br>7.通过元数据信息,去lock info里查出是否会有相关的锁信息，并把这条update语句需要的<br>锁信息写入到lock info里(锁这里还有待补充)<br>8.然后涉及到的老数据通过快照的方式存储到innodb_buffer_pool里的undo page里,并且记录undo log修改的redo<br>(如果data page里有就直接载入到undo page里，如果没有，则需要去磁盘里取出相应page的数据，载入到undo page里)<br>9.在innodb_buffer_pool的data page做update操作。并把操作的物理数据页修改记录到redo log buffer里<br>由于update这个事务会涉及到多个页面的修改，所以redo log buffer里会记录多条页面的修改信息。<br>因为group commit的原因，这次事务所产生的redo log buffer可能会跟随其它事务一同flush并且sync到磁盘上<br>10.同时修改的信息，会按照event的格式,记录到binlog_cache中。(这里注意binlog_cache_size是transaction级别的,不是session级别的参数,<br>一旦commit之后，dump线程会从binlog_cache里把event主动发送给slave的I/O线程)<br>11.之后把这条sql,需要在二级索引上做的修改，写入到change buffer page，等到下次有其他sql需要读取该二级索引时，再去与二级索引做merge<br>(随机I/O变为顺序I/O,但是由于现在的磁盘都是SSD,所以对于寻址来说,随机I/O和顺序I/O差距不大)<br>12.此时update语句已经完成，需要commit或者rollback。这里讨论commit的情况，并且双1<br>13.commit操作，由于存储引擎层与server层之间采用的是内部XA(保证两个事务的一致性,这里主要保证redo log和binlog的原子性),<br>所以提交分为prepare阶段与commit阶段<br>14.prepare阶段,将事务的xid写入，将binlog_cache里的进行flush以及sync操作(大事务的话这步非常耗时)<br>15.commit阶段，由于之前该事务产生的redo log已经sync到磁盘了。所以这步只是在redo log里标记commit<br>16.当binlog和redo log都已经落盘以后，如果触发了刷新脏页的操作，先把该脏页复制到doublewrite buffer里，把doublewrite buffer里的刷新到共享表空间，然后才是通过page cleaner线程把脏页写入到磁盘中<br>老师，你看我的步骤中有什么问题嘛？我感觉第6步那里有点问题,因为第5步已经去open table了，第6步还有没有必要去buffer里查找元数据呢?这元数据是表示的系统的元数据嘛,还是所有表的？谢谢老师指正</p>
+<p>其实在实现上5是调用了6的过程了的，所以是一回事。MySQL server 层和InnoDB层都保存了表结构，所以有书上描述时会拆开说。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjs37pct10006gcvxylj3m7sq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MYSQL-Study1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/" class="article-date">
@@ -150,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjs37o4q2000548vxbbo3vvg3" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjs37pcsx0004gcvx6bz058wx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -193,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjs37o4qn000s48vxn4vwknoq" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjs37pctn000tgcvxum7yc8xf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
@@ -250,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Trouble-Shooting1/" data-id="cjs37o4qx001148vxgkaz2r0o" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Trouble-Shooting1/" data-id="cjs37pcu20019gcvx56re6zju" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
@@ -293,50 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Security-Test/" data-id="cjs37o4qv000y48vxrh8t8nr7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SQA-Workflow" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2018/10/21/SQA-Workflow/" class="article-date">
-  <time datetime="2018-10-21T02:21:39.000Z" itemprop="datePublished">2018-10-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2018/10/21/SQA-Workflow/">SQA Workflow</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Security-Test-Summary"><a href="#Security-Test-Summary" class="headerlink" title="Security Test Summary"></a>Security Test Summary</h2><p><img src="/echoblog.github.io/2018/10/21/SQA-Workflow/测试流程.png" alt="Test Workflow"><br><img src="/echoblog.github.io/2018/10/21/SQA-Workflow/流程优化方案.png" alt="Optimum Proposal"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/SQA-Workflow/" data-id="cjs37o4qr000u48vx7k001wi8" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Security-Test/" data-id="cjs37pctv0011gcvx52l2g4kt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -405,6 +454,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/02/13/ShellCommand/">ShellCommand</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/02/13/test/">test</a>
           </li>
         
@@ -418,10 +471,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/01/27/MYSQL-Study7/">MYSQL-Study7</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/01/26/MYSQL-Study6/">MYSQL_Study6</a>
           </li>
         
       </ul>
