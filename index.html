@@ -62,6 +62,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-troubleshooting2019-2-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" class="article-date">
+  <time datetime="2019-02-20T12:16:36.000Z" itemprop="datePublished">2019-02-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/">troubleshooting-Allure Report &amp; HTMLReport</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="How-to-Generate-Allure-Report-in-cmd"><a href="#How-to-Generate-Allure-Report-in-cmd" class="headerlink" title="How to Generate Allure Report in cmd"></a>How to Generate Allure Report in cmd</h4><ol>
+<li>In the project root directory</li>
+<li>cmd execute:  pytest -s -q –alluredir allure-result<br>Grammar: pytest -s -q –alluredir [xml_report_path]</li>
+<li>Copy allure commandline to local, and set environment path<br>Set environment path, example:<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure1.png" alt="path"></li>
+<li>Under the same path, run cmd: example(&gt;allure generate allure-result -o allure-html)<br>Grammar: allure generate [xml_report_path] -o [html_report_path]<br>How to Check Allure Report</li>
+<li>In pycharm, select the index.html file reported by allure</li>
+<li>Right click, select “Open in Browser”, chose Chrome<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure2.png" alt="report showing"></li>
+</ol>
+<p>####　How to generate Htmlreport<br>run commd:<br>pytest –html=.\interfaceReport\report.html<br>Grammar:  pytest –html=[htmlpath.html]</p>
+<h4 id="Generate-Together"><a href="#Generate-Together" class="headerlink" title="Generate Together"></a>Generate Together</h4><p> pytest -s -q –alluredir [xml_report_path] –html=[htmlpath.html]<br>allure generate [xml_report_path] -o [html_report_path]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjsd69zl7001kz8vxhdbxrcnc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-trouble-shooting2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/02/14/trouble-shooting2/" class="article-date">
@@ -94,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjs5anypd001aasvx6n4b7y8w" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjsd69zl2001cz8vxgnax3ipk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -755,7 +807,7 @@ return $(($aNum+$anotherNum))
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/13/ShellCommand/" data-id="cjs5anyp20012asvxax2w1uxx" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/13/ShellCommand/" data-id="cjsd69zku0014z8vxdce67x0g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -1476,7 +1528,7 @@ return $(($aNum+$anotherNum))
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/01/resume/" data-id="cjs5anypi001fasvx4wklsmk8" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/01/resume/" data-id="cjsd69zl5001hz8vxdmrym5it" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1512,170 +1564,9 @@ return $(($aNum+$anotherNum))
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study8/" data-id="cjs5anyob000hasvxjk3pve48" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study8/" data-id="cjsd69zkc000mz8vxk0ungeo0" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MYSQL-Study7" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/27/MYSQL-Study7/" class="article-date">
-  <time datetime="2019-01-27T09:18:25.000Z" itemprop="datePublished">2019-01-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/27/MYSQL-Study7/">MYSQL-Study7</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/图一.png" alt="图一"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/图二.png" alt="图二"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/行锁.png" alt="行锁"></p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="MySQL-的行锁实在引擎层由各个引擎自己实现的。-但并不是所有的引擎都支持行锁，-如mylSAM-引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，-会影响到业务并发度。"><a href="#MySQL-的行锁实在引擎层由各个引擎自己实现的。-但并不是所有的引擎都支持行锁，-如mylSAM-引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，-会影响到业务并发度。" class="headerlink" title="MySQL 的行锁实在引擎层由各个引擎自己实现的。 但并不是所有的引擎都支持行锁， 如mylSAM 引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行， 会影响到业务并发度。"></a>MySQL 的行锁实在引擎层由各个引擎自己实现的。 但并不是所有的引擎都支持行锁， 如mylSAM 引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行， 会影响到业务并发度。</h3><h3 id="InnoDB-支持行锁。-如事务A-更新了一行，事务B-要更新同一行，则必须等事务A擦做完成后才能进行更新。"><a href="#InnoDB-支持行锁。-如事务A-更新了一行，事务B-要更新同一行，则必须等事务A擦做完成后才能进行更新。" class="headerlink" title="InnoDB 支持行锁。 如事务A 更新了一行，事务B 要更新同一行，则必须等事务A擦做完成后才能进行更新。"></a>InnoDB 支持行锁。 如事务A 更新了一行，事务B 要更新同一行，则必须等事务A擦做完成后才能进行更新。</h3><h2 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h2><h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><ul>
-<li>例子操作中， 事务B 的update语句执行时回事怎样呢？ 假设字段id 是表t的主键 图一</li>
-<li>问题的结论取决于事务A在执行完两条update 语句后，持有哪些锁，以及在什么时候释放。</li>
-<li>验证后， 实际上事务B 的update语句会被阻塞， 直到事务A执行commit之后，事务B才能继续执行。事务A持有的两条记录的锁，都是在commit 之后释放的</li>
-</ul>
-<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
-<li><p>两阶段锁协议</p>
-<ul>
-<li>在InnoDB 事务中，行锁实在需要的时候才加上，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。</li>
-</ul>
-</li>
-<li><p>如果事务中需要锁多个行，要把最可能造成锁冲突，最可能影响并发度的锁尽量往后放</p>
-</li>
-</ul>
-<h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><ul>
-<li>若果要负责实现一个电影票在线交易业务，顾客A要在影院B购买电影票</li>
-<li><p>涉及操作</p>
-<ul>
-<li><ol>
-<li>从顾客A账户余额中扣除电影票价</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>给影院B的账户余额增加这张电影票价</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>记录一条交易日志</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>如果同时有另外一个顾客要在B 影院买票， 那么这两个事务冲突的部分就是语句2.。 因为他们要更新同一个影院账户的余额，需要修改同一行数据。</p>
-</li>
-<li>根据两阶段锁协议，不论怎样安排语句顺序，所有的操作需要的行锁都在事务提交的时候才释放。 如果把语句2安排在最后， 比如按照3，1，2这样的顺序， 那么影院账户余额这一行的锁时间就最少最大程度地减少了事务之间地锁等待， 提升了并发度</li>
-<li>但如果影院做活动，可以低价预售一年内所有地电影票，活动持续一条。可能活动开始地时候MySQL就挂了。 CPU 消耗接近100%，但整个数据库美标执行不到100个事务</li>
-</ul>
-<h2 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><ul>
-<li><p>概念</p>
-<ul>
-<li>当并发系统中不同线程出现循环资源依赖， 涉及地线程都在等待别地线程释放资源时，就会导致这几个线程都进入无限等待地状态</li>
-</ul>
-</li>
-<li><p>例子（图二）</p>
-<ul>
-<li>事务A 在等待事务B 释放 id=2 的行锁，而事务B 在等待事务A 释放id=1 的行锁。 事务A和B 互相等待对方释放资源，就进入了死锁状态</li>
-<li><p>解决办法</p>
-<ul>
-<li>直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
-<li>发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑</li>
-</ul>
-</li>
-<li><p>分析： 在InnoDB 中，innodb_lock_wait_timeout的默认值是50s,使用第一个方法，当出现死锁以后，第一个被锁住的线程要过50s才会超时退出，然后其他线程才有可能继续执行。 但是超时时间又不能设置得很短，因为回出现很多误伤。</p>
-</li>
-<li>所以我们会使用第二种方案</li>
-</ul>
-</li>
-</ul>
-<h3 id="主动死锁检测"><a href="#主动死锁检测" class="headerlink" title="主动死锁检测"></a>主动死锁检测</h3><ul>
-<li><p>引子</p>
-<ul>
-<li>innodb_deadlock_detect的默认值本身就是on. 主动死锁检测在发生死锁的时候，是能够快速发现并进行处理的。但他也有额外负担。</li>
-<li>可以想象过程：每当一个事务被锁得时候，就要看看她所依赖得线程有没有被别人锁住，如此循环，最后判断是否出现了循环等待，也就是死锁</li>
-<li>每个新来的被堵住的过程，都要判断会不会由于自己的加入导致了死锁，这个是一个时间复杂度是O(n)的操作。 假设有100个并发线程要同时更新同一行，那么死锁检测操作就是100万这个量级的。虽然最终检测的结果是没有死锁，但是这期间要消耗大量的CPU资源。</li>
-</ul>
-</li>
-<li><p>如何解决由这种热点行更新导致的性能问题呢？</p>
-<ul>
-<li><p>问题症结</p>
-<ul>
-<li>死锁检测要耗费大量的CPU 资源</li>
-</ul>
-</li>
-<li><p>方法</p>
-<ul>
-<li>如果该业务一定不会出现死锁，可以临时把死锁检测关掉。但这种操作有一定风险，因为业务设计的时候一般不会把死锁当作一个严重错误，毕竟出现死锁，就回滚，然后通过业务重试一般就没问题了，这是业务无损的。而关掉死锁检测可能会出现大量超时，就会业务有损。</li>
-<li><p>控制并发度。 如果并发度能够控制，比如同一行同时最多只有10个线程在更新，那么死锁检测的成本很低，就不会出现这个问题。</p>
-<ul>
-<li>客户端并发控制。此方法可能不太可行，因为客户端很多。见过一个应用，600个客户端，即使每个客户端控制到只有5个并发线程，汇总到数据库服务端后，峰值并发数也可能达到3000</li>
-<li>因此，数据库服务端并发控制。如果有中间件，可以考虑在中间件实现； 或者有人可以修改MySQL源码，也可以放在MySQL里。</li>
-<li>原理， 对于相同行的更新，在进入引擎之前排队。在InnoDB内部就不会有大量的死锁检测工作。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="如何从设计上优化这个问题？"><a href="#如何从设计上优化这个问题？" class="headerlink" title="如何从设计上优化这个问题？"></a>如何从设计上优化这个问题？</h3><ul>
-<li>可以考虑通过将一行改成逻辑上的多行来减少锁冲突。</li>
-<li>以刚刚的影院账户为例，可以考虑放在多条记录上，比如10个记录，影院的账户总额等于这10个记录值得总和。 每次要个影院账户加金额得时候，随机选其中一条记录来加。这样每次冲突概率变成原来得1/10， 可以减少锁等待个数，也就减少了死锁检测得CPU 消耗</li>
-<li>这个方案看起来无损，但是需要根据业务逻辑做详细设计。如果账户余额可能会减少，比如退票逻辑，你这时候就需要考虑当一部分行记录变成0得时候，代码要有特殊处理</li>
-</ul>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h3><ul>
-<li>原则： 如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度得锁得申请时机尽量往后放</li>
-<li>调整语句顺序比能不能完全避免死锁</li>
-</ul>
-<h3 id="死锁和死锁检测-1"><a href="#死锁和死锁检测-1" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><ul>
-<li>方案1： 直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
-<li>方案2：发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑 </li>
-<li>方案3： 控制并发度。 （主要方向）</li>
-</ul>
-<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
-<li><p>要删除一个表里面得前10000行数据，三种方法</p>
-<ul>
-<li>第一种： 直接执行 delete from T limit 10000;</li>
-<li>第二种： 在一个链接中循环执行20次 delete from T limit 500;</li>
-<li>第三种： 在20个连接中同时执行20次 delete from T limit 500;</li>
-</ul>
-</li>
-<li><p>如何选择，为什么？</p>
-<ul>
-<li>第二种相对较好</li>
-<li>第一种方式（即： 直接执行 delete from T limit 10000）里面， 单个语句占用时间长，锁得时间也比较长，而且大事务还会导致主从延迟</li>
-<li>第三种方式， 会认为造成锁冲突</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study7/" data-id="cjs5anyof000lasvxdfqa8ubz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
     </footer>
   </div>
   
@@ -1740,6 +1631,10 @@ return $(($aNum+$anotherNum))
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/">troubleshooting-Allure Report &amp; HTMLReport</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/02/14/trouble-shooting2/">trouble-shooting2</a>
           </li>
         
@@ -1753,10 +1648,6 @@ return $(($aNum+$anotherNum))
         
           <li>
             <a href="/echoblog.github.io/2019/01/27/MYSQL-Study8/">MYSQL-Study8</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/01/27/MYSQL-Study7/">MYSQL-Study7</a>
           </li>
         
       </ul>

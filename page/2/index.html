@@ -62,6 +62,167 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MYSQL-Study7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/01/27/MYSQL-Study7/" class="article-date">
+  <time datetime="2019-01-27T09:18:25.000Z" itemprop="datePublished">2019-01-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/01/27/MYSQL-Study7/">MYSQL-Study7</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/图一.png" alt="图一"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/图二.png" alt="图二"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/行锁.png" alt="行锁"></p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="MySQL-的行锁实在引擎层由各个引擎自己实现的。-但并不是所有的引擎都支持行锁，-如mylSAM-引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，-会影响到业务并发度。"><a href="#MySQL-的行锁实在引擎层由各个引擎自己实现的。-但并不是所有的引擎都支持行锁，-如mylSAM-引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，-会影响到业务并发度。" class="headerlink" title="MySQL 的行锁实在引擎层由各个引擎自己实现的。 但并不是所有的引擎都支持行锁， 如mylSAM 引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行， 会影响到业务并发度。"></a>MySQL 的行锁实在引擎层由各个引擎自己实现的。 但并不是所有的引擎都支持行锁， 如mylSAM 引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行， 会影响到业务并发度。</h3><h3 id="InnoDB-支持行锁。-如事务A-更新了一行，事务B-要更新同一行，则必须等事务A擦做完成后才能进行更新。"><a href="#InnoDB-支持行锁。-如事务A-更新了一行，事务B-要更新同一行，则必须等事务A擦做完成后才能进行更新。" class="headerlink" title="InnoDB 支持行锁。 如事务A 更新了一行，事务B 要更新同一行，则必须等事务A擦做完成后才能进行更新。"></a>InnoDB 支持行锁。 如事务A 更新了一行，事务B 要更新同一行，则必须等事务A擦做完成后才能进行更新。</h3><h2 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h2><h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><ul>
+<li>例子操作中， 事务B 的update语句执行时回事怎样呢？ 假设字段id 是表t的主键 图一</li>
+<li>问题的结论取决于事务A在执行完两条update 语句后，持有哪些锁，以及在什么时候释放。</li>
+<li>验证后， 实际上事务B 的update语句会被阻塞， 直到事务A执行commit之后，事务B才能继续执行。事务A持有的两条记录的锁，都是在commit 之后释放的</li>
+</ul>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li><p>两阶段锁协议</p>
+<ul>
+<li>在InnoDB 事务中，行锁实在需要的时候才加上，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。</li>
+</ul>
+</li>
+<li><p>如果事务中需要锁多个行，要把最可能造成锁冲突，最可能影响并发度的锁尽量往后放</p>
+</li>
+</ul>
+<h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><ul>
+<li>若果要负责实现一个电影票在线交易业务，顾客A要在影院B购买电影票</li>
+<li><p>涉及操作</p>
+<ul>
+<li><ol>
+<li>从顾客A账户余额中扣除电影票价</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>给影院B的账户余额增加这张电影票价</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>记录一条交易日志</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>如果同时有另外一个顾客要在B 影院买票， 那么这两个事务冲突的部分就是语句2.。 因为他们要更新同一个影院账户的余额，需要修改同一行数据。</p>
+</li>
+<li>根据两阶段锁协议，不论怎样安排语句顺序，所有的操作需要的行锁都在事务提交的时候才释放。 如果把语句2安排在最后， 比如按照3，1，2这样的顺序， 那么影院账户余额这一行的锁时间就最少最大程度地减少了事务之间地锁等待， 提升了并发度</li>
+<li>但如果影院做活动，可以低价预售一年内所有地电影票，活动持续一条。可能活动开始地时候MySQL就挂了。 CPU 消耗接近100%，但整个数据库美标执行不到100个事务</li>
+</ul>
+<h2 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><ul>
+<li><p>概念</p>
+<ul>
+<li>当并发系统中不同线程出现循环资源依赖， 涉及地线程都在等待别地线程释放资源时，就会导致这几个线程都进入无限等待地状态</li>
+</ul>
+</li>
+<li><p>例子（图二）</p>
+<ul>
+<li>事务A 在等待事务B 释放 id=2 的行锁，而事务B 在等待事务A 释放id=1 的行锁。 事务A和B 互相等待对方释放资源，就进入了死锁状态</li>
+<li><p>解决办法</p>
+<ul>
+<li>直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
+<li>发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑</li>
+</ul>
+</li>
+<li><p>分析： 在InnoDB 中，innodb_lock_wait_timeout的默认值是50s,使用第一个方法，当出现死锁以后，第一个被锁住的线程要过50s才会超时退出，然后其他线程才有可能继续执行。 但是超时时间又不能设置得很短，因为回出现很多误伤。</p>
+</li>
+<li>所以我们会使用第二种方案</li>
+</ul>
+</li>
+</ul>
+<h3 id="主动死锁检测"><a href="#主动死锁检测" class="headerlink" title="主动死锁检测"></a>主动死锁检测</h3><ul>
+<li><p>引子</p>
+<ul>
+<li>innodb_deadlock_detect的默认值本身就是on. 主动死锁检测在发生死锁的时候，是能够快速发现并进行处理的。但他也有额外负担。</li>
+<li>可以想象过程：每当一个事务被锁得时候，就要看看她所依赖得线程有没有被别人锁住，如此循环，最后判断是否出现了循环等待，也就是死锁</li>
+<li>每个新来的被堵住的过程，都要判断会不会由于自己的加入导致了死锁，这个是一个时间复杂度是O(n)的操作。 假设有100个并发线程要同时更新同一行，那么死锁检测操作就是100万这个量级的。虽然最终检测的结果是没有死锁，但是这期间要消耗大量的CPU资源。</li>
+</ul>
+</li>
+<li><p>如何解决由这种热点行更新导致的性能问题呢？</p>
+<ul>
+<li><p>问题症结</p>
+<ul>
+<li>死锁检测要耗费大量的CPU 资源</li>
+</ul>
+</li>
+<li><p>方法</p>
+<ul>
+<li>如果该业务一定不会出现死锁，可以临时把死锁检测关掉。但这种操作有一定风险，因为业务设计的时候一般不会把死锁当作一个严重错误，毕竟出现死锁，就回滚，然后通过业务重试一般就没问题了，这是业务无损的。而关掉死锁检测可能会出现大量超时，就会业务有损。</li>
+<li><p>控制并发度。 如果并发度能够控制，比如同一行同时最多只有10个线程在更新，那么死锁检测的成本很低，就不会出现这个问题。</p>
+<ul>
+<li>客户端并发控制。此方法可能不太可行，因为客户端很多。见过一个应用，600个客户端，即使每个客户端控制到只有5个并发线程，汇总到数据库服务端后，峰值并发数也可能达到3000</li>
+<li>因此，数据库服务端并发控制。如果有中间件，可以考虑在中间件实现； 或者有人可以修改MySQL源码，也可以放在MySQL里。</li>
+<li>原理， 对于相同行的更新，在进入引擎之前排队。在InnoDB内部就不会有大量的死锁检测工作。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何从设计上优化这个问题？"><a href="#如何从设计上优化这个问题？" class="headerlink" title="如何从设计上优化这个问题？"></a>如何从设计上优化这个问题？</h3><ul>
+<li>可以考虑通过将一行改成逻辑上的多行来减少锁冲突。</li>
+<li>以刚刚的影院账户为例，可以考虑放在多条记录上，比如10个记录，影院的账户总额等于这10个记录值得总和。 每次要个影院账户加金额得时候，随机选其中一条记录来加。这样每次冲突概率变成原来得1/10， 可以减少锁等待个数，也就减少了死锁检测得CPU 消耗</li>
+<li>这个方案看起来无损，但是需要根据业务逻辑做详细设计。如果账户余额可能会减少，比如退票逻辑，你这时候就需要考虑当一部分行记录变成0得时候，代码要有特殊处理</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h3><ul>
+<li>原则： 如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度得锁得申请时机尽量往后放</li>
+<li>调整语句顺序比能不能完全避免死锁</li>
+</ul>
+<h3 id="死锁和死锁检测-1"><a href="#死锁和死锁检测-1" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><ul>
+<li>方案1： 直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
+<li>方案2：发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑 </li>
+<li>方案3： 控制并发度。 （主要方向）</li>
+</ul>
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
+<li><p>要删除一个表里面得前10000行数据，三种方法</p>
+<ul>
+<li>第一种： 直接执行 delete from T limit 10000;</li>
+<li>第二种： 在一个链接中循环执行20次 delete from T limit 500;</li>
+<li>第三种： 在20个连接中同时执行20次 delete from T limit 500;</li>
+</ul>
+</li>
+<li><p>如何选择，为什么？</p>
+<ul>
+<li>第二种相对较好</li>
+<li>第一种方式（即： 直接执行 delete from T limit 10000）里面， 单个语句占用时间长，锁得时间也比较长，而且大事务还会导致主从延迟</li>
+<li>第三种方式， 会认为造成锁冲突</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study7/" data-id="cjsd69zk8000hz8vx8uxc125o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MYSQL-Study6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/01/26/MYSQL-Study6/" class="article-date">
@@ -236,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjs5anyoi000nasvxq3kxl1fb" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjsd69zkh000tz8vx8tztm48p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -341,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study5/" data-id="cjs5anyo8000fasvx4x08j8bx" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study5/" data-id="cjsd69zk6000fz8vxs8rezeke" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -385,7 +546,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjs5anyni0004asvx99qazqdb" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjsd69zj30001z8vxnzbb150s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li></ul>
@@ -477,99 +638,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjs5anyo0000aasvx5skxct2s" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MYSQL-Study3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/01/MYSQL-Study3/" class="article-date">
-  <time datetime="2019-01-01T09:42:59.000Z" itemprop="datePublished">2019-01-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/01/MYSQL-Study3/">MYSQL-Study3</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>####　事务隔离<br>事务是保证一组数据库操作，要么全部成功，要么全部失败。　在ＭySQA中，事务支持是在引擎层实现的。MySQL是一个支持多引擎的系统，<br>但并不是所有的引擎都支持事务。 如 MYSQL原生的MylSAM引擎就不支持事务，这也是MylSAM 被InnoDB 取代的重要原因之一。</p>
-<h4 id="隔离性与隔离级别"><a href="#隔离性与隔离级别" class="headerlink" title="隔离性与隔离级别"></a>隔离性与隔离级别</h4><p>ACID(Atomicity, Consistency, Isolation, Durability, 即原子性， 一致性， 隔离性，持久性 )。<br>当数据路上有多个事务同时执行的时候， 就可能出现脏读(dirty, read), 不可重复读(non-repeateable read)、<br>幻读(phantom read)的问题， 为了解决这个问题，就有了“隔离级别”的概念。</p>
-<p>如果隔离越严实， 效率就会越低。 SQL 标准的事务隔离级别包括：读未提交（read uncommitted）、<br>读提交（read committed）、可重复读（repeatable read）和串行化（serializable）</p>
-<ol>
-<li>读未提交： 一个事务还没提交时， 它做的变更就能被别的事务看到</li>
-<li>读提交： 一个事务提交之后， 它做的变更才会被其他事务看到</li>
-<li>可重复读： 一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在<br>可重复读隔离级别下，未提交变更对其他事务也是不可见的。</li>
-<li>串行化， 对于同一行记录， “写”会加“写锁”， “读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，<br>才能继续执行。</li>
-</ol>
-<p>隔离区别：<br>假设数据表T中只有一列，其中一行的值为1， 则按时间顺序执行下面两个事务的行为：<br>create table T(c int) engine = InnoDB;<br>insert into T(c) values(1);</p>
-<p><img src="/echoblog.github.io/2019/01/01/MYSQL-Study3/affair.png" alt="Affair"></p>
-<ol>
-<li>若隔离级别是“读未提交”， 则V1 的值就是2. 这时候事务B 虽然还没有提交， 但是结果已经被A看到了。 因此， V2，V3也都是2</li>
-<li>若隔离级别是“读提交”，则V1是1， V2 的值是2。 事务B 的更新在提交后才能被A 看到。 所以， V3的值也是2</li>
-<li>若隔离级别是“可重复读”， 则V1、V2 是1， V3是2. 之所以V2 还是1， 遵循的就是这个要求： 事务在执行期间看到的数据前后必须是一致的</li>
-<li>若隔离级别是“串行化”， 则在事务B 执行“将1改成2”的时候，会被锁住。直到事务A提交后，事务B才可以继续执行。所以从A的角度看，V1，V2<br>值是1， V3 的值是2。</li>
-</ol>
-<p>在实现上，数据库里面会创建一个视图， 访问的时候以视图的逻辑结果为准。<br>在“可重复读”隔离级别下，这个视图是在事务启动时创建的，整个事务存在期间都用这个视图。在“读提交”隔离级别下，这个视图是在每个SQL语句开始<br>执行的时候创建的。 需要注意的是， “读未提交”隔离级别下直接返回记录上的最新值，没有视图概念; 而“串行化” 隔离级别下直接返回记录上的最新值，<br>没有视图概念； 而“串行化”隔离级别下直接用加锁的方式来避免并行访问。</p>
-<p>不同隔离级别下，数据库行为是有所不同的。 Oracle数据库的默认隔离级别其实是“读提交”， 因此对于一些从Oracle 迁移到MYSQL的应用，<br>为了保证数据库隔离级别的一致， 需要将“MYSQL”的隔离级别设置为“读提交”。</p>
-<p>配置方式： 将启动参数 transaction-isolation 的值设置为READ-COMMITTED， 可用show variables 来查看当前的值。<br>show variables like ‘transaction_isolation’;</p>
-<p>可重复读出现： 假设在管理一个个人银行账户表。 一个表存了每个月月底的余额， 一个表存了账单明细。 如果需要做数据校对，也就是判断上个月的余额<br>和当前余额的差额，是否与本月账单明细一致。校对者一定希望在校对过程中，即使有用户发生了一笔新的交易，也不影响校对结果。此时， 使用“可重复读”<br>隔离级别就很方便。 事务启动时的视图可以认为时静止的，不受其他事务更新的影响。</p>
-<h4 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h4><p>“可重复读”<br>在MYSQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上最新值，通过回滚操作，都可以得到前一个状态的值。<br>假设一个值按顺序被改成了2,3,4， 在回滚日志里面就会有类似的记录。</p>
-<p><img src="/echoblog.github.io/2019/01/01/MYSQL-Study3/roll-back.png" alt="回滚日志"><br>当前值是4， 但是在查询这条记录的时候，不同时刻启动的事务会有不同的read-view. 如图所示， 在视图A,B,C 里面，这一个记录的值分别是1，2，4，同一条记录<br>在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。 对于read-view A, 要得到1， 就必须将当前值依次执行图中所有的回归操作得到。</p>
-<p>同时你会发现，即使现在有另外一个事务正在将4改成5，这个事务跟read-view A,B,C 对应的事务是不会冲突的。<br>在不需要的时候才会删除回滚日志， 也就是说，系统会判断，当没有事务再需要用到这些回滚日志的时候就会被删除。<br>什么时候才不需要的呢？就是当系统里面没有比这个回滚日志更早的read-view 的时候。</p>
-<p>在实际中，尽量不要使用长事务。<br>长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面肯能用到的回滚记录必须保留，<br>这就会导致大量占用存储空间。</p>
-<p>在MYSQL 5.5 以及之前的版本，回滚体制是跟数据字典一起放在ibdata文件里的，即使长事务最终提交，回滚段被清理，文件也不会变小。<br>除了对回滚段的影响，长事务还占用锁资源，也可能拖垮整个库。</p>
-<p>####　事务的启动方式<br>MYSQL 的事务启动方式有以下几种：</p>
-<ol>
-<li>显示启动事务语句， begin或start transaction。 配套的提交语句是commit， 回滚语句是rollback</li>
-<li>set autocommit = 0, 这个命令会将这个线程的自动提交关掉。 如只执行一个select 语句， 这个事务就启动了，并且不会自动提交。 这个事务持续寻在直到主动执行commit<br>或者rollback 语句，或者断开连接。</li>
-</ol>
-<p>有些客户端连接框架会默认连接成功后先执行一个set autocommit = 0 的命令。 这就导致接下来的查询都在事务中，如果是长连接，就导致了意外的长事务。</p>
-<p>因此，建议使用set autocommit =1,通过显式语句的方式来启动事务。<br>对于一个需求频繁使用事务的业务，第二种方式每个事务在开始时都不需要主动执行一次“begin”，减少了语句的交互次数。如果有此顾虑，<br>建议使用commit work and chain 语句。</p>
-<p>在autocommit 为1 的情况下，用begin显示启动的事务，如果执行commit 则提交事务。 如果执行commit work and  chain, 则是提交事务并自动启动<br>下一个事务， 这样也省区了再次执行begin语句的开销。 同时带来的好处是从程序开发的角度明确知道每个语句是否处于事务中。</p>
-<p>可以在informa_schema 库的innodb_trx这个表中查询长事务，如下面的可以查询持续时间超过60s的事务。<br>select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started)) &gt; 60</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在开发过程中，尽可能的减小事务范围，少用长事务，如果无法避免，保证逻辑日志空间足够用，并且支持动态日志空间增长。监控Innodb_trx表，发现长事务报警。</p>
-<p>读未提交：别人改数据的事务尚未提交，我在我的事务中也能读到。<br>读已提交：别人改数据的事务已经提交，我在我的事务中才能读到。<br>可重复读：别人改数据的事务已经提交，我在我的事务中也不去读。<br>串行：我的事务尚未提交，别人就别想改数据。<br>这4种隔离级别，并行性能依次降低，安全性依次提高。</p>
-<p>如何避免长事务对业务的影响？<br>应用开发端：</p>
-<ol>
-<li>确认是否使用了set autocommit = 0. 确认工作可以在测试环境中开展，把MYSQL 的general_log 开起， 然后跑一个业务逻辑。通过general_log的日志<br>来确认。一般框架如果会设置这个值，也会提供参数来控制行为，目标就是把它改成1. </li>
-<li>确认是都有不必要的只读事务。有些框架会习惯不管什么语句先用begin/commit 框起来。 有些业务还会把好几个select语句放到了事务中。这种只读<br>事务可以去掉。</li>
-<li>业务连接数据库的时候， 根据业务本身的预估，通过SET MAX_EXECUTION_TIME命令，来控制每个语句执行的最长时间，避免单个语句意外执行太长</li>
-</ol>
-<p>数据库端：</p>
-<ol>
-<li>监控information_schema.Innodb_trx表，设置长事务阈值，超过就报警或者kill</li>
-<li>Percona 的 pt-kill 工具推荐</li>
-<li>在业务功能测试阶段要求输出所有的general_log， 分析日志行为提前发现问题</li>
-<li>MYSQL 5.6 或者更新版本，innodb_undo_tablespace 设置成2（或者更大值）。 如果真出现大事务导致回滚段过大，这样清理起来会更方便。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjs5anyo4000basvxbmrmshnn" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjsd69zju000az8vxhprt2ll2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -638,6 +707,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/">troubleshooting-Allure Report &amp; HTMLReport</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/02/14/trouble-shooting2/">trouble-shooting2</a>
           </li>
         
@@ -651,10 +724,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/01/27/MYSQL-Study8/">MYSQL-Study8</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/01/27/MYSQL-Study7/">MYSQL-Study7</a>
           </li>
         
       </ul>

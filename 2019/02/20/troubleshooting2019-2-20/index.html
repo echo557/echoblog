@@ -5,15 +5,23 @@
   
 
   
-  <title>Tag: QA | Ying&#39;s Blog</title>
+  <title>troubleshooting-Allure Report &amp; HTMLReport | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ying&#39;s Blog">
-<meta property="og:url" content="https://echo557.github.io/echoblog.github.io/tags/QA/index.html">
+  <meta name="description" content="How to Generate Allure Report in cmd In the project root directory cmd execute:  pytest -s -q –alluredir allure-resultGrammar: pytest -s -q –alluredir [xml_report_path] Copy allure commandline to loca">
+<meta name="keywords" content="QA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="troubleshooting-Allure Report &amp; HTMLReport">
+<meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
+<meta property="og:description" content="How to Generate Allure Report in cmd In the project root directory cmd execute:  pytest -s -q –alluredir allure-resultGrammar: pytest -s -q –alluredir [xml_report_path] Copy allure commandline to loca">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure1.png">
+<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure2.png">
+<meta property="og:updated_time" content="2019-02-20T12:26:56.610Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ying&#39;s Blog">
+<meta name="twitter:title" content="troubleshooting-Allure Report &amp; HTMLReport">
+<meta name="twitter:description" content="How to Generate Allure Report in cmd In the project root directory cmd execute:  pytest -s -q –alluredir allure-resultGrammar: pytest -s -q –alluredir [xml_report_path] Copy allure commandline to loca">
+<meta name="twitter:image" content="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure1.png">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -60,121 +68,67 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/echoblog.github.io/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" class="archive-article-date">
-  <time datetime="2019-02-20T12:16:36.000Z" itemprop="datePublished">Feb 20</time>
+        <section id="main"><article id="post-troubleshooting2019-2-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" class="article-date">
+  <time datetime="2019-02-20T12:16:36.000Z" itemprop="datePublished">2019-02-20</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/">troubleshooting-Allure Report &amp; HTMLReport</a>
+    <h1 class="article-title" itemprop="name">
+      troubleshooting-Allure Report &amp; HTMLReport
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2019/02/14/trouble-shooting2/" class="archive-article-date">
-  <time datetime="2019-02-13T22:40:26.000Z" itemprop="datePublished">Feb 14</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2019/02/14/trouble-shooting2/">trouble-shooting2</a>
-    </h1>
-  
+        <h4 id="How-to-Generate-Allure-Report-in-cmd"><a href="#How-to-Generate-Allure-Report-in-cmd" class="headerlink" title="How to Generate Allure Report in cmd"></a>How to Generate Allure Report in cmd</h4><ol>
+<li>In the project root directory</li>
+<li>cmd execute:  pytest -s -q –alluredir allure-result<br>Grammar: pytest -s -q –alluredir [xml_report_path]</li>
+<li>Copy allure commandline to local, and set environment path<br>Set environment path, example:<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure1.png" alt="path"></li>
+<li>Under the same path, run cmd: example(&gt;allure generate allure-result -o allure-html)<br>Grammar: allure generate [xml_report_path] -o [html_report_path]<br>How to Check Allure Report</li>
+<li>In pycharm, select the index.html file reported by allure</li>
+<li>Right click, select “Open in Browser”, chose Chrome<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure2.png" alt="report showing"></li>
+</ol>
+<p>####　How to generate Htmlreport<br>run commd:<br>pytest –html=.\interfaceReport\report.html<br>Grammar:  pytest –html=[htmlpath.html]</p>
+<h4 id="Generate-Together"><a href="#Generate-Together" class="headerlink" title="Generate Together"></a>Generate Together</h4><p> pytest -s -q –alluredir [xml_report_path] –html=[htmlpath.html]<br>allure generate [xml_report_path] -o [html_report_path]</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2019/02/13/ShellCommand/" class="archive-article-date">
-  <time datetime="2019-02-13T13:09:15.000Z" itemprop="datePublished">Feb 13</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2019/02/13/ShellCommand/">ShellCommand</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2019/01/27/MYSQL-Study7/" class="archive-article-date">
-  <time datetime="2019-01-27T09:18:25.000Z" itemprop="datePublished">Jan 27</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjsd69zl7001kz8vxhdbxrcnc" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2019/01/27/MYSQL-Study7/">MYSQL-Study7</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2019/01/26/MYSQL-Study6/" class="archive-article-date">
-  <time datetime="2019-01-26T12:28:27.000Z" itemprop="datePublished">Jan 26</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2019/01/26/MYSQL-Study6/">MYSQL_Study6</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/echoblog.github.io/tags/QA/page/2/">2</a><a class="page-number" href="/echoblog.github.io/tags/QA/page/3/">3</a><a class="extend next" rel="next" href="/echoblog.github.io/tags/QA/page/2/">Next &raquo;</a>
-  </nav>
+<nav id="article-nav">
+  
+  
+    <a href="/echoblog.github.io/2019/02/14/trouble-shooting2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">trouble-shooting2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
