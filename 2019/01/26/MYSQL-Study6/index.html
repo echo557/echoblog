@@ -5,12 +5,12 @@
   
 
   
-  <title>MYSQL_Study6 | Ying&#39;s Blog</title>
+  <title>全局锁和表锁 | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="引言多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构三种锁： 全局锁， 表级锁 和行锁全局锁引子 全局锁就是对整个数据库实例加锁。  MySQL提供了一个加全局读锁地方法， 命令： Flush tables with read lock(FTWRL). 如果需要让整个库处于只读状态，可以使用此命令。然后所有语句会被阻塞： 数据库">
 <meta name="keywords" content="QA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MYSQL_Study6">
+<meta property="og:title" content="全局锁和表锁">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
 <meta property="og:description" content="引言多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构三种锁： 全局锁， 表级锁 和行锁全局锁引子 全局锁就是对整个数据库实例加锁。  MySQL提供了一个加全局读锁地方法， 命令： Flush tables with read lock(FTWRL). 如果需要让整个库处于只读状态，可以使用此命令。然后所有语句会被阻塞： 数据库">
@@ -18,9 +18,9 @@
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/图一.png">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/MDL.png">
 <meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/全局锁和表锁.png">
-<meta property="og:updated_time" content="2019-01-29T13:22:17.128Z">
+<meta property="og:updated_time" content="2019-04-12T01:52:20.600Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MYSQL_Study6">
+<meta name="twitter:title" content="全局锁和表锁">
 <meta name="twitter:description" content="引言多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构三种锁： 全局锁， 表级锁 和行锁全局锁引子 全局锁就是对整个数据库实例加锁。  MySQL提供了一个加全局读锁地方法， 命令： Flush tables with read lock(FTWRL). 如果需要让整个库处于只读状态，可以使用此命令。然后所有语句会被阻塞： 数据库">
 <meta name="twitter:image" content="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/图一.png">
   
@@ -87,7 +87,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MYSQL_Study6
+      全局锁和表锁
     </h1>
   
 
@@ -243,7 +243,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjuddgcxt000h6wvxlnq4ilyq" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjudhftxj000l14vx6dcz79dl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -258,7 +258,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          MYSQL-Study7
+          行锁
         
       </div>
     </a>
@@ -266,7 +266,7 @@
   
     <a href="/echoblog.github.io/2019/01/26/MYSQL-Study5/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">MYSQL_Study5</div>
+      <div class="article-nav-title">索引下</div>
     </a>
   
 </nav>
@@ -282,7 +282,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -324,6 +324,14 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/12/PerformanceTesting1/">性能测试流程</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/08/functionTesting/">Testing</a>
           </li>
         
@@ -333,14 +341,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/08/seleniumIDE/">seleniumIDE</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/02/SoftwareTesting/">SoftwareTesting</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/03/12/machinelearning1/">machinelearning1-</a>
           </li>
         
       </ul>
