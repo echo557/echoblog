@@ -62,6 +62,132 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/12/python1/" class="article-date">
+  <time datetime="2019-04-12T13:26:14.000Z" itemprop="datePublished">2019-04-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/12/python1/">python1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Python-base"><a href="#Python-base" class="headerlink" title="Python_base"></a>Python_base</h4><ol>
+<li>import time as shijian</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjue5dapw0020m4vxsd1j7clb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scipts/">Scipts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-autotesting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/12/autotesting/" class="article-date">
+  <time datetime="2019-04-12T05:12:12.000Z" itemprop="datePublished">2019-04-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/12/autotesting/">自动化框架搭建建议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/echoblog.github.io/2019/04/12/autotesting/自动化框架.png" alt="自动化框架"></p>
+<h2 id="手工VS自动化"><a href="#手工VS自动化" class="headerlink" title="手工VS自动化"></a>手工VS自动化</h2><h3 id="手工"><a href="#手工" class="headerlink" title="手工"></a>手工</h3><ul>
+<li>无法做到覆盖所有代码路径</li>
+<li>机械性、重复性</li>
+<li>无法短时间完成大量用例</li>
+</ul>
+<h3 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h3><ul>
+<li>缩短测试周期</li>
+<li>提高效率，节约成本</li>
+<li>增加稳定性</li>
+</ul>
+<h2 id="工具-框架特征"><a href="#工具-框架特征" class="headerlink" title="工具/框架特征"></a>工具/框架特征</h2><h3 id="支持脚本化语言（Scripting-Language）"><a href="#支持脚本化语言（Scripting-Language）" class="headerlink" title="支持脚本化语言（Scripting Language）"></a>支持脚本化语言（Scripting Language）</h3><h3 id="对程序界面中对象得识别能力"><a href="#对程序界面中对象得识别能力" class="headerlink" title="对程序界面中对象得识别能力"></a>对程序界面中对象得识别能力</h3><h3 id="支持函数得可重用"><a href="#支持函数得可重用" class="headerlink" title="支持函数得可重用"></a>支持函数得可重用</h3><h3 id="支持外部函数库"><a href="#支持外部函数库" class="headerlink" title="支持外部函数库"></a>支持外部函数库</h3><h3 id="抽象层-将程序界面中得对象实体映射成逻辑对象"><a href="#抽象层-将程序界面中得对象实体映射成逻辑对象" class="headerlink" title="抽象层-将程序界面中得对象实体映射成逻辑对象"></a>抽象层-将程序界面中得对象实体映射成逻辑对象</h3><h3 id="支持数据驱动测试（Data-Driven-Test）"><a href="#支持数据驱动测试（Data-Driven-Test）" class="headerlink" title="支持数据驱动测试（Data-Driven Test）"></a>支持数据驱动测试（Data-Driven Test）</h3><h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h3 id="调试器（Debugger）"><a href="#调试器（Debugger）" class="headerlink" title="调试器（Debugger）"></a>调试器（Debugger）</h3><h3 id="源代码管理"><a href="#源代码管理" class="headerlink" title="源代码管理"></a>源代码管理</h3><h3 id="支持脚本的命令行（Command-Line）方式"><a href="#支持脚本的命令行（Command-Line）方式" class="headerlink" title="支持脚本的命令行（Command Line）方式"></a>支持脚本的命令行（Command Line）方式</h3><h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h2><h3 id="通用性"><a href="#通用性" class="headerlink" title="通用性"></a>通用性</h3><ul>
+<li><p>分层</p>
+<ul>
+<li>Case</li>
+<li>元素处理</li>
+<li>底层</li>
+<li>通用</li>
+<li>日志</li>
+<li>报告</li>
+<li>用途</li>
+<li>数据层</li>
+</ul>
+</li>
+<li><p>驱动式</p>
+</li>
+</ul>
+<h3 id="易维护性"><a href="#易维护性" class="headerlink" title="易维护性"></a>易维护性</h3><h3 id="定时处理"><a href="#定时处理" class="headerlink" title="定时处理"></a>定时处理</h3><h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><h2 id="框架驱动方式"><a href="#框架驱动方式" class="headerlink" title="框架驱动方式"></a>框架驱动方式</h2><h3 id="数据驱动"><a href="#数据驱动" class="headerlink" title="数据驱动"></a>数据驱动</h3><h3 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h3><h2 id="内部-外部框架"><a href="#内部-外部框架" class="headerlink" title="内部/外部框架"></a>内部/外部框架</h2><h3 id="内部框架"><a href="#内部框架" class="headerlink" title="内部框架"></a>内部框架</h3><ul>
+<li><p>即分层框架，目的在于更好的优化和管理测试用例、更便捷的进行数据、元素、脚本的维护和更快速的创建新脚本</p>
+<ul>
+<li>Junit(单线程)+Webdriver+grid</li>
+<li>Testng（多线程）+Webdriver+Maven（调用，编辑）+Ant+SVN/Git+Jenkins+xslt/reportng(组件)+Mail</li>
+</ul>
+</li>
+</ul>
+<h3 id="外部框架"><a href="#外部框架" class="headerlink" title="外部框架"></a>外部框架</h3><ul>
+<li>主要指以WebDriver为核心，辅以外部第三方框架和工具，用以实现持续集成、自动部署、脚本执行、远程调用、报告优化、邮件发送等功能性框架</li>
+</ul>
+<p><em>XMind: ZEN - Trial Version</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjue5dapg001km4vxzh2hoqhc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PerformanceTesting2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/" class="article-date">
@@ -108,11 +234,23 @@
 <li>SQL 语句实现性能低下</li>
 <li>开发人员经验不足（算法、代码规范、浪费时间）</li>
 </ol>
+<p>数据库联合查询是利用笛卡尔积</p>
+<p>实施过程</p>
+<ol>
+<li>了解性能测试的需求</li>
+<li>分析测试需求</li>
+<li>编写计划和用例</li>
+<li>相关资源准备</li>
+<li>脚本维护</li>
+<li>执行脚本</li>
+<li>分析结果</li>
+<li>性能优化</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjudhftxt000u14vxi2wdwtmn" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjue5dao8000mm4vxyj96qx2e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -266,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting1/" data-id="cjudhftxp000s14vxmb1qdmu7" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting1/" data-id="cjue5daol000tm4vxu2rsct1c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -481,103 +619,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/functionTesting/" data-id="cjudhftyf001n14vx6wspyp7t" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/functionTesting/" data-id="cjue5dapq001wm4vxxnkh4bxs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-pict" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/08/pict/" class="article-date">
-  <time datetime="2019-04-08T01:39:20.000Z" itemprop="datePublished">2019-04-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/08/pict/">pict</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>应用： 使用来辅助生成接口测试用例，来实现更多覆盖</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/pict/" data-id="cjudhftyo001v14vxnvpa1o5y" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-seleniumIDE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/08/seleniumIDE/" class="article-date">
-  <time datetime="2019-04-08T00:32:16.000Z" itemprop="datePublished">2019-04-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/08/seleniumIDE/">seleniumIDE</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需要下载和fireFox 配套使用</p>
-<p>####基本功能<br>录制<br>回放</p>
-<p>####步骤</p>
-<ol>
-<li>precondition</li>
-<li>steps</li>
-<li>assert</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/seleniumIDE/" data-id="cjudhftyt002114vxse52mtpu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
     </footer>
   </div>
@@ -601,7 +646,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -611,7 +656,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scipts/">Scipts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
     </div>
   </div>
 
@@ -621,7 +666,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 15px;">SQA</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 15px;">SQA</a> <a href="/echoblog.github.io/tags/Scipts/" style="font-size: 10px;">Scipts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
     </div>
   </div>
 
@@ -643,6 +688,14 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/12/python1/">python1</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/12/autotesting/">自动化框架搭建建议</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
           </li>
         
@@ -652,14 +705,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/08/functionTesting/">Testing</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/08/pict/">pict</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/08/seleniumIDE/">seleniumIDE</a>
           </li>
         
       </ul>

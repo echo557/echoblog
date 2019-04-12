@@ -5,20 +5,22 @@
   
 
   
-  <title>PerformanceTesting2 | Ying&#39;s Blog</title>
+  <title>自动化框架搭建建议 | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="性能测试场景  并发用户数 性能瓶颈查找 同一系统可以采用的架构选择 功能上某一模块的用户并发数  主要指标–用户角度  响应时间–2/5/10 原则–过长等待时间会让客户焦躁不安 稳定性–HTTP 500–数据库崩溃–应用服务器前端主要指标–系统角度 网络运行请情况 硬件配备情况 软件的配置情况（应用服务器/数据库/系统）mysql.my.initomcatJVM 的配置，采用的系统主要指标–开">
+  <meta name="description" content="手工VS自动化手工 无法做到覆盖所有代码路径 机械性、重复性 无法短时间完成大量用例  自动化 缩短测试周期 提高效率，节约成本 增加稳定性  工具/框架特征支持脚本化语言（Scripting Language）对程序界面中对象得识别能力支持函数得可重用支持外部函数库抽象层-将程序界面中得对象实体映射成逻辑对象支持数据驱动测试（Data-Driven Test）错误处理调试器（Debugger）">
 <meta name="keywords" content="QA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PerformanceTesting2">
-<meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/index.html">
+<meta property="og:title" content="自动化框架搭建建议">
+<meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
-<meta property="og:description" content="性能测试场景  并发用户数 性能瓶颈查找 同一系统可以采用的架构选择 功能上某一模块的用户并发数  主要指标–用户角度  响应时间–2/5/10 原则–过长等待时间会让客户焦躁不安 稳定性–HTTP 500–数据库崩溃–应用服务器前端主要指标–系统角度 网络运行请情况 硬件配备情况 软件的配置情况（应用服务器/数据库/系统）mysql.my.initomcatJVM 的配置，采用的系统主要指标–开">
+<meta property="og:description" content="手工VS自动化手工 无法做到覆盖所有代码路径 机械性、重复性 无法短时间完成大量用例  自动化 缩短测试周期 提高效率，节约成本 增加稳定性  工具/框架特征支持脚本化语言（Scripting Language）对程序界面中对象得识别能力支持函数得可重用支持外部函数库抽象层-将程序界面中得对象实体映射成逻辑对象支持数据驱动测试（Data-Driven Test）错误处理调试器（Debugger）">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-12T13:21:26.261Z">
+<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/自动化框架.png">
+<meta property="og:updated_time" content="2019-04-12T13:25:16.483Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PerformanceTesting2">
-<meta name="twitter:description" content="性能测试场景  并发用户数 性能瓶颈查找 同一系统可以采用的架构选择 功能上某一模块的用户并发数  主要指标–用户角度  响应时间–2/5/10 原则–过长等待时间会让客户焦躁不安 稳定性–HTTP 500–数据库崩溃–应用服务器前端主要指标–系统角度 网络运行请情况 硬件配备情况 软件的配置情况（应用服务器/数据库/系统）mysql.my.initomcatJVM 的配置，采用的系统主要指标–开">
+<meta name="twitter:title" content="自动化框架搭建建议">
+<meta name="twitter:description" content="手工VS自动化手工 无法做到覆盖所有代码路径 机械性、重复性 无法短时间完成大量用例  自动化 缩短测试周期 提高效率，节约成本 增加稳定性  工具/框架特征支持脚本化语言（Scripting Language）对程序界面中对象得识别能力支持函数得可重用支持外部函数库抽象层-将程序界面中得对象实体映射成逻辑对象支持数据驱动测试（Data-Driven Test）错误处理调试器（Debugger）">
+<meta name="twitter:image" content="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/自动化框架.png">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -65,14 +67,14 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-PerformanceTesting2" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-autotesting" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/" class="article-date">
-  <time datetime="2019-04-12T02:55:39.000Z" itemprop="datePublished">2019-04-12</time>
+    <a href="/echoblog.github.io/2019/04/12/autotesting/" class="article-date">
+  <time datetime="2019-04-12T05:12:12.000Z" itemprop="datePublished">2019-04-12</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Performance/">Performance</a>
+    <a class="article-category-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a>
   </div>
 
   </div>
@@ -83,7 +85,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      PerformanceTesting2
+      自动化框架搭建建议
     </h1>
   
 
@@ -91,43 +93,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>性能测试场景</p>
-<ol>
-<li>并发用户数</li>
-<li>性能瓶颈查找</li>
-<li>同一系统可以采用的架构选择</li>
-<li>功能上某一模块的用户并发数</li>
-</ol>
-<p>主要指标–用户角度</p>
-<ol>
-<li>响应时间<br>–2/5/10 原则<br>–过长等待时间会让客户焦躁不安</li>
-<li>稳定性<br>–HTTP 500<br>–数据库崩溃<br>–应用服务器前端<br>主要指标–系统角度</li>
-<li>网络运行请情况</li>
-<li>硬件配备情况</li>
-<li>软件的配置情况（应用服务器/数据库/系统）<br>mysql.my.ini<br>tomcat<br>JVM 的配置，采用的系统<br>主要指标–开发角度</li>
-<li>系统的框架设计不合理</li>
-<li>对应用的技术不熟悉</li>
-<li>数据库模型设计不合理</li>
-<li>SQL 语句实现性能低下</li>
-<li>开发人员经验不足（算法、代码规范、浪费时间）</li>
-</ol>
-<p>数据库联合查询是利用笛卡尔积</p>
-<p>实施过程</p>
-<ol>
-<li>了解性能测试的需求</li>
-<li>分析测试需求</li>
-<li>编写计划和用例</li>
-<li>相关资源准备</li>
-<li>脚本维护</li>
-<li>执行脚本</li>
-<li>分析结果</li>
-<li>性能优化</li>
-</ol>
+        <p><img src="/echoblog.github.io/2019/04/12/autotesting/自动化框架.png" alt="自动化框架"></p>
+<h2 id="手工VS自动化"><a href="#手工VS自动化" class="headerlink" title="手工VS自动化"></a>手工VS自动化</h2><h3 id="手工"><a href="#手工" class="headerlink" title="手工"></a>手工</h3><ul>
+<li>无法做到覆盖所有代码路径</li>
+<li>机械性、重复性</li>
+<li>无法短时间完成大量用例</li>
+</ul>
+<h3 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h3><ul>
+<li>缩短测试周期</li>
+<li>提高效率，节约成本</li>
+<li>增加稳定性</li>
+</ul>
+<h2 id="工具-框架特征"><a href="#工具-框架特征" class="headerlink" title="工具/框架特征"></a>工具/框架特征</h2><h3 id="支持脚本化语言（Scripting-Language）"><a href="#支持脚本化语言（Scripting-Language）" class="headerlink" title="支持脚本化语言（Scripting Language）"></a>支持脚本化语言（Scripting Language）</h3><h3 id="对程序界面中对象得识别能力"><a href="#对程序界面中对象得识别能力" class="headerlink" title="对程序界面中对象得识别能力"></a>对程序界面中对象得识别能力</h3><h3 id="支持函数得可重用"><a href="#支持函数得可重用" class="headerlink" title="支持函数得可重用"></a>支持函数得可重用</h3><h3 id="支持外部函数库"><a href="#支持外部函数库" class="headerlink" title="支持外部函数库"></a>支持外部函数库</h3><h3 id="抽象层-将程序界面中得对象实体映射成逻辑对象"><a href="#抽象层-将程序界面中得对象实体映射成逻辑对象" class="headerlink" title="抽象层-将程序界面中得对象实体映射成逻辑对象"></a>抽象层-将程序界面中得对象实体映射成逻辑对象</h3><h3 id="支持数据驱动测试（Data-Driven-Test）"><a href="#支持数据驱动测试（Data-Driven-Test）" class="headerlink" title="支持数据驱动测试（Data-Driven Test）"></a>支持数据驱动测试（Data-Driven Test）</h3><h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h3 id="调试器（Debugger）"><a href="#调试器（Debugger）" class="headerlink" title="调试器（Debugger）"></a>调试器（Debugger）</h3><h3 id="源代码管理"><a href="#源代码管理" class="headerlink" title="源代码管理"></a>源代码管理</h3><h3 id="支持脚本的命令行（Command-Line）方式"><a href="#支持脚本的命令行（Command-Line）方式" class="headerlink" title="支持脚本的命令行（Command Line）方式"></a>支持脚本的命令行（Command Line）方式</h3><h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h2><h3 id="通用性"><a href="#通用性" class="headerlink" title="通用性"></a>通用性</h3><ul>
+<li><p>分层</p>
+<ul>
+<li>Case</li>
+<li>元素处理</li>
+<li>底层</li>
+<li>通用</li>
+<li>日志</li>
+<li>报告</li>
+<li>用途</li>
+<li>数据层</li>
+</ul>
+</li>
+<li><p>驱动式</p>
+</li>
+</ul>
+<h3 id="易维护性"><a href="#易维护性" class="headerlink" title="易维护性"></a>易维护性</h3><h3 id="定时处理"><a href="#定时处理" class="headerlink" title="定时处理"></a>定时处理</h3><h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><h2 id="框架驱动方式"><a href="#框架驱动方式" class="headerlink" title="框架驱动方式"></a>框架驱动方式</h2><h3 id="数据驱动"><a href="#数据驱动" class="headerlink" title="数据驱动"></a>数据驱动</h3><h3 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h3><h2 id="内部-外部框架"><a href="#内部-外部框架" class="headerlink" title="内部/外部框架"></a>内部/外部框架</h2><h3 id="内部框架"><a href="#内部框架" class="headerlink" title="内部框架"></a>内部框架</h3><ul>
+<li><p>即分层框架，目的在于更好的优化和管理测试用例、更便捷的进行数据、元素、脚本的维护和更快速的创建新脚本</p>
+<ul>
+<li>Junit(单线程)+Webdriver+grid</li>
+<li>Testng（多线程）+Webdriver+Maven（调用，编辑）+Ant+SVN/Git+Jenkins+xslt/reportng(组件)+Mail</li>
+</ul>
+</li>
+</ul>
+<h3 id="外部框架"><a href="#外部框架" class="headerlink" title="外部框架"></a>外部框架</h3><ul>
+<li>主要指以WebDriver为核心，辅以外部第三方框架和工具，用以实现持续集成、自动部署、脚本执行、远程调用、报告优化、邮件发送等功能性框架</li>
+</ul>
+<p><em>XMind: ZEN - Trial Version</em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjue5dao8000mm4vxyj96qx2e" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjue5dapg001km4vxzh2hoqhc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -138,19 +147,19 @@
     
 <nav id="article-nav">
   
-    <a href="/echoblog.github.io/2019/04/12/autotesting/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/echoblog.github.io/2019/04/12/python1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          自动化框架搭建建议
+          python1
         
       </div>
     </a>
   
   
-    <a href="/echoblog.github.io/2019/04/12/PerformanceTesting1/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">性能测试流程</div>
+      <div class="article-nav-title">PerformanceTesting2</div>
     </a>
   
 </nav>
