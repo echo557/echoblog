@@ -62,6 +62,190 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MYSQL-Study4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/01/07/MYSQL-Study4/" class="article-date">
+  <time datetime="2019-01-07T12:46:59.000Z" itemprop="datePublished">2019-01-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/01/07/MYSQL-Study4/">索引上</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="索引上"><a href="#索引上" class="headerlink" title="索引上"></a>索引上</h3><p>索引是为了提高数据库查询的效率， 就像书的目录一样。</p>
+<h4 id="索引的常见模型"><a href="#索引的常见模型" class="headerlink" title="索引的常见模型"></a>索引的常见模型</h4><p>可以用于提高读写效率的数据结构很多，常见的三种数据结构有： 哈希表、有序数组 和搜索树。<br>区别：</p>
+<ol>
+<li>哈希表是一种以键值对（key-value）存储数据的结构，我们只需要输入待查找的值key, j就能找到对应的值value。 哈希的思路： 把值放在数组里， 用一个哈希函数<br>把key 换算成一个确定的位置， 然后把value放在数组的这个位置。<br>不可避免地， 多个key值经过hash 函数地转换，会出现同一个值得情况。处理这种情况得一种方法是： 拉出一个链表。<br>如一个需要维护得身份证信息和姓名得表，需要根据身份证号找到对应名字，哈希索引示意图：</li>
+</ol>
+<p><img src="/echoblog.github.io/2019/01/07/MYSQL-Study4/hash.png" alt="Hash"><br>图中，User2 和User4根据身份证号算出来得值都是N，但是没关系，后面还有个链表。<br>若你要查出ID_card_n2对应得name,step： 将ID_card_n2通过hash function 算出N， 然后顺序遍历，找到user2.</p>
+<p>主要注意得是， 图中四个ID_card_n得值并不是递增得，这样得好处是增加新user时速度会很快，只需要往后追加。 缺点是： 因为不是有序，<br>所以哈希索引做区间查询得速度是很慢的。<br>所以，哈希表这种结构适用于只有等值查询的场景。 如Memcached 及其他一些NoSQL 引擎。</p>
+<ol start="2">
+<li>而有序数组在等值查询和范围查询场景中的性能就都非常优秀。 如下图：<br><img src="/echoblog.github.io/2019/01/07/MYSQL-Study4/order.png" alt="Order"></li>
+</ol>
+<p>假设身份证号没有重复，此数组就是按照身份证号递增的顺序保存的。这时候要查ID_card_n2 对应的名字， 用二分法就可以很快速得到， 时间复杂度是O(LOG(N)).</p>
+<p>同时很显然，这个索引结构支持范围查询。 若要查询身份证号在[ID_card_X, ID_card_Y]区间的User, 可以先用二分法找到ID_card_X(<br>如果不存在ID_card_X， 就找到大于ID_card__X的第一个User)， 然后向右遍历， 直到找到第一个大于ID_card_Y 的身份证号，退出循环。</p>
+<p>仅看查询效率，有序数组是最好的数据结构。 但更新需要挪动后面所有记录，成本太高。<br>所以，有序数组索引只适用于静态存储引擎， 那些不再修改的数据。</p>
+<ol start="3">
+<li>二叉搜索树，同样例子如图：<br><img src="/echoblog.github.io/2019/01/07/MYSQL-Study4/tree.png" alt="Tree"></li>
+</ol>
+<p>二叉搜索树的特点： 每个节点的左儿子小于父节点， 父节点又小于右儿子。 若要查询ID_card_n2的话， 按照图中搜索顺序就是按照UserA&gt;UserC&gt;UserF&gt;User2此路径<br>得到。 这个时间复杂成都是O（log(N)）。</p>
+<p>当然为了维持O（log(N)）的查询复杂度， 就需要平衡二叉树， 为了保证这个，更新时间复杂度也是O（log(N)）。</p>
+<p>树可以有二叉， 也可以有多叉。 多叉树就是每个节点有多个儿子，儿子之间大小从左到右递增。二叉树的搜索效率是最高的。但是实际上<br>大多数数据库存储却并不使用二叉树。 原因是： 索引不止存在内存中，还要写到磁盘里。</p>
+<p>若一颗100万节点的平衡二叉树，树高20.一次查询可能需要访问20个数据块。在机械硬盘时代，从磁盘随机读一个数据库需要10ms 左右的寻址时间。 对于<br>100万行的表，如果使用二叉树来存储，单独访问一个行可能需要20个10ms。</p>
+<p>为了让一个查询尽量少读磁盘，就必须让查询过程访问尽量少的数据块。所以，应该使用N叉树。这里， N叉树中的N取决于数据块大小。 </p>
+<p>以InnoDB 为例， N大概是1200. 树高为4的时候，可以存储1200的3次方个值，为17亿。 考虑到树根的数据块总是在内存中，一个<br>10亿行的表上一个整数字段的索引，查找一个值最多只需要访问3此磁盘。 其实，树的第二层也有很大概率在内存中，那么访问磁盘的平均次数就更少了</p>
+<p>N叉树由于读写上的性能优点，以及适配磁盘的访问模式。已经被广泛应用在数据库引擎中。<br>跳表、LSM树等数据结构也被用于引擎设计中。</p>
+<p>数据库底层存储核心是基于数据库模型的。<br>在MYSQL 中， 索引是在存储引擎层实现的，所以并没有统一索引标准，即不同才存储引擎的索引工作方式并不一样。</p>
+<h3 id="InnoDB索引模型"><a href="#InnoDB索引模型" class="headerlink" title="InnoDB索引模型"></a>InnoDB索引模型</h3><p>在InnoDB中， 表是根据主键顺序以索引的形式存放的，这种存储方式的表称为索引组织表。 InnoDB使用了B+树索引模型，<br>所以数据是存储在B+树中的。 每个索引在InnoDB里面对应一颗B+树。<br>若， 我们有一个主键列为ID的值， 表中有字段K， 并且在K 上有索引。<br>建表语句：<br>create table T(<br>id int primary key,<br>k int not null,<br>name varchar(16),<br>index (k))engine = InnoDB;</p>
+<p>表中R1-R5的(ID,k)值分别为（100,1）,(200,2),(300,3),(400,4),(500,5)和(600,6)， 两棵树示例如下：<br><img src="/echoblog.github.io/2019/01/07/MYSQL-Study4/InnoDB.png" alt="InnoDB Example"></p>
+<p>根据叶子节点的内容，索引类型分为主键索引 和非主键索引。 主键索引的叶子节点存的是整行数据， 在InnoDB里，<br>主键索引也被称为聚簇索引（clustered index）。 非主键索引的叶子节点内容是主键的值。 在InnoDB中，非<br>主键索引也称为二级索引（secondary index）。</p>
+<p>基于主键索引和普通索引的查询区别：</p>
+<ol>
+<li>如果语句是select * from T where ID=500, 即主键查询方式，则只需要搜索ID 这颗B+树。</li>
+<li>如果语句是 select * from T where k=5， 即普通索引查询方式，则需要先搜索k索引树， 得到ID 的<br>值为500， 再到ID 索引树搜索一次。 此过程叫回表。</li>
+</ol>
+<p>因此我们再应用中应尽量使用主键查询。</p>
+<h3 id="索引维护"><a href="#索引维护" class="headerlink" title="索引维护"></a>索引维护</h3><p>B+ 树为了索引有序性， 在插入新值得时候需要做必要得维护。<br>以上图为例，如果插入新的行ID 值为700， 则只需要在R5的记录后面插入一个新记录。如果新插入的ID 值为400，<br>就相对麻烦，需要逻辑上挪动后面的数据，空出位置。更糟糕的是，如果R5 所在数据页已经满了，根据B+树的算法，<br>这时候就需要申请一个新的数据页，然后挪动部分数据过去。此过程叫页分裂，这种状况下啊，性能就会受到影响。</p>
+<p>除了性能外，页分裂操作还影响数据页的利用率。原本放在一个页的数据，现在分到两个页中，整体空间利用率降低大约50%。<br>当相邻两个页由于删除了数据，利用率很低之后，会将数据页做合并。合并的过程，可以认为是分裂过程的逆过程。</p>
+<p>基于上面索引维护过程说明，可以做以下讨论：<br>可能在一些建表规范中见过类似描述， 要求建表语句里一定要有自增主键。那么可以分析以下哪些场景下应该使用自增主键，哪些不该。</p>
+<p>自增主键： 自增列上定义的主键，在建表语句中一般定义：NOT NULL PRIMARY KEY AUTO_INCREMENT<br>插入新记录的时候可以不指定ID 值， 系统会获取当前ID最大值加1作为下一条记录的ID 值。<br>即， 自增主键的插入数据模式，正符合了我们前面提到的递增插入的场景。每次插入一条新记录，都是追加操作，<br>都不涉及到挪动其他记录，也不会触及到叶子节点的分裂。</p>
+<p>而有业务逻辑的字段做主键则往往不容易保证有序插入，这样写数据成本相对较高。</p>
+<p>由于每个非主键索引的叶子节点上都是主键的值。如果用身份证做主键，那么每个二级索引的叶子节点占用约20个字节，如果整型做<br>主键，则只要4个字节，如果长整型(bigint)则是8个字节。</p>
+<p>显然，主键长度越小，普通索引的叶子节点就越小，普通索引占用的空间也就越小。</p>
+<p>所以，从性能和存储空间方面考量，自增主键往往是更合理的选择。</p>
+<p>有没有什么场景适合用业务字段直接做主键的呢？ 如：有些业务场景需求是：</p>
+<ol>
+<li>只有一个索引</li>
+<li>该索引必须是唯一索引<br>KV场景</li>
+</ol>
+<p>需要尽量使用主键查询原则，直接将索引设置为主键，可以避免每次搜索两棵树。</p>
+<h4 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h4><p>通过两个alter 语句重建索引k,以及通过两个alter 语句重建主键索引是否合理。</p>
+<p>为什么要重建索引？<br>索引可能因为删除，或者页分裂等原因，导致数据页有空洞， 重建索引的过程会创建一个新的索引，把数据按顺序插入，可以让页面利用率最高。</p>
+<p>重建索引k的做法是合理的，可以达到省空间的目的。但是，重建主键的过程不合理。 不论是删除主键还是创建主键，都会将整个表重建。<br>所以连着执行两个语句，第一个语句就会白做。所以可以用语句代替： alter table T engine=InnoDB</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjugvj90s000a1svxhpcyrx43" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-MYSQL-Study3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/01/01/MYSQL-Study3/" class="article-date">
+  <time datetime="2019-01-01T09:42:59.000Z" itemprop="datePublished">2019-01-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/01/01/MYSQL-Study3/">隔离</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>####　事务隔离<br>事务是保证一组数据库操作，要么全部成功，要么全部失败。　在ＭySQA中，事务支持是在引擎层实现的。MySQL是一个支持多引擎的系统，<br>但并不是所有的引擎都支持事务。 如 MYSQL原生的MylSAM引擎就不支持事务，这也是MylSAM 被InnoDB 取代的重要原因之一。</p>
+<h4 id="隔离性与隔离级别"><a href="#隔离性与隔离级别" class="headerlink" title="隔离性与隔离级别"></a>隔离性与隔离级别</h4><p>ACID(Atomicity, Consistency, Isolation, Durability, 即原子性， 一致性， 隔离性，持久性 )。<br>当数据路上有多个事务同时执行的时候， 就可能出现脏读(dirty, read), 不可重复读(non-repeateable read)、<br>幻读(phantom read)的问题， 为了解决这个问题，就有了“隔离级别”的概念。</p>
+<p>如果隔离越严实， 效率就会越低。 SQL 标准的事务隔离级别包括：读未提交（read uncommitted）、<br>读提交（read committed）、可重复读（repeatable read）和串行化（serializable）</p>
+<ol>
+<li>读未提交： 一个事务还没提交时， 它做的变更就能被别的事务看到</li>
+<li>读提交： 一个事务提交之后， 它做的变更才会被其他事务看到</li>
+<li>可重复读： 一个事务执行过程中看到的数据，总是跟这个事务在启动时看到的数据是一致的。当然在<br>可重复读隔离级别下，未提交变更对其他事务也是不可见的。</li>
+<li>串行化， 对于同一行记录， “写”会加“写锁”， “读”会加“读锁”。当出现读写锁冲突的时候，后访问的事务必须等前一个事务执行完成，<br>才能继续执行。</li>
+</ol>
+<p>隔离区别：<br>假设数据表T中只有一列，其中一行的值为1， 则按时间顺序执行下面两个事务的行为：<br>create table T(c int) engine = InnoDB;<br>insert into T(c) values(1);</p>
+<p><img src="/echoblog.github.io/2019/01/01/MYSQL-Study3/affair.png" alt="Affair"></p>
+<ol>
+<li>若隔离级别是“读未提交”， 则V1 的值就是2. 这时候事务B 虽然还没有提交， 但是结果已经被A看到了。 因此， V2，V3也都是2</li>
+<li>若隔离级别是“读提交”，则V1是1， V2 的值是2。 事务B 的更新在提交后才能被A 看到。 所以， V3的值也是2</li>
+<li>若隔离级别是“可重复读”， 则V1、V2 是1， V3是2. 之所以V2 还是1， 遵循的就是这个要求： 事务在执行期间看到的数据前后必须是一致的</li>
+<li>若隔离级别是“串行化”， 则在事务B 执行“将1改成2”的时候，会被锁住。直到事务A提交后，事务B才可以继续执行。所以从A的角度看，V1，V2<br>值是1， V3 的值是2。</li>
+</ol>
+<p>在实现上，数据库里面会创建一个视图， 访问的时候以视图的逻辑结果为准。<br>在“可重复读”隔离级别下，这个视图是在事务启动时创建的，整个事务存在期间都用这个视图。在“读提交”隔离级别下，这个视图是在每个SQL语句开始<br>执行的时候创建的。 需要注意的是， “读未提交”隔离级别下直接返回记录上的最新值，没有视图概念; 而“串行化” 隔离级别下直接返回记录上的最新值，<br>没有视图概念； 而“串行化”隔离级别下直接用加锁的方式来避免并行访问。</p>
+<p>不同隔离级别下，数据库行为是有所不同的。 Oracle数据库的默认隔离级别其实是“读提交”， 因此对于一些从Oracle 迁移到MYSQL的应用，<br>为了保证数据库隔离级别的一致， 需要将“MYSQL”的隔离级别设置为“读提交”。</p>
+<p>配置方式： 将启动参数 transaction-isolation 的值设置为READ-COMMITTED， 可用show variables 来查看当前的值。<br>show variables like ‘transaction_isolation’;</p>
+<p>可重复读出现： 假设在管理一个个人银行账户表。 一个表存了每个月月底的余额， 一个表存了账单明细。 如果需要做数据校对，也就是判断上个月的余额<br>和当前余额的差额，是否与本月账单明细一致。校对者一定希望在校对过程中，即使有用户发生了一笔新的交易，也不影响校对结果。此时， 使用“可重复读”<br>隔离级别就很方便。 事务启动时的视图可以认为时静止的，不受其他事务更新的影响。</p>
+<h4 id="事务隔离的实现"><a href="#事务隔离的实现" class="headerlink" title="事务隔离的实现"></a>事务隔离的实现</h4><p>“可重复读”<br>在MYSQL 中，实际上每条记录在更新的时候都会同时记录一条回滚操作。记录上最新值，通过回滚操作，都可以得到前一个状态的值。<br>假设一个值按顺序被改成了2,3,4， 在回滚日志里面就会有类似的记录。</p>
+<p><img src="/echoblog.github.io/2019/01/01/MYSQL-Study3/roll-back.png" alt="回滚日志"><br>当前值是4， 但是在查询这条记录的时候，不同时刻启动的事务会有不同的read-view. 如图所示， 在视图A,B,C 里面，这一个记录的值分别是1，2，4，同一条记录<br>在系统中可以存在多个版本，就是数据库的多版本并发控制（MVCC）。 对于read-view A, 要得到1， 就必须将当前值依次执行图中所有的回归操作得到。</p>
+<p>同时你会发现，即使现在有另外一个事务正在将4改成5，这个事务跟read-view A,B,C 对应的事务是不会冲突的。<br>在不需要的时候才会删除回滚日志， 也就是说，系统会判断，当没有事务再需要用到这些回滚日志的时候就会被删除。<br>什么时候才不需要的呢？就是当系统里面没有比这个回滚日志更早的read-view 的时候。</p>
+<p>在实际中，尽量不要使用长事务。<br>长事务意味着系统里面会存在很老的事务视图。由于这些事务随时可能访问数据库里面的任何数据，所以这个事务提交之前，数据库里面肯能用到的回滚记录必须保留，<br>这就会导致大量占用存储空间。</p>
+<p>在MYSQL 5.5 以及之前的版本，回滚体制是跟数据字典一起放在ibdata文件里的，即使长事务最终提交，回滚段被清理，文件也不会变小。<br>除了对回滚段的影响，长事务还占用锁资源，也可能拖垮整个库。</p>
+<p>####　事务的启动方式<br>MYSQL 的事务启动方式有以下几种：</p>
+<ol>
+<li>显示启动事务语句， begin或start transaction。 配套的提交语句是commit， 回滚语句是rollback</li>
+<li>set autocommit = 0, 这个命令会将这个线程的自动提交关掉。 如只执行一个select 语句， 这个事务就启动了，并且不会自动提交。 这个事务持续寻在直到主动执行commit<br>或者rollback 语句，或者断开连接。</li>
+</ol>
+<p>有些客户端连接框架会默认连接成功后先执行一个set autocommit = 0 的命令。 这就导致接下来的查询都在事务中，如果是长连接，就导致了意外的长事务。</p>
+<p>因此，建议使用set autocommit =1,通过显式语句的方式来启动事务。<br>对于一个需求频繁使用事务的业务，第二种方式每个事务在开始时都不需要主动执行一次“begin”，减少了语句的交互次数。如果有此顾虑，<br>建议使用commit work and chain 语句。</p>
+<p>在autocommit 为1 的情况下，用begin显示启动的事务，如果执行commit 则提交事务。 如果执行commit work and  chain, 则是提交事务并自动启动<br>下一个事务， 这样也省区了再次执行begin语句的开销。 同时带来的好处是从程序开发的角度明确知道每个语句是否处于事务中。</p>
+<p>可以在informa_schema 库的innodb_trx这个表中查询长事务，如下面的可以查询持续时间超过60s的事务。<br>select * from information_schema.innodb_trx where TIME_TO_SEC(timediff(now(),trx_started)) &gt; 60</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>在开发过程中，尽可能的减小事务范围，少用长事务，如果无法避免，保证逻辑日志空间足够用，并且支持动态日志空间增长。监控Innodb_trx表，发现长事务报警。</p>
+<p>读未提交：别人改数据的事务尚未提交，我在我的事务中也能读到。<br>读已提交：别人改数据的事务已经提交，我在我的事务中才能读到。<br>可重复读：别人改数据的事务已经提交，我在我的事务中也不去读。<br>串行：我的事务尚未提交，别人就别想改数据。<br>这4种隔离级别，并行性能依次降低，安全性依次提高。</p>
+<p>如何避免长事务对业务的影响？<br>应用开发端：</p>
+<ol>
+<li>确认是否使用了set autocommit = 0. 确认工作可以在测试环境中开展，把MYSQL 的general_log 开起， 然后跑一个业务逻辑。通过general_log的日志<br>来确认。一般框架如果会设置这个值，也会提供参数来控制行为，目标就是把它改成1. </li>
+<li>确认是都有不必要的只读事务。有些框架会习惯不管什么语句先用begin/commit 框起来。 有些业务还会把好几个select语句放到了事务中。这种只读<br>事务可以去掉。</li>
+<li>业务连接数据库的时候， 根据业务本身的预估，通过SET MAX_EXECUTION_TIME命令，来控制每个语句执行的最长时间，避免单个语句意外执行太长</li>
+</ol>
+<p>数据库端：</p>
+<ol>
+<li>监控information_schema.Innodb_trx表，设置长事务阈值，超过就报警或者kill</li>
+<li>Percona 的 pt-kill 工具推荐</li>
+<li>在业务功能测试阶段要求输出所有的general_log， 分析日志行为提前发现问题</li>
+<li>MYSQL 5.6 或者更新版本，innodb_undo_tablespace 设置成2（或者更大值）。 如果真出现大事务导致回滚段过大，这样清理起来会更方便。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjugvj90u000b1svx5amxilfp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-MYSQL-Study2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2018/12/22/MYSQL-Study2/" class="article-date">
@@ -142,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjue5daky0006m4vxm5zds0y2" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjugvj90p00061svxd2pmkil9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -242,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjue5dakj0004m4vxr0sqi2sy" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjugvj90o00051svxyc43q0ih" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -285,110 +469,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjue5daoo000wm4vxaexze3cg" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="cjugvj91k00121svx5xy4uchk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Trouble-Shooting1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2018/10/21/Trouble-Shooting1/" class="article-date">
-  <time datetime="2018-10-21T03:35:52.000Z" itemprop="datePublished">2018-10-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2018/10/21/Trouble-Shooting1/">Trouble Shooting1 -Jenkins Cannot Send Out Email</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>Enable Telnet on Windows</li>
-</ol>
-<p>Control Pannel》 Programmes and Function 》 Open or Close windows Function》 Check Telnet Client<br><img src="/echoblog.github.io/2018/10/21/Trouble-Shooting1/Enable Telnet.png" alt="Enable Telnet"><br><img src="/echoblog.github.io/2018/10/21/Trouble-Shooting1/Process.png" alt="Processing"><br><img src="/echoblog.github.io/2018/10/21/Trouble-Shooting1/Telnet Test.png" alt="Telnet Test"></p>
-<p>The port is not open, check the port is exist or not in cmd</p>
-<ol start="2">
-<li>How to Open Port</li>
-</ol>
-<p><a href="https://blog.csdn.net/spt_dream/article/details/75014619" target="_blank" rel="noopener">https://blog.csdn.net/spt_dream/article/details/75014619</a> </p>
-<ol start="3">
-<li>Install SMTP Server on Win10</li>
-</ol>
-<p><a href="https://www.hmailserver.com/download_getfile/?performdownload=1&amp;downloadid=262" target="_blank" rel="noopener">https://www.hmailserver.com/download_getfile/?performdownload=1&amp;downloadid=262</a></p>
-<p>4） Run this server after finished installation<br>Open it on cmd telnet 127.0.0.1 25</p>
-<p><a href="http://blog.evomailserver.com/how-to-setup-mail-server-in-windows/" target="_blank" rel="noopener">http://blog.evomailserver.com/how-to-setup-mail-server-in-windows/</a> </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Trouble-Shooting1/" data-id="cjue5dap9001hm4vx2b5mhqg9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Security-Test" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2018/10/21/Security-Test/" class="article-date">
-  <time datetime="2018-10-21T02:22:05.000Z" itemprop="datePublished">2018-10-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2018/10/21/Security-Test/">Security Test</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Security-Test-Summary"><a href="#Security-Test-Summary" class="headerlink" title="Security Test Summary"></a>Security Test Summary</h2><p><img src="/echoblog.github.io/2018/10/21/Security-Test/安全.bmp" alt="Security Test Summary"><br><img src="/echoblog.github.io/2018/10/21/Security-Test/安全.mmap" alt="Security Test Summary"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Security-Test/" data-id="cjue5daoz0014m4vx9kcmuc34" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
     </footer>
   </div>
@@ -422,7 +506,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scipts/">Scipts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
     </div>
   </div>
 
@@ -432,7 +516,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 15px;">SQA</a> <a href="/echoblog.github.io/tags/Scipts/" style="font-size: 10px;">Scipts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
     </div>
   </div>
 
@@ -454,7 +538,15 @@
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/12/python1/">python1</a>
+            <a href="/echoblog.github.io/2019/04/14/python3/">python3</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/14/python2/">python_find_element</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/12/python1/">python_base</a>
           </li>
         
           <li>
@@ -463,14 +555,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/12/PerformanceTesting1/">性能测试流程</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/08/functionTesting/">Testing</a>
           </li>
         
       </ul>
