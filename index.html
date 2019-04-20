@@ -62,10 +62,182 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-python3" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java-framework" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/14/python3/" class="article-date">
-  <time datetime="2019-04-14T11:56:13.000Z" itemprop="datePublished">2019-04-14</time>
+    <a href="/echoblog.github.io/2019/04/18/java-framework/" class="article-date">
+  <time datetime="2019-04-18T12:47:24.000Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JAVA 最小执行单位： 线程<br>局部变量表</p>
+<p>一个方法调用时一个栈帧<br>虚拟机栈 FILO<br>MethodOne:<br>–局部变量表<br>–操作数栈<br>–动态链接<br>–出口</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjupklbxh002fhkvxiae2gjh1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Jmeter2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/18/Jmeter2/" class="article-date">
+  <time datetime="2019-04-18T10:58:00.000Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Jmeter-组件"><a href="#Jmeter-组件" class="headerlink" title="Jmeter 组件"></a>Jmeter 组件</h4><ol>
+<li>sampler(采样器，基于通信协议，HTTP/FTP/SMTP)</li>
+<li>计时器（Timer）</li>
+<li>前置处理器和后置处理器(Pre/Post Processor, 基于采样器存在的作用下起效。在采样器执行之前或者之后执行。 可以取用响应中的一些数据， 可以通过xpath ， 正则表达式去取出)</li>
+<li>断言（status code/string/type）</li>
+<li>Controller（IF/loop/switch）</li>
+<li>Listener（result）</li>
+<li>配置原件（config element）</li>
+</ol>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>同一级别下，采样器的执行顺序时从上至下执行</p>
+<p>配置原件》HTTP Request Default的作用：可以优先读取，然后如果同一级别得samper里面没有值得话，则samper 使用得数据是使用继承HTTP Requests Default里面得值</p>
+<p>怎样去构建不同得作用域</p>
+<ol>
+<li>不同级别</li>
+<li>同一级别</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjupklbue0005hkvxp3vr32c9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Jmeter1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/17/Jmeter1/" class="article-date">
+  <time datetime="2019-04-17T03:15:03.000Z" itemprop="datePublished">2019-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/17/Jmeter1/">Jmeter1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="性能测试工具选择原则"><a href="#性能测试工具选择原则" class="headerlink" title="性能测试工具选择原则"></a>性能测试工具选择原则</h4><ol>
+<li>成本（学习成本、工具成本）</li>
+<li>通信协议（标准协议、自有协议）</li>
+<li>生命力</li>
+<li>跨平台</li>
+</ol>
+<p>难点：资料比较少</p>
+<p>Jmeter is not a browser</p>
+<p>jmeter.properties  相关配置文件</p>
+<h4 id="Jmeter模拟压力测试原理"><a href="#Jmeter模拟压力测试原理" class="headerlink" title="Jmeter模拟压力测试原理"></a>Jmeter模拟压力测试原理</h4><p>1）性能测试工具-协议<br>2）自动化测试工具-对象识别技术</p>
+<h4 id="Jmeter目录结构"><a href="#Jmeter目录结构" class="headerlink" title="Jmeter目录结构"></a>Jmeter目录结构</h4><p>1）目录结构解析<br>bin<br>docs<br>lib：库文件<br>–ext: 采样器<br>–junit: 单元测试框架<br>extra<br>partical-docs</p>
+<p>2）配置文件</p>
+<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ol>
+<li>Test Plan</li>
+<li>线程组</li>
+<li>result</li>
+</ol>
+<p>日志查找jmeter.log<br>配置是在jmeter.properties， log_level.jmeter<br>Java 虚拟机启动设置</p>
+<p>Jmeter vs LoadRunner</p>
+<ol>
+<li>界面&gt; LR</li>
+<li>安装 &gt; Jmeter</li>
+<li>协议支持上 &gt; Jmeter(体现在采样器上)</li>
+<li>函数库&gt;LR</li>
+<li>成本&gt; Jmeter</li>
+<li>开源 &gt; Jmeter</li>
+</ol>
+<h4 id="Jmeter录制代理"><a href="#Jmeter录制代理" class="headerlink" title="Jmeter录制代理"></a>Jmeter录制代理</h4><p>代理和反向代理<br>可以使用一个代理服务器向web 服务器发送请求<br>代理服务器来承载请求</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/Jmeter1/" data-id="cjupklbuq000ahkvxuje5nntm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/17/python5/" class="article-date">
+  <time datetime="2019-04-17T01:17:55.000Z" itemprop="datePublished">2019-04-17</time>
 </a>
     
   <div class="article-category">
@@ -80,7 +252,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/14/python3/">webdriver_api</a>
+      <a class="article-title" href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
     </h1>
   
 
@@ -88,80 +260,45 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="set-window-size"><a href="#set-window-size" class="headerlink" title="set_window_size()"></a>set_window_size()</h4><p>from selenium import webdriver<br>from time import  sleep<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://m.mail.10086.cn&quot;" target="_blank" rel="noopener">http://m.mail.10086.cn&quot;</a>)<br>dr.set_window_size(480,800)<br>sleep(3)<br>dr.quit()</p>
-<h4 id="maxmize-window"><a href="#maxmize-window" class="headerlink" title="maxmize_window()"></a>maxmize_window()</h4><h4 id="back-amp-forward"><a href="#back-amp-forward" class="headerlink" title="back() &amp;forward()"></a>back() &amp;forward()</h4><p>from selenium import webdriver<br>from time import  sleep<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.maximize_window()<br>dr.find_element_by_link_text(u”新闻”).click()<br>now_url = dr.current_url<br>print(now_url)<br>dr.back()<br>second_url = dr.current_url<br>dr.forward()<br>print(second_url)<br>sleep(3)<br>dr.quit()</p>
-<h4 id="click-amp-clear-amp-send-keys"><a href="#click-amp-clear-amp-send-keys" class="headerlink" title="click()&amp;clear()&amp;send_keys()"></a>click()&amp;clear()&amp;send_keys()</h4><p>click()在某些状况下可以和submit() 相互替换<br>size 返回元素的尺寸<br>text 返回文本文档<br>get_attribute(name) 获取属性值<br>is_displayed()设置该元素是否用户可见</p>
-<p>size=dr.find_element_by_link_text(u”新闻”).size<br>dr.find_element_by_link_text(u”新闻”).click()<br>text=dr.find_element_by_link_text(u”新闻”).text<br>attribute=dr.find_element_by_link_text(u”新闻”).get_attribute(“type”)<br>result=dr.find_element_by_link_text(u”新闻”).is_displayed()</p>
-<p>python中解决乱码问题的方法<br>import sys<br>reload(sys)<br>sys.setdefaultencoding(‘utf-8’)</p>
-<p>可以通过type找元素</p>
-<h4 id="Mouse-Event"><a href="#Mouse-Event" class="headerlink" title="Mouse Event"></a>Mouse Event</h4><p>click()<br>double_click() 双击<br>perform() 执行所有Action Chains 中的存储行为<br>context_click()  右击<br>drag_and_drop() 拖动<br>move_to_element() 鼠标悬停</p>
-<p>from selenium import webdriver<br>from selenium.webdriver.common.action_chains import ActionChains<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)</p>
-<p>right_click = dr.find_element_by_link_text(u”新闻”)</p>
-<p>#右击<br>ActionChains(dr).context_click(right_click).perform()</p>
-<p>#双击<br>ActionChains(dr).double_click(right_click).perform()</p>
-<p>#拖拽<br>ActionChains(dr).drag_and_drop(element,target).perform()<br>element: 源位置<br>target: 目标位置</p>
-<p>怎样定位右键菜单的元素？<br>作业：百度》搜索》设置》更改》保存</p>
-<p>from selenium import webdriver<br>import time<br>from selenium.webdriver.common.action_chains import ActionChains<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)</p>
-<p>ele=dr.find_element_by_link_text(u”设置”)</p>
-<h1 id="ele-dr-find-element-by-css-selector-“-setting-text”"><a href="#ele-dr-find-element-by-css-selector-“-setting-text”" class="headerlink" title="ele = dr.find_element_by_css_selector(“.setting-text”)"></a>ele = dr.find_element_by_css_selector(“.setting-text”)</h1><p>ActionChains(dr).move_to_element(ele).perform()<br>time.sleep(3)<br>ele2=dr.find_element_by_link_text(u”搜索设置”).click()<br>time.sleep(3)<br>dr.find_element_by_css_selector(“#s1_2”).click()<br>time.sleep(3)<br>dr.find_element_by_css_selector(“.prefpanelgo”).click()<br>dr.quit()</p>
-<h4 id="Keyboad-Event"><a href="#Keyboad-Event" class="headerlink" title="Keyboad Event"></a>Keyboad Event</h4><p>send_keys()<br>from selenium.webdriver.common.keys import Keys<br>send_keys(Keys.BACK_SPACE)<br>send_keys(Keys.ENTER)<br>send_keys(Keys.CONCTROL,’v’)</p>
-<p>相关文档： Selenium Python Bindings</p>
-<p>判断操作完成的一些线索：</p>
+        <p>unittest的学习</p>
+<p>assert() python所提供的方法， 第一份参数和第二进行比较，如果返回是true,则pass</p>
+<h4 id="unittest使用"><a href="#unittest使用" class="headerlink" title="unittest使用"></a>unittest使用</h4><p>test.py<br>import unittest<br>from comm.webCustomer.count import Count</p>
+<p>class TestMethod(unittest.TestCase):<br>    def setUp(self):<br>        print(“test case start”)</p>
+<pre><code>def tearDown(self):
+    print(&quot;test case end&quot;)
+
+def test_add1(self):
+    j = Count(2, 4)
+    add = j.add()
+    self.assertEqual(add, 7)
+
+def test_add2(self):
+    j = Count(2, 4)   
+    add = j.add()
+    self.assertEqual(add, 6)
+</code></pre><p>if <strong>name</strong>==”<strong>main</strong>“:<br>    unittest.main()</p>
+<p>调用实现的时候，还可以使用以下方法：</p>
+<pre><code>suite = unittest.TestSuite()
+suite.addTest(TestMethod(&quot;test_add1&quot;))
+suite.addTest(TestMethod(&quot;test_add2&quot;))
+runner = unittest.TextTestRunner()
+runner.run(suite)
+</code></pre><p>####　断言方法<br>assertEqual(a,b) 检查 a==b<br>assertNotEqual(a,b)    检查 a!=b<br>assertTrue(x)  检查bool(x) is True<br>assertFalse(x)   检查bool(x) is False<br>assertIs(a,b)  a is b<br>assertIsNot(a,b) a is not b<br>assertIsNotNone(x) x is none<br>assertIn(a,b) a in b<br>assertNotIn(a,b) a not in b<br>assertIsInstance(a,b) isinstance(a,b)<br>assertNotIsInstance(a,b)  not isinstance(a,b)</p>
+<p>使用方法：<br>assertEqual(first,second,msg=None)<br>判断第一个参数和第二个参数是否相等，如果不相等则测试失败。 msg是可选参数，用于定义测试失败时打印的信息。</p>
+<p>共同的测试类可以进行复用</p>
+<p>有多个类就需要建不同的文件</p>
+<h4 id="多个suite一起测试"><a href="#多个suite一起测试" class="headerlink" title="多个suite一起测试"></a>多个suite一起测试</h4><p>方法一：</p>
 <ol>
-<li>url</li>
-<li>页面元素</li>
-<li>文本信息</li>
-<li>title 信息</li>
-<li>标志性信息–退出/id</li>
+<li>新建一个文件py 文件，导入testsuite包</li>
+<li>构建如下代码：<br>import unittest<br>from comm.webCustomer import webCustomer</li>
 </ol>
-<h4 id="Waiting"><a href="#Waiting" class="headerlink" title="Waiting"></a>Waiting</h4><p>from selenium.webdriver.support import expected_conditions as EC<br>from selenium.webdriver.common.by import By<br>from selenium.webdriver.support.ui import WebDriverWait<br>from selenium import webdriver<br>from time import sleep<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)</p>
-<p>element = WebDriverWait(dr, 5, 0.5).until(EC.presence_of_all_elements_located(By.ID,””))</p>
-<p>“””<br>for i in range(10):<br>    el = dr.find_element_by_id().is_displayed()<br>    if el == ‘True’:<br>        el.click()<br>    else:<br>        sleep(0.5)<br>“””</p>
-<p>隐式等待：implictly_wait(30)<br>e.g:<br>from selenium import webdriver<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.implicitly_wait(30)</p>
-<p>element=dr.find_element_by_id(“kw”)<br>element.send_keys(u”权力的游戏”)<br>dr.find_element_by_id(“su”).click()<br>print(dr.current_url)<br>dr.quit()</p>
-<p>e.g1:<br>import time<br>from selenium import webdriver<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.implicitly_wait(30)</p>
-<p>print(time.ctime())<br>try:<br>    element=dr.find_element_by_id(“kwm”)<br>    element.send_keys(u”权力的游戏”)<br>    dr.find_element_by_id(“su”).click()<br>    print(dr.current_url)<br>except Exception  as e:<br>    print(e)<br>finally:<br>    print(time.ctime())<br>    dr.quit()</p>
-<h4 id="checkbox-操作"><a href="#checkbox-操作" class="headerlink" title="checkbox 操作"></a>checkbox 操作</h4><p>find_element_by_css_selector<br>find_elements_by_css_selector<br>get_attribute(type)可以判断获取元素的类型</p>
-<h4 id="frame多表单切换"><a href="#frame多表单切换" class="headerlink" title="frame多表单切换"></a>frame多表单切换</h4><p>driver.switch_to.frame(“id”)<br>只能使用id, 但如果没有id 属性，则可以使用xpath 来定位元素，在使用xpath所定位的element到frame 里面</p>
-<h4 id="多窗口切换"><a href="#多窗口切换" class="headerlink" title="多窗口切换"></a>多窗口切换</h4><p>跨域网站的访问<br>窗口句柄<br>driver.window_handles<br>driver.current_window_handle<br>driver.switch_to.window(handle)</p>
-<h4 id="alert-window"><a href="#alert-window" class="headerlink" title="alert window"></a>alert window</h4><p>使用switch_to_alert()方法定位到alert/confirm/prompt,然后使用text/accept/dismiss/send_keys等方法进行操作。<br>text：返回alert/confirm/prompt中的文字信息<br>accept(): 接受现有警告框<br>dismiss():解散现有警告框<br>send_keys(KeysToSend): 发送文本至警告框。</p>
-<p>driver.switch_to_alert().accept()</p>
-<h4 id="upload-files"><a href="#upload-files" class="headerlink" title="upload files"></a>upload files</h4><p>通过前端来判断</p>
-<ol>
-<li><p>send_keys 实现上传</p>
-</li>
-<li><p>AutoIt<br>下载：<a href="https://www.autoitscript.com/site/autoit/downloads/" target="_blank" rel="noopener">https://www.autoitscript.com/site/autoit/downloads/</a></p>
-</li>
-</ol>
-<p>使用AutoIt来进行元素识别，以及写脚本<br>.au3 的文件<br>文本脚本如下：<br>;ControlFocus(“title”, “text”,controlID) ComboBox = ComboBox Instance 1<br>ControlFocus(“打开”,””,”Edit1”)<br>;Wait 10 seconds for the Upload window to appear<br>WinWait(“[CLASS:#32770]”,””,10)<br>;Set the File name text on the Edit field<br>ControlSetText(“打开”,””,”Edit1”,”D:\BaiduNetdiskDownload\beibei\简历\resume.pdf”)<br>Sleep(2000)</p>
-<p>;Click on the open button<br>ControlClick(“打开”,””,”Button1”)</p>
-<p>保存文件为exe<br>然后再python脚本中进行上传<br>import os<br>os.system(“d:\upfile.exe”)<br>文档参考：<br>Selenium Python Building</p>
-<h4 id="Download-files"><a href="#Download-files" class="headerlink" title="Download files"></a>Download files</h4><p>例子上使用的是Firefox 浏览器<br>需要先设置浏览器的一些相关参数<br>about.config 页面可以查看</p>
-<h4 id="操作cookies"><a href="#操作cookies" class="headerlink" title="操作cookies"></a>操作cookies</h4><p>get_cookies() 获取所有cookies 信息<br>get_cookies(name) 返回有特定name值有cookies信息<br>add_cookies(cookie_dict) 添加cookies,必须有name和value值<br>delete_cookies(name) 删掉特定（部分）的cookie 信息<br>delete_all_cookies() 删除所有cookie信息</p>
-<p>from selenium import webdriver<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.implicitly_wait(30)<br>dr.add_cookie({‘name’:’key—aaaa’,’value’:’value—bbbbb’})<br>cookies = dr.get_cookies()<br>for cookie in cookies:<br>    print(“%s -&gt;%s” %(cookie[‘name’],cookie[“value”]))<br>print(cookies)<br>dr.quit()</p>
-<h4 id="调用Javascript"><a href="#调用Javascript" class="headerlink" title="调用Javascript"></a>调用Javascript</h4><p>js=””<br>driver.execute_script(js)</p>
-<p>如：<br>js=”window.scrollTo(0,450)”<br>或者js=”document.documentElement.scrollTop=10000”<br>如果遇到可以通过id 定位，但是不能通过send_keys()向文本框中输入文本信息，可以使用javascript代码完成输入。<br>如：<br>text=”input text”<br>js=”var sum=document.getElementById(‘id’);sum.value=’”+text+”‘;”<br>driver.execute_script(js)</p>
-<p>参看：<br><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">http://www.w3school.com.cn/</a> </p>
-<h4 id="关闭窗口"><a href="#关闭窗口" class="headerlink" title="关闭窗口"></a>关闭窗口</h4><p>driver.quit()<br>driver.close()</p>
-<h4 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h4><ol>
-<li>去掉验证码</li>
-<li>设置万能验证码</li>
-<li>验证码识别技术<br>Python-tesseract</li>
-<li>记录cookie</li>
-</ol>
-<h4 id="WebDriver原理"><a href="#WebDriver原理" class="headerlink" title="WebDriver原理"></a>WebDriver原理</h4><p>Webdriver是按照Server-Client模式设置<br>Server 端就是Remote Server, 可以是任意浏览器。<br>Client 端就是测试代码。<br>工作流程：</p>
-<ol>
-<li>WebDriver启动目标浏览器， 并绑定到指定端口。启动的浏览器实例将作为Webdriver 的remote server</li>
-<li>Client端通过CommandExcuter发送HTTPRequest给remote server的侦听端口（通信协议：the webdriver wire protocol）</li>
-<li>Remote Server 需要依赖原生的浏览器组件（如IEDriverServer.exe、chromedriver.exe）来转化浏览器的native调用。</li>
-</ol>
-<p>Python提供logging模块给运行中的应用提供了一个标准的信息接口。它提供了basicConfig()方法用于基本信息的定义。开启debug模块，就可以捕捉到客户端向服务器发送的请求。</p>
-<p>import logging<br>logging.basicConfig(level=logging.DEBUG)</p>
+<p>suite = unittest.TestSuite()<br>suite.addTest(webCustomer.TestMethod(“test_add1”))<br>suite.addTest(webCustomer.TestMethod(“test_add2”))<br>if <strong>name</strong>==”<strong>main</strong>“:<br>    runner = unittest.TextTestRunner()<br>    runner.run(suite)</p>
+<p>方法二：</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjuih7qw000263wvxwxv31ma1" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/python5/" data-id="cjupklby80039hkvxcfzq6tqm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -173,10 +310,10 @@
 
 
   
-    <article id="post-python2" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/14/python2/" class="article-date">
-  <time datetime="2019-04-14T08:05:45.000Z" itemprop="datePublished">2019-04-14</time>
+    <a href="/echoblog.github.io/2019/04/15/python4/" class="article-date">
+  <time datetime="2019-04-15T14:52:31.000Z" itemprop="datePublished">2019-04-15</time>
 </a>
     
   <div class="article-category">
@@ -191,7 +328,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/14/python2/">python_find_element</a>
+      <a class="article-title" href="/echoblog.github.io/2019/04/15/python4/">model</a>
     </h1>
   
 
@@ -199,240 +336,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="Selenium-Webdriver"><a href="#Selenium-Webdriver" class="headerlink" title="Selenium-Webdriver"></a>Selenium-Webdriver</h4><p>find_element_by_id()<br>find_element_by_name()<br>find_element_by_class_name()<br>find_element_by_tag_name()<br>find_element_by_link_text()<br>find_element_by_partial_link_text()<br>find_element_by_xpath()<br>find_element_by_css_selector()</p>
-<h4 id="find-element-by-xpath"><a href="#find-element-by-xpath" class="headerlink" title="find_element_by_xpath()"></a>find_element_by_xpath()</h4><p>Absolute Path<br>/html/body/div/div[3]/form<br>find_element_by_xpath(“/<em>[@id=’kw’]”)<br>find_element_by_xpath(“//input[@id=’kw’]”)<br>find_element_by_xpath(“//</em>[@input=’kw’]”)</p>
-<p>find_element_by_xpath(“/html/body/div/div[3]/form”)<br>find_element_by_xpath(“//*[@input=’kw’ and @id =’wd’]”)<br>find_element_by_xpath(“//form[@id=’kw’]/span/input”)</p>
-<p>其中/表示从根标签开始，//表示不是</p>
-<p>Firefox 的插件FirePath可以辅助生成xpath</p>
-<h4 id="find-element-by-css-selector"><a href="#find-element-by-css-selector" class="headerlink" title="find_element_by_css_selector()"></a>find_element_by_css_selector()</h4><p>find_element_by_css_selector(“._cs”)<br>. 表示的是class<br>find_element_by_css_selector(“#id_name”)</p>
-<p>#表示id<br>find_element_by_css_selector(“input”)</p>
-<p>#表示tag name</p>
-<p>find_element_by_css_selector(“span&gt;input”)</p>
-<p>#表示从上一级到下一级<br>find_element_by_css_selector(“form#form&gt;span&gt;input#kw”)</p>
-<p>#表示从上一级到下一级<br>from selenium.webdriver.common,by import By<br>findElement(By.ID,”kw”)</p>
-<p>xpath 有的时候没有css定位快， css 比较简单</p>
-<p>javascript 也可以实现一些操作，改变页面的一些操作，按钮消失等。<br>js=’document.getElementById(“im”).innerHTML=”select i”‘<br>driver.execute_script(js)</p>
+        <h3 id="自动化测试模型介绍"><a href="#自动化测试模型介绍" class="headerlink" title="自动化测试模型介绍"></a>自动化测试模型介绍</h3><h4 id="线性测试"><a href="#线性测试" class="headerlink" title="线性测试"></a>线性测试</h4><p>优点：无依赖关系，顺序<br>缺点： 开发/维护成本高<br>结构化：</p>
+<ol>
+<li>判断</li>
+<li>循环</li>
+</ol>
+<h4 id="模块化驱动测试"><a href="#模块化驱动测试" class="headerlink" title="模块化驱动测试"></a>模块化驱动测试</h4><p>重复操作独立成共同模块 </p>
+<h4 id="数据驱动测试"><a href="#数据驱动测试" class="headerlink" title="数据驱动测试"></a>数据驱动测试</h4><p>数据的参数化<br>输入数据的不同，结果也不同<br>比如不同用户的登陆，不同数据的传输</p>
+<h4 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h4><p>关键字==函数<br>def func()<br>如： Robot Framework<br>使用关键字，传输一些参数</p>
+<p>文件读取数据 txt：<br>from seleniu import webdriver<br>from time import sleep<br>files = open(‘data.txt’,’r’)<br>for li in files.readlines():<br>    dr= webdriver.Chrome()<br>    dr.get(‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>)<br>    dr.find_element_by_id(‘kw’).send_keys(line)<br>    sleep(3)<br>    dr.quit()</p>
+<p>读取用户名和密码<br>也可以直接for循环去读取<br>split可以去分割数据</p>
+<h4 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h4><p>import csv<br>csv.reader(file(file,’rb’))</p>
+<p>返回的是数组</p>
+<h4 id="读取xml文件"><a href="#读取xml文件" class="headerlink" title="读取xml文件"></a>读取xml文件</h4><p>import xml.dom.minicom<br>dom = xml.dom.minidom.parse(‘info.xml’)    </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjuih7qw700293wvx1tfv35t8" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjupklby0002yhkvxm9e1jgxv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/python1/" class="article-date">
-  <time datetime="2019-04-12T13:26:14.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/12/python1/">python_base</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Python-base"><a href="#Python-base" class="headerlink" title="Python_base"></a>Python_base</h4><ol>
-<li>import time as shijian</li>
-<li>If contain Chinese, need to use uni-code like u’哈罗’</li>
-<li>数组：元素的序列<br>字典： 键值对</li>
-<li><p>类<br>class lei(object):<br> def fun(self,a):</p>
-<pre><code>b = &quot;hello&quot;
-return a
-</code></pre><p> def aaaa(self,b):</p>
-<pre><code>self.b
-</code></pre></li>
-</ol>
-<p>f=lei()<br>f.fun(‘hello’)        </p>
-<ol start="5">
-<li>模组<br>路径访问顺序：<br>1)当前目录查找文件(不会去找子目录)没有<br>2)python 安装目录的lib 包，没有<br>3)Path 下去查找，没有<br>4)报错, no module<br>问题：什么样的目录能被python 识别呢？<br>解决：<br>import sys<br>sys.path.append(‘\filename’)<br>print sys.path</li>
-</ol>
-<p>6.捕捉异常<br>try：<br>except BaseException,msg:<br>print(msg)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjuih7qvp001y3wvxm21l1y0k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-autotesting" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/autotesting/" class="article-date">
-  <time datetime="2019-04-12T05:12:12.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/12/autotesting/">自动化框架搭建建议</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/echoblog.github.io/2019/04/12/autotesting/自动化框架.png" alt="自动化框架"></p>
-<h2 id="手工VS自动化"><a href="#手工VS自动化" class="headerlink" title="手工VS自动化"></a>手工VS自动化</h2><h3 id="手工"><a href="#手工" class="headerlink" title="手工"></a>手工</h3><ul>
-<li>无法做到覆盖所有代码路径</li>
-<li>机械性、重复性</li>
-<li>无法短时间完成大量用例</li>
-</ul>
-<h3 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h3><ul>
-<li>缩短测试周期</li>
-<li>提高效率，节约成本</li>
-<li>增加稳定性</li>
-</ul>
-<h2 id="工具-框架特征"><a href="#工具-框架特征" class="headerlink" title="工具/框架特征"></a>工具/框架特征</h2><h3 id="支持脚本化语言（Scripting-Language）"><a href="#支持脚本化语言（Scripting-Language）" class="headerlink" title="支持脚本化语言（Scripting Language）"></a>支持脚本化语言（Scripting Language）</h3><h3 id="对程序界面中对象得识别能力"><a href="#对程序界面中对象得识别能力" class="headerlink" title="对程序界面中对象得识别能力"></a>对程序界面中对象得识别能力</h3><h3 id="支持函数得可重用"><a href="#支持函数得可重用" class="headerlink" title="支持函数得可重用"></a>支持函数得可重用</h3><h3 id="支持外部函数库"><a href="#支持外部函数库" class="headerlink" title="支持外部函数库"></a>支持外部函数库</h3><h3 id="抽象层-将程序界面中得对象实体映射成逻辑对象"><a href="#抽象层-将程序界面中得对象实体映射成逻辑对象" class="headerlink" title="抽象层-将程序界面中得对象实体映射成逻辑对象"></a>抽象层-将程序界面中得对象实体映射成逻辑对象</h3><h3 id="支持数据驱动测试（Data-Driven-Test）"><a href="#支持数据驱动测试（Data-Driven-Test）" class="headerlink" title="支持数据驱动测试（Data-Driven Test）"></a>支持数据驱动测试（Data-Driven Test）</h3><h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h3 id="调试器（Debugger）"><a href="#调试器（Debugger）" class="headerlink" title="调试器（Debugger）"></a>调试器（Debugger）</h3><h3 id="源代码管理"><a href="#源代码管理" class="headerlink" title="源代码管理"></a>源代码管理</h3><h3 id="支持脚本的命令行（Command-Line）方式"><a href="#支持脚本的命令行（Command-Line）方式" class="headerlink" title="支持脚本的命令行（Command Line）方式"></a>支持脚本的命令行（Command Line）方式</h3><h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h2><h3 id="通用性"><a href="#通用性" class="headerlink" title="通用性"></a>通用性</h3><ul>
-<li><p>分层</p>
-<ul>
-<li>Case</li>
-<li>元素处理</li>
-<li>底层</li>
-<li>通用</li>
-<li>日志</li>
-<li>报告</li>
-<li>用途</li>
-<li>数据层</li>
-</ul>
-</li>
-<li><p>驱动式</p>
-</li>
-</ul>
-<h3 id="易维护性"><a href="#易维护性" class="headerlink" title="易维护性"></a>易维护性</h3><h3 id="定时处理"><a href="#定时处理" class="headerlink" title="定时处理"></a>定时处理</h3><h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><h2 id="框架驱动方式"><a href="#框架驱动方式" class="headerlink" title="框架驱动方式"></a>框架驱动方式</h2><h3 id="数据驱动"><a href="#数据驱动" class="headerlink" title="数据驱动"></a>数据驱动</h3><h3 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h3><h2 id="内部-外部框架"><a href="#内部-外部框架" class="headerlink" title="内部/外部框架"></a>内部/外部框架</h2><h3 id="内部框架"><a href="#内部框架" class="headerlink" title="内部框架"></a>内部框架</h3><ul>
-<li><p>即分层框架，目的在于更好的优化和管理测试用例、更便捷的进行数据、元素、脚本的维护和更快速的创建新脚本</p>
-<ul>
-<li>Junit(单线程)+Webdriver+grid</li>
-<li>Testng（多线程）+Webdriver+Maven（调用，编辑）+Ant+SVN/Git+Jenkins+xslt/reportng(组件)+Mail</li>
-</ul>
-</li>
-</ul>
-<h3 id="外部框架"><a href="#外部框架" class="headerlink" title="外部框架"></a>外部框架</h3><ul>
-<li>主要指以WebDriver为核心，辅以外部第三方框架和工具，用以实现持续集成、自动部署、脚本执行、远程调用、报告优化、邮件发送等功能性框架</li>
-</ul>
-<p><em>XMind: ZEN - Trial Version</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjuih7qvg001n3wvxh4cg1w8k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PerformanceTesting2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/" class="article-date">
-  <time datetime="2019-04-12T02:55:39.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Performance/">Performance</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>性能测试场景</p>
-<ol>
-<li>并发用户数</li>
-<li>性能瓶颈查找</li>
-<li>同一系统可以采用的架构选择</li>
-<li>功能上某一模块的用户并发数</li>
-</ol>
-<p>主要指标–用户角度</p>
-<ol>
-<li>响应时间<br>–2/5/10 原则<br>–过长等待时间会让客户焦躁不安</li>
-<li>稳定性<br>–HTTP 500<br>–数据库崩溃<br>–应用服务器前端<br>主要指标–系统角度</li>
-<li>网络运行请情况</li>
-<li>硬件配备情况</li>
-<li>软件的配置情况（应用服务器/数据库/系统）<br>mysql.my.ini<br>tomcat<br>JVM 的配置，采用的系统<br>主要指标–开发角度</li>
-<li>系统的框架设计不合理</li>
-<li>对应用的技术不熟悉</li>
-<li>数据库模型设计不合理</li>
-<li>SQL 语句实现性能低下</li>
-<li>开发人员经验不足（算法、代码规范、浪费时间）</li>
-</ol>
-<p>数据库联合查询是利用笛卡尔积</p>
-<p>实施过程</p>
-<ol>
-<li>了解性能测试的需求</li>
-<li>分析测试需求</li>
-<li>编写计划和用例</li>
-<li>相关资源准备</li>
-<li>脚本维护</li>
-<li>执行脚本</li>
-<li>分析结果</li>
-<li>性能优化</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjuih7quy000z3wvxt67b7w82" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
     </footer>
   </div>
@@ -445,7 +369,7 @@ return a
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/6/">6</a><a class="extend next" rel="next" href="/echoblog.github.io/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/7/">7</a><a class="extend next" rel="next" href="/echoblog.github.io/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -456,7 +380,7 @@ return a
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -466,7 +390,7 @@ return a
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
     </div>
   </div>
 
@@ -476,7 +400,7 @@ return a
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
     </div>
   </div>
 
@@ -498,23 +422,23 @@ return a
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/14/python3/">webdriver_api</a>
+            <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/14/python2/">python_find_element</a>
+            <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/12/python1/">python_base</a>
+            <a href="/echoblog.github.io/2019/04/17/Jmeter1/">Jmeter1</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/12/autotesting/">自动化框架搭建建议</a>
+            <a href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
+            <a href="/echoblog.github.io/2019/04/15/python4/">model</a>
           </li>
         
       </ul>

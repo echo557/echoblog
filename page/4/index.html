@@ -62,14 +62,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-MYSQL-Study8" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-machinelearning1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/27/MYSQL-Study8/" class="article-date">
-  <time datetime="2019-01-27T09:18:33.000Z" itemprop="datePublished">2019-01-27</time>
+    <a href="/echoblog.github.io/2019/03/12/machinelearning1/" class="article-date">
+  <time datetime="2019-03-12T13:26:07.000Z" itemprop="datePublished">2019-03-12</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+    <a class="article-category-link" href="/echoblog.github.io/categories/Learning/">Learning</a>
   </div>
 
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/27/MYSQL-Study8/">普通索引和唯一索引</a>
+      <a class="article-title" href="/echoblog.github.io/2019/03/12/machinelearning1/">machinelearning1-</a>
     </h1>
   
 
@@ -88,81 +88,63 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/echoblog.github.io/2019/01/27/MYSQL-Study8/图一.png" alt="图一"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study8/图二.png" alt="图二"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study8/图三.png" alt="图三"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study8/MYSQL-Study7/普通索引和唯一索引.png" alt="普通索引和唯一索引"></p>
-<h1 id="普通索引和唯一索引"><a href="#普通索引和唯一索引" class="headerlink" title="普通索引和唯一索引"></a>普通索引和唯一索引</h1><h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><h3 id="一个市民系统，每个人有唯一的身份证号，且业务代码已经保证不会写入两个重复的身份证号。-如果按照身份证号查询姓名，即可执行类似SQL-语句：-select-name-from-CUser-where-id-card-“xxxxxxxxxxxxx”-所以，一般会考虑再id-card-字段加索引"><a href="#一个市民系统，每个人有唯一的身份证号，且业务代码已经保证不会写入两个重复的身份证号。-如果按照身份证号查询姓名，即可执行类似SQL-语句：-select-name-from-CUser-where-id-card-“xxxxxxxxxxxxx”-所以，一般会考虑再id-card-字段加索引" class="headerlink" title="一个市民系统，每个人有唯一的身份证号，且业务代码已经保证不会写入两个重复的身份证号。 如果按照身份证号查询姓名，即可执行类似SQL 语句： select name from CUser where id_card = “xxxxxxxxxxxxx”; 所以，一般会考虑再id_card 字段加索引"></a>一个市民系统，每个人有唯一的身份证号，且业务代码已经保证不会写入两个重复的身份证号。 如果按照身份证号查询姓名，即可执行类似SQL 语句： select name from CUser where id_card = “xxxxxxxxxxxxx”; 所以，一般会考虑再id_card 字段加索引</h3><h3 id="但由于身份证号字段比较大，则身份证号不建议做主键。则可以选择要么创建唯一索引，要么创建一个普通索引。因为业务代码的保证，两者逻辑上都没有问题。"><a href="#但由于身份证号字段比较大，则身份证号不建议做主键。则可以选择要么创建唯一索引，要么创建一个普通索引。因为业务代码的保证，两者逻辑上都没有问题。" class="headerlink" title="但由于身份证号字段比较大，则身份证号不建议做主键。则可以选择要么创建唯一索引，要么创建一个普通索引。因为业务代码的保证，两者逻辑上都没有问题。"></a>但由于身份证号字段比较大，则身份证号不建议做主键。则可以选择要么创建唯一索引，要么创建一个普通索引。因为业务代码的保证，两者逻辑上都没有问题。</h3><h3 id="如果从性能考虑，如何做选择"><a href="#如果从性能考虑，如何做选择" class="headerlink" title="如果从性能考虑，如何做选择?"></a>如果从性能考虑，如何做选择?</h3><h2 id="查询过程"><a href="#查询过程" class="headerlink" title="查询过程"></a>查询过程</h2><h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
-<li>如图1： 假设K 值不重复</li>
-</ul>
-<h3 id="假设，执行查询语句是-select-id-from-T-where-k-5-此查询语句再索引树上查找的过程，先是通过B-树从树根开始，按层搜索到叶子节点，，-也就是图中右下角的数据页，然后可以认为数据页内部通过二分法来定位记录。"><a href="#假设，执行查询语句是-select-id-from-T-where-k-5-此查询语句再索引树上查找的过程，先是通过B-树从树根开始，按层搜索到叶子节点，，-也就是图中右下角的数据页，然后可以认为数据页内部通过二分法来定位记录。" class="headerlink" title="假设，执行查询语句是 select id from T where k=5. 此查询语句再索引树上查找的过程，先是通过B+树从树根开始，按层搜索到叶子节点，， 也就是图中右下角的数据页，然后可以认为数据页内部通过二分法来定位记录。"></a>假设，执行查询语句是 select id from T where k=5. 此查询语句再索引树上查找的过程，先是通过B+树从树根开始，按层搜索到叶子节点，， 也就是图中右下角的数据页，然后可以认为数据页内部通过二分法来定位记录。</h3><h3 id="差别"><a href="#差别" class="headerlink" title="差别"></a>差别</h3><ul>
-<li>对于普通索引， 查到满足条件的第一个记录（5， 500）后，需要查找下一个记录， 直到遇到第一个不满足k=5条件的记录</li>
-<li>对于唯一索引来说，由于索引定义了唯一性，查找到第一个满足条件的记录后，就会停止继续检索。</li>
-<li>性能差距结论： 微乎其微</li>
-</ul>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ul>
-<li>InnoDB 的数据页是按数据页为单位来读取的。 即，当需要读取一条记录时，并不是将这个记录本身从磁盘读出来，而是以页为单位，将其整体读入内存。 再InnoDB 中，每个数据页的大小默认是16KB.</li>
-<li>因为引擎是按页读写的，所以，当找到k=5的记录的时它所在的数据页都在内存里了，对于普通索引来说，多做一个的“查找和判断下一条记录”的操作，只需要一次指针寻找和一次计算。</li>
-<li>但， 如果k=5这个记录刚好是这个数据页的最后一个记录，那么要取下一个，则需要读取下一个数据页。</li>
-<li>由于之前计算过，对于整形字段，一个数据页可以放近千个key,因为出现此情况概率很低，此操作成本对于现在CPU 来说可以忽略。</li>
-</ul>
-<h2 id="更新过程"><a href="#更新过程" class="headerlink" title="更新过程"></a>更新过程</h2><h3 id="change-buffer概念"><a href="#change-buffer概念" class="headerlink" title="change buffer概念"></a>change buffer概念</h3><ul>
-<li>当需要更新一个数据页时， 如果数据页再内存中就直接更改，如果不在，在不影响数据一致性的前提下，InnoDB 会将这些更新操作缓存在change buffer中， 这样就不需要从磁盘中读取这个数据页了。 在下一次查询需要访问这个数据页的时候，将数据页读入内存，然后执行change buffer 中与这个页有关的操作。通过这种方式保证这个数据逻辑的正确性。</li>
-<li>change buffer 时可以持久化的数据。也就是说change buffer 在内存中有拷贝，也会被写入到磁盘上。</li>
-<li>change buffer 中操作应用到原数据页，得到最新结果的过程为merge。 除了访问这个数据页会触发merge 外，系统有后台线程也会定期merge。 在数据库正常关闭（shutdown）的过程中，也会执行merge操作。</li>
-<li>如果能将更新操作先记录在change buffer， 减少读取磁盘，语句的执行速度会得到明显的提升。 且，数据读入内存是需要占用buffer pool的， 这种方式还能避免占用内存，提高内存利用率</li>
-</ul>
-<h3 id="什么条件可以使用change-buffer"><a href="#什么条件可以使用change-buffer" class="headerlink" title="什么条件可以使用change buffer"></a>什么条件可以使用change buffer</h3><ul>
-<li>对于唯一索引来说，所有的更新操作都要先判断这个操作是否违反唯一性约束。 比如： 要插入（4，400）这个记录，需要先判断现在表中是否已经存在k=4的记录，而且必须要将数据页读入内存才能判断。 既然已经读入内存，那直接更新内存会更快，不需要使用change buffer了。</li>
-<li>change buffer 用的是buffer pool 里的内存， 因此不能无限增大。 change buffer的大小， 可以通过参数innodb_change_buffer_max_size 来动态设置。 这个参数设置为50 的时候，表示change buffer 的大小最多只能占用buffer pool 的50%。</li>
-<li><p>如果要在例子中的表中插入一个新记录（4， 400）的话， InnoDB 的处理流程是怎样的。</p>
-<ul>
-<li><p>第一种状况（记录要更新的目标页在内存中）</p>
-<ul>
-<li>对于唯一索引来说，找到3和5之间的位置，判断到没有冲突，插入这个值，语句执行结束</li>
-<li>对于普通索引来说，找到3和5之间的位置，插入这个值，语句执行结束</li>
-<li>差别：看起来只有一个判断，只会消耗微小的CPU 时间</li>
-</ul>
-</li>
-<li><p>第二种状况（记录要更新的目标页不在内存中）</p>
-<ul>
-<li>对于唯一索引来说，需要将数据页读入内存，判断到没有冲突，插入这个值，语句执行结束</li>
-<li>对于普通索引来说，将更新记录在change buffer，语句执行结束</li>
-<li>将数据从磁盘读入内训涉及随机IO 的访问，是数据库里面成本最高的操作之一。change buffer 因为减少了随机磁盘访问，所以对更新性能的提升是会很明显的。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>使用场景</p>
-<ul>
-<li>只限于在普通索引的场景下，不适用于唯一索引</li>
-<li>merge 的时候是真正进行数据更新的时刻，而change buffer 的主要目的就是将记录的变更动作缓存下来，所以在一个数据页做merge之前，change buffer 记录变更越多（更新次数越多）， 收益就越大</li>
-<li>对于写多读少的业务来说， 页面在写完以后马上被访问到的概率比较小，此时change buffer 的使用效果最好。 这种业务模式常见的就是账单类、日志类的系统。</li>
-<li>相反，如果一个业务的更新模式是写入之后马上会做查询，那么即便是满足了条件，将更新记录在change buffer , 但之后由于马上要访问这个数据页，会立刻触发merge过程。 这样随机访问IO的次数不会减少，反而增加了change buffer的维护代价。</li>
-</ul>
-</li>
-</ul>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="通过图2-可以看到，change-buffer-一开始是写内存的，如果此时机器掉电重启，会不会导致change-buffer-丢失？change-buffer-丢失后，再从磁盘读取数据就没有了merge-过程，就等于是数据丢失了。-会出现此状况么？"><a href="#通过图2-可以看到，change-buffer-一开始是写内存的，如果此时机器掉电重启，会不会导致change-buffer-丢失？change-buffer-丢失后，再从磁盘读取数据就没有了merge-过程，就等于是数据丢失了。-会出现此状况么？" class="headerlink" title="通过图2 可以看到，change buffer 一开始是写内存的，如果此时机器掉电重启，会不会导致change buffer 丢失？change buffer 丢失后，再从磁盘读取数据就没有了merge 过程，就等于是数据丢失了。 会出现此状况么？"></a>通过图2 可以看到，change buffer 一开始是写内存的，如果此时机器掉电重启，会不会导致change buffer 丢失？change buffer 丢失后，再从磁盘读取数据就没有了merge 过程，就等于是数据丢失了。 会出现此状况么？</h3><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="change-buffer-不影响查询性能，只影响更新性能"><a href="#change-buffer-不影响查询性能，只影响更新性能" class="headerlink" title="change buffer 不影响查询性能，只影响更新性能"></a>change buffer 不影响查询性能，只影响更新性能</h3><h3 id="change-buffer，只限于在普通索引的场景下，不适用于唯一索引"><a href="#change-buffer，只限于在普通索引的场景下，不适用于唯一索引" class="headerlink" title="change buffer，只限于在普通索引的场景下，不适用于唯一索引"></a>change buffer，只限于在普通索引的场景下，不适用于唯一索引</h3><h3 id="对于写多读少的业务来说，-页面在写完以后马上被访问到的概率比较小，此时change-buffer-的使用效果最好。-这种业务模式常见的就是账单类、日志类的系统。"><a href="#对于写多读少的业务来说，-页面在写完以后马上被访问到的概率比较小，此时change-buffer-的使用效果最好。-这种业务模式常见的就是账单类、日志类的系统。" class="headerlink" title="对于写多读少的业务来说， 页面在写完以后马上被访问到的概率比较小，此时change buffer 的使用效果最好。 这种业务模式常见的就是账单类、日志类的系统。"></a>对于写多读少的业务来说， 页面在写完以后马上被访问到的概率比较小，此时change buffer 的使用效果最好。 这种业务模式常见的就是账单类、日志类的系统。</h3><h3 id="redo-log-主要节省的是随机写磁盘的IO-消耗（转成顺序写），-而change-buffer-主要节省的是随机读磁盘的IO-消耗"><a href="#redo-log-主要节省的是随机写磁盘的IO-消耗（转成顺序写），-而change-buffer-主要节省的是随机读磁盘的IO-消耗" class="headerlink" title="redo log 主要节省的是随机写磁盘的IO 消耗（转成顺序写）， 而change buffer 主要节省的是随机读磁盘的IO 消耗"></a>redo log 主要节省的是随机写磁盘的IO 消耗（转成顺序写）， 而change buffer 主要节省的是随机读磁盘的IO 消耗</h3><h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><ul>
-<li>业务正确性优先，文章前提是： 业务代码已经保证不会写入重复数据， 再讨论性能问题。 如果业务不能保证，需要从数据库约束，则必须创建唯一索引。</li>
-<li>再一些“归档”的场景，可以考虑使用普通索引。线上数据只需要保留半年，然后历史数据保存再归档库。此时，归档数据已经是确保没有唯一键冲突了，要提高归档效率，可以考虑把表里面的唯一索引改成普通索引。</li>
-</ul>
-<h2 id="change-buffer-和redo-log"><a href="#change-buffer-和redo-log" class="headerlink" title="change buffer 和redo log"></a>change buffer 和redo log</h2><h3 id="例子1"><a href="#例子1" class="headerlink" title="例子1"></a>例子1</h3><ul>
-<li>insert into t(id,k) values(id1,k1),(id2,k2); 假设当前k索引树地状态，查找到位置后，k1 所在数据页在内存（InnoDB buffer pool）中，k2所在地数据页不在内存中。</li>
-<li><p>如图2所示是带change buffer 地更新状态图。</p>
-<ul>
-<li>分析语句，涉及4个部分： 内存，redo log(ib_log_fileX), 数据表空间(t.ibd)， 系统表空间（ibdata1）</li>
-<li>更新流程：1. Page1在内存中，直接更新内存；2. Page2没有在内存中，就在内存地change buffer 区域， 记录下“我要往Page2 插入一行”这个信息；3. 将上述两个动作记入 redo log 中（图中3和4）</li>
-<li>更新此条语句，写了两处内存，一处磁盘（两次操作合在一起写了一次磁盘）， 而且还是顺序写的。图中两个虚线，是后台操作，不影响更新的响应时间。</li>
-</ul>
-</li>
-</ul>
-<h3 id="例子2"><a href="#例子2" class="headerlink" title="例子2"></a>例子2</h3><ul>
-<li>在例子1完成后，执行select * from t where k in（k1,k2）。 如果读语句发生在更新语句后不久，内存数据还在，此时这两个读操作和系统表空间（ibdata1）和redo log（ib_log_fileX）无关了。 如图3</li>
-<li>由图可以看出： 1. 读取page1的时候，直接从内存返回。图中状态可以看出，虽然磁盘上还是之前的数据，但是这里直接从内存返回结果，结果是正确的；2. 要读page2 的时候，需要把page2从磁盘读入内存中，然后应用change buffer 里面的操作日志，生成一个正确的版本并返回结果。</li>
-<li>可以看到， 直到需要读page2的时候，这个数据页才会被读入内存。 因为，要简单对比这两个机制在提升更新性能上的收益的话， redo log 主要节省的是随机写磁盘的IO 消耗（转成顺序写）， 而change buffer 主要节省的是随机读磁盘的IO 消耗</li>
-</ul>
-<h2 id="索引选择和实践"><a href="#索引选择和实践" class="headerlink" title="索引选择和实践"></a>索引选择和实践</h2><h3 id="查询能力无差别，主要考虑更新性能。-所以，尽量选择普通索引。"><a href="#查询能力无差别，主要考虑更新性能。-所以，尽量选择普通索引。" class="headerlink" title="查询能力无差别，主要考虑更新性能。 所以，尽量选择普通索引。"></a>查询能力无差别，主要考虑更新性能。 所以，尽量选择普通索引。</h3><h3 id="如果所有的更新后面，需要伴随对这个记录的查询，-应关闭change-buffer-而其他情况下，-change-buffer-都能提升更新性能。"><a href="#如果所有的更新后面，需要伴随对这个记录的查询，-应关闭change-buffer-而其他情况下，-change-buffer-都能提升更新性能。" class="headerlink" title="如果所有的更新后面，需要伴随对这个记录的查询， 应关闭change buffer. 而其他情况下， change buffer 都能提升更新性能。"></a>如果所有的更新后面，需要伴随对这个记录的查询， 应关闭change buffer. 而其他情况下， change buffer 都能提升更新性能。</h3><h3 id="特别地，-在使用机械硬盘时，-change-buffer这个机制地收益是非常显著地。-如果有一个类似“历史数据”地库，-并且出于成本考虑用的是机械硬盘时，-应该特别关注这些表里地索引，-尽量使用普通索引。把change-buffer-尽量开大，确保“历史数据”表地数据写入速度。"><a href="#特别地，-在使用机械硬盘时，-change-buffer这个机制地收益是非常显著地。-如果有一个类似“历史数据”地库，-并且出于成本考虑用的是机械硬盘时，-应该特别关注这些表里地索引，-尽量使用普通索引。把change-buffer-尽量开大，确保“历史数据”表地数据写入速度。" class="headerlink" title="特别地， 在使用机械硬盘时， change buffer这个机制地收益是非常显著地。 如果有一个类似“历史数据”地库， 并且出于成本考虑用的是机械硬盘时， 应该特别关注这些表里地索引， 尽量使用普通索引。把change buffer 尽量开大，确保“历史数据”表地数据写入速度。"></a>特别地， 在使用机械硬盘时， change buffer这个机制地收益是非常显著地。 如果有一个类似“历史数据”地库， 并且出于成本考虑用的是机械硬盘时， 应该特别关注这些表里地索引， 尽量使用普通索引。把change buffer 尽量开大，确保“历史数据”表地数据写入速度。</h3>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study8/" data-id="cjuih7quk000l3wvx72b78t6d" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/03/12/machinelearning1/" data-id="cjupklbxq002khkvxfh6auq2n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-troubleshooting2019-2-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" class="article-date">
+  <time datetime="2019-02-20T12:16:36.000Z" itemprop="datePublished">2019-02-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/">troubleshooting-Allure Report &amp; HTMLReport</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="How-to-Generate-Allure-Report-in-cmd"><a href="#How-to-Generate-Allure-Report-in-cmd" class="headerlink" title="How to Generate Allure Report in cmd"></a>How to Generate Allure Report in cmd</h4><ol>
+<li>In the project root directory</li>
+<li>cmd execute:  pytest -s -q –alluredir allure-result<br>Grammar: pytest -s -q –alluredir [xml_report_path]</li>
+<li>Copy allure commandline to local, and set environment path<br>Set environment path, example:<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure1.png" alt="path"></li>
+<li>Under the same path, run cmd: example(&gt;allure generate allure-result -o allure-html)<br>Grammar: allure generate [xml_report_path] -o [html_report_path]<br>How to Check Allure Report</li>
+<li>In pycharm, select the index.html file reported by allure</li>
+<li>Right click, select “Open in Browser”, chose Chrome<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure2.png" alt="report showing"></li>
+</ol>
+<h4 id="How-to-generate-Htmlreport"><a href="#How-to-generate-Htmlreport" class="headerlink" title="How to generate Htmlreport"></a>How to generate Htmlreport</h4><p>run commd:<br>pytest –html=.\interfaceReport\report.html<br>Grammar:  pytest –html=[htmlpath.html]</p>
+<h4 id="Generate-Together"><a href="#Generate-Together" class="headerlink" title="Generate Together"></a>Generate Together</h4><p> pytest -s -q –alluredir [xml_report_path] –html=[htmlpath.html]<br>allure generate [xml_report_path] -o [html_report_path]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjupklbyh003khkvxofv7h4ei" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -174,14 +156,14 @@
 
 
   
-    <article id="post-MYSQL-Study7" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-trouble-shooting2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/27/MYSQL-Study7/" class="article-date">
-  <time datetime="2019-01-27T09:18:25.000Z" itemprop="datePublished">2019-01-27</time>
+    <a href="/echoblog.github.io/2019/02/14/trouble-shooting2/" class="article-date">
+  <time datetime="2019-02-13T22:40:26.000Z" itemprop="datePublished">2019-02-14</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
   </div>
 
   </div>
@@ -192,7 +174,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/27/MYSQL-Study7/">行锁</a>
+      <a class="article-title" href="/echoblog.github.io/2019/02/14/trouble-shooting2/">trouble-shooting2</a>
     </h1>
   
 
@@ -200,130 +182,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/图一.png" alt="图一"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/图二.png" alt="图二"><br><img src="/echoblog.github.io/2019/01/27/MYSQL-Study7/行锁.png" alt="行锁"></p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="MySQL-的行锁实在引擎层由各个引擎自己实现的。-但并不是所有的引擎都支持行锁，-如mylSAM-引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，-会影响到业务并发度。"><a href="#MySQL-的行锁实在引擎层由各个引擎自己实现的。-但并不是所有的引擎都支持行锁，-如mylSAM-引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行，-会影响到业务并发度。" class="headerlink" title="MySQL 的行锁实在引擎层由各个引擎自己实现的。 但并不是所有的引擎都支持行锁， 如mylSAM 引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行， 会影响到业务并发度。"></a>MySQL 的行锁实在引擎层由各个引擎自己实现的。 但并不是所有的引擎都支持行锁， 如mylSAM 引擎就不支持行锁。不支持行锁意味这并发控制只能使用表锁，对于这种引擎的表，同一张表上任何时刻只能有一个更新在执行， 会影响到业务并发度。</h3><h3 id="InnoDB-支持行锁。-如事务A-更新了一行，事务B-要更新同一行，则必须等事务A擦做完成后才能进行更新。"><a href="#InnoDB-支持行锁。-如事务A-更新了一行，事务B-要更新同一行，则必须等事务A擦做完成后才能进行更新。" class="headerlink" title="InnoDB 支持行锁。 如事务A 更新了一行，事务B 要更新同一行，则必须等事务A擦做完成后才能进行更新。"></a>InnoDB 支持行锁。 如事务A 更新了一行，事务B 要更新同一行，则必须等事务A擦做完成后才能进行更新。</h3><h2 id="两阶段锁"><a href="#两阶段锁" class="headerlink" title="两阶段锁"></a>两阶段锁</h2><h3 id="例子一"><a href="#例子一" class="headerlink" title="例子一"></a>例子一</h3><ul>
-<li>例子操作中， 事务B 的update语句执行时回事怎样呢？ 假设字段id 是表t的主键 图一</li>
-<li>问题的结论取决于事务A在执行完两条update 语句后，持有哪些锁，以及在什么时候释放。</li>
-<li>验证后， 实际上事务B 的update语句会被阻塞， 直到事务A执行commit之后，事务B才能继续执行。事务A持有的两条记录的锁，都是在commit 之后释放的</li>
-</ul>
-<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
-<li><p>两阶段锁协议</p>
-<ul>
-<li>在InnoDB 事务中，行锁实在需要的时候才加上，但并不是不需要了就立刻释放，而是要等到事务结束时才释放。</li>
-</ul>
-</li>
-<li><p>如果事务中需要锁多个行，要把最可能造成锁冲突，最可能影响并发度的锁尽量往后放</p>
-</li>
-</ul>
-<h3 id="例子二"><a href="#例子二" class="headerlink" title="例子二"></a>例子二</h3><ul>
-<li>若果要负责实现一个电影票在线交易业务，顾客A要在影院B购买电影票</li>
-<li><p>涉及操作</p>
-<ul>
-<li><ol>
-<li>从顾客A账户余额中扣除电影票价</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>给影院B的账户余额增加这张电影票价</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>记录一条交易日志</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>如果同时有另外一个顾客要在B 影院买票， 那么这两个事务冲突的部分就是语句2.。 因为他们要更新同一个影院账户的余额，需要修改同一行数据。</p>
-</li>
-<li>根据两阶段锁协议，不论怎样安排语句顺序，所有的操作需要的行锁都在事务提交的时候才释放。 如果把语句2安排在最后， 比如按照3，1，2这样的顺序， 那么影院账户余额这一行的锁时间就最少最大程度地减少了事务之间地锁等待， 提升了并发度</li>
-<li>但如果影院做活动，可以低价预售一年内所有地电影票，活动持续一条。可能活动开始地时候MySQL就挂了。 CPU 消耗接近100%，但整个数据库美标执行不到100个事务</li>
-</ul>
-<h2 id="死锁和死锁检测"><a href="#死锁和死锁检测" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h2><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><ul>
-<li><p>概念</p>
-<ul>
-<li>当并发系统中不同线程出现循环资源依赖， 涉及地线程都在等待别地线程释放资源时，就会导致这几个线程都进入无限等待地状态</li>
-</ul>
-</li>
-<li><p>例子（图二）</p>
-<ul>
-<li>事务A 在等待事务B 释放 id=2 的行锁，而事务B 在等待事务A 释放id=1 的行锁。 事务A和B 互相等待对方释放资源，就进入了死锁状态</li>
-<li><p>解决办法</p>
-<ul>
-<li>直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
-<li>发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑</li>
-</ul>
-</li>
-<li><p>分析： 在InnoDB 中，innodb_lock_wait_timeout的默认值是50s,使用第一个方法，当出现死锁以后，第一个被锁住的线程要过50s才会超时退出，然后其他线程才有可能继续执行。 但是超时时间又不能设置得很短，因为回出现很多误伤。</p>
-</li>
-<li>所以我们会使用第二种方案</li>
-</ul>
-</li>
-</ul>
-<h3 id="主动死锁检测"><a href="#主动死锁检测" class="headerlink" title="主动死锁检测"></a>主动死锁检测</h3><ul>
-<li><p>引子</p>
-<ul>
-<li>innodb_deadlock_detect的默认值本身就是on. 主动死锁检测在发生死锁的时候，是能够快速发现并进行处理的。但他也有额外负担。</li>
-<li>可以想象过程：每当一个事务被锁得时候，就要看看她所依赖得线程有没有被别人锁住，如此循环，最后判断是否出现了循环等待，也就是死锁</li>
-<li>每个新来的被堵住的过程，都要判断会不会由于自己的加入导致了死锁，这个是一个时间复杂度是O(n)的操作。 假设有100个并发线程要同时更新同一行，那么死锁检测操作就是100万这个量级的。虽然最终检测的结果是没有死锁，但是这期间要消耗大量的CPU资源。</li>
-</ul>
-</li>
-<li><p>如何解决由这种热点行更新导致的性能问题呢？</p>
-<ul>
-<li><p>问题症结</p>
-<ul>
-<li>死锁检测要耗费大量的CPU 资源</li>
-</ul>
-</li>
-<li><p>方法</p>
-<ul>
-<li>如果该业务一定不会出现死锁，可以临时把死锁检测关掉。但这种操作有一定风险，因为业务设计的时候一般不会把死锁当作一个严重错误，毕竟出现死锁，就回滚，然后通过业务重试一般就没问题了，这是业务无损的。而关掉死锁检测可能会出现大量超时，就会业务有损。</li>
-<li><p>控制并发度。 如果并发度能够控制，比如同一行同时最多只有10个线程在更新，那么死锁检测的成本很低，就不会出现这个问题。</p>
-<ul>
-<li>客户端并发控制。此方法可能不太可行，因为客户端很多。见过一个应用，600个客户端，即使每个客户端控制到只有5个并发线程，汇总到数据库服务端后，峰值并发数也可能达到3000</li>
-<li>因此，数据库服务端并发控制。如果有中间件，可以考虑在中间件实现； 或者有人可以修改MySQL源码，也可以放在MySQL里。</li>
-<li>原理， 对于相同行的更新，在进入引擎之前排队。在InnoDB内部就不会有大量的死锁检测工作。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="如何从设计上优化这个问题？"><a href="#如何从设计上优化这个问题？" class="headerlink" title="如何从设计上优化这个问题？"></a>如何从设计上优化这个问题？</h3><ul>
-<li>可以考虑通过将一行改成逻辑上的多行来减少锁冲突。</li>
-<li>以刚刚的影院账户为例，可以考虑放在多条记录上，比如10个记录，影院的账户总额等于这10个记录值得总和。 每次要个影院账户加金额得时候，随机选其中一条记录来加。这样每次冲突概率变成原来得1/10， 可以减少锁等待个数，也就减少了死锁检测得CPU 消耗</li>
-<li>这个方案看起来无损，但是需要根据业务逻辑做详细设计。如果账户余额可能会减少，比如退票逻辑，你这时候就需要考虑当一部分行记录变成0得时候，代码要有特殊处理</li>
-</ul>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="两阶段锁协议"><a href="#两阶段锁协议" class="headerlink" title="两阶段锁协议"></a>两阶段锁协议</h3><ul>
-<li>原则： 如果事务中需要锁多个行，要把最可能造成锁冲突、最可能影响并发度得锁得申请时机尽量往后放</li>
-<li>调整语句顺序比能不能完全避免死锁</li>
-</ul>
-<h3 id="死锁和死锁检测-1"><a href="#死锁和死锁检测-1" class="headerlink" title="死锁和死锁检测"></a>死锁和死锁检测</h3><ul>
-<li>方案1： 直接进入等待，直到超时。 这个超时时间可以通过参数innodb_lock_wait_timeout来设置</li>
-<li>方案2：发起死锁检测，发现死锁后，主动回滚死锁链条中的，某一个事务，让其他事务得以继续执行。 将参数innodb_deadlock_detect 设置为on,表示开启这个逻辑 </li>
-<li>方案3： 控制并发度。 （主要方向）</li>
-</ul>
-<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
-<li><p>要删除一个表里面得前10000行数据，三种方法</p>
-<ul>
-<li>第一种： 直接执行 delete from T limit 10000;</li>
-<li>第二种： 在一个链接中循环执行20次 delete from T limit 500;</li>
-<li>第三种： 在20个连接中同时执行20次 delete from T limit 500;</li>
-</ul>
-</li>
-<li><p>如何选择，为什么？</p>
-<ul>
-<li>第二种相对较好</li>
-<li>第一种方式（即： 直接执行 delete from T limit 10000）里面， 单个语句占用时间长，锁得时间也比较长，而且大事务还会导致主从延迟</li>
-<li>第三种方式， 会认为造成锁冲突</li>
-</ul>
-</li>
-</ul>
+        <p>关于通过hexo 编译文件时， .md 文档种不能有$ + { } +里面# 的内容，如果有会导致编译失败，error 信息：<br>FATAL Something’s wrong. Maybe you can find the solution here: <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">http://hexo.io/docs/troubleshooting.html</a><br>Template render error: (unknown path)<br>  Error: expected end of comment, got end of file</p>
+<p>分析：属于语法冲突</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study7/" data-id="cjuih7quh000h3wvxk9c2nu5t" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjupklbyc003fhkvxbarj66cy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -335,10 +200,10 @@
 
 
   
-    <article id="post-MYSQL-Study6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-ShellCommand" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/26/MYSQL-Study6/" class="article-date">
-  <time datetime="2019-01-26T12:28:27.000Z" itemprop="datePublished">2019-01-26</time>
+    <a href="/echoblog.github.io/2019/02/13/ShellCommand/" class="article-date">
+  <time datetime="2019-02-13T13:09:15.000Z" itemprop="datePublished">2019-02-13</time>
 </a>
     
   <div class="article-category">
@@ -353,7 +218,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/26/MYSQL-Study6/">全局锁和表锁</a>
+      <a class="article-title" href="/echoblog.github.io/2019/02/13/ShellCommand/">ShellCommand</a>
     </h1>
   
 
@@ -361,155 +226,630 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/echoblog.github.io/2019/01/26/MYSQL-Study6/图一.png" alt="图一"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study6/MDL.png" alt="MDL"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study6/全局锁和表锁.png" alt="全局锁和表锁"></p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h4 id="多用户共享资源，-并出现并发的时候，数据库需要合理地控制资源地访问规则。-而锁就是用来实现这些访问规则地重要数据结构"><a href="#多用户共享资源，-并出现并发的时候，数据库需要合理地控制资源地访问规则。-而锁就是用来实现这些访问规则地重要数据结构" class="headerlink" title="多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构"></a>多用户共享资源， 并出现并发的时候，数据库需要合理地控制资源地访问规则。 而锁就是用来实现这些访问规则地重要数据结构</h4><h4 id="三种锁：-全局锁，-表级锁-和行锁"><a href="#三种锁：-全局锁，-表级锁-和行锁" class="headerlink" title="三种锁： 全局锁， 表级锁 和行锁"></a>三种锁： 全局锁， 表级锁 和行锁</h4><h2 id="全局锁"><a href="#全局锁" class="headerlink" title="全局锁"></a>全局锁</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>全局锁就是对整个数据库实例加锁。 </li>
-<li>MySQL提供了一个加全局读锁地方法， 命令： Flush tables with read lock(FTWRL). 如果需要让整个库处于只读状态，可以使用此命令。然后所有语句会被阻塞： 数据库更新（增删改）， 数据定义语句（建表、修改表结构）和更新类事务地语句提交</li>
+        <p><img src="/echoblog.github.io/2019/02/13/ShellCommand/Shell.png" alt="Shell"></p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>C编写的程序，使用Linux 的桥梁</li>
+<li>是命令语言，也是程序设计语言</li>
+<li>shell 脚本是用shell编写的脚本程序</li>
 </ul>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>全库逻辑备份。 即把整库每个表都select 出来存成文本。</li>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>Bourne Shell(/usr/bin/sh 或者 /bin/sh)</li>
+<li>Bourne Again Shell（/bin/bash）</li>
+<li>C Shell（/usr/bin/csh）</li>
+<li>K Shell（/usr/bin/ksh）</li>
+<li>Shell for Root（/sbin/sh）</li>
 </ul>
-<h3 id="潜在风险"><a href="#潜在风险" class="headerlink" title="潜在风险"></a>潜在风险</h3><ul>
-<li>如果主库上备份， 那么备份期间都不能执行更新，业务基本上就得停止</li>
-<li>如果从库上备份，那么备份期间从库不能执行主库同步过来地binlog，会导致主从延迟</li>
+<h3 id="在一般情况下，人们并不区分-Bourne-Shell-和-Bourne-Again-Shell，所以，像-bin-sh，它同样也可以改为-bin-bash"><a href="#在一般情况下，人们并不区分-Bourne-Shell-和-Bourne-Again-Shell，所以，像-bin-sh，它同样也可以改为-bin-bash" class="headerlink" title="在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 #!/bin/sh，它同样也可以改为 #!/bin/bash"></a>在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 #!/bin/sh，它同样也可以改为 #!/bin/bash</h3><h3 id="指定用什么解释器运行脚本以及解释器所在的位置"><a href="#指定用什么解释器运行脚本以及解释器所在的位置" class="headerlink" title="#! 指定用什么解释器运行脚本以及解释器所在的位置"></a>#! 指定用什么解释器运行脚本以及解释器所在的位置</h3><ul>
+<li>有时候写 #!/usr/bin/python 还是不行，很简单，因为python解释器没有装在/usr/bin/目录，改成其所在目录就行了，或者更通用的方法是：<br>#!/usr/bin/env python</li>
 </ul>
-<h3 id="备份加锁目的"><a href="#备份加锁目的" class="headerlink" title="备份加锁目的"></a>备份加锁目的</h3><ul>
-<li><p>例子</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ul>
+<li><p>可执行程序</p>
 <ul>
-<li>如果维护购买系统， 所要关注的是用户账户余额表和用户课程表</li>
-<li>发起逻辑备份。 在备份期间，有一个用户发生购买， 业务逻辑里就要扣除他的余额， 并往已购买中加入购买的东西</li>
-<li>如果按照时间顺序备份，先备份账户余额表（u_account）， 然后用户购买，在备份用户课程表（u_course），会如图一所示：</li>
-<li>结果用户得到的状态是“账户余额没扣，但是用户课程表里面已经多了一门课”； 如果反过来， 先备份用户课程再备份账户余额表，就会出现用户花了钱，但是课程没有买到</li>
+<li>chmod +x ./test.sh  #使脚本具有执行权限<br>./test.sh  #执行脚本</li>
+<li>Note： 运行的时候，路径需要写名，要不然就会去path 里面去找，而path 是需要配置的， 一般只有/bin,/sbin, /usr/sbin 等再PATH 里面</li>
 </ul>
 </li>
+<li><p>作为解释器参数</p>
+<ul>
+<li>/bin/sh test.sh<br>/bin/php test.php</li>
+<li>Note： 这种方式不需要再第一行指定解释器信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
+<li><p>规则</p>
+<ul>
+<li><p>不需要有$符号</p>
+<ul>
+<li>如： name_1=”name”</li>
+</ul>
+</li>
+<li><p>变量名和等号之间不能有空格</p>
+</li>
+<li><p>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头</p>
+<ul>
+<li>如：_var</li>
+</ul>
+</li>
+<li><p>中间不能有空格，可以使用下划线（_）</p>
+</li>
+<li>不能使用标点符号</li>
+<li>不能使用bash里面的关键字（help 可以获取到）</li>
+</ul>
+</li>
+<li><p>使用变量</p>
+<ul>
+<li>your_name=”qinjx”<br>echo $your_name<br>echo ${your_name}</li>
+<li>note：最好给所有变量加上{}</li>
+</ul>
+</li>
+<li><p>相关操作</p>
+<ul>
+<li><p>只读</p>
+<ul>
+<li>readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变</li>
+<li>#!/bin/bash<br>myUrl=”<a href="http://www.google.com&quot;" target="_blank" rel="noopener">http://www.google.com&quot;</a><br>readonly myUrl<br>myUrl=”<a href="http://www.runoob.com&quot;" target="_blank" rel="noopener">http://www.runoob.com&quot;</a><br>运行报错/bin/sh: NAME: This variable is read only.</li>
+</ul>
+</li>
+<li><p>删除</p>
+<ul>
+<li>使用unset命令可以删除变量。 语法：unset variable_name. 变量被删除后不能再次使用，unset命令不能删除只读变量</li>
+<li>#!/bin/sh<br>myUrl=”<a href="http://www.runoob.com&quot;" target="_blank" rel="noopener">http://www.runoob.com&quot;</a><br>unset myUrl<br>echo $myUrl</li>
+</ul>
+</li>
+<li><p>变量类型</p>
+<ul>
+<li>局部变量 局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。</li>
+<li>环境变量 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。</li>
+<li>shell变量 shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
+<li><p>单引号（两个限制）</p>
+<ul>
+<li>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；</li>
+<li>单引号字串中不能出现单独一个的单引号（对单引号使用转义符后也不行），但可成对出现，作为字符串拼接使用。</li>
+</ul>
+</li>
+<li><p>双引号（优点）</p>
+<ul>
+<li>双引号里可以有变量</li>
+<li>双引号里可以出现转义字符</li>
+</ul>
+</li>
+<li><p>拼接字符串</p>
+<ul>
+<li><p>your_name=”runoob”</p>
+<h1 id="使用双引号拼接"><a href="#使用双引号拼接" class="headerlink" title="使用双引号拼接"></a>使用双引号拼接</h1><p>greeting=”hello, “$your_name” !”<br>greeting_1=”hello, ${your_name} !”<br>echo $greeting  $greeting_1</p>
+<ul>
+<li>hello, runoob ! hello, runoob !</li>
+</ul>
+</li>
+<li><p>your_name=”runoob”# 使用单引号拼接<br>greeting_2=’hello, ‘$your_name’ !’<br>greeting_3=’hello, ${your_name} !’<br>echo $greeting_2  $greeting_3</p>
+<ul>
+<li>hello, runoob ! hello, ${your_name} !</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取字符串长度</p>
+<ul>
+<li>string=”abcd”<br>echo ${<em>string} #输出 4，”#” 替换成</em>， 因为语法冲突</li>
+</ul>
+</li>
+<li><p>提取子字符串</p>
+<ul>
+<li>string=”runoob is a great site”<br>echo ${string:1:4} # 输出 unoo</li>
+</ul>
+</li>
+<li><p>查找子字符串</p>
+<ul>
+<li>查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)</li>
+<li>string=”runoob is a great site”<br>echo <code>expr index &quot;$string&quot; io</code>  # 输出 4</li>
+</ul>
+</li>
+</ul>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>bash支持一维数组（不支持多维数组），并且没有限定数组的大小。</li>
+<li>用括号来表示数组，数组元素用”空格”符号分割开（数组名=(值1 值2 … 值n)）</li>
+<li>array_name=(value0 value1 value2 value3)或者array_name=(<br>value0<br>value1<br>value2<br>value3<br>)</li>
+</ul>
+</li>
+<li><p>读取</p>
+<ul>
+<li>${数组名[下标]}</li>
+<li><p>使用 @ 符号可以获取数组中的所有元素</p>
+<ul>
+<li>echo ${array_name[@]}</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取数组长度</p>
+</li>
+</ul>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
+<li><p>单行</p>
+<ul>
+<li>以 # 开头的行就是注释，会被解释器忽略。</li>
+<li>通过每一行加一个 # 号设置多行注释</li>
+</ul>
+</li>
+<li><p>多行</p>
+<ul>
+<li>这一段要注释的代码用一对花括号括起来，定义成一个函数，没有地方调用这个函数，这块代码就不会执行，达到了和注释一样的效果。</li>
+<li>:&lt;&lt;EOF<br>注释内容…<br>注释内容…<br>注释内容…<br>EOF</li>
+<li>:&lt;&lt;’<br>注释内容…<br>注释内容…<br>注释内容…<br>‘</li>
+<li>:&lt;&lt;!<br>注释内容…<br>注释内容…<br>注释内容…<br>!</li>
+</ul>
+</li>
+</ul>
+<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><ul>
+<li><p>Rules</p>
+<ul>
+<li>$#传递到脚本的参数个数</li>
+<li>$<em>以一个单字符串显示所有向脚本传递的参数。<br>如”$</em>“用「”」括起来的情况、以”$1 $2 … $n”的形式输出所有参数。传递一个参数</li>
+<li>$$脚本运行的当前进程ID号</li>
+<li>$! 后台运行的最后一个进程的ID号</li>
+<li>$@与$*相同，但是使用时加引号，并在引号中返回每个参数。<br>如”$@”用「”」括起来的情况、以”$1” “$2” … “$n” 的形式输出所有参数。 传递n个参数</li>
+<li>$- 显示Shell使用的当前选项，与set命令功能相同。</li>
+<li>$? 显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</li>
+</ul>
+</li>
+<li><p>Example</p>
+<ul>
+<li>#!/bin/bash</li>
+</ul>
+</li>
+</ul>
+<p>echo “– \$<em> 演示 —“<br>for i in “$</em>“; do<br>    echo $i<br>done</p>
+<p>echo “– \$@ 演示 —“<br>for i in “$@”; do<br>    echo $i<br>done</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh 1 2 3<br>– $* 演示 —<br>1 2 3<br>– $@ 演示 —<br>1<br>2<br>3</p>
+<h3 id="数组-1"><a href="#数组-1" class="headerlink" title="数组"></a>数组</h3><ul>
+<li><p>Rules</p>
+<ul>
+<li>数组中可以存放多个值。Bash Shell 只支持一维数组（不支持多维数组），初始化时不需要定义数组大小（与 PHP 类似）。</li>
+<li>array_name=(value1 … valuen)</li>
+<li>${array_name[index]}</li>
+</ul>
+</li>
+<li><p>Apply</p>
+<ul>
+<li><p>Read</p>
+<ul>
+<li>my_array=(A B “C” D)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>echo “第一个元素为: ${my_array[0]}”<br>echo “第二个元素为: ${my_array[1]}”<br>echo “第三个元素为: ${my_array[2]}”<br>echo “第四个元素为: ${my_array[3]}”</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh<br>第一个元素为: A<br>第二个元素为: B<br>第三个元素为: C<br>第四个元素为: D</p>
+<pre><code>- Extract all elements
+
+    - my_array[0]=A
+</code></pre><p>my_array[1]=B<br>my_array[2]=C<br>my_array[3]=D</p>
+<p>echo “数组的元素为: ${my_array[*]}”<br>echo “数组的元素为: ${my_array[@]}”</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh<br>数组的元素为: A B C D<br>数组的元素为: A B C D</p>
+<pre><code>- Get length
+
+    - my_array[0]=A
+</code></pre><p>my_array[1]=B<br>my_array[2]=C<br>my_array[3]=D</p>
+<p>echo “数组元素个数为: ${<em>my_array[</em>]}”  “#” 替换成<em>， 因为语法冲突<br>echo “数组元素个数为: ${</em>my_array[@]}”   “#” 替换成*， 因为语法冲突</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh<br>数组元素个数为: 4<br>数组元素个数为: 4</p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><ul>
+<li><p>Classifiy</p>
+<ul>
+<li><p>算数运算符</p>
+<ul>
+<li><code>expr $a + $b</code> </li>
+<li><code>expr $a - $b</code></li>
+<li><code>expr $a \* $b</code></li>
+<li><code>expr $b / $a</code> </li>
+<li><code>expr $b % $a</code> </li>
+<li>a=$b </li>
+<li>[ $a == $b ] </li>
+<li>[ $a != $b ]</li>
+</ul>
+</li>
+<li><p>关系运算符</p>
+<ul>
+<li>-eq/-ne/-gt/-lt/-ge/-le</li>
+</ul>
+</li>
+<li><p>布尔运算符</p>
+<ul>
+<li>[ ! false ] 返回 true。</li>
+<li>[ $a -lt 20 -o $b -gt 100 ] 返回 true。</li>
+<li>[ $a -lt 20 -a $b -gt 100 ] 返回 false</li>
+</ul>
+</li>
+<li><p>逻辑运算符</p>
+<ul>
+<li>[[ $a -lt 100 &amp;&amp; $b -gt 100 ]] 返回 false</li>
+<li>[[ $a -lt 100 || $b -gt 100 ]] 返回 true</li>
+</ul>
+</li>
+<li><p>字符串运算符</p>
+<ul>
+<li>=    检测两个字符串是否相等，相等返回 true。    [ $a = $b ] 返回 false。</li>
+<li>!=    检测两个字符串是否相等，不相等返回 true。    [ $a != $b ] 返回 true。</li>
+<li>-z    检测字符串长度是否为0，为0返回 true。    [ -z $a ] 返回 false。</li>
+<li>-n    检测字符串长度是否为0，不为0返回 true。    [ -n “$a” ] 返回 true。</li>
+<li>str    检测字符串是否为空，不为空返回 true。    [ $a ] 返回 true。</li>
+</ul>
+</li>
+<li><p>文件测试运算符</p>
+<ul>
+<li>-b file    检测文件是否是块设备文件，如果是，则返回 true。    [ -b $file ] 返回 false。</li>
+<li>-c file    检测文件是否是字符设备文件，如果是，则返回 true。    [ -c $file ] 返回 false。</li>
+<li>-d file    检测文件是否是目录，如果是，则返回 true。    [ -d $file ] 返回 false。</li>
+<li>-f file    检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。    [ -f $file ] 返回 true。</li>
+<li>-g file    检测文件是否设置了 SGID 位，如果是，则返回 true。    [ -g $file ] 返回 false。</li>
+<li>-k file    检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。    [ -k $file ] 返回 false。</li>
+<li>-p file    检测文件是否是有名管道，如果是，则返回 true。    [ -p $file ] 返回 false。</li>
+<li>-u file    检测文件是否设置了 SUID 位，如果是，则返回 true。    [ -u $file ] 返回 false。</li>
+<li>-r file    检测文件是否可读，如果是，则返回 true。    [ -r $file ] 返回 true。</li>
+<li>-w file    检测文件是否可写，如果是，则返回 true。    [ -w $file ] 返回 true。</li>
+<li>-x file    检测文件是否可执行，如果是，则返回 true。    [ -x $file ] 返回 true。</li>
+<li>-s file    检测文件是否为空（文件大小是否大于0），不为空返回 true。    [ -s $file ] 返回 true。</li>
+<li>-e file    检测文件（包括目录）是否存在，如果是，则返回 true。    [ -e $file ] 返回 true。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Rules</p>
+<ul>
+<li>原生bash不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用</li>
+<li>两个数相加(注意使用的是反引号 ` 而不是单引号 ‘)</li>
+<li>表达式和运算符之间要有空格，例如 2+2 是不对的，必须写成 2 + 2，这与我们熟悉的大多数编程语言不一样。</li>
+<li>完整的表达式要被 <code></code> 包含，注意这个字符不是常用的单引号，在 Esc 键下边</li>
+<li>条件表达式要放在方括号之间，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]</li>
+<li>乘号(*)前边必须加反斜杠()才能实现乘法运算；</li>
+<li>在 MAC 中 shell 的 expr 语法是：$((表达式))，此处表达式中的 “*” 不需要转义符号 “\” </li>
+</ul>
+</li>
+<li><p>Examples</p>
+</li>
+</ul>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><ul>
+<li><p>显示普通字符</p>
+<ul>
+<li>echo “It is a test”</li>
+</ul>
+</li>
+<li><p>显示转义字符</p>
+<ul>
+<li>echo “\”It is a test\””</li>
+</ul>
+</li>
+<li><p>显示变量</p>
+<ul>
+<li>read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量</li>
+</ul>
+</li>
+<li><p>显示换行</p>
+<ul>
+<li>echo -e “OK! \n” # -e 开启转义<br>echo “It is a test”</li>
+<li>OK!</li>
+</ul>
+</li>
+</ul>
+<p>It is a test</p>
+<ul>
+<li><p>显示不换行</p>
+<ul>
+<li>#!/bin/sh<br>echo -e “OK! \c” # -e 开启转义 \c 不换行<br>echo “It is a test”</li>
+<li>OK! It is a test</li>
+</ul>
+</li>
+<li><p>显示结果定向至文件</p>
+<ul>
+<li>echo “It is a test” &gt; myfile</li>
+</ul>
+</li>
+<li><p>原样输出字符串，不进行转义或取变量(用单引号)</p>
+</li>
+<li><p>显示命令执行结果</p>
+<ul>
+<li>echo <code>date</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><ul>
+<li><p>引言</p>
+<ul>
+<li>printf 命令模仿 C 程序库（library）里的 printf() 程序。</li>
+<li>printf 由 POSIX 标准所定义，因此使用 printf 的脚本比使用 echo 移植性好。</li>
+<li>printf 使用引用文本或空格分隔的参数，外面可以在 printf 中使用格式化字符串，还可以制定字符串的宽度、左右对齐方式等。默认 printf 不会像 echo 自动添加换行符，我们可以手动添加 \n。</li>
+</ul>
+</li>
+<li><p>Format</p>
+<ul>
+<li>printf  format-string  [arguments…]</li>
+<li>参数说明：</li>
+</ul>
+</li>
+</ul>
+<p>format-string: 为格式控制字符串<br>arguments: 为参数列表。</p>
+<ul>
+<li><p>Example</p>
+<ul>
+<li>%s %c %d %f都是格式替代符</li>
+</ul>
+</li>
+</ul>
+<h3 id="test"><a href="#test" class="headerlink" title="test"></a>test</h3><ul>
 <li><p>目的</p>
 <ul>
-<li>为了让备份系统备份得到的库再同一个逻辑时间点，页视图也会一致</li>
-<li>得到一致视图的方法： 在可重复读隔离级别下开启一个事务</li>
+<li>检查某个条件是否成立</li>
 </ul>
 </li>
-</ul>
-<h3 id="逻辑备份工具"><a href="#逻辑备份工具" class="headerlink" title="逻辑备份工具"></a>逻辑备份工具</h3><ul>
-<li>官方： mysqldump</li>
-<li>当mysqldump 使用参数-single-transaction 的时候，导数据之前就会启动一个事务， 来确保拿到一致性视图。 而由于MVCC 的支持， 这个过程中数据是可以正常更新的</li>
-</ul>
-<h3 id="为什么需要FTWRL"><a href="#为什么需要FTWRL" class="headerlink" title="为什么需要FTWRL"></a>为什么需要FTWRL</h3><ul>
-<li>一致性读是好，但前提是引擎要支持这个隔离级别</li>
-<li>如： 对于MylSAM 这种不支持事务的引擎，如果备份过程中有更新，总是只能取到最新的数据，那么就破坏了备份的一致性，此时就需要FTWRL</li>
-<li>因此，single-transaction 方法只适用于所有的表使用事务引擎的库。 如果有的表不支持事务的引擎， 那么备份就只能通过FTWRL方法。 这就是DBA 要求业务开发人员使用InnoDB替代MylSAM 的原因之一</li>
-</ul>
-<h3 id="既然全库只读，为什么不适用-set-global-readonly-true-的方式"><a href="#既然全库只读，为什么不适用-set-global-readonly-true-的方式" class="headerlink" title="既然全库只读，为什么不适用 set global readonly= true 的方式"></a>既然全库只读，为什么不适用 set global readonly= true 的方式</h3><ul>
-<li><ol>
-<li>在有些系统中， readonly的值会被用来做其他逻辑，比如用来判断一个库是主库还是备库。 因此，修改global变量的方式影响面更大</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>在异常处理机制上有差异。 如果执行FTWRL 命令后由于客户端发生异常断开，那么MySQL 会自动释放这个全局锁， 整个库回到可以正常更新的状态。 而将整个库设置为readonly 之后，如果客户端发生异常，则数据库会一致保持readonly 状态，这样会导致整个库长时间处于不可写状态，风险较高 </li>
-</ol>
-</li>
-</ul>
-<h3 id="业务更新不只是增删改数据（DML，还有可能是加字段等修改表结构的操作（DDL）。-不论哪种方法，一个库被全局锁上以后，要对里面任何一个表做加字段操作，都会被锁住。"><a href="#业务更新不只是增删改数据（DML，还有可能是加字段等修改表结构的操作（DDL）。-不论哪种方法，一个库被全局锁上以后，要对里面任何一个表做加字段操作，都会被锁住。" class="headerlink" title="业务更新不只是增删改数据（DML，还有可能是加字段等修改表结构的操作（DDL）。 不论哪种方法，一个库被全局锁上以后，要对里面任何一个表做加字段操作，都会被锁住。"></a>业务更新不只是增删改数据（DML，还有可能是加字段等修改表结构的操作（DDL）。 不论哪种方法，一个库被全局锁上以后，要对里面任何一个表做加字段操作，都会被锁住。</h3><h2 id="表级锁"><a href="#表级锁" class="headerlink" title="表级锁"></a>表级锁</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
-<li>表锁</li>
-<li>元数据锁（meta data lock, MDL）</li>
-</ul>
-<h3 id="表锁"><a href="#表锁" class="headerlink" title="表锁"></a>表锁</h3><ul>
-<li>语法：lock tables.. read/write</li>
-<li>和FTWRL 类似， 可以用unlock tables z主动释放锁， 也可以在客户端断开的时候自动释放。需要注意的是， lock tables语法除了会限制别的线程的读写外，也限定了本线程接下来的操作对象。</li>
-<li>举例： 如果在某个线程A中执行lock tables t1 read, t2 write; 则其他线程写t1 ， 读写t2 的语句都会被阻塞。 同时， 线程A在执行unlock tables 之前， 也只能执行读t1、读写t2 的操作。连写t1 都不允许，自然也不能访问其他表</li>
-<li>还未出现更细粒度的锁的时候，表锁是最常用的处理并发方式。而对于InnoDB 这种支持行锁的引擎， 一般不是lock tables 命令来控制并发。</li>
-</ul>
-<h3 id="元数据锁（MDL）"><a href="#元数据锁（MDL）" class="headerlink" title="元数据锁（MDL）"></a>元数据锁（MDL）</h3><ul>
-<li>不需要显式使用，在访问一个表的时候会被自动加上。</li>
-<li>作用： 保证读写的正确性。 如果一个查询正在遍历一个表中的数据，而执行期间另一个线程对这个表结构做了变更，删了一行，那么查询线程拿到的结果跟表结构对不上， 肯定是不行的</li>
-<li><p>MySQL 5.5 版本引入MDL， 当对一个表做增删改查操作的时候，加MDL 读锁； 当要对表做结构变更操作的时候，加MDL 写锁。</p>
+<li><p>数值测试</p>
 <ul>
-<li>读锁之间不互斥， 因此可以有多个线程同时对一张表增删改查</li>
-<li>读写锁之间、写锁之间是互斥的，用来保证变更表结构操作的安全性。 因此，如果有两个线程要同时给一个表加字段，其中一个要等另一个执行完才开始执行</li>
+<li>num1=100<br>num2=100<br>if test $[num1] -eq $[num2]<br>then<br>echo ‘两个数相等！’<br>else<br>echo ‘两个数不相等！’<br>fi</li>
+<li>输出结果：</li>
 </ul>
 </li>
-<li><p>例子</p>
+</ul>
+<p>两个数相等！</p>
 <ul>
-<li>MDL 锁是系统默认会加的，但不能忽略例子中的机制</li>
-<li>给一个表加字段，或者修改字段，或者加索引， 需要扫描全表的数据。 对于大表，可能会对线上服务造成影响。 但是实际上，即使小表，操作不慎也会出问题</li>
-<li><p>假设t 是一个小表（环境是MySQL5.6）， 图MDL</p>
+<li><p>字符串测试</p>
 <ul>
-<li>可以看到session A 先启动， 这时候会对表t加一个MDL读锁</li>
-<li>由于session B需要的也是MDL 读锁，因此可以正常运运行</li>
-<li>session C 会被blocked， 因为session A 的MDL 读锁还没有释放， 而session C 需要MDL 写锁， 因此只能被阻塞</li>
-<li>如果只有session C 自己被阻塞还没什么关系，但是之后所有要在表t 上新申请MDL 读锁的请求也会被session C 阻塞。因为， 所有对表的增删改查操作都需要先申请MDL 读锁，就都被锁住， 等于这个表现在完全不可读写了</li>
-<li>如果某个表上的查询语句频繁， 而且客户端有重试机制， 超时后会再起一个新session 再请求，这个库的线程很快会爆满</li>
+<li>num1=”ru1noob”<br>num2=”runoob”<br>if test $num1 = $num2<br>then<br>echo ‘两个字符串相等!’<br>else<br>echo ‘两个字符串不相等!’<br>fi</li>
+<li>输出结果：</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>事务中的MDL 锁， 在语句执行开始时的申请， 但是语句结束后并不会马上释放，会等到整个事务提交后再释放</p>
-</li>
-<li><p>如何安全地给小表加字段</p>
+<p>两个字符串不相等!</p>
 <ul>
-<li>首先要解决长事务， 事务不提交，就会一直占着MDL 锁。 在MySQL的 information_schema库的innodb_trx 表中， 可以查询到当前执行中的事务。</li>
-<li>若要做DDL变更的表刚好有长事务在执行， 要考虑先暂停DDL， 或者kill掉这个长事务。</li>
-<li>但考虑另外的场景，需要变更的表是一个热点表， 虽然数据量不大， 但请求很频繁。 且不得不加字段， 如何执行。</li>
-<li>kill 未必管用，比较理想的机制： 在alter table 语句里面设定等待时间，如果在指定时间内能够拿到MDL 写锁最好，拿不到也不要阻塞后面的业务语句，先放弃。然后开发人员或者DBA 再重试执行命令重复此过程。</li>
-<li><p>MariaDB 已经合并AliSQL 这个功能， 所以这两个开源分支目前都支持DDL NOWAIT/WAIT n这个语法</p>
+<li><p>文本测试</p>
 <ul>
-<li>alter table tbl_name NOWAIT add column ….</li>
-<li>Alter table tbl_name WAIT N add column</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><h3 id="全局锁-1"><a href="#全局锁-1" class="headerlink" title="全局锁"></a>全局锁</h3><ul>
-<li>用途： 逻辑备份中</li>
-<li>如库全是InnoDB, 可选择 -single-transaction 参数</li>
-</ul>
-<h3 id="表锁-1"><a href="#表锁-1" class="headerlink" title="表锁"></a>表锁</h3><ul>
-<li>用途： 数据库引擎不支持行锁的时候才被用到</li>
-<li><p>如果程序里有lock tables 这样的语句， 如何做？</p>
+<li><p>参数</p>
 <ul>
-<li>要么是系统还是MylSAM 这类不支持事务的引擎， 需要升级换引擎</li>
-<li>引擎升级，代码没升级，把lock tables 和unlock tables 改成begin和commit</li>
+<li>-e 文件名    如果文件存在则为真</li>
+<li>-r 文件名    如果文件存在且可读则为真</li>
+<li>-w 文件名    如果文件存在且可写则为真</li>
+<li>-x 文件名    如果文件存在且可执行则为真</li>
+<li>-s 文件名    如果文件存在且至少有一个字符则为真</li>
+<li>-d 文件名    如果文件存在且为目录则为真</li>
+<li>-f 文件名    如果文件存在且为普通文件则为真</li>
+<li>-c 文件名    如果文件存在且为字符型特殊文件则为真</li>
+<li>-b 文件名    如果文件存在且为块特殊文件则为真</li>
 </ul>
 </li>
-<li><p>MDL 直到事务提交才释放，表变更需要注意，</p>
+<li><p>另外，Shell还提供了与( -a )、或( -o )、非( ! )三个逻辑操作符用于将测试条件连接起来，其优先级为：”!”最高，”-a”次之，”-o”最低</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><ul>
+<li><p>If else</p>
 <ul>
-<li>设置超时等待时间，然后循环提交</li>
-</ul>
-</li>
-</ul>
-<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul>
-<li>备份一般都会再备份库上执行，再用-single-transaction 方法做逻辑备份的过程Hon个如果主库的一个小表做了DDL， 比如给一个表上加了一列。这时候备库看到的现象是什么？</li>
-</ul>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ul>
-<li><p>假设DDL是针对表t1的， 那么备份过程中几个关键语句异常如下</p>
+<li><p>if</p>
 <ul>
-<li>Q1： SET SESSION TRANSACTION ISOLATION LEVEL REPEATABLE READ;</li>
-<li>Q2： start transaction with consistent snapshot;</li>
-<li>/<em> other tables </em>/ Q3: SAVEPOINT sp;</li>
-<li>/<em>时刻1</em>/ Q4： show create table ‘t1’;</li>
-<li>/<em>时刻2</em>/ Q5： select * from ‘t1’;</li>
-<li>/<em>时刻3</em>/ Q6：rollback to savepoint sp;</li>
-<li>/<em>时刻4</em>/ /<em>other tables</em>/</li>
+<li>if condition<br>then<br>command1<br>command2<br>…<br>commandN<br>fi</li>
+<li>if [ $(ps -ef | grep -c “ssh”) -gt 1 ]; then echo “true”; fi</li>
 </ul>
 </li>
-<li><p>在备份开始时，为了确保RR（可重复读）隔离级别，再设置一次RR 隔离级别（Q1）</p>
+<li><p>if else</p>
+<ul>
+<li>if condition<br>then<br>command1<br>command2<br>…<br>commandN<br>else<br>command<br>fi</li>
+</ul>
 </li>
-<li>启动事务， 使用with consistent snapshot 确保这个语句执行完就可以得到一个一致性视图（Q2）</li>
-<li>设置一个保存点， 很重要（Q3）</li>
-<li>show create 为了拿到表结构(Q4)， 然后正式导数据（Q5）， 回滚到savepoint sp， 作用是释放t1的MDL 锁（Q6）</li>
-<li>DDL 从主库传过来的时间按照效果不同，打了四个时刻。 题目设定为小表， 假定到达后，如果开始执行，则很快能够执行完成</li>
+<li><p>if else-if else</p>
+<ul>
+<li>if condition1<br>then<br>command1<br>elif condition2<br>then<br>command2<br>else<br>commandN<br>fi</li>
+<li>a=10<br>b=20<br>if [ $a == $b ]<br>then<br>echo “a 等于 b”<br>elif [ $a -gt $b ]<br>then<br>echo “a 大于 b”<br>elif [ $a -lt $b ]<br>then<br>echo “a 小于 b”<br>else<br>echo “没有符合的条件”<br>fi</li>
 </ul>
-<h3 id="参考答案"><a href="#参考答案" class="headerlink" title="参考答案"></a>参考答案</h3><ul>
-<li>如果再Q4 语句执行之前到达， 现象： 没有影响， 备份拿到的是DDL 后的表结构</li>
-<li>如果再“时刻2到达”， 则表结构被改过， Q5执行的时候，报Table definition has changed, please retry transaction, 现象： mysqldump 终止</li>
-<li>如果再“时刻2”和“时刻3”之间到达，mysqldump 占着t1 的MDL 读锁， binlog 被阻塞，现象： 主从延迟， 直到Q6执行完成</li>
-<li>从“时刻4”开始，mysqldump 释放了MDL 读锁， 现象： 没有影响， 备份拿到的是DDL 前的表结构</li>
+</li>
 </ul>
+</li>
+<li><p>For</p>
+<ul>
+<li>for var in item1 item2 … itemN<br>do<br>command1<br>command2<br>…<br>commandN<br>done</li>
+<li>for var in item1 item2 … itemN; do command1; command2… done;</li>
+<li>当变量值在列表里，for循环即执行一次所有命令，使用变量名获取列表中的当前取值。命令可为任何有效的shell命令和语句。in列表可以包含替换、字符串和文件名。</li>
+</ul>
+</li>
+</ul>
+<p>in列表是可选的，如果不用它，for循环使用命令行的位置参数。</p>
+<pre><code>- for loop in 1 2 3 4 5
+</code></pre><p>do<br>    echo “The value is: $loop”<br>done</p>
+<pre><code>- for str in &apos;This is a string&apos;
+</code></pre><p>do<br>    echo $str<br>done</p>
+<ul>
+<li><p>while</p>
+<ul>
+<li>while condition<br>do<br>command<br>done</li>
+<li><p>无限循环</p>
+<ul>
+<li>while :<br>do<br>command<br>done</li>
+<li>while true<br>do<br>command<br>done</li>
+<li>for (( ; ; ))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>until 循环</p>
+<ul>
+<li>until 循环执行一系列命令直至条件为 true 时停止。</li>
+</ul>
+</li>
+</ul>
+<p>until 循环与 while 循环在处理方式上刚好相反。</p>
+<p>一般 while 循环优于 until 循环，但在某些时候—也只是极少数情况下，until 循环更加有用。</p>
+<pre><code>- condition 一般为条件表达式，如果返回值为 false，则继续执行循环体内的语句，否则跳出循环。
+- until condition
+</code></pre><p>do<br>    command<br>done</p>
+<ul>
+<li><p>case</p>
+<ul>
+<li>Shell case语句为多选择语句。可以用case语句匹配一个值与一个模式，如果匹配成功，执行相匹配的命令。</li>
+<li>case 值 in<br>模式1)<br>command1<br>command2<br>…<br>commandN<br>;;<br>模式2）<br>command1<br>command2<br>…<br>commandN<br>;;<br>esac</li>
+<li>echo ‘输入 1 到 4 之间的数字:’<br>echo ‘你输入的数字为:’<br>read aNum<br>case $aNum in<br>1)  echo ‘你选择了 1’<br>;;<br>2)  echo ‘你选择了 2’<br>;;<br>3)  echo ‘你选择了 3’<br>;;<br>4)  echo ‘你选择了 4’<br>;;<br>*)  echo ‘你没有输入 1 到 4 之间的数字’<br>;;<br>esac</li>
+<li>esac<br>case的语法和C family语言差别很大，它需要一个esac（就是case反过来）作为结束标记，每个case分支用右圆括号，用两个分号表示break。</li>
+</ul>
+</li>
+<li><p>跳出循环</p>
+<ul>
+<li><p>break</p>
+<ul>
+<li>break命令允许跳出所有循环（终止执行后面的所有循环）。</li>
+<li>#!/bin/bash<br>while :<br>do<br>echo -n “输入 1 到 5 之间的数字:”<br>read aNum<br>case $aNum in<br>1|2|3|4|5) echo “你输入的数字为 $aNum!”<br>;;<br>*) echo “你输入的数字不是 1 到 5 之间的! 游戏结束”<br>  break<br>;;<br>esac<br>done</li>
+</ul>
+</li>
+<li><p>continue</p>
+<ul>
+<li>continue命令与break命令类似，只有一点差别，它不会跳出所有循环，仅仅跳出当前循环。</li>
+<li>#!/bin/bash<br>while :<br>do<br>echo -n “输入 1 到 5 之间的数字: “<br>read aNum<br>case $aNum in<br>1|2|3|4|5) echo “你输入的数字为 $aNum!”<br>;;<br>*) echo “你输入的数字不是 1 到 5 之间的!”<br>  continue<br>  echo “游戏结束”<br>;;<br>esac<br>done</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li>[ function ] funname [()]</li>
+</ul>
+<p>{</p>
+<pre><code>action;
+
+[return int;]
+</code></pre><p>}</p>
+<pre><code>- 可以带function fun() 定义，也可以直接fun() 定义,不带任何参数
+- 参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255
+</code></pre><ul>
+<li><p>Example</p>
+<ul>
+<li>#!/bin/bash</li>
+</ul>
+</li>
+</ul>
+<p>demoFun(){<br>    echo “这是我的第一个 shell 函数!”<br>}<br>echo “—–函数开始执行—–”<br>demoFun<br>echo “—–函数执行完毕—–”</p>
+<pre><code>- funWithReturn(){
+echo &quot;这个函数会对输入的两个数字进行相加运算...&quot;
+echo &quot;输入第一个数字: &quot;
+read aNum
+echo &quot;输入第二个数字: &quot;
+read anotherNum
+echo &quot;两个数字分别为 $aNum 和 $anotherNum !&quot;
+return $(($aNum+$anotherNum))
+</code></pre><p>}<br>funWithReturn<br>echo “输入的两个数字之和为 $? !”</p>
+<ul>
+<li><p>函数参数</p>
+<ul>
+<li>在Shell中，调用函数时可以向其传递参数。在函数体内部，通过 $n 的形式来获取参数的值，例如，$1表示第一个参数，$2表示第二个参数…</li>
+<li>$10 不能获取第十个参数，获取第十个参数需要${10}。当n&gt;=10时，需要使用${n}来获取参数。</li>
+<li><p>常用</p>
+<ul>
+<li>$#    传递到脚本的参数个数</li>
+<li>$*    以一个单字符串显示所有向脚本传递的参数</li>
+<li>$$    脚本运行的当前进程ID号</li>
+<li>$!    后台运行的最后一个进程的ID号</li>
+<li>$@    与$*相同，但是使用时加引号，并在引号中返回每个参数。</li>
+<li>$-    显示Shell使用的当前选项，与set命令功能相同。</li>
+<li>$?    显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h3><ul>
+<li><p>命令</p>
+<ul>
+<li>command &gt; file    将输出重定向到 file。</li>
+<li>command &lt; file    将输入重定向到 file。</li>
+<li>command &gt;&gt; file    将输出以追加的方式重定向到 file。</li>
+<li>n &gt; file    将文件描述符为 n 的文件重定向到 file。</li>
+<li>n &gt;&gt; file    将文件描述符为 n 的文件以追加的方式重定向到 file。</li>
+<li>n &gt;&amp; m    将输出文件 m 和 n 合并。</li>
+<li>n &lt;&amp; m    将输入文件 m 和 n 合并。</li>
+<li>&lt;&lt; tag    将开始标记 tag 和结束标记 tag 之间的内容作为输入。</li>
+<li>需要注意的是文件描述符 0 通常是标准输入（STDIN），1 是标准输出（STDOUT），2 是标准错误输出（STDERR）。</li>
+</ul>
+</li>
+<li><p>输出重定向</p>
+<ul>
+<li>command1 &gt; file1</li>
+<li>上面这个命令执行command1然后将输出的内容存入file1。</li>
+</ul>
+</li>
+</ul>
+<p>注意任何file1内的已经存在的内容将被新内容替代。如果要将新内容添加在文件末尾，请使用&gt;&gt;操作符。</p>
+<pre><code>- echo@C3-QA-ECHO:~$ echo &quot;test&quot; &gt; test5.sh
+</code></pre><p>echo@C3-QA-ECHO:~$ cat test5.sh<br>test</p>
+<pre><code>- echo@C3-QA-ECHO:~$ echo &quot;hello&quot; &gt;&gt; test5.sh
+</code></pre><p>echo@C3-QA-ECHO:~$ cat test5.sh<br>test<br>hello</p>
+<ul>
+<li><p>输入重定向</p>
+<ul>
+<li>command1 &lt; file1</li>
+<li>这样，本来需要从键盘获取输入的命令会转移到文件读取内容。</li>
+</ul>
+</li>
+</ul>
+<p>注意：输出重定向是大于号(&gt;)，输入重定向是小于号(&lt;)。</p>
+<pre><code>- echo@C3-QA-ECHO:~$ wc -l &lt; test5.sh
+</code></pre><p>2<br>echo@C3-QA-ECHO:~$ cat test5.sh<br>test<br>hello</p>
+<pre><code>- echo@C3-QA-ECHO:~$ wc -l test5.sh
+</code></pre><p>2 test5.sh<br>echo@C3-QA-ECHO:~$</p>
+<ul>
+<li><p>扩展重定向</p>
+<ul>
+<li>标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。</li>
+<li>标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。</li>
+<li>标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。</li>
+<li>默认情况下，command &gt; file 将 stdout 重定向到 file，command &lt; file 将stdin 重定向到 file。</li>
+</ul>
+</li>
+<li><p>Here Document</p>
+<ul>
+<li>Here Document 是 Shell 中的一种特殊的重定向方式，用来将输入重定向到一个交互式 Shell 脚本或程序。</li>
+<li>command &lt;&lt; delimiter<br>document<br>delimiter</li>
+<li>它的作用是将两个 delimiter 之间的内容(document) 作为输入传递给 command。</li>
+<li>注意：</li>
+</ul>
+</li>
+</ul>
+<p>结尾的delimiter 一定要顶格写，前面不能有任何字符，后面也不能有任何字符，包括空格和 tab 缩进。<br>开始的delimiter前后的空格会被忽略掉。</p>
+<pre><code>- echo@C3-QA-ECHO:~$ wc -l &lt;&lt; EOF
+</code></pre><blockquote>
+<p>hELLO<br>World<br>!<br>EOF<br>3</p>
+<pre><code>- echo@C3-QA-ECHO:~$ cat &lt;&lt; EOF
+</code></pre><p>hello<br>end<br>you<br>at<br>EOF<br>hello<br>end<br>you<br>at</p>
+</blockquote>
+<ul>
+<li><p>/dev/null 文件</p>
+<ul>
+<li>如果希望执行某个命令，但又不希望在屏幕上显示输出结果，那么可以将输出重定向到 /dev/null：</li>
+</ul>
+</li>
+</ul>
+<p>$ command &gt; /dev/null</p>
+<pre><code>- /dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到&quot;禁止输出&quot;的效果。
+- 如果希望屏蔽 stdout 和 stderr，可以这样写：
+</code></pre><p>$ command &gt; /dev/null 2&gt;&amp;1</p>
+<pre><code>- 注意：0 是标准输入（STDIN），1 是标准输出（STDOUT），2 是标准错误输出（STDERR）。
+</code></pre><h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><ul>
+<li>Shell 文件包含的语法格式如下：</li>
+</ul>
+<p>. filename   # 注意点号(.)和文件名中间有一空格</p>
+<p>或</p>
+<p>source filename</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjuih7qum000n3wvxnuy0eero" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/13/ShellCommand/" data-id="cjupklbx8002dhkvxukuh7hzq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -521,16 +861,12 @@
 
 
   
-    <article id="post-MYSQL-Study5" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-resume" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/26/MYSQL-Study5/" class="article-date">
-  <time datetime="2019-01-26T01:50:15.000Z" itemprop="datePublished">2019-01-26</time>
+    <a href="/echoblog.github.io/2019/02/01/resume/" class="article-date">
+  <time datetime="2019-01-31T23:28:29.000Z" itemprop="datePublished">2019-02-01</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -539,7 +875,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/26/MYSQL-Study5/">索引下</a>
+      <a class="article-title" href="/echoblog.github.io/2019/02/01/resume/">resume</a>
     </h1>
   
 
@@ -547,122 +883,696 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引示意图.png" alt="(name,age)索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/InnoDB索引结构.png" alt="InnoDB索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图三.png" alt="图三"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图四.png" alt="图四"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引（下）.png" alt="索引（下）"></p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h4 id="如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？"><a href="#如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？" class="headerlink" title="如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？"></a>如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？</h4><h4 id="初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB"><a href="#初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB" class="headerlink" title="初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;"></a>初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;</h4><h4 id="insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’"><a href="#insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’" class="headerlink" title="insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);"></a>insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);</h4><h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><ul>
-<li>在k索引树上找到k=3的记录，取得ID=300</li>
-<li>再到ID索引树查到ID=300对应的R3</li>
-<li>在k索引树取下一个值k=5， 取得ID=500</li>
-<li>再回到ID 索引树查到ID=500对应的R4</li>
-<li>在k索引树取下一个值k=6， 不满足条件，循环结束</li>
+        <h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><h3 id="软件开发"><a href="#软件开发" class="headerlink" title="软件开发"></a>软件开发</h3><ul>
+<li>需求分析</li>
+<li>概要设计</li>
+<li>详细设计</li>
+<li>Coding</li>
+<li>Debug</li>
+<li>单元测试</li>
+<li>集成测试</li>
+<li>发布</li>
 </ul>
-<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>如果执行语句select ID from T where k between 3 and 5， 这时候只需要查ID的值， 而ID 的值已经在k索引树上，因此可以直接提供查询结果，不需要回表。在这个查询里面，索引k已经“覆盖了”我们的查询需求，称为覆盖索引</li>
-<li>需要注意的是， 在引擎内部使用覆盖索引在索引k上其实读了3个记录，R3~R5(对应的索引k上的记录项)，但是对于mysql 的server 层来说，它就是找引擎拿到两条记录，因此mysql 认为扫描行数是2</li>
-</ul>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
-<li>减少树的搜索次数， 显著提升查询性能， 所以使用覆盖索引是一个常用的性能优化手段</li>
-</ul>
-<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><ul>
-<li>在一个市民信息表上，是否有必要将身份证号和名字建立联合索引？</li>
-<li>Create table ‘tuser’(‘id’ int(11) not null, ‘id_card’ varchar(32) default null, ‘name’ varchar(32) default null, ‘age’ int(11) default null, ‘ismale’ tinyint(1) default null, primary key (‘id’), key ‘id_card’ (‘id_card’), key ‘name_age’ (‘name’, ‘age’) ) ENGINE = InnoDB</li>
-<li>根据身份证号查询市民信息的需求，我们只需要在身份证号字段上建立索引就够，在建立一个（身份证，姓名）的联合索引，岂不是浪费空间？</li>
-<li>如果现在有一个高频请求，要根据身份证号查询姓名，这个联合索引就有意义。它可以在高频请求上用到覆盖索引， 不在需要需要回表查正航记录</li>
-</ul>
-<h2 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h2><h3 id="引子-1"><a href="#引子-1" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>B+树这种索引结构，可以利用索引的“最左前缀”， 来定位记录</li>
-<li>如（name,age）索引示意图， 可以看到索引项是按照索引定义里面出现的字段顺序排序的。</li>
-<li>当逻辑需求是查到所有名字是“张三”时，可以快速定位到ID4， 然后遍历得到所有需要的结果</li>
-<li>如果要查询所有名字第一个字是“张”， SQL 语句就是“where name like ‘张%’”。此时，可以查到第一个符合条件的记录是ID3， 然后向后遍历，直到不满足条件为止</li>
-</ul>
-<h3 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h3><ul>
-<li>在建立联合索引时， 如何安排索引内的字段顺序</li>
-<li>评估标准： 索引的复用能力。 </li>
-<li>第一原则， 如果通过调整顺序，可以少维护一个索引，那么这个顺序往往就是需要优先考虑采用的</li>
-<li>那么，如果既有联合查询，又有基于a,b各自的查询呢？查询条件里面只有b语句，时无法使用(a,b)这个联合索引的，这时候不得不维护另外一个索引，即（a,b）, (b)这两个</li>
-<li>空间原则： 如上面的市民表， name 字段大于age 字段，则建议创建一个（name, age）的联合索引和一个（age）的单字段索引</li>
-</ul>
-<h2 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h2><h3 id="引子-2"><a href="#引子-2" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>如果满足最左前缀原则的时候，最左前缀可以用于在索引中定位记录。 如果不符合最左前缀的部分，怎样处理呢？</li>
-<li>如上面的连个索引（name, age）为例。需求： 检索表中“名字第一个字是张，而且年龄是10 的所有男孩”。 SQL：select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
-<li><p>执行步骤</p>
+<h3 id="测试流程"><a href="#测试流程" class="headerlink" title="测试流程"></a>测试流程</h3><ul>
+<li>需求分析</li>
+<li>评审、沟通</li>
+<li><p>编写测试计划</p>
 <ul>
-<li>满足第一个条件，找到记录ID=3</li>
-<li>在MySQL 5.6 之前，只能从ID3 开始一个个回表，到主键索引上找出数据行，再对比字段值</li>
-<li>MYSQL 5.6 引入索引下推优化， 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数</li>
-<li>图三和图四是两个过程的流程图，每一个虚线箭头表示回表一次</li>
-<li>图3中，（name,age）索引里面去掉了age的值， 这个过程InnoDB 并不去去看age的值， 值是按顺序把“name第一个字是张”的记录一条条取出来回表。因此需要回表4次。</li>
-<li>图4跟图3的区别是： InnoDB 在（name,age）索引内部就判断了age 是否为10， 对于不为10的记录，直接判断并跳过。则需要回表2次</li>
+<li>测试内容</li>
+<li><p>测试方法</p>
+<ul>
+<li><p>黑盒</p>
+<ul>
+<li>决策表</li>
+<li>等价类划分</li>
+<li>边界值分析</li>
+<li>因果法</li>
+<li>错误推测法</li>
+<li>功能图</li>
+<li>Ad-hoc法</li>
+</ul>
+</li>
+<li><p>白盒</p>
+<ul>
+<li>符号执行</li>
+<li>形式化方法</li>
+<li>基本路径</li>
+<li>组合覆盖</li>
+<li>条件覆盖</li>
+<li>判定覆盖</li>
+<li>语句覆盖</li>
+<li>代码审查</li>
 </ul>
 </li>
 </ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><h3 id="覆盖索引-1"><a href="#覆盖索引-1" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><ul>
-<li>select ID from T where k between 3 and 5</li>
+</li>
+<li><p>测试工具</p>
+</li>
+<li>人力评估</li>
 </ul>
-<h3 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h3><ul>
-<li>select ID from T where name like ‘张%’</li>
+</li>
+<li><p>评审、完善</p>
+</li>
+<li>提取测试需求</li>
+<li><p>设计测试用例</p>
+<ul>
+<li>数据准备</li>
 </ul>
-<h3 id="索引下推-1"><a href="#索引下推-1" class="headerlink" title="索引下推"></a>索引下推</h3><ul>
-<li>select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
+</li>
+<li><p>评审、完善</p>
+</li>
+<li>搭建测试环境</li>
+<li>冒烟测试</li>
+<li><p>执行测试用例</p>
+<ul>
+<li>完善测试用例</li>
 </ul>
-<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="实际上主键索引也是可以使用多个字段的"><a href="#实际上主键索引也是可以使用多个字段的" class="headerlink" title="实际上主键索引也是可以使用多个字段的"></a>实际上主键索引也是可以使用多个字段的</h3><h3 id="如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB"><a href="#如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB" class="headerlink" title="如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;"></a>如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;</h3><h3 id="这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？"><a href="#这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？" class="headerlink" title="这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？"></a>这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？</h3><h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><ul>
-<li>主键a,b的聚簇索引组织顺序相当于order by a,b,也就是按a排序， 再按b排序，c 无序</li>
-<li>索引ca的组织是先按c排序，再按a排序， 同时记录主键（注意，这里不是ab， 而是只有b。 这个跟索引c的数据是一模一样的</li>
-<li>索引cb的组织是先按c排序，再按b排序，同时记录主键a</li>
-<li>因此 ca 可以去掉， cb需要保留</li>
+</li>
+<li><p>报告输出</p>
+</li>
+<li>编写用户使用说明书</li>
 </ul>
+<h3 id="敏捷测试"><a href="#敏捷测试" class="headerlink" title="敏捷测试"></a>敏捷测试</h3><h3 id="流程改进"><a href="#流程改进" class="headerlink" title="流程改进"></a>流程改进</h3><ul>
+<li>问题</li>
+<li>如何改进</li>
+<li>怎样实施</li>
+</ul>
+<h3 id="测试类型"><a href="#测试类型" class="headerlink" title="测试类型"></a>测试类型</h3><ul>
+<li>API测试</li>
+<li>性能测试</li>
+<li>压力测试</li>
+<li>负载测试</li>
+<li>UI测试</li>
+<li>兼容性测试</li>
+<li>安全测试</li>
+<li>恢复测试</li>
+<li>可用性测试</li>
+<li>可靠性测试</li>
+<li>安装测试</li>
+<li>本地化测试</li>
+<li>国际化测试</li>
+</ul>
+<h3 id="测试阶段分类"><a href="#测试阶段分类" class="headerlink" title="测试阶段分类"></a>测试阶段分类</h3><ul>
+<li><p>单元测试</p>
+<ul>
+<li>Junit</li>
+</ul>
+</li>
+<li><p>集成测试</p>
+</li>
+<li>系统测试</li>
+<li>验收测试</li>
+<li>A测试</li>
+<li>B测试</li>
+<li>回归测试</li>
+<li>冒险测试</li>
+</ul>
+<h3 id="自动化环境"><a href="#自动化环境" class="headerlink" title="自动化环境"></a>自动化环境</h3><ul>
+<li><p>接口测试</p>
+<ul>
+<li>定义</li>
+<li>库</li>
+<li>语言</li>
+<li>分类</li>
+</ul>
+</li>
+<li><p>客户端</p>
+<ul>
+<li><p>库</p>
+<ul>
+<li><p>appium</p>
+<ul>
+<li>支持OSX， Windows以及linux系统， 使用同一套API来写自动化测试</li>
+<li><p>工作原理</p>
+<ul>
+<li><p>Appium-client(用各类语言写的测试脚本 )</p>
+<ul>
+<li>java-client</li>
+<li>python-client</li>
+<li>ruby-cli</li>
+</ul>
+</li>
+<li><p>Appium-server(安装appium的工具，用来监听client端的请求，转发请求并控制移动设备执行测试，默认开启并监听4723接口)</p>
+<ul>
+<li>appium.dmg</li>
+<li>AppiumForWindow.zip</li>
+</ul>
+</li>
+<li><p>移动设备</p>
+<ul>
+<li>Android 模拟器</li>
+<li>Android真机</li>
+<li>IOS 真机</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>过程</p>
+<ul>
+<li>在某台服务器上安装appium工具（server端），开启进程（默认4723接口）进行监听</li>
+<li>编写测试脚本，放置到服务器上，执行该测试脚本（相当于发送命令给server端）</li>
+<li>移动设备接收到server端发送过来的命令，执行指定的操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>python-uiautomator2(Android)</p>
+<ul>
+<li><p>原理</p>
+<ul>
+<li>python端</li>
+<li><p>移动设备</p>
+<ul>
+<li><p>atx-agent</p>
+<ul>
+<li>安卓真机</li>
+<li>安卓模拟机</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>过程</p>
+<ul>
+<li>在移动设备上安装atx-agent(守护进程), 随后atx-agent启动uiautomator2服务(默认7912端口)进行监听</li>
+<li>在PC上编写测试脚本并执行（相当于发送HTTP请求到移动设备的server端）</li>
+<li>移动设备通过WIFI或USB接收到PC上发来的HTTP请求，执行制定的操作</li>
+</ul>
+</li>
+<li><p><a href="https://testerhome.com/topics/11357" target="_blank" rel="noopener">https://testerhome.com/topics/11357</a></p>
+</li>
+</ul>
+</li>
+<li><p>requests</p>
+<ul>
+<li>get</li>
+<li>post</li>
+<li>put</li>
+<li>delete</li>
+</ul>
+</li>
+<li><p>selenium</p>
+<ul>
+<li><p>driver</p>
+<ul>
+<li>webdriver.chrome()</li>
+<li>wedriver.IE()</li>
+<li>webdriver.Firefox()</li>
+</ul>
+</li>
+<li><p>element</p>
+<ul>
+<li>bycss</li>
+<li>byid</li>
+<li>byxpath</li>
+<li>….</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>pyjson</p>
+<ul>
+<li>json.load()</li>
+<li><p>json.dumps()</p>
+<p>和python中各个类型进行转换<br>object&gt;dict</p>
+</li>
+</ul>
+</li>
+<li><p>xlrd</p>
+</li>
+<li>yaml</li>
+<li>pysql</li>
+<li>pytest</li>
+<li>pycurl</li>
+</ul>
+</li>
+<li><p>工具</p>
+<ul>
+<li>jenkins</li>
+<li>Allure report</li>
+<li>pytest</li>
+<li>fiddler</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>架构</p>
+<ul>
+<li>log, mysql, yaml, json, xml</li>
+<li>Base Class: Mobile, Web, API</li>
+<li><p>Project Base</p>
+<ul>
+<li>参数分离</li>
+<li>读取参数</li>
+</ul>
+</li>
+<li><p>Project Case</p>
+<ul>
+<li>precondition</li>
+<li>setup</li>
+<li>steps</li>
+<li>cleanup</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="项目经历-工作"><a href="#项目经历-工作" class="headerlink" title="项目经历/工作"></a>项目经历/工作</h2><h3 id="CDC-MP-MR"><a href="#CDC-MP-MR" class="headerlink" title="CDC MP/MR"></a>CDC MP/MR</h3><ul>
+<li>产品线</li>
+<li>数据展示在APP端，Web端</li>
+<li><p>通过蓝牙，BLE, BT</p>
+<ul>
+<li>配对</li>
+<li>数据传输（WIFI）</li>
+<li>USB/ANT 传输数据</li>
+</ul>
+</li>
+<li><p>和server 交互的部分</p>
+<ul>
+<li><p>丢包</p>
+<ul>
+<li>fidder</li>
+<li>API/ postman</li>
+<li>Sniffer</li>
+<li>查询后台log</li>
+<li>Debug 版本查看log</li>
+</ul>
+</li>
+<li><p>server连接错误</p>
+</li>
+<li>SSO </li>
+<li>OMT server</li>
+</ul>
+</li>
+</ul>
+<h3 id="CIQ-Music"><a href="#CIQ-Music" class="headerlink" title="CIQ Music"></a>CIQ Music</h3><ul>
+<li>明星产品</li>
+<li>5*6</li>
+<li><p>痛点</p>
+<ul>
+<li>本地化测试</li>
+<li>网络问题</li>
+<li><p>第三方交互问题</p>
+<ul>
+<li>API 接口</li>
+<li>Review 代码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="流程改进-1"><a href="#流程改进-1" class="headerlink" title="流程改进"></a>流程改进</h3><h3 id="Auto-key相关"><a href="#Auto-key相关" class="headerlink" title="Auto key相关"></a>Auto key相关</h3><ul>
+<li>树莓派</li>
+<li>录制</li>
+</ul>
+<h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ul>
+<li><p>System</p>
+<ul>
+<li>cat /proc/cpuinfo</li>
+<li>date</li>
+</ul>
+</li>
+<li><p>shutdown</p>
+<ul>
+<li>shutdown -h now 关闭系统(1) </li>
+<li>init 0 关闭系统(2</li>
+<li>telinit 0 关闭系统(3) </li>
+<li>shutdown -h hours:minutes &amp; 按预定时间关闭系统 </li>
+<li>shutdown -c 取消按预定时间关闭系统 </li>
+<li>shutdown -r now 重启(1) </li>
+<li>reboot 重启(2) </li>
+</ul>
+</li>
+<li><p>files and directory</p>
+<ul>
+<li>cd/cd ../cd ../.. /cd ~user1</li>
+<li>cp/mv</li>
+<li>ln -s file1 lnk1 创建一个指向文件或目录的软链接 </li>
+<li>ln file1 lnk1 创建一个指向文件或目录的物理链接 </li>
+<li>pwd</li>
+<li>ls/ls -l</li>
+<li>tree/lstree</li>
+<li>mkdir/mkdir -p /tmp/dir1</li>
+<li>rm -rf</li>
+</ul>
+</li>
+<li><p>find</p>
+</li>
+<li>挂载一个文件系统 </li>
+<li><p>磁盘空间</p>
+<ul>
+<li>df -h 显示已经挂载的分区列表 </li>
+<li>ls -lSr |more 以尺寸大小排列文件和目录</li>
+</ul>
+</li>
+<li><p>用户和群组 </p>
+<ul>
+<li>groupadd group_name 创建一个新用户组 </li>
+<li>groupdel group_name 删除一个用户组 </li>
+<li>passwd 修改口令</li>
+</ul>
+</li>
+<li><p>文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消</p>
+<ul>
+<li>ls -lh 显示权限</li>
+<li>chown user1:group1 file1 改变一个文件的所有人和群组属性</li>
+<li>chattr +a file1 只允许以追加方式读写文件</li>
+</ul>
+</li>
+<li><p>查看文件内容 </p>
+<ul>
+<li>cat file1 从第一个字节开始正向查看文件的内容 </li>
+<li>more file1 查看一个长文件的内容 </li>
+<li>tail -2 file1 查看一个文件的最后两行 </li>
+<li>head -2 file1 查看一个文件的前两行 </li>
+<li>tail -f /var/log/messages 实时查看被添加到一个文件中的内容 </li>
+</ul>
+</li>
+<li><p>文本处理</p>
+<ul>
+<li>grep Aug /var/log/messages 在文件 ‘/var/log/messages’中查找关键词”Aug” </li>
+<li>grep ^Aug /var/log/messages 在文件 ‘/var/log/messages’中查找以”Aug”开始的词汇 </li>
+<li>sort file1 file2 排序两个文件的内容 </li>
+</ul>
+</li>
+<li><p>子主题 10</p>
+</li>
+</ul>
+<h3 id="curl-API"><a href="#curl-API" class="headerlink" title="curl(API)"></a>curl(API)</h3><h3 id="PowerShell"><a href="#PowerShell" class="headerlink" title="PowerShell"></a>PowerShell</h3><ul>
+<li>Get-Content</li>
+<li>Get-Process</li>
+<li>子主题 3</li>
+</ul>
+<h3 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h3><h2 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h2><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
+<li>测试策略</li>
+<li>测试风险</li>
+<li>测试资源/进度</li>
+<li>测试计划</li>
+<li>实验室</li>
+<li>测试团队</li>
+<li>测试覆盖</li>
+<li>测试报告</li>
+<li>模板</li>
+</ul>
+<h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><ul>
+<li>客户需求</li>
+<li>质量文化</li>
+<li>质量保证</li>
+<li>测试现实</li>
+<li>测试原则</li>
+<li>测试驱动</li>
+<li>成熟度模型</li>
+</ul>
+<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
+<li>缺陷报告</li>
+<li>缺陷生命周期</li>
+<li>缺陷跟踪</li>
+<li>趋势分析</li>
+<li>分布分析</li>
+<li>缺陷清除率</li>
+<li>质量评估</li>
+<li>缺陷预防</li>
+</ul>
+<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
+<li><p>开发</p>
+<ul>
+<li>用例review</li>
+<li>工作流程确认</li>
+<li>测试报告</li>
+</ul>
+</li>
+<li><p>测试人员</p>
+<ul>
+<li>培训</li>
+<li><p>制定SOP</p>
+<ul>
+<li>测试环境</li>
+<li>版本</li>
+<li>内容</li>
+<li>如何准备数据</li>
+<li>回报问题template</li>
+<li>问题回报规则</li>
+<li>测试进度回报</li>
+<li>测试完成小结</li>
+</ul>
+</li>
+<li><p>管理</p>
+</li>
+</ul>
+</li>
+<li><p>跨地区</p>
+<ul>
+<li>合作方式</li>
+<li>流程规范</li>
+</ul>
+</li>
+<li><p>PM</p>
+<ul>
+<li>Meeting</li>
+<li>测试报告</li>
+</ul>
+</li>
+<li><p>UX</p>
+<ul>
+<li>需求</li>
+<li>meeting</li>
+<li>测试报告</li>
+</ul>
+</li>
+<li><p>客服</p>
+<ul>
+<li>培训</li>
+<li>trouble shooting</li>
+<li>流程规范</li>
+</ul>
+</li>
+</ul>
+<h2 id="一个测试系统需要测试的点"><a href="#一个测试系统需要测试的点" class="headerlink" title="一个测试系统需要测试的点"></a>一个测试系统需要测试的点</h2><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><h3 id="API-测试"><a href="#API-测试" class="headerlink" title="API 测试"></a>API 测试</h3><ul>
+<li><p>测试范围</p>
+<ul>
+<li>业务功能（包括正常、异常场景是否实现）</li>
+<li>业务规则（覆盖度是否全面）</li>
+<li>参数验证（边界、业务规则是否达到要求）</li>
+<li>异常场景（重复提交、并发提交、事务中断、多机环境、大数据量测试）</li>
+<li>性能测试（响应时间、吞吐量、并发数、资源要求）</li>
+<li>安全测试（权限验证、SQL注入等）</li>
+</ul>
+</li>
+<li><p>接口测试的重点</p>
+<ul>
+<li>检查接口返回的数据是否与预期结果一致。</li>
+<li>检查接口的容错性，假如传递数据的类型错误时是否可以处理。</li>
+<li>接口参数的边界值。例如，传递的参数足够大或为负数时，接口是否可以正常处理</li>
+<li>接口的性能，http请求接口大多与后端执行的SQL语句性能、算法等比较相关。</li>
+<li>接口的安全性，外部调用的接口尤为重要。</li>
+</ul>
+</li>
+<li><p>注意点</p>
+<ul>
+<li>子主题 1</li>
+<li>子主题 2</li>
+<li>子主题 3</li>
+<li>子主题 4</li>
+</ul>
+</li>
+</ul>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
+<li><p>指标</p>
+<p>QPS（TPS）= 并发数/平均响应时间</p>
+<ul>
+<li>QPS（TPS）：每秒钟request/事务 数量</li>
+<li>并发数： 系统同时处理的request/事务数</li>
+<li>响应时间：  一般取平均响应时间</li>
+<li><p>日PV：每天访问的流量</p>
+<ul>
+<li>Nginx</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>做法</p>
+<ul>
+<li><p>系统</p>
+<ul>
+<li>CPU运算</li>
+<li>IO</li>
+<li>外部系统响应</li>
+</ul>
+</li>
+<li><p>关注点</p>
+<ul>
+<li><p>用户</p>
+<ul>
+<li>响应时间</li>
+</ul>
+</li>
+<li><p>管理员</p>
+<ul>
+<li>响应时间</li>
+<li>服务器资源使用情况是否合理</li>
+<li>应用服务器和数据库资源使用是否合理</li>
+<li>系统能否实现扩展</li>
+<li>系统最多支持多少用户访问、系统最大业务处理量是多少</li>
+<li>系统性能可能存在的瓶颈在哪里</li>
+<li>更换那些设备可以提高性能</li>
+<li>系统能否支持7×24小时的业务访问</li>
+</ul>
+</li>
+<li><p>开发者</p>
+<ul>
+<li>架构设计是否合理</li>
+<li>数据库设计是否合理</li>
+<li>代码是否存在性能方面的问题</li>
+<li>系统中是否有不合理的内存使用方式</li>
+<li>系统中是否存在不合理的线程同步方式</li>
+<li>系统中是否存在不合理的资源竞争</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>指标计算</p>
+<ul>
+<li><p>QPS</p>
+<ul>
+<li>网络传输时间：N1+N2+N3+N4</li>
+<li>应用服务器处理时间：A1+A3</li>
+<li>数据库服务器处理时间：A2</li>
+</ul>
+</li>
+<li><p>并发用户数</p>
+</li>
+<li>吞吐量</li>
+<li><p>性能计数器</p>
+<ul>
+<li>资源利用率</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>如何做好性能测试</p>
+<ul>
+<li><p>成员</p>
+<ul>
+<li>子主题 1</li>
+<li>子主题 2</li>
+<li>子主题 3</li>
+<li>子主题 4</li>
+</ul>
+</li>
+<li><p>子主题 2</p>
+</li>
+<li>子主题 3</li>
+<li>子主题 4</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>工具</p>
+<ul>
+<li>Nginx</li>
+<li>Jmeter</li>
+<li>Loadrunner</li>
+</ul>
+</li>
+</ul>
+<h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3><h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
+<li><p>Browser</p>
+<ul>
+<li>IE</li>
+<li>Firefox</li>
+<li>Chrome</li>
+<li>Safari</li>
+</ul>
+</li>
+<li><p>Mobile</p>
+<ul>
+<li>IOS</li>
+<li><p>Android</p>
+<ul>
+<li>Version</li>
+<li>Products</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>PC Sytems</p>
+<ul>
+<li>Windows</li>
+<li>MAC</li>
+</ul>
+</li>
+</ul>
+<h3 id="可用性测试"><a href="#可用性测试" class="headerlink" title="可用性测试"></a>可用性测试</h3><ul>
+<li>是否可以全用键盘操作，是否有快捷键</li>
+<li>输入用户名，密码后按回车，是否可以登陆</li>
+<li>输入框能否可以以Tab键切换</li>
+</ul>
+<h3 id="本地化测试"><a href="#本地化测试" class="headerlink" title="本地化测试"></a>本地化测试</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><ul>
+<li><p>服务器端接口测试</p>
+<ul>
+<li><p>ZAP 代理扫描</p>
+<ul>
+<li><p>SQL 注入</p>
+<ul>
+<li>通过正常WW 接口访问，制造SQL 语句</li>
+<li>需要查询IIS 日志习惯</li>
+<li>Insert</li>
+</ul>
+</li>
+<li><p>XSS 脚本攻击</p>
+</li>
+<li>CSRF 跨站请求伪造</li>
+<li>越权访问</li>
+</ul>
+</li>
+<li><p>结合需求，设计和代码，需求和设计本身带来的问题</p>
+<ul>
+<li>滥用密码恢复</li>
+<li>滥用可预测的标识符</li>
+<li>滥用高负载操作（DOS 攻击）</li>
+<li>滥用竞争关系（SQL 中操作）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>账户安全</p>
+<ul>
+<li><p>Login</p>
+<ul>
+<li>注册位数/密码明文暗文传输</li>
+<li>密码错误最大尝试次数</li>
+<li>是否允许多台设备同时登陆一个账号</li>
+<li>设备数量是否有限制</li>
+<li>同一账号发送请求的次数限制</li>
+<li>用户权限</li>
+<li>注销机制（用户注销后，任何需要调用身份验证的接口调用都不能成功）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据通信安全</p>
+<ul>
+<li>关键数据散列或者加密</li>
+<li>安全通信</li>
+<li>数字证书合法验证</li>
+<li>是否检验数据合法性</li>
+</ul>
+</li>
+<li><p>安装包测试</p>
+</li>
+<li>敏感信息测试</li>
+<li>软键盘挟持</li>
+<li>组建安全性</li>
+</ul>
+<p><em>XMind: ZEN - Trial Version</em></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study5/" data-id="cjuih7qua000a3wvxk2v0xjze" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/01/resume/" data-id="cjupklbye003hhkvxmu10xgap" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-LinuxCommand" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/20/LinuxCommand/" class="article-date">
-  <time datetime="2019-01-20T13:50:25.000Z" itemprop="datePublished">2019-01-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/20/LinuxCommand/">Linux Command</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="Basic-Command"><a href="#Basic-Command" class="headerlink" title="Basic Command"></a>Basic Command</h3><p>系统信息<br>arch<br>uname -m<br>cat /proc/cpuinfo<br>data</p>
-<p>文件搜索<br>find / -name file1 从 ‘/‘ 开始进入根文件系统搜索文件和目录<br>find / -user user1 搜索属于用户 ‘user1’ 的文件和目录<br>find /home/user1 -name *.bin 在目录 ‘/ home/user1’ 中搜索带有’.bin’ 结尾的文件<br>find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件<br>find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件 </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjuih7qts00003wvx9a93i3p6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li></ul>
-
     </footer>
   </div>
   
@@ -674,7 +1584,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/3/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/echoblog.github.io/page/5/">5</a><a class="page-number" href="/echoblog.github.io/page/6/">6</a><a class="extend next" rel="next" href="/echoblog.github.io/page/5/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/3/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/echoblog.github.io/page/5/">5</a><a class="page-number" href="/echoblog.github.io/page/6/">6</a><a class="page-number" href="/echoblog.github.io/page/7/">7</a><a class="extend next" rel="next" href="/echoblog.github.io/page/5/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -685,7 +1595,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -695,7 +1605,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
     </div>
   </div>
 
@@ -705,7 +1615,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
     </div>
   </div>
 
@@ -727,23 +1637,23 @@
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/14/python3/">webdriver_api</a>
+            <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/14/python2/">python_find_element</a>
+            <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/12/python1/">python_base</a>
+            <a href="/echoblog.github.io/2019/04/17/Jmeter1/">Jmeter1</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/12/autotesting/">自动化框架搭建建议</a>
+            <a href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
           </li>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
+            <a href="/echoblog.github.io/2019/04/15/python4/">model</a>
           </li>
         
       </ul>
