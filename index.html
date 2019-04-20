@@ -62,6 +62,42 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/20/python6/" class="article-date">
+  <time datetime="2019-04-20T14:55:09.000Z" itemprop="datePublished">2019-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/20/python6/">python6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjupmju0e002ow8vxroqbgs7g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-java-framework" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/18/java-framework/" class="article-date">
@@ -94,7 +130,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjupklbxh002fhkvxiae2gjh1" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjupmjtyn001vw8vxby13eqa7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -152,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjupklbue0005hkvxp3vr32c9" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjupmjtx60005w8vx24e43025" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -222,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/Jmeter1/" data-id="cjupklbuq000ahkvxuje5nntm" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/Jmeter1/" data-id="cjupmjtx40004w8vxwrvqz4tu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -293,67 +329,34 @@ runner.run(suite)
 <li>构建如下代码：<br>import unittest<br>from comm.webCustomer import webCustomer</li>
 </ol>
 <p>suite = unittest.TestSuite()<br>suite.addTest(webCustomer.TestMethod(“test_add1”))<br>suite.addTest(webCustomer.TestMethod(“test_add2”))<br>if <strong>name</strong>==”<strong>main</strong>“:<br>    runner = unittest.TextTestRunner()<br>    runner.run(suite)</p>
-<p>方法二：</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/python5/" data-id="cjupklby80039hkvxcfzq6tqm" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/15/python4/" class="article-date">
-  <time datetime="2019-04-15T14:52:31.000Z" itemprop="datePublished">2019-04-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/15/python4/">model</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="自动化测试模型介绍"><a href="#自动化测试模型介绍" class="headerlink" title="自动化测试模型介绍"></a>自动化测试模型介绍</h3><h4 id="线性测试"><a href="#线性测试" class="headerlink" title="线性测试"></a>线性测试</h4><p>优点：无依赖关系，顺序<br>缺点： 开发/维护成本高<br>结构化：</p>
+<p>方法二：<br>使用discover的方法，discover 可以匹配到测试用例的测试套件<br>import unittest</p>
+<p>testunit = unittest.TestSuite()<br>test_dir = ‘D:\code\AUT\comm\webCustomer’<br>discover = unittest.defaultTestLoader.discover(test_dir,<br>                                               pattern=’test*.py’,<br>                                               top_level_dir=None)</p>
+<p>if <strong>name</strong>==”<strong>main</strong>“:<br>    runner = unittest.TextTestRunner()<br>    runner.run(discover)</p>
+<h4 id="测试用例归类"><a href="#测试用例归类" class="headerlink" title="测试用例归类"></a>测试用例归类</h4><p>注意点：</p>
 <ol>
-<li>判断</li>
-<li>循环</li>
+<li>需要以test 开头</li>
+<li>可以以不同的测试功能来进行分类</li>
+<li>可以参考功能测试的分类方法</li>
 </ol>
-<h4 id="模块化驱动测试"><a href="#模块化驱动测试" class="headerlink" title="模块化驱动测试"></a>模块化驱动测试</h4><p>重复操作独立成共同模块 </p>
-<h4 id="数据驱动测试"><a href="#数据驱动测试" class="headerlink" title="数据驱动测试"></a>数据驱动测试</h4><p>数据的参数化<br>输入数据的不同，结果也不同<br>比如不同用户的登陆，不同数据的传输</p>
-<h4 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h4><p>关键字==函数<br>def func()<br>如： Robot Framework<br>使用关键字，传输一些参数</p>
-<p>文件读取数据 txt：<br>from seleniu import webdriver<br>from time import sleep<br>files = open(‘data.txt’,’r’)<br>for li in files.readlines():<br>    dr= webdriver.Chrome()<br>    dr.get(‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>)<br>    dr.find_element_by_id(‘kw’).send_keys(line)<br>    sleep(3)<br>    dr.quit()</p>
-<p>读取用户名和密码<br>也可以直接for循环去读取<br>split可以去分割数据</p>
-<h4 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h4><p>import csv<br>csv.reader(file(file,’rb’))</p>
-<p>返回的是数组</p>
-<h4 id="读取xml文件"><a href="#读取xml文件" class="headerlink" title="读取xml文件"></a>读取xml文件</h4><p>import xml.dom.minicom<br>dom = xml.dom.minidom.parse(‘info.xml’)    </p>
+<p>discover方法找的是所给目录下的匹配条件<br>是按照ascii🐴的顺序来找测试用例的<br>unittest.main() 也是按照ascii码来文件的</p>
+<h4 id="跳过测试和预期失败"><a href="#跳过测试和预期失败" class="headerlink" title="跳过测试和预期失败"></a>跳过测试和预期失败</h4><ol>
+<li>unitest.skip(reason) 无条件跳过装饰的测试，说明跳过测试的原因</li>
+<li>unitest.skipIf(condition,reason) 条件为真，跳过</li>
+<li>unitest.skipUnless(condition,reason) 除非条件为真，跳过</li>
+<li>unitest.exceptedFailure() 测试标记失败，不管结果是否真的失败，标记为失败</li>
+</ol>
+<h4 id="fixture"><a href="#fixture" class="headerlink" title="fixture"></a>fixture</h4><p>三个层级：</p>
+<ol>
+<li>模块 setUpModule()/tearDownModule()</li>
+<li>类 setUpClass()/tearDownClass()</li>
+<li>用例 setUp()/tearDown()</li>
+</ol>
+<p>####　总结<br>selenium　IDE可以帮助我们写单元测试脚本</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjupklby0002yhkvxm9e1jgxv" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/python5/" data-id="cjupmju0c002nw8vxywmrdaho" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -369,7 +372,7 @@ runner.run(suite)
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/7/">7</a><a class="extend next" rel="next" href="/echoblog.github.io/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/8/">8</a><a class="extend next" rel="next" href="/echoblog.github.io/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -422,6 +425,10 @@ runner.run(suite)
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/20/python6/">python6</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
           </li>
         
@@ -435,10 +442,6 @@ runner.run(suite)
         
           <li>
             <a href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/15/python4/">model</a>
           </li>
         
       </ul>
