@@ -62,6 +62,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python9" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/21/python9/" class="article-date">
+  <time datetime="2019-04-21T14:22:00.000Z" itemprop="datePublished">2019-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
+<li>减少代码重复</li>
+<li>提高测试用例的可读性</li>
+<li>提高测试用例的可维护性，特别是针对UI 变化频繁的项目</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjur1w7n2002ukcvx4jgog9v4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python8" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/21/python8/" class="article-date">
@@ -88,11 +135,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="多线程技术"><a href="#多线程技术" class="headerlink" title="多线程技术"></a>多线程技术</h4><ol>
+<li>thread 提供了低级别的、原始的线程以及一个简单的锁</li>
+<li>threading 基于Java的线性涉及的. 锁（lock）和条件变量（condition）再JAVA 中是对象的基本行为（每一个对象都自带了锁和条件变量），而在Python中则是独立的对象。</li>
+</ol>
+<p>我们应该避免thread 模块，因为它不支持守护线程。<br>threading支持守护线程。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>Example 1:<br>from time import sleep,ctime<br>import threading</p>
+<p>def music(func,loop):<br>    for i in range(loop):<br>        print(“I was listen to %s! %s” %(func,ctime()))<br>        sleep(2)</p>
+<p>def movie(func,loop):<br>    for i in range(loop):<br>        print(“I was watching at %s! %s” %(func,ctime()))<br>        sleep(2)</p>
+<p>#create threads lists<br>threads =[]</p>
+<p>#create Thread() by threading<br>t1 = threading.Thread(target=music, args=(‘Listen’,2))<br>threads.append(t1)</p>
+<p>t2 = threading.Thread(target=movie, args=(‘watching good movie’,2))<br>threads.append(t2)</p>
+<p>if <strong>name</strong>==”<strong>main</strong>“:</p>
+<p>#start threads<br>    for t in threads:<br>        t.start()</p>
+<p>#keep threads<br>    for t in threads:<br>        t.join()</p>
+<pre><code>print(&quot;all ends: %s&quot; %ctime())
+</code></pre><p>Example 2:<br>当线程很多的时候如何解决问题<br>from time import sleep,ctime<br>import threading</p>
+<p>def super_player(file_,time):<br>    for i in range(2):<br>        print(“I was listen to %s! %s” %(file_,ctime()))<br>        sleep(time)</p>
+<p>lists={‘Test1’:3,’Test2’:5,’Test3’:6}</p>
+<p>threads =[]<br>files = range(len(lists))<br>for file_,time in lists.items():<br>    t = threading.Thread(target=super_player, args=(file_,time))<br>    threads.append(t)</p>
+<p>if <strong>name</strong>==”<strong>main</strong>“:<br>    for t in threads:<br>        t.start()</p>
+<pre><code>for t in threads:
+    t.join()
+
+print(&quot;all ends: %s&quot; %ctime())
+</code></pre><p>当然，我们还可以自定义线程<br>class MyThread(threading.Thread):<br>    def <strong>init</strong>(self, func, args,name=’’):<br>        threading.Thread.<strong>init</strong>(self)<br>        self.func = func<br>        self.args = args<br>        self.name = name</p>
+<pre><code>def run(self):
+    self.func(*self.args)
+</code></pre><h4 id="多线程技术multiprocessing"><a href="#多线程技术multiprocessing" class="headerlink" title="多线程技术multiprocessing"></a>多线程技术multiprocessing</h4><p>multiprocessing提供了本地和远程的并发性，有效地沟通全局解释锁(Global Interceptor Lock, GIL)来使用进程。<br>multiprocessing 可以利用硬件地多处理器来进行工作。支持Unix 和 Windows</p>
+<p>修改上面地例子，将threading模块中地Thread方法替换为multiprocessing 模块地Process 即可</p>
+<h4 id="Pipe-和Queue"><a href="#Pipe-和Queue" class="headerlink" title="Pipe 和Queue"></a>Pipe 和Queue</h4><p>multiprocessing提供IPC（进程间通信），效率更高。<br>优先考虑Pipe和Queue，避免使用Lock/Event/Semaphore/Condition 等同步方式（因为他们占据的不是用户进程的资料）</p>
+<h4 id="应用在自动化测试"><a href="#应用在自动化测试" class="headerlink" title="应用在自动化测试"></a>应用在自动化测试</h4><p>多线程执行测试用例<br>比如：<br>使用不同的浏览器去搜索不同的内容，并返回结果</p>
+<p>多线程分布式执行测试用例<br>配合Selenium Grid 来进行使用    </p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>多线程测试可以用在性能测试中，可以结合性能测试的方向来进行思考</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjuqu790u002ukgvxvnp8lp4l" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjur1w7my002okcvxzenjxedc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -167,7 +247,7 @@ print(&apos;end&apos;)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjuqu790s002tkgvxkqr7bhiz" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjur1w7n50030kcvxrsqtrigq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -223,7 +303,7 @@ print(&apos;end&apos;)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjuqu790p002okgvxh5ctjj7c" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjur1w7n0002tkcvxcdobl1k4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -267,68 +347,10 @@ print(&apos;end&apos;)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjuqu7901001vkgvx12muwvo2" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjur1w7m3001skcvxqlav3ohs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Jmeter2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/18/Jmeter2/" class="article-date">
-  <time datetime="2019-04-18T10:58:00.000Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Jmeter-组件"><a href="#Jmeter-组件" class="headerlink" title="Jmeter 组件"></a>Jmeter 组件</h4><ol>
-<li>sampler(采样器，基于通信协议，HTTP/FTP/SMTP)</li>
-<li>计时器（Timer）</li>
-<li>前置处理器和后置处理器(Pre/Post Processor, 基于采样器存在的作用下起效。在采样器执行之前或者之后执行。 可以取用响应中的一些数据， 可以通过xpath ， 正则表达式去取出)</li>
-<li>断言（status code/string/type）</li>
-<li>Controller（IF/loop/switch）</li>
-<li>Listener（result）</li>
-<li>配置原件（config element）</li>
-</ol>
-<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>同一级别下，采样器的执行顺序时从上至下执行</p>
-<p>配置原件》HTTP Request Default的作用：可以优先读取，然后如果同一级别得samper里面没有值得话，则samper 使用得数据是使用继承HTTP Requests Default里面得值</p>
-<p>怎样去构建不同得作用域</p>
-<ol>
-<li>不同级别</li>
-<li>同一级别</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjuqu78xu0005kgvx988jjuah" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
 
     </footer>
   </div>
@@ -394,6 +416,10 @@ print(&apos;end&apos;)
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/21/python8/">Python Multiple Threading</a>
           </li>
         
@@ -407,10 +433,6 @@ print(&apos;end&apos;)
         
           <li>
             <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
           </li>
         
       </ul>

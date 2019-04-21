@@ -62,6 +62,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Jmeter2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/18/Jmeter2/" class="article-date">
+  <time datetime="2019-04-18T10:58:00.000Z" itemprop="datePublished">2019-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Jmeter-组件"><a href="#Jmeter-组件" class="headerlink" title="Jmeter 组件"></a>Jmeter 组件</h4><ol>
+<li>sampler(采样器，基于通信协议，HTTP/FTP/SMTP)</li>
+<li>计时器（Timer）</li>
+<li>前置处理器和后置处理器(Pre/Post Processor, 基于采样器存在的作用下起效。在采样器执行之前或者之后执行。 可以取用响应中的一些数据， 可以通过xpath ， 正则表达式去取出)</li>
+<li>断言（status code/string/type）</li>
+<li>Controller（IF/loop/switch）</li>
+<li>Listener（result）</li>
+<li>配置原件（config element）</li>
+</ol>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>同一级别下，采样器的执行顺序时从上至下执行</p>
+<p>配置原件》HTTP Request Default的作用：可以优先读取，然后如果同一级别得samper里面没有值得话，则samper 使用得数据是使用继承HTTP Requests Default里面得值</p>
+<p>怎样去构建不同得作用域</p>
+<ol>
+<li>不同级别</li>
+<li>同一级别</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjur1w7ki0006kcvxw7q811g3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Jmeter1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/17/Jmeter1/" class="article-date">
@@ -120,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/Jmeter1/" data-id="cjuqu78xq0004kgvxn7mlg0nk" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/Jmeter1/" data-id="cjur1w7k30001kcvxr0ibmljj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -218,7 +276,7 @@ runner.run(suite)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/python5/" data-id="cjuqu790o002nkgvx4bdqr2xw" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/python5/" data-id="cjur1w7mx002nkcvx2aj08adj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -273,7 +331,7 @@ runner.run(suite)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjuqu790l002ikgvxhn3qlxj3" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjur1w7ms002gkcvx715wp9rx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -384,62 +442,7 @@ runner.run(suite)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjuqu790i002gkgvx5slay8q3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/14/python2/" class="article-date">
-  <time datetime="2019-04-14T08:05:45.000Z" itemprop="datePublished">2019-04-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/14/python2/">python_find_element</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Selenium-Webdriver"><a href="#Selenium-Webdriver" class="headerlink" title="Selenium-Webdriver"></a>Selenium-Webdriver</h4><p>find_element_by_id()<br>find_element_by_name()<br>find_element_by_class_name()<br>find_element_by_tag_name()<br>find_element_by_link_text()<br>find_element_by_partial_link_text()<br>find_element_by_xpath()<br>find_element_by_css_selector()</p>
-<h4 id="find-element-by-xpath"><a href="#find-element-by-xpath" class="headerlink" title="find_element_by_xpath()"></a>find_element_by_xpath()</h4><p>Absolute Path<br>/html/body/div/div[3]/form<br>find_element_by_xpath(“/<em>[@id=’kw’]”)<br>find_element_by_xpath(“//input[@id=’kw’]”)<br>find_element_by_xpath(“//</em>[@input=’kw’]”)</p>
-<p>find_element_by_xpath(“/html/body/div/div[3]/form”)<br>find_element_by_xpath(“//*[@input=’kw’ and @id =’wd’]”)<br>find_element_by_xpath(“//form[@id=’kw’]/span/input”)</p>
-<p>其中/表示从根标签开始，//表示不是</p>
-<p>Firefox 的插件FirePath可以辅助生成xpath</p>
-<h4 id="find-element-by-css-selector"><a href="#find-element-by-css-selector" class="headerlink" title="find_element_by_css_selector()"></a>find_element_by_css_selector()</h4><p>find_element_by_css_selector(“._cs”)<br>. 表示的是class<br>find_element_by_css_selector(“#id_name”)</p>
-<p>#表示id<br>find_element_by_css_selector(“input”)</p>
-<p>#表示tag name</p>
-<p>find_element_by_css_selector(“span&gt;input”)</p>
-<p>#表示从上一级到下一级<br>find_element_by_css_selector(“form#form&gt;span&gt;input#kw”)</p>
-<p>#表示从上一级到下一级<br>from selenium.webdriver.common,by import By<br>findElement(By.ID,”kw”)</p>
-<p>xpath 有的时候没有css定位快， css 比较简单</p>
-<p>javascript 也可以实现一些操作，改变页面的一些操作，按钮消失等。<br>js=’document.getElementById(“im”).innerHTML=”select i”‘<br>driver.execute_script(js)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjuqu790d002bkgvxuz74b3ke" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjur1w7mu002ikcvxlgme9ep6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -508,6 +511,10 @@ runner.run(suite)
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/21/python8/">Python Multiple Threading</a>
           </li>
         
@@ -521,10 +528,6 @@ runner.run(suite)
         
           <li>
             <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
           </li>
         
       </ul>

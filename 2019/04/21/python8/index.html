@@ -7,15 +7,18 @@
   
   <title>Python Multiple Threading | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Scripts">
+  <meta name="description" content="多线程技术 thread 提供了低级别的、原始的线程以及一个简单的锁 threading 基于Java的线性涉及的. 锁（lock）和条件变量（condition）再JAVA 中是对象的基本行为（每一个对象都自带了锁和条件变量），而在Python中则是独立的对象。  我们应该避免thread 模块，因为它不支持守护线程。threading支持守护线程。 例子Example 1:from time">
+<meta name="keywords" content="Scripts">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python Multiple Threading">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
+<meta property="og:description" content="多线程技术 thread 提供了低级别的、原始的线程以及一个简单的锁 threading 基于Java的线性涉及的. 锁（lock）和条件变量（condition）再JAVA 中是对象的基本行为（每一个对象都自带了锁和条件变量），而在Python中则是独立的对象。  我们应该避免thread 模块，因为它不支持守护线程。threading支持守护线程。 例子Example 1:from time">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-21T10:34:36.678Z">
+<meta property="og:updated_time" content="2019-04-21T14:23:50.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Multiple Threading">
+<meta name="twitter:description" content="多线程技术 thread 提供了低级别的、原始的线程以及一个简单的锁 threading 基于Java的线性涉及的. 锁（lock）和条件变量（condition）再JAVA 中是对象的基本行为（每一个对象都自带了锁和条件变量），而在Python中则是独立的对象。  我们应该避免thread 模块，因为它不支持守护线程。threading支持守护线程。 例子Example 1:from time">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -88,11 +91,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="多线程技术"><a href="#多线程技术" class="headerlink" title="多线程技术"></a>多线程技术</h4><ol>
+<li>thread 提供了低级别的、原始的线程以及一个简单的锁</li>
+<li>threading 基于Java的线性涉及的. 锁（lock）和条件变量（condition）再JAVA 中是对象的基本行为（每一个对象都自带了锁和条件变量），而在Python中则是独立的对象。</li>
+</ol>
+<p>我们应该避免thread 模块，因为它不支持守护线程。<br>threading支持守护线程。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>Example 1:<br>from time import sleep,ctime<br>import threading</p>
+<p>def music(func,loop):<br>    for i in range(loop):<br>        print(“I was listen to %s! %s” %(func,ctime()))<br>        sleep(2)</p>
+<p>def movie(func,loop):<br>    for i in range(loop):<br>        print(“I was watching at %s! %s” %(func,ctime()))<br>        sleep(2)</p>
+<p>#create threads lists<br>threads =[]</p>
+<p>#create Thread() by threading<br>t1 = threading.Thread(target=music, args=(‘Listen’,2))<br>threads.append(t1)</p>
+<p>t2 = threading.Thread(target=movie, args=(‘watching good movie’,2))<br>threads.append(t2)</p>
+<p>if <strong>name</strong>==”<strong>main</strong>“:</p>
+<p>#start threads<br>    for t in threads:<br>        t.start()</p>
+<p>#keep threads<br>    for t in threads:<br>        t.join()</p>
+<pre><code>print(&quot;all ends: %s&quot; %ctime())
+</code></pre><p>Example 2:<br>当线程很多的时候如何解决问题<br>from time import sleep,ctime<br>import threading</p>
+<p>def super_player(file_,time):<br>    for i in range(2):<br>        print(“I was listen to %s! %s” %(file_,ctime()))<br>        sleep(time)</p>
+<p>lists={‘Test1’:3,’Test2’:5,’Test3’:6}</p>
+<p>threads =[]<br>files = range(len(lists))<br>for file_,time in lists.items():<br>    t = threading.Thread(target=super_player, args=(file_,time))<br>    threads.append(t)</p>
+<p>if <strong>name</strong>==”<strong>main</strong>“:<br>    for t in threads:<br>        t.start()</p>
+<pre><code>for t in threads:
+    t.join()
+
+print(&quot;all ends: %s&quot; %ctime())
+</code></pre><p>当然，我们还可以自定义线程<br>class MyThread(threading.Thread):<br>    def <strong>init</strong>(self, func, args,name=’’):<br>        threading.Thread.<strong>init</strong>(self)<br>        self.func = func<br>        self.args = args<br>        self.name = name</p>
+<pre><code>def run(self):
+    self.func(*self.args)
+</code></pre><h4 id="多线程技术multiprocessing"><a href="#多线程技术multiprocessing" class="headerlink" title="多线程技术multiprocessing"></a>多线程技术multiprocessing</h4><p>multiprocessing提供了本地和远程的并发性，有效地沟通全局解释锁(Global Interceptor Lock, GIL)来使用进程。<br>multiprocessing 可以利用硬件地多处理器来进行工作。支持Unix 和 Windows</p>
+<p>修改上面地例子，将threading模块中地Thread方法替换为multiprocessing 模块地Process 即可</p>
+<h4 id="Pipe-和Queue"><a href="#Pipe-和Queue" class="headerlink" title="Pipe 和Queue"></a>Pipe 和Queue</h4><p>multiprocessing提供IPC（进程间通信），效率更高。<br>优先考虑Pipe和Queue，避免使用Lock/Event/Semaphore/Condition 等同步方式（因为他们占据的不是用户进程的资料）</p>
+<h4 id="应用在自动化测试"><a href="#应用在自动化测试" class="headerlink" title="应用在自动化测试"></a>应用在自动化测试</h4><p>多线程执行测试用例<br>比如：<br>使用不同的浏览器去搜索不同的内容，并返回结果</p>
+<p>多线程分布式执行测试用例<br>配合Selenium Grid 来进行使用    </p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>多线程测试可以用在性能测试中，可以结合性能测试的方向来进行思考</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjuqu790u002ukgvxvnp8lp4l" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjur1w7my002okcvxzenjxedc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -102,6 +138,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/echoblog.github.io/2019/04/21/python9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Page-Object设计模式
+        
+      </div>
+    </a>
   
   
     <a href="/echoblog.github.io/2019/04/21/python7/" id="article-nav-older" class="article-nav-link-wrap">
@@ -164,6 +209,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/21/python8/">Python Multiple Threading</a>
           </li>
         
@@ -177,10 +226,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
           </li>
         
       </ul>
