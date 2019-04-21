@@ -62,12 +62,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-python6" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-python8" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/20/python6/" class="article-date">
-  <time datetime="2019-04-20T14:55:09.000Z" itemprop="datePublished">2019-04-20</time>
+    <a href="/echoblog.github.io/2019/04/21/python8/" class="article-date">
+  <time datetime="2019-04-21T10:31:46.000Z" itemprop="datePublished">2019-04-21</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -76,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/20/python6/">python6</a>
+      <a class="article-title" href="/echoblog.github.io/2019/04/21/python8/">python8</a>
     </h1>
   
 
@@ -88,9 +92,142 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjupmju0e002ow8vxroqbgs7g" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjuqsm5j6002wskvxdnjzes4w" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/21/python7/" class="article-date">
+  <time datetime="2019-04-21T07:51:31.000Z" itemprop="datePublished">2019-04-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/21/python7/">Selenium Grid2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>Grid 是用于设计进行分布式测试的工具。结构由一个hub 主节点和若干个node代理节点组成。 hub用来管理各个代理节点的注册和状态信息，并且接收远程客户端代码的请求调用，然后把请求的命令再转发给代理节点来执行。使用Grid远程执行测试的代码与直接调用Selenium Server 是一样的，知识环境启动的方式不一样，需要同时启动hub和至少一个node.</p>
+<p><img src="/echoblog.github.io/2019/04/21/python7/Python7/Grid.png" alt="Grid"></p>
+<h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h4><p><a href="https://www.seleniumhq.org/download/" target="_blank" rel="noopener">https://www.seleniumhq.org/download/</a><br>Selenium Standalone Server</p>
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><p>java -jar selenium-server-standalone-3.141.59.jar -role hub<br>java -jar selenium-server-standalone-3.141.59.jar -role node(默认端口是4444)<br>启动多个节点：<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5555<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5556<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5557</p>
+<p>控制台地址：（指显示节点信息）<br><a href="http://127.0.0.1:4444/grid/console" target="_blank" rel="noopener">http://127.0.0.1:4444/grid/console</a></p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>单个浏览器调用<br>from selenium.webdriver import  Remote</p>
+<p>driver = Remote(command_executor=”<a href="http://127.0.0.1:4444/wd/hub&quot;" target="_blank" rel="noopener">http://127.0.0.1:4444/wd/hub&quot;</a>,<br>                desired_capabilities={‘platform’:’ANY’,<br>                                      ‘browserName’:’chrome’,<br>                                      ‘version’:’’,<br>                                      ‘javascriptEnabled’:True,</p>
+<pre><code>})
+</code></pre><p>driver.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>driver.find_element_by_id(“kw”).send_keys(“remote”)<br>driver.find_element_by_id(“su”).click()<br>driver.quit()<br>print(‘end’)</p>
+<p>多个节点上跑：<br>from selenium.webdriver import  Remote</p>
+<p>browser={‘<a href="http://127.0.0.1:4444/wd/hub&#39;:&#39;chrome&#39;" target="_blank" rel="noopener">http://127.0.0.1:4444/wd/hub&#39;:&#39;chrome&#39;</a>,<br>     ‘<a href="http://127.0.0.1:5555/wd/hub&#39;:&#39;internetexplore&#39;}" target="_blank" rel="noopener">http://127.0.0.1:5555/wd/hub&#39;:&#39;internetexplore&#39;}</a></p>
+<p>for hub,bro in browser.items():<br>    print(bro,hub)<br>    driver = Remote(command_executor=hub,<br>                    desired_capabilities={‘platform’:’ANY’,<br>                                          ‘browserName’:bro,<br>                                          ‘version’:’’,<br>                                          ‘javascriptEnabled’:True,</p>
+<pre><code>                })
+driver.get(&quot;http://www.baidu.com&quot;)
+driver.find_element_by_id(&quot;kw&quot;).send_keys(&quot;remote&quot;)
+driver.find_element_by_id(&quot;su&quot;).click()
+driver.quit()
+print(&apos;end&apos;)
+</code></pre><p>trouble shooting:<br>需要把相关的browser driver驱动放在python路径下</p>
+<h4 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h4><p>如果要在其他主机上启动node,则需要满足以下条件：</p>
+<ol>
+<li>本地hub主机与远程node主机之间可以ping通</li>
+<li>远程主机需要安装用例执行的浏览器及驱动。并且驱动再环境变量的path的目录下</li>
+<li>远程主机必须安装JAVA 环境，因为需要运行Selenium Server</li>
+</ol>
+<p>步骤：</p>
+<ol>
+<li>启动本地hub主机</li>
+<li>启动远程node主机， 需要指向的hub主机IP</li>
+<li>修改远程主机的IP地址及端口号，再其上面的firefox浏览下运行脚本</li>
+</ol>
+<p>其中：<br>HtmlUnit 和PhantomJS 是没有界面浏览器， 所以其运行速度非常快。</p>
+<p><img src="/echoblog.github.io/2019/04/21/python7/Python7/bowser_compare.png" alt="Browser">    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjuqsm5j1002rskvx8tsfooeg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/20/python6/" class="article-date">
+  <time datetime="2019-04-20T14:55:09.000Z" itemprop="datePublished">2019-04-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h4><p><a href="http://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py" target="_blank" rel="noopener">http://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py</a></p>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
+<li>HTMLTestRunner是基于Python2 开发的，在Python3上使用，需要修改某些代码</li>
+<li>下载文件之后，需要把文件复制到Python的Lib目录下</li>
+<li>使用方法：使用main函数进行调用<br> suite = unittest.TestSuite()<br> suite.addTest(TestMethod(“test_add1”))<br> suite.addTest(TestMethod(“test_add2”))<br> fp = open(“./result.html”,”wb”)<br> runner = HTMLTestRunner(stream=fp, title=”result report”, description=u”Details”)<br> runner.run(suite)<br> fp.close()</li>
+</ol>
+<h4 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h4><ol>
+<li>Pycharm 中main函数不会执行的问题解决：<br>Root Cause: 因为没有设置运行设置，目前可以看到默认运行的设置是：pytest。所以执行该文件就不会运行到main 函数<br>1）修改执行configuration<br>2）Edit<br>3）有三个选择：<br>–Python<br>–Python tests<br>–Templates<br>4） 选择python, 点击添加，放入脚本路径，保存<br>5）执行，就可生成</li>
+</ol>
+<h4 id="报告优化"><a href="#报告优化" class="headerlink" title="报告优化"></a>报告优化</h4><ol>
+<li>增加注释</li>
+<li>注释有两种： comment和doc string。 其中前者是普通注释，后者用于函数，类和方法的描述<br>增加注释可以让报告阅读更容易</li>
+<li>增加时间戳可以让旧报告不会被覆盖。方法：<br>time.time() 获取当前时间戳<br>time.ctime() 当前时间的字符串形式<br>time.localtime() 当前时间的struct_time形式<br>time.strftime() 用来获取当前时间，可以将时间格式化为字符串。<br>比如：<br>now=time.time.strftime(“%Y-%m-%d %H_%M_%S”)<br>filename=’./‘+now+’result.html’</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjuqsm5iz002oskvx0lrw3580" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
     </footer>
   </div>
   
@@ -130,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjupmjtyn001vw8vxby13eqa7" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjuqsm5hq001pskvxgungxnq2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -188,178 +325,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjupmjtx60005w8vx24e43025" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjuqsm5g8000askvxo1ti0y5y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Jmeter1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/17/Jmeter1/" class="article-date">
-  <time datetime="2019-04-17T03:15:03.000Z" itemprop="datePublished">2019-04-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/17/Jmeter1/">Jmeter1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="性能测试工具选择原则"><a href="#性能测试工具选择原则" class="headerlink" title="性能测试工具选择原则"></a>性能测试工具选择原则</h4><ol>
-<li>成本（学习成本、工具成本）</li>
-<li>通信协议（标准协议、自有协议）</li>
-<li>生命力</li>
-<li>跨平台</li>
-</ol>
-<p>难点：资料比较少</p>
-<p>Jmeter is not a browser</p>
-<p>jmeter.properties  相关配置文件</p>
-<h4 id="Jmeter模拟压力测试原理"><a href="#Jmeter模拟压力测试原理" class="headerlink" title="Jmeter模拟压力测试原理"></a>Jmeter模拟压力测试原理</h4><p>1）性能测试工具-协议<br>2）自动化测试工具-对象识别技术</p>
-<h4 id="Jmeter目录结构"><a href="#Jmeter目录结构" class="headerlink" title="Jmeter目录结构"></a>Jmeter目录结构</h4><p>1）目录结构解析<br>bin<br>docs<br>lib：库文件<br>–ext: 采样器<br>–junit: 单元测试框架<br>extra<br>partical-docs</p>
-<p>2）配置文件</p>
-<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ol>
-<li>Test Plan</li>
-<li>线程组</li>
-<li>result</li>
-</ol>
-<p>日志查找jmeter.log<br>配置是在jmeter.properties， log_level.jmeter<br>Java 虚拟机启动设置</p>
-<p>Jmeter vs LoadRunner</p>
-<ol>
-<li>界面&gt; LR</li>
-<li>安装 &gt; Jmeter</li>
-<li>协议支持上 &gt; Jmeter(体现在采样器上)</li>
-<li>函数库&gt;LR</li>
-<li>成本&gt; Jmeter</li>
-<li>开源 &gt; Jmeter</li>
-</ol>
-<h4 id="Jmeter录制代理"><a href="#Jmeter录制代理" class="headerlink" title="Jmeter录制代理"></a>Jmeter录制代理</h4><p>代理和反向代理<br>可以使用一个代理服务器向web 服务器发送请求<br>代理服务器来承载请求</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/Jmeter1/" data-id="cjupmjtx40004w8vxwrvqz4tu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python5" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/17/python5/" class="article-date">
-  <time datetime="2019-04-17T01:17:55.000Z" itemprop="datePublished">2019-04-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>unittest的学习</p>
-<p>assert() python所提供的方法， 第一份参数和第二进行比较，如果返回是true,则pass</p>
-<h4 id="unittest使用"><a href="#unittest使用" class="headerlink" title="unittest使用"></a>unittest使用</h4><p>test.py<br>import unittest<br>from comm.webCustomer.count import Count</p>
-<p>class TestMethod(unittest.TestCase):<br>    def setUp(self):<br>        print(“test case start”)</p>
-<pre><code>def tearDown(self):
-    print(&quot;test case end&quot;)
-
-def test_add1(self):
-    j = Count(2, 4)
-    add = j.add()
-    self.assertEqual(add, 7)
-
-def test_add2(self):
-    j = Count(2, 4)   
-    add = j.add()
-    self.assertEqual(add, 6)
-</code></pre><p>if <strong>name</strong>==”<strong>main</strong>“:<br>    unittest.main()</p>
-<p>调用实现的时候，还可以使用以下方法：</p>
-<pre><code>suite = unittest.TestSuite()
-suite.addTest(TestMethod(&quot;test_add1&quot;))
-suite.addTest(TestMethod(&quot;test_add2&quot;))
-runner = unittest.TextTestRunner()
-runner.run(suite)
-</code></pre><p>####　断言方法<br>assertEqual(a,b) 检查 a==b<br>assertNotEqual(a,b)    检查 a!=b<br>assertTrue(x)  检查bool(x) is True<br>assertFalse(x)   检查bool(x) is False<br>assertIs(a,b)  a is b<br>assertIsNot(a,b) a is not b<br>assertIsNotNone(x) x is none<br>assertIn(a,b) a in b<br>assertNotIn(a,b) a not in b<br>assertIsInstance(a,b) isinstance(a,b)<br>assertNotIsInstance(a,b)  not isinstance(a,b)</p>
-<p>使用方法：<br>assertEqual(first,second,msg=None)<br>判断第一个参数和第二个参数是否相等，如果不相等则测试失败。 msg是可选参数，用于定义测试失败时打印的信息。</p>
-<p>共同的测试类可以进行复用</p>
-<p>有多个类就需要建不同的文件</p>
-<h4 id="多个suite一起测试"><a href="#多个suite一起测试" class="headerlink" title="多个suite一起测试"></a>多个suite一起测试</h4><p>方法一：</p>
-<ol>
-<li>新建一个文件py 文件，导入testsuite包</li>
-<li>构建如下代码：<br>import unittest<br>from comm.webCustomer import webCustomer</li>
-</ol>
-<p>suite = unittest.TestSuite()<br>suite.addTest(webCustomer.TestMethod(“test_add1”))<br>suite.addTest(webCustomer.TestMethod(“test_add2”))<br>if <strong>name</strong>==”<strong>main</strong>“:<br>    runner = unittest.TextTestRunner()<br>    runner.run(suite)</p>
-<p>方法二：<br>使用discover的方法，discover 可以匹配到测试用例的测试套件<br>import unittest</p>
-<p>testunit = unittest.TestSuite()<br>test_dir = ‘D:\code\AUT\comm\webCustomer’<br>discover = unittest.defaultTestLoader.discover(test_dir,<br>                                               pattern=’test*.py’,<br>                                               top_level_dir=None)</p>
-<p>if <strong>name</strong>==”<strong>main</strong>“:<br>    runner = unittest.TextTestRunner()<br>    runner.run(discover)</p>
-<h4 id="测试用例归类"><a href="#测试用例归类" class="headerlink" title="测试用例归类"></a>测试用例归类</h4><p>注意点：</p>
-<ol>
-<li>需要以test 开头</li>
-<li>可以以不同的测试功能来进行分类</li>
-<li>可以参考功能测试的分类方法</li>
-</ol>
-<p>discover方法找的是所给目录下的匹配条件<br>是按照ascii🐴的顺序来找测试用例的<br>unittest.main() 也是按照ascii码来文件的</p>
-<h4 id="跳过测试和预期失败"><a href="#跳过测试和预期失败" class="headerlink" title="跳过测试和预期失败"></a>跳过测试和预期失败</h4><ol>
-<li>unitest.skip(reason) 无条件跳过装饰的测试，说明跳过测试的原因</li>
-<li>unitest.skipIf(condition,reason) 条件为真，跳过</li>
-<li>unitest.skipUnless(condition,reason) 除非条件为真，跳过</li>
-<li>unitest.exceptedFailure() 测试标记失败，不管结果是否真的失败，标记为失败</li>
-</ol>
-<h4 id="fixture"><a href="#fixture" class="headerlink" title="fixture"></a>fixture</h4><p>三个层级：</p>
-<ol>
-<li>模块 setUpModule()/tearDownModule()</li>
-<li>类 setUpClass()/tearDownClass()</li>
-<li>用例 setUp()/tearDown()</li>
-</ol>
-<p>####　总结<br>selenium　IDE可以帮助我们写单元测试脚本</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/python5/" data-id="cjupmju0c002nw8vxywmrdaho" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
 
     </footer>
   </div>
@@ -425,7 +394,15 @@ runner.run(suite)
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/20/python6/">python6</a>
+            <a href="/echoblog.github.io/2019/04/21/python8/">python8</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/21/python7/">Selenium Grid2</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
           </li>
         
           <li>
@@ -434,14 +411,6 @@ runner.run(suite)
         
           <li>
             <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/17/Jmeter1/">Jmeter1</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
           </li>
         
       </ul>

@@ -62,6 +62,124 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SQA-Workflow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2018/10/21/SQA-Workflow/" class="article-date">
+  <time datetime="2018-10-21T02:21:39.000Z" itemprop="datePublished">2018-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2018/10/21/SQA-Workflow/">SQA Workflow</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Security-Test-Summary"><a href="#Security-Test-Summary" class="headerlink" title="Security Test Summary"></a>Security Test Summary</h2><p><img src="/echoblog.github.io/2018/10/21/SQA-Workflow/测试流程.png" alt="Test Workflow"><br><img src="/echoblog.github.io/2018/10/21/SQA-Workflow/流程优化方案.png" alt="Optimum Proposal"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/SQA-Workflow/" data-id="cjuqsm5hb0016skvx7y8pefhw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Auto-Framwork-Building" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/" class="article-date">
+  <time datetime="2018-10-20T08:10:57.000Z" itemprop="datePublished">2018-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/">Pytest+ Jenkins + Allure Auto Framework Building</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Prepare"><a href="#Prepare" class="headerlink" title="Prepare"></a>Prepare</h2><p>Windows 10 </p>
+<h3 id="Software-Plugins"><a href="#Software-Plugins" class="headerlink" title="Software/Plugins"></a>Software/Plugins</h3><p>python3<br>jenkins<br>java<br>allure</p>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="Python-install"><a href="#Python-install" class="headerlink" title="Python install"></a>Python install</h3><ol>
+<li>download exe from <a href="https://www.python.org/downloads/release/python-370/" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-370/</a></li>
+<li>install</li>
+<li>environment configuration setting:</li>
+<li>Compter&gt; System&gt;Advance System Settings&gt;Environment&gt;Path<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/environment.png" alt="Configure Setting"></li>
+<li>Check python installed or not， input python<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/python version.png" alt="Python Version"></li>
+</ol>
+<h3 id="Java-install"><a href="#Java-install" class="headerlink" title="Java install"></a>Java install</h3><ol>
+<li>download package from <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></li>
+<li>install </li>
+<li>environment configuration setting:</li>
+<li>same as java</li>
+<li>Check java installed or not， input java -version in cmd<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/java version.png" alt="JAVA Version"></li>
+</ol>
+<h3 id="Tomcat-installation"><a href="#Tomcat-installation" class="headerlink" title="Tomcat installation"></a>Tomcat installation</h3><ol>
+<li>Download tomcat</li>
+<li><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi</a><br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/tomcat install.png" alt="Tomcat Install"></li>
+</ol>
+<h3 id="Jenkins-installation"><a href="#Jenkins-installation" class="headerlink" title="Jenkins installation"></a>Jenkins installation</h3><ol>
+<li>download : <a href="https://jenkins.io/download/" target="_blank" rel="noopener">https://jenkins.io/download/</a></li>
+<li><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></li>
+<li>install the plungins which are recommanded, and set administors </li>
+<li>login<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/jenkins start.png" alt="Jenkins Start"></li>
+</ol>
+<h3 id="Allure-installation"><a href="#Allure-installation" class="headerlink" title="Allure installation"></a>Allure installation</h3><h2 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h2><ol>
+<li>Cannot run the software mainly due to the paths are not correct</li>
+<li>Jenkins can not run always due to the port is occupied</li>
+<li>If you forget you‘re jenkins’ administors password, you can do the following steps</li>
+</ol>
+<p>One situation: password isn’t changed<br>A}Enter in  ..\Jenkins\secrets, open initialAdminPassword file, copy password<br>B}Visit Jenkins webpage, enter admin and the password<br>C}Login and change the password </p>
+<p>Second situation: password is changed<br>A)Delete config.xml under Jenkins file and save<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/xml.png" alt="xml"><br>B} Rebbot Jenkins service<br>C} Enter main page&gt; “System Management” &gt; “Configure Global Security”<br>D} Enable “Enable Security”<br>E} Check “Jenkins’ user database”, save<br>F} Enter main page&gt; “System Management” &gt; “Manage Users”<br>G} Enter “User list”<br>H} Modify password, then login again</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/20/Auto-Framwork-Building/" data-id="cjuqsm5fh0001skvx0yyrhc8q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-IELTS" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2018/10/20/IELTS/" class="article-date">
@@ -95,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/20/IELTS/" data-id="cjupmjtwu0000w8vxu04zsbi9" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/20/IELTS/" data-id="cjuqsm5fa0000skvxaagyyuyr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li></ul>
@@ -164,7 +282,15 @@
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/20/python6/">python6</a>
+            <a href="/echoblog.github.io/2019/04/21/python8/">python8</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/21/python7/">Selenium Grid2</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
           </li>
         
           <li>
@@ -173,14 +299,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/17/Jmeter1/">Jmeter1</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
           </li>
         
       </ul>

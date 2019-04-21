@@ -5,16 +5,20 @@
   
 
   
-  <title>python6 | Ying&#39;s Blog</title>
+  <title>HTMLTestRunner | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="python6">
+  <meta name="description" content="Downloadhttp://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py 注意事项 HTMLTestRunner是基于Python2 开发的，在Python3上使用，需要修改某些代码 下载文件之后，需要把文件复制到Python的Lib目录下 使用方法：使用main函数进行调用 suite = unittest.Te">
+<meta name="keywords" content="Scripts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTMLTestRunner">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
+<meta property="og:description" content="Downloadhttp://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py 注意事项 HTMLTestRunner是基于Python2 开发的，在Python3上使用，需要修改某些代码 下载文件之后，需要把文件复制到Python的Lib目录下 使用方法：使用main函数进行调用 suite = unittest.Te">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-20T14:55:09.136Z">
+<meta property="og:updated_time" content="2019-04-21T07:15:40.207Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python6">
+<meta name="twitter:title" content="HTMLTestRunner">
+<meta name="twitter:description" content="Downloadhttp://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py 注意事项 HTMLTestRunner是基于Python2 开发的，在Python3上使用，需要修改某些代码 下载文件之后，需要把文件复制到Python的Lib目录下 使用方法：使用main函数进行调用 suite = unittest.Te">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -67,6 +71,10 @@
   <time datetime="2019-04-20T14:55:09.000Z" itemprop="datePublished">2019-04-20</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -75,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      python6
+      HTMLTestRunner
     </h1>
   
 
@@ -83,18 +91,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h4><p><a href="http://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py" target="_blank" rel="noopener">http://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py</a></p>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
+<li>HTMLTestRunner是基于Python2 开发的，在Python3上使用，需要修改某些代码</li>
+<li>下载文件之后，需要把文件复制到Python的Lib目录下</li>
+<li>使用方法：使用main函数进行调用<br> suite = unittest.TestSuite()<br> suite.addTest(TestMethod(“test_add1”))<br> suite.addTest(TestMethod(“test_add2”))<br> fp = open(“./result.html”,”wb”)<br> runner = HTMLTestRunner(stream=fp, title=”result report”, description=u”Details”)<br> runner.run(suite)<br> fp.close()</li>
+</ol>
+<h4 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h4><ol>
+<li>Pycharm 中main函数不会执行的问题解决：<br>Root Cause: 因为没有设置运行设置，目前可以看到默认运行的设置是：pytest。所以执行该文件就不会运行到main 函数<br>1）修改执行configuration<br>2）Edit<br>3）有三个选择：<br>–Python<br>–Python tests<br>–Templates<br>4） 选择python, 点击添加，放入脚本路径，保存<br>5）执行，就可生成</li>
+</ol>
+<h4 id="报告优化"><a href="#报告优化" class="headerlink" title="报告优化"></a>报告优化</h4><ol>
+<li>增加注释</li>
+<li>注释有两种： comment和doc string。 其中前者是普通注释，后者用于函数，类和方法的描述<br>增加注释可以让报告阅读更容易</li>
+<li>增加时间戳可以让旧报告不会被覆盖。方法：<br>time.time() 获取当前时间戳<br>time.ctime() 当前时间的字符串形式<br>time.localtime() 当前时间的struct_time形式<br>time.strftime() 用来获取当前时间，可以将时间格式化为字符串。<br>比如：<br>now=time.time.strftime(“%Y-%m-%d %H_%M_%S”)<br>filename=’./‘+now+’result.html’</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjupmju0e002ow8vxroqbgs7g" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjuqsm5iz002oskvx0lrw3580" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
+  
+    <a href="/echoblog.github.io/2019/04/21/python7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Selenium Grid2
+        
+      </div>
+    </a>
   
   
     <a href="/echoblog.github.io/2019/04/18/java-framework/" id="article-nav-older" class="article-nav-link-wrap">
@@ -157,7 +190,15 @@
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/20/python6/">python6</a>
+            <a href="/echoblog.github.io/2019/04/21/python8/">python8</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/21/python7/">Selenium Grid2</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
           </li>
         
           <li>
@@ -166,14 +207,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/18/Jmeter2/">Jmeter2</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/17/Jmeter1/">Jmeter1</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
           </li>
         
       </ul>
