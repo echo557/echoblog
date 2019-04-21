@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="Ying&#39;s Blog">
 <meta property="og:description" content="工作原理Grid 是用于设计进行分布式测试的工具。结构由一个hub 主节点和若干个node代理节点组成。 hub用来管理各个代理节点的注册和状态信息，并且接收远程客户端代码的请求调用，然后把请求的命令再转发给代理节点来执行。使用Grid远程执行测试的代码与直接调用Selenium Server 是一样的，知识环境启动的方式不一样，需要同时启动hub和至少一个node.  Downloadhttps">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/Python7/Grid.png">
-<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/Python7/bowser_compare.png">
-<meta property="og:updated_time" content="2019-04-21T10:31:10.742Z">
+<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/Grid.png">
+<meta property="og:image" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/bowser_compare.png">
+<meta property="og:updated_time" content="2019-04-21T11:14:20.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Selenium Grid2">
 <meta name="twitter:description" content="工作原理Grid 是用于设计进行分布式测试的工具。结构由一个hub 主节点和若干个node代理节点组成。 hub用来管理各个代理节点的注册和状态信息，并且接收远程客户端代码的请求调用，然后把请求的命令再转发给代理节点来执行。使用Grid远程执行测试的代码与直接调用Selenium Server 是一样的，知识环境启动的方式不一样，需要同时启动hub和至少一个node.  Downloadhttps">
-<meta name="twitter:image" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/Python7/Grid.png">
+<meta name="twitter:image" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/Grid.png">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -95,7 +95,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>Grid 是用于设计进行分布式测试的工具。结构由一个hub 主节点和若干个node代理节点组成。 hub用来管理各个代理节点的注册和状态信息，并且接收远程客户端代码的请求调用，然后把请求的命令再转发给代理节点来执行。使用Grid远程执行测试的代码与直接调用Selenium Server 是一样的，知识环境启动的方式不一样，需要同时启动hub和至少一个node.</p>
-<p><img src="/echoblog.github.io/2019/04/21/python7/Python7/Grid.png" alt="Grid"></p>
+<p><img src="/echoblog.github.io/2019/04/21/python7/Grid.png" alt="Grid"></p>
 <h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h4><p><a href="https://www.seleniumhq.org/download/" target="_blank" rel="noopener">https://www.seleniumhq.org/download/</a><br>Selenium Standalone Server</p>
 <h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><p>java -jar selenium-server-standalone-3.141.59.jar -role hub<br>java -jar selenium-server-standalone-3.141.59.jar -role node(默认端口是4444)<br>启动多个节点：<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5555<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5556<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5557</p>
 <p>控制台地址：（指显示节点信息）<br><a href="http://127.0.0.1:4444/grid/console" target="_blank" rel="noopener">http://127.0.0.1:4444/grid/console</a></p>
@@ -126,12 +126,12 @@ print(&apos;end&apos;)
 <li>修改远程主机的IP地址及端口号，再其上面的firefox浏览下运行脚本</li>
 </ol>
 <p>其中：<br>HtmlUnit 和PhantomJS 是没有界面浏览器， 所以其运行速度非常快。</p>
-<p><img src="/echoblog.github.io/2019/04/21/python7/Python7/bowser_compare.png" alt="Browser">    </p>
+<p><img src="/echoblog.github.io/2019/04/21/python7/bowser_compare.png" alt="Browser">    </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjuqsm5j1002rskvx8tsfooeg" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjuqu790s002tkgvxkqr7bhiz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -146,7 +146,7 @@ print(&apos;end&apos;)
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          python8
+          Python Multiple Threading
         
       </div>
     </a>
@@ -212,7 +212,7 @@ print(&apos;end&apos;)
       <ul>
         
           <li>
-            <a href="/echoblog.github.io/2019/04/21/python8/">python8</a>
+            <a href="/echoblog.github.io/2019/04/21/python8/">Python Multiple Threading</a>
           </li>
         
           <li>
