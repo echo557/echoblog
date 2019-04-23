@@ -7,18 +7,18 @@
   
   <title>Page-Object设计模式 | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="优点 减少代码重复 提高测试用例的可读性 提高测试用例的可维护性，特别是针对UI 变化频繁的项目">
+  <meta name="description" content="优点 减少代码重复 提高测试用例的可读性 提高测试用例的可维护性，特别是针对UI 变化频繁的项目  怎样设计 构造page类 创建项目相关的页面类 创建测试用例函数 创建main函数来执行用例，以及传参  note: 为了参数分离，传参的部分也可以放在相关的配置文件上">
 <meta name="keywords" content="Scripts">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Page-Object设计模式">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
-<meta property="og:description" content="优点 减少代码重复 提高测试用例的可读性 提高测试用例的可维护性，特别是针对UI 变化频繁的项目">
+<meta property="og:description" content="优点 减少代码重复 提高测试用例的可读性 提高测试用例的可维护性，特别是针对UI 变化频繁的项目  怎样设计 构造page类 创建项目相关的页面类 创建测试用例函数 创建main函数来执行用例，以及传参  note: 为了参数分离，传参的部分也可以放在相关的配置文件上">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-21T14:51:53.104Z">
+<meta property="og:updated_time" content="2019-04-22T22:50:33.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Page-Object设计模式">
-<meta name="twitter:description" content="优点 减少代码重复 提高测试用例的可读性 提高测试用例的可维护性，特别是针对UI 变化频繁的项目">
+<meta name="twitter:description" content="优点 减少代码重复 提高测试用例的可读性 提高测试用例的可维护性，特别是针对UI 变化频繁的项目  怎样设计 构造page类 创建项目相关的页面类 创建测试用例函数 创建main函数来执行用例，以及传参  note: 为了参数分离，传参的部分也可以放在相关的配置文件上">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -96,11 +96,18 @@
 <li>提高测试用例的可读性</li>
 <li>提高测试用例的可维护性，特别是针对UI 变化频繁的项目</li>
 </ol>
+<h4 id="怎样设计"><a href="#怎样设计" class="headerlink" title="怎样设计"></a>怎样设计</h4><ol>
+<li>构造page类</li>
+<li>创建项目相关的页面类</li>
+<li>创建测试用例函数</li>
+<li>创建main函数来执行用例，以及传参</li>
+</ol>
+<p>note: 为了参数分离，传参的部分也可以放在相关的配置文件上</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjur1w7n2002ukcvx4jgog9v4" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjutd6d3b0030kgvxzbbo7mz0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -110,6 +117,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/echoblog.github.io/2019/04/22/java1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          并发原理和实现
+        
+      </div>
+    </a>
   
   
     <a href="/echoblog.github.io/2019/04/21/python8/" id="article-nav-older" class="article-nav-link-wrap">
@@ -172,6 +188,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
           </li>
         
@@ -185,10 +205,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
           </li>
         
       </ul>

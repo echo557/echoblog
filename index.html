@@ -62,6 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-java1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/22/java1/" class="article-date">
+  <time datetime="2019-04-22T12:25:36.000Z" itemprop="datePublished">2019-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>支付问题： 用户》交易平台》第三方支付</p>
+<p>处理时长会导致请求被阻塞，以及系统支援的开销</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>使用多线程<br>怎样实现多线程？<br>内部和第三方实现多线程</p>
+<p>如果构建：<br>用户》交易平台》队列》线程》第三方支付<br>使用队列去做，异步轮询队列中的数据</p>
+<ol>
+<li>构建阻塞队列</li>
+<li>加线程池</li>
+<li>构建新的第三方支付服务</li>
+<li>提交payment 请求请求数据</li>
+<li>通过队列拿到请求，进行处理。阻塞获取队列中的</li>
+</ol>
+<h4 id="那些场景会使用到"><a href="#那些场景会使用到" class="headerlink" title="那些场景会使用到"></a>那些场景会使用到</h4><p>多线程能够合理的利用CPU资源区实现任务的并行处理，提升程序的性能处理</p>
+<p>IO 的处理： 网络IO和文件IO<br>IO 性能提升方法：<br>TOMCAT(BIO)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/22/java1/" data-id="cjutd6d2q0024kgvx29th6sia" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python9" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/21/python9/" class="article-date">
@@ -93,11 +148,18 @@
 <li>提高测试用例的可读性</li>
 <li>提高测试用例的可维护性，特别是针对UI 变化频繁的项目</li>
 </ol>
+<h4 id="怎样设计"><a href="#怎样设计" class="headerlink" title="怎样设计"></a>怎样设计</h4><ol>
+<li>构造page类</li>
+<li>创建项目相关的页面类</li>
+<li>创建测试用例函数</li>
+<li>创建main函数来执行用例，以及传参</li>
+</ol>
+<p>note: 为了参数分离，传参的部分也可以放在相关的配置文件上</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjur1w7n2002ukcvx4jgog9v4" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjutd6d3b0030kgvxzbbo7mz0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -172,7 +234,7 @@ print(&quot;all ends: %s&quot; %ctime())
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjur1w7my002okcvxzenjxedc" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjutd6d3k003ckgvxz18ufimv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -247,7 +309,7 @@ print(&apos;end&apos;)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjur1w7n50030kcvxrsqtrigq" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjutd6d38002wkgvx7c6n4ven" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -303,51 +365,7 @@ print(&apos;end&apos;)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjur1w7n0002tkcvxcdobl1k4" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-framework" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/18/java-framework/" class="article-date">
-  <time datetime="2019-04-18T12:47:24.000Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>JAVA 最小执行单位： 线程<br>局部变量表</p>
-<p>一个方法调用时一个栈帧<br>虚拟机栈 FILO<br>MethodOne:<br>–局部变量表<br>–操作数栈<br>–动态链接<br>–出口</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjur1w7m3001skcvxqlav3ohs" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjutd6d37002ukgvxnyhekhu9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -416,6 +434,10 @@ print(&apos;end&apos;)
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
           </li>
         
@@ -429,10 +451,6 @@ print(&apos;end&apos;)
         
           <li>
             <a href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
           </li>
         
       </ul>
