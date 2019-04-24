@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>InterfaceTesting | Ying&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接口定义： 提供一套标准，服务和规范 目的： 进行评估的系统或组件是否正确地传递数据及互相正确的控制。互相正确的控制。 时间： 应用或者功能开发的初期检验模块间调用的正确性和友好性 接口分类：  功能： 功能间和系统间特点：功能间接口： 一般系统的所有模块部署在同一服务器中，并且使用同一个数据库方法： 常用黑盒测试， 注意接口数据在不同模块间的走向。 尤其注意接口间的逻辑控制关系。比如：销售发货时">
+<meta name="keywords" content="TestingMethod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="InterfaceTesting">
+<meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/index.html">
+<meta property="og:site_name" content="Ying&#39;s Blog">
+<meta property="og:description" content="接口定义： 提供一套标准，服务和规范 目的： 进行评估的系统或组件是否正确地传递数据及互相正确的控制。互相正确的控制。 时间： 应用或者功能开发的初期检验模块间调用的正确性和友好性 接口分类：  功能： 功能间和系统间特点：功能间接口： 一般系统的所有模块部署在同一服务器中，并且使用同一个数据库方法： 常用黑盒测试， 注意接口数据在不同模块间的走向。 尤其注意接口间的逻辑控制关系。比如：销售发货时">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-24T06:43:18.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="InterfaceTesting">
+<meta name="twitter:description" content="接口定义： 提供一套标准，服务和规范 目的： 进行评估的系统或组件是否正确地传递数据及互相正确的控制。互相正确的控制。 时间： 应用或者功能开发的初期检验模块间调用的正确性和友好性 接口分类：  功能： 功能间和系统间特点：功能间接口： 一般系统的所有模块部署在同一服务器中，并且使用同一个数据库方法： 常用黑盒测试， 注意接口数据在不同模块间的走向。 尤其注意接口间的逻辑控制关系。比如：销售发货时">
+  
+    <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/echoblog.github.io/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/echoblog.github.io/" id="logo">Ying&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/echoblog.github.io/">Home</a>
+        
+          <a class="main-nav-link" href="/echoblog.github.io/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/echoblog.github.io/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://echo557.github.io/echoblog.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-InterfaceTesting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/24/InterfaceTesting/" class="article-date">
+  <time datetime="2019-04-24T06:42:22.000Z" itemprop="datePublished">2019-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      InterfaceTesting
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接口定义： 提供一套标准，服务和规范</p>
+<p>目的： 进行评估的系统或组件是否正确地传递数据及互相正确的控制。<br>互相正确的控制。</p>
+<p>时间： 应用或者功能开发的初期检验模块间调用的正确性和友好性</p>
+<p>接口分类：</p>
+<ol>
+<li>功能： 功能间和系统间<br>特点：<br>功能间接口： 一般系统的所有模块部署在同一服务器中，并且使用同一个数据库<br>方法： 常用黑盒测试， 注意接口数据在不同模块间的走向。 尤其注意接口间的逻辑控制关系。<br>比如：销售发货时，要检查库存的可用量，如可用量不足，则不允许发货   </li>
+</ol>
+<p>系统间接口： 通常情况下，不同系统部署在不同的服务器上，不仅采用不同的数据库，而且数据库类型还有可能不同<br>方法： 采用白盒测试方法， 关注的是系统间接口的实现方式<br>如：采用何种类型的接口文件，接口文件格式，以及接口文件处理方式等 </p>
+<ol start="2">
+<li>类型： 业务接口和数据接口</li>
+</ol>
+<p>业务接口：  系统或功能接口间有业务逻辑关系。<br>特点：接口间有业务逻辑的上下游关系，有可能会涉及跨系统或模块的逻辑控制，以及反向操作<br>方法： 通常采用黑盒测试方法，注重分析业务逻辑，采用路径覆盖法进行分析。并且一定要注意正向和反向操作的测试<br>比如erp系统中，采购入库后，会生成库存入库单，影响可用量或现存量等。也可称为联机接口</p>
+<p>数据接口：接口系统没有业务逻辑的上下游关系，只有接口数据的上下游关系。<br>特点：系统间只存在数据的上下游关系，而且数据都是进行批量处理<br>方法： 通常采用白盒测试方法。关注的是数据文件格式，以及记录数及内容等是否正确，还要考虑数据是否加密的问题<br>比如企业征信系统，要通过数据交换平台获取核心系统的数据。也可称为批量接口</p>
+<ol start="3">
+<li>接口数据： 单向和双向<br>单向：数据在接口中是单向流动，但根据具体实现方式又可以分为单向推或取两种方式。数据仓库与各系统间的接口基本上都是单向接口。一方面前端系统向数据仓库推送数据，一方面后端系统又主动取数据仓库提供的数据<br>特点：不管数据是单向推或取，一般都会有一个ftp地址，存放指定数据文件，并且有定时存取的规则。可在日志中查看存取结果<br>方法：通常采用黑盒测试和白盒测试相结合的方法。着重测试数据文件格式，是否按规则存取等。</li>
+</ol>
+<p>双向： 两个系统间的接口数据既有来，又有往。<br>特点：可以将不同数据方向的接口分开分析，当作两个单向接口。但要注意来往的数据通常具有关联性<br>方法： 通常采用黑盒测试和白盒测试相结合的方法。在测试时要着重来往数据的关联性，合理设计测试数据，制定测试执行计划<br>比如综合报文处理系统与核心系统，综合报文处理系统即接收核心系统发送的数据，又要将处理结果反馈给核心系统 </p>
+<p>接口测试的原理：通过测试程序模拟客户端向服务器发送请求报文，服务器接收请求报文后对相应的报文做出处理然后再把应答报文发送给客户端，客户端接收应答报文这一过程（request→response）</p>
+<p> 接口测试的流程：类似于功能测试，需求讨论→评审需求→确定需求→产出接口定义→根据需求文档及接口定义设计测试用例（测试用例主要从业务场景，功能以及异常测试几个方面考虑）→评审用例→执行测试</p>
+<p>接口测试的价值：降低成本，提高效率。接口测试能够提供系统复杂度上升情况下的低成本高效率的解决方案。它是一个完整的体系，还包括功能测试，性能测试等</p>
+<p>接口测试的适用范围：一般用于多个系统间的交互开发，或者拥有多个子系统的应用系统开发的测试。接口测试适用于为其他系统提供服务的底层框架系统和中心服务系统。主要测试这些对外部提供的接口的正确性和稳定性。它也同样适用于上层系统中服务层接口，测试难度随层级而上升。即越往上难度越大。</p>
+<p>接口测试用例的编写：</p>
+<ol>
+<li>如何简单设计接口测试的设计用例</li>
+</ol>
+<p>A) 明确出发点： 找出软件误漏为出发点，测试用例需要紧贴此线， 更容易找到问题所在。<br>B) 明确测试点： 选择好的测试对象。 （可将这些最外层的接口根据数据的流向分为进入和流出两类，进入系统的接口实际上是我们用例的执行调用的接口。可通过参数对这些接口进行调用，模拟外部的使用；而流出的接口则是我们用例真正该验证的点。数据从哪里流出，流出的状态如何，此时系统的状态都是作为测试目的所要着重关注的部分）<br>C）确认完整的测试对象功能： 确认外部接口提供给使用这些接口的外部用户什么样的功能，外部用户真正需要的时什么样的功能予以区别。用例的设计要严格按照测试对象功能设计才是正确的用例。</p>
+<ol start="2">
+<li><p>设计（接口测试用例有哪些要求）： 结构好， 可读性高， 渗透性强</p>
+</li>
+<li><p>测试用例包括的内容： 功能点， 测试环境， 测试数据， 执行操作以及预期结果<br>a)          接口测试测试的功能点：如果一个接口功能过于复杂时，可以对接口用例进行结构划分（如根据层次，平台，功能点等等），这样用例具有更好的可读性（接口划分原则为：以接口提供的功能点的不同进行合适粒度的划分，同一功能点的用例又可根据测试环境的不同，数据的不同进行用例的填充）</p>
+</li>
+</ol>
+<p>b)         接口测试用例的环境：程序内部环境和程序所调用的外部接口的环境。</p>
+<p>c)          关于接口测试测试数据：分为两部分：接口参数数据和用例执行所需系统数据。数据的设计、准备测试用例的数据不可马虎。通过好的测试数据查找问题，能极大的提高工作效率。接口参数数据需要对每个参数根据测试接口的实际功能进行分析，在符合业务逻辑的情况下进行逻辑组合排列，不要遗漏某些边界值和错误点的数据，这样用例更容易发现问题。</p>
+<p>d)         执行操作：即对所测接口的调用。</p>
+<p>e)          预期结果：根据需求进行验证，是衡量软件是否达到预期的标准。应该着重细致，每个用例均需验证，应该避免一个用例重复做相同的验证，提高测试用例的效率。</p>
+<ol start="4">
+<li></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/" data-id="cjuuuuvzi0004gkvxq3st85dk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/echoblog.github.io/2019/04/24/TroubleShooting3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">TroubleShooting--多人收邮件不成功</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/24/InterfaceTesting/">InterfaceTesting</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/24/TroubleShooting3/">TroubleShooting--多人收邮件不成功</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/23/python10/">BDD--Lettuce</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Ying<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/echoblog.github.io/" class="mobile-nav-link">Home</a>
+  
+    <a href="/echoblog.github.io/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/echoblog.github.io/fancybox/jquery.fancybox.css">
+  <script src="/echoblog.github.io/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/echoblog.github.io/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

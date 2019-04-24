@@ -62,6 +62,264 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-functionTesting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/08/functionTesting/" class="article-date">
+  <time datetime="2019-04-08T01:46:42.000Z" itemprop="datePublished">2019-04-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/08/functionTesting/">Testing</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="FunctionTesting"><a href="#FunctionTesting" class="headerlink" title="FunctionTesting"></a>FunctionTesting</h3><ol>
+<li>根据需求来细分功能点</li>
+<li>根据功能点派生测试需求</li>
+<li>根据测试需求设计功能测试用例</li>
+<li>逐项执行功能测试用例验证产品</li>
+</ol>
+<p>用户界面类型：</p>
+<ol>
+<li>非图形化用户界面</li>
+<li>图形化用户界面（GUI）<br>桌面<br>web<br>移动设备</li>
+<li>其他交互方式</li>
+</ol>
+<p>相关测试类型</p>
+<ol>
+<li>正确性（与设计和需求文档一致）</li>
+<li>可靠性（用户交互是否引发软件崩溃和其他异常）</li>
+<li>易用性（软件产品完成特定任务地难易程度）</li>
+</ol>
+<p>测试编号/测试环境/输入数据/预期结果/实际结果 </p>
+<h3 id="探索性测试"><a href="#探索性测试" class="headerlink" title="探索性测试"></a>探索性测试</h3><p>史亮， 探索式测试<br>启发式测试策略模型<br><img src="/echoblog.github.io/2019/04/08/functionTesting/启发式策略模型.png" alt="启发式测试策略模型"><br>产品元素：需要测试地对象<br>结构（structure）：产品地物理（physical）元素，如代码、硬件、配置文件、数据文件等<br>功能（function）:产品地功能<br>数据（data）: 产品所操作地数据<br>接口（Interface）:产品锁使用地或暴露出地接口<br>平台（Platform）: 产品所依赖地外部元素<br>操作（Operation）:产品被使用地方式<br>时间（Time）:影响产品地时间因素</p>
+<p>强调<br>关注价值（Value）<br>风险驱动（Risk）</p>
+<p>测程（Session）<br>任务：<br>通过漫游测试，建立Notepod的初始<br>功能列表（Function List）<br>潜在目标：<br>学习软件功能，建立测试模型</p>
+<p>功能列表的特诊：</p>
+<ol>
+<li>建立了北侧对象的整体模型</li>
+<li>提供了可扩展的测试设计框架</li>
+<li>提供了测试覆盖的目标</li>
+<li>用简洁的形式提供丰富的信息</li>
+</ol>
+<p>运用功能列表<br>将功能列表视作覆盖率指南，逐个检查每个功能</p>
+<ol>
+<li>该功能与当前测试任务相关么？</li>
+<li>该功能存在什么风险？可能会有什么缺陷？</li>
+<li>通过什么测试可以发现这些缺陷？<br>4.在上次测试中，该功能表现如何？已有的测试想法，哪些值得再次尝试？哪些不必再测？</li>
+<li>依据当前的进度和资源， 如何实施这些测试？</li>
+<li>功能列表是否充分？有没有漏掉一些功能？</li>
+</ol>
+<p>综合功能列表中的多个元素，来测试功能的协作</p>
+<ol>
+<li>该功能与哪些功能相关？</li>
+<li>功能的组合有没有揭示新的风险？<br>3.哪些功能访问同一批数据？哪些是生产者？哪些是消费者？</li>
+<li>如何设计测试，以同时测试这些功能？<br>5.如何构造一个（有意义的）业务流程，让它能够访问尽可能多的功能与数据？<br>6.对于相互依赖的功能，某个功能的失败是否对其他功能造成恶劣影响？</li>
+</ol>
+<p>运用功能列表<br>1.将功能列表视为操作覆盖率指南，逐个检查每个功能</p>
+<ol start="2">
+<li>综合功能列表的多个元素，来测试功能</li>
+</ol>
+<p>例子：<br>可以使用xmind/mindmanager 来做<br>写字板</p>
+<ol>
+<li>与操作系统的集成<br>–Windows 窗口：改变大小，最大化，最小化，移动<br>–触屏<br>  触摸<br>  放大缩小（不支持）</li>
+<li>创建文件<br>–file&gt;new<br>–Ctrl+New<br>–未保存：save,not save,cancel</li>
+<li>英文输入（语言）</li>
+<li>保存文件<br>–File format(txt, all)<br>–Encoding(utf8/string,)与操作系统相关，考虑操作系统的当前字符集和区域设置</li>
+<li>Open<br>–打开一个其他程序所打开的文件<br>–Action<br> File&gt;open<br> Ctrl+o<br> Drag<br>–Content<br> Txt<pre><code>Encoding
+</code></pre> Binary</li>
+<li>Print<br>–Print setup<br>–Printers<br> Physical<br> Virtual</li>
+<li>Edit<br>–Edit menu<br>–Copy/Cut/Paste<br> source: ….<br> target:….<br> content:….<br>–Input<br> IME<br> Keyboard only?<br>–Content<br> 非常长的（文本）行</li>
+<li>View<br>–Word wrap<br>–Font<br>–Status Bar</li>
+<li>Help</li>
+</ol>
+<h3 id="Performance-Testing"><a href="#Performance-Testing" class="headerlink" title="Performance Testing"></a>Performance Testing</h3><p>验证产品的性能在特定负载和环境条件下使用是否满足性能指标<br>进一步发现系统中存在的性能瓶颈， 优化系统</p>
+<p>性能测试度量方法</p>
+<ol>
+<li>不同的关注对象采用不同的性能的度量方法</li>
+<li>服务端性能采用CPU、内存等使用率来度量<br>3.客户端性能通常根据系统处理特定用户请求的响应时间来度量</li>
+</ol>
+<p>响应时间： 指系统对请求作出响应所需要的时间<br>分为两类：<br>1.服务器响应时间是指从请求发出开始到客户端接收到最后一个字节数据所消耗的时间<br>2.客户端响应时间是指客户端收到相应数据后呈现/响应用户所消耗的时间</p>
+<p>并发用户数</p>
+<ol>
+<li>并发用户数取决于测试对象的目标业务场景<br>2.需要先确定业务场景，然后基于场景采用某些相应方法计算并发用户数<br>3.并发用户数与同时在线数的区别</li>
+</ol>
+<p>吞吐量: 单位时间内处理的用户<br>请求数量<br>访问人数/天， 页面数/秒，请求数/秒， 处理业务数/小时，等等</p>
+<p>性能计数器：描述系统性能的一些数据指标<br>例如： 内存使用率、CPU使用率、进程时间等都是常见服务器性能计数器<br>性能计数器与系统配置情况、系统架构、开发方式等有密切联系</p>
+<p>负载测试： 用于验证应用系统在正常负载条件下得行为<br>性能行为通过一些性能指标体现<br>两种方式：</p>
+<ol>
+<li>直接到达负载数（如并发用户数，事务数等）</li>
+<li>逐步增加负载数（如并发用户数，事务数等）</li>
+</ol>
+<p>压力测试：<br>1.评估应用系统处于或超过预期负载时的行为<br>2.压力测试关注的行为不一定时性能行为，可能时某种bug, 比如同步问题，内存泄漏等<br>3.在压力级别逐渐增加时， 系统性能应该按照预期缓慢下降，但是不应该崩溃<br>4.压力测试还可以发现系统崩溃的临界点，从而发现系统中的薄弱环节</p>
+<h4 id="Jmeter-分散到亚马逊云的性能测试"><a href="#Jmeter-分散到亚马逊云的性能测试" class="headerlink" title="Jmeter 分散到亚马逊云的性能测试"></a>Jmeter 分散到亚马逊云的性能测试</h4><p>IWSaaS: InterScan Web Security As a Service<br>IWSaaS: 是部署在云上的安全网关<br>IWSaaS：是部署在云上安全HTTPS代理<br>IWSaaS：部署在Amazon 云平台<br>IWSaaS对全球提供服务</p>
+<p><img src="/echoblog.github.io/2019/04/08/functionTesting/性能测试Amazon.png" alt="性能测试 Amazon"><br><img src="/echoblog.github.io/2019/04/08/functionTesting/Amazon_Web_Service.png" alt="Amazon Web Service"></p>
+<p>测试难点：<br>十万级用户支持<br>20+安全网关实例<br>20+ Jmeter 实例<br>动态实例<br>Jmeter多级联合不适用</p>
+<p>代码复用：</p>
+<ol>
+<li>测试不同，负载模型不同<br>1）auto scaling<br>2）性能测试<br>3）稳定性测试</li>
+<li>代码复用<br>1）提高代码利用率<br>2）降低维护成本</li>
+</ol>
+<p>安全网关性能测试需求和方案</p>
+<ol>
+<li>性能测试需求<br>1）单台IWSaaS安全网关的吞吐量和支持的用户数<br>2）平均页面响应时间&lt;2s</li>
+<li>测试方案<br>1）Jmeter 模拟用户产生Http流量通过安全网关<br>2）初始用户数，逐渐增加用户数，直到找到符合条件的最大用户数和吞吐量</li>
+</ol>
+<p>手工测试的烦恼<br>-单轮测试120分钟<br>-整个测试480-600分钟<br>-机械重复<br>自动化测试<br>-一键开始（使用Jmeter去封装）<br><img src="/echoblog.github.io/2019/04/08/functionTesting/自动化性能测试.png" alt="自动化性能测试"></p>
+<p>无人值守性能测试</p>
+<ol>
+<li>部署自动化</li>
+<li>性能测试自动化<br>1）控制服务器<br>2）自动上传测试脚本<br>3）自动上传测试报告</li>
+<li>持续集成<br>Jekins集成，自动触发</li>
+</ol>
+<h4 id="趋势性能测试环境"><a href="#趋势性能测试环境" class="headerlink" title="趋势性能测试环境"></a>趋势性能测试环境</h4><p>splunk log 管理系统（汇总所有机器的log）<br>Zenoss用于主机管理(基于business,end to end de case, 5分钟跑一次)</p>
+<h4 id="Web端性能测试"><a href="#Web端性能测试" class="headerlink" title="Web端性能测试"></a>Web端性能测试</h4><p>例子：淘宝<br>三阶段：</p>
+<ol>
+<li>业务发展（基础）</li>
+<li>平台发展（创新）</li>
+<li>共建云端（分享）</li>
+</ol>
+<p>第一部分：性能评估和流程<br>页面加载时间的重要性<br>据统计，大多数用户期望的网站加载时间是3s， 超过则开始流失用户<br>SamrtBear研究表明，Amazon加载时间每延长1s一年就会减少16亿美元的营收</p>
+<p>页面驾照时间的组成：<br>客户端/浏览器，网络，服务器，数据存储<br>前端页面测试流程：<br>使用F12，可以查看页面加载时间长度和图片,JS，CSS前端页面资源加载时间。<br>前端常见的优化点：</p>
+<ol>
+<li>静态资源增加缓存</li>
+<li>静态资源使用CDN和独立域名</li>
+<li>JS压缩，并去掉存在的重复请求</li>
+<li>JS 位置后移</li>
+<li>CSS 依赖减小，同时置顶</li>
+<li>减少Banner图片个数，同时减小大小，进行压缩</li>
+<li>异步接口请求优化，合并和减少</li>
+<li>检查页面请求失败和跳转的外部资源</li>
+<li>优化外部依赖接口请求<br>10.减小页面请求个数，减小JS 和CSS 的加载<br>优化工具</li>
+<li>Speed Tracer-Google</li>
+<li>HttpWatch（基于时间消耗，用户访问）</li>
+<li>Msfast-Facebook</li>
+<li>Pagetest-Aol（基于时间消耗，用户访问）</li>
+<li>Page Speed(基于规则，可以提供信息给开发</li>
+<li>Fiddler-Microsoft</li>
+<li>DynaTrace（基于时间消耗，用户访问）<br>8.ySlow-YAHOO(基于规则，可以提供信息给开发者)</li>
+</ol>
+<p>第二部分： 性能监控和分析<br>性能测试指标</p>
+<ol>
+<li>PV（Page View), 即页面浏览量或点击量，用户每次刷新即被计算一次。我们可以认为，用户的一次刷新，给服务器造成了一次请求</li>
+<li>UV(Unique Visotor), 访问您网站的一台电脑客户端为一个访客。 00：00-24：00内相同的客户端只被计算一次。</li>
+</ol>
+<p><img src="/echoblog.github.io/2019/04/08/functionTesting/Server性能测试流程.png" alt="Server性能测试流程"></p>
+<p>指标</p>
+<ol>
+<li>TPS（Transaction Per Second)每秒钟系统能够处理的交易或事务的数量，它是衡量系统处理能力的重要指标</li>
+<li>RT（Response Time) 指从客户端发一个请求开始记时，到客户端接收到从服务器端返回的响应结果结束所经历的时间，响应时间由请求发送时间、网络传输时间和服务器处理时间三部分组成。</li>
+<li>VU(Virtual User),模拟真实业务逻辑步骤的虚拟用户，虚拟用户模拟的操作步骤都被记录在虚拟用户脚本里。一般性能测试过程中，通俗称之为并发用户数。</li>
+<li>TPS波动，系统性能依赖于特定的硬件、软件代码<br>应用服务、网络资源等，所以在性能场景执行期间，TPS可能会表现为稳定或者波动，抑或遵循一定的上升或下降趋势，使用TPS波动系数来记录这个指标值。</li>
+<li>CPU资源是指性能测试场景运行的这个时间段内，应用服务系统的CPU 资源占用率。CPU资源是判断系统处理能力以及应用运行是否稳定的重要参数。<br>6.Load.系统正在干活的多少的度量，队列长度。系统平均负载，被定义为在特定时间间隔(1m,5m,15m)内运行队列中的平均进程数。</li>
+<li>I/O 可以分为磁盘IO 和网卡IO</li>
+<li>JVM， 即JAVA虚拟机，它拥有自己的处理器，堆栈，寄存器等，还有自己相应的指定系统。Java应用运行在JVM 上面。</li>
+<li>GC是一种自动内存管理程序，它主要的职责是分配内存、保证被引用的对象始终在内存中、把不被应用的对象从内存中释放。FGC会引起JVM挂起。</li>
+<li>网速。 网络中的数据传输速率，一般以Byte/s为单位。通过ping延时来反映网速。</li>
+<li>流量，性能测试中，一般指单位时间内流经网卡的总流量，分为inbound 和outbound,一般以KB为单位。</li>
+</ol>
+<p>测试方法：<br>随着压力的增加，系统的处理能力变化会达到四个点：期望值；高于期望，系统安全；高于期望，拐点；超过负载，系统崩溃四点。</p>
+<ol>
+<li>性能测试：测试被测系统是否满足预期性能测试目标。CPU:&lt;75%和Load:&lt;4(4核)和Java Memory:&lt;80%</li>
+<li>负载测试：测试被测试系统，在服务器安全范围内的最大负载值。CPU:&lt;75%和Load:&lt;4(4核)和Java  Memory:&lt;80%</li>
+<li>压力测试：测试被测试系统，在超过服务器安全范围所能承受的最大压力值。CPU:&gt;75%和Load:&gt;4(4核)和Java Memory:&gt;80%</li>
+<li>稳定性测试：测试被测系统在长时间的压力下的稳定性。CPU:&lt;75%和Load:&lt;4(4核)和Java Memory:&lt;80%</li>
+</ol>
+<p>通过指标： 分析标准，判断性能测试是否通过。</p>
+<ol>
+<li>服务端性能：<br>1）超时概率：通过（小于万分之一），不通过（大于万分之一）<br>2）错误概率：通过（小于万分之一），不通过（大于万分之一）<br>3）TPS：通过（大于期望高峰值），不通过（小于期望高峰值）<br>4）TPS波动范围： 通过（小于8%），不通过（大于8%）<br>5）CPU利用率：通过（小于75%），不通过（大于75%）<br>6）Load：通过（平均每核CPU的load 小于1），不通过（平均每核CPU的load大于1）<br>7）JVM 内存使用率：通过（小于80%），不通过（大于80%）<br>8）Ful GC频率：通过（平均大于1小时1次），不通过（平均小于1小时1次）</li>
+<li>前端性能：<br>1）TSlow 核Dynatrace: 通过（暂定分数&gt;80），不通过（暂定分数&lt;80）</li>
+<li>用户体验性能：</li>
+<li>页面大小：通过（页面小于800K），不通过（页面大于800K）</li>
+<li>页面响应：通过（首次加载&lt;1s, DOM Ready&lt;2s， Full Load&lt;2s）,不通过（首次加载&gt;1s, DOM Ready&gt;2s， Full Load&gt;2s）</li>
+</ol>
+<p>备注：</p>
+<ol>
+<li>性能测试团队根据通过标准，判定被测试性能点不通过，有PM,PDM认为可以通过时，需要进行沟通。沟通以会议形式，由专家组来判断。</li>
+<li>页面大小包括js,css 图片等资源</li>
+<li>最佳情况下，页面下载时间小于2s</li>
+</ol>
+<p>第三部分： 性能测试平台PTS架构<br><img src="/echoblog.github.io/2019/04/08/functionTesting/PTS.png" alt="PTS"><br><img src="/echoblog.github.io/2019/04/08/functionTesting/PTS Framework.png" alt="PTS Framework"></p>
+<p>华三SDN 性能测试</p>
+<p>Jmeter的使用<br>也可以做录制脚本的动作</p>
+<h3 id="移动测试"><a href="#移动测试" class="headerlink" title="移动测试"></a>移动测试</h3><p>百度MTC平台，移动应用<br>云测试（系统测试），云调试（功能测试），云测试工具（测试补充），云众测（灰度测试）<br>MTC架构<br>1.物理层 （接受调度并执行）<br>2.基础服务（接受调度并执行）<br>3.数据调度（任务分解与分配以及数据存储）<br>4.用户层（网页，访问首页，提交测试任务）</p>
+<p>稳定性扩展<br>可复用</p>
+<p>测试内容：<br>1）性能测试（真机测，通过运行检测进程或是直接读取系统相应文件数值等方式实现对电量、流量、CPU、内存、帧率和市场类测试内容的测试）； atx可以达到这个功能测试<br>2）兼容测试（终端兼容、安装卸载、安全软件）；<br>3）遍历（通过主流真机终端上模拟真人对Native App的UI 操作行为，自动遍历控件从而发现程序的功能问题）；<br>4）场景（低电量、网络、地理位置，模拟器来测试）；<br>5）安全扫描（组件动态扫面及API函数过期扫描，发现安全漏洞）；<br>6）功能回放</p>
+<p>安全移动：</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/functionTesting/" data-id="cjuuuuw1f001xgkvxn0kxglkp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-pict" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/08/pict/" class="article-date">
+  <time datetime="2019-04-08T01:39:20.000Z" itemprop="datePublished">2019-04-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/08/pict/">pict</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>应用： 使用来辅助生成接口测试用例，来实现更多覆盖</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/pict/" data-id="cjuuuuw2c002dgkvxtehdbnn3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-seleniumIDE" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/08/seleniumIDE/" class="article-date">
@@ -100,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/seleniumIDE/" data-id="cjuuu0pmb003ghgvxz14t09xx" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/seleniumIDE/" data-id="cjuuuuw3n003fgkvx9jehp89b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -186,7 +444,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/02/SoftwareTesting/" data-id="cjuuu0pl9001yhgvxbrgdl11s" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/02/SoftwareTesting/" data-id="cjuuuuw0x001hgkvxrw96p8go" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -228,106 +486,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/03/12/machinelearning1/" data-id="cjuuu0plg0028hgvx6ph0fyhe" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/03/12/machinelearning1/" data-id="cjuuuuw230028gkvxc2zrkofd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-troubleshooting2019-2-20" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" class="article-date">
-  <time datetime="2019-02-20T12:16:36.000Z" itemprop="datePublished">2019-02-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/">troubleshooting-Allure Report &amp; HTMLReport</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="How-to-Generate-Allure-Report-in-cmd"><a href="#How-to-Generate-Allure-Report-in-cmd" class="headerlink" title="How to Generate Allure Report in cmd"></a>How to Generate Allure Report in cmd</h4><ol>
-<li>In the project root directory</li>
-<li>cmd execute:  pytest -s -q –alluredir allure-result<br>Grammar: pytest -s -q –alluredir [xml_report_path]</li>
-<li>Copy allure commandline to local, and set environment path<br>Set environment path, example:<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure1.png" alt="path"></li>
-<li>Under the same path, run cmd: example(&gt;allure generate allure-result -o allure-html)<br>Grammar: allure generate [xml_report_path] -o [html_report_path]<br>How to Check Allure Report</li>
-<li>In pycharm, select the index.html file reported by allure</li>
-<li>Right click, select “Open in Browser”, chose Chrome<br><img src="/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/allure2.png" alt="report showing"></li>
-</ol>
-<h4 id="How-to-generate-Htmlreport"><a href="#How-to-generate-Htmlreport" class="headerlink" title="How to generate Htmlreport"></a>How to generate Htmlreport</h4><p>run commd:<br>pytest –html=.\interfaceReport\report.html<br>Grammar:  pytest –html=[htmlpath.html]</p>
-<h4 id="Generate-Together"><a href="#Generate-Together" class="headerlink" title="Generate Together"></a>Generate Together</h4><p> pytest -s -q –alluredir [xml_report_path] –html=[htmlpath.html]<br>allure generate [xml_report_path] -o [html_report_path]</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjuuu0pmn003yhgvxzsjno356" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-trouble-shooting2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/02/14/trouble-shooting2/" class="article-date">
-  <time datetime="2019-02-13T22:40:26.000Z" itemprop="datePublished">2019-02-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/02/14/trouble-shooting2/">trouble-shooting2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于通过hexo 编译文件时， .md 文档种不能有$ + { } +里面# 的内容，如果有会导致编译失败，error 信息：<br>FATAL Something’s wrong. Maybe you can find the solution here: <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">http://hexo.io/docs/troubleshooting.html</a><br>Template render error: (unknown path)<br>  Error: expected end of comment, got end of file</p>
-<p>分析：属于语法冲突</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjuuu0pmg003nhgvxrvw9uh8n" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
     </footer>
   </div>
@@ -361,7 +523,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
     </div>
   </div>
 
@@ -371,7 +533,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -393,6 +555,14 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/24/InterfaceTesting/">InterfaceTesting</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/24/TroubleShooting3/">TroubleShooting--多人收邮件不成功</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
           </li>
         
@@ -402,14 +572,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/21/python8/">Python Multiple Threading</a>
           </li>
         
       </ul>
