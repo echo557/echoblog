@@ -62,6 +62,142 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-seleniumIDE" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/08/seleniumIDE/" class="article-date">
+  <time datetime="2019-04-08T00:32:16.000Z" itemprop="datePublished">2019-04-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/08/seleniumIDE/">seleniumIDE</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>需要下载和fireFox 配套使用</p>
+<p>####基本功能<br>录制<br>回放</p>
+<p>####步骤</p>
+<ol>
+<li>precondition</li>
+<li>steps</li>
+<li>assert</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/seleniumIDE/" data-id="cjuuu0pmb003ghgvxz14t09xx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SoftwareTesting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/02/SoftwareTesting/" class="article-date">
+  <time datetime="2019-04-02T09:02:58.000Z" itemprop="datePublished">2019-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/02/SoftwareTesting/">SoftwareTesting</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="PIE-Module"><a href="#PIE-Module" class="headerlink" title="PIE Module"></a>PIE Module</h3><p>Execution/Reachability: Fault</p>
+<p>Infection: The state of the program must be incorrect. A test executing the fault may not produce error.<br>Propagation: The infected state must propagate to cause some output of the program to be incorrect. An error may not be propagated to the output!</p>
+<p>Test Case: Test Input(Test Data)/Test Oracle(Excepted Output)/Others(Environment)</p>
+<p>Verification:  The evaluation of whether or not a product, service, or system compiles with a regulation, requirement, specification, or imposed condition. It is often an internal process.<br>Validation: The assurance that a product, service, or system meets the needs of the customer and other identified stakeholders. It often involves acceptance and suitability with external customers.</p>
+<p>####Testing level:<br>Unit Level<br>Module Level<br>Integration Level<br>System Level<br>(Google Testing)</p>
+<p>##White Box Testing Method</p>
+<p>###Graph in Testing</p>
+<h4 id="Test-Path"><a href="#Test-Path" class="headerlink" title="Test Path"></a>Test Path</h4><p>A path that starts at an initial vertex and ends at a final vertex.<br>Test Paths represent execution of test cases<br>–Some test paths can be executed by many tests<br>–Some test paths cannot be executed by any cases</p>
+<p>####Reach<br>–Syntactic reach: A path exists in the graph<br>–Semantic reach: A test exists that can execute that path</p>
+<p>####Cover<br>A test path p covers a vertex v if v is in p<br>A test path p covers an edge e if e is in p<br>A test path p covers a subpath p’ if p’ is in p</p>
+<p>####Structural Coverage<br>Defined on a graph just in terms of vertices and edges<br>–Source code<br>–Requirement specification<br>–Design diagram</p>
+<p>####Data Flow Coverage</p>
+<h3 id="Test-Criteria"><a href="#Test-Criteria" class="headerlink" title="Test Criteria"></a>Test Criteria</h3><p>–Test Requirement(TR)<br>Describe properties of test paths</p>
+<p>–Test Criteria:<br>Rules that define test requirement</p>
+<p>–Satisfaction:<br>Given a set TR of test requirements for a criterion C,a set of tests satisfies C on a graph if and only if for every test requirement in TR, there is a test path in path(T) that meets the test requirement true</p>
+<p>###Structural Coverage</p>
+<p>####Vertex Coverage(VC)<br>–Test set T satisfies vertex coverage on graph G if and only if for every syntactically reachable vertex v in V, there is a path p in path(T) such that p covers v<br>–TR contains each reachable vertex in G</p>
+<p>####Edge Coverage(EC)<br>–Test set T satisfies vertex coverage on graph G if and only if for every syntactically reachable edge e in E, there is a path p in path(T) such that p covers e<br>–TR contains each reachable edge in G<br>满足EC即会满足VC， 但反之不一定</p>
+<p>####Covering Multiple Edges<br>–Edge-pair coverage requires pairs of edges<br>–Edge-Pairs Coverage(EPC): TR contains each reachable path of length to up 2, inclusive, in G.<br>–Complete Path Coverage(CPC): TR contains all paths in G.<br>–n-Path Coverage(nPC): TR contains each reachable path of length up to n, inclusive, in G.<br>VC(n=0),EC(n=1),EPC(n=2),CPC(n=无穷)</p>
+<p>####Subsume<br>–C1 subsumes C2, denoted by C1 &gt;=C2: For any T,if T satisfies C1 implies T satisfies C2.<br>–n1PC&gt;=n2PC if n1》=n2<br>– C1&gt;=C2 does not imply that T1 satisfying C1 can detect any fault detected by T2 which satisfies C2.</p>
+<p>###Control Flow Graph<br>A control flow graph(CFG) is a representation,using graph notation, of all paths that might be traversed through a program during its execution.</p>
+<p>Vertex:<br>–Statement<br>–Block<br>–Function<br>–Module</p>
+<p>Edge:<br>–Flow<br>–Jump<br>–Call</p>
+<p>if 语句<br>if-return 语句<br>while<br>for<br>break /continue<br>do</p>
+<p>###Data Flow</p>
+<p>####Beyond Structure<br>Goal: Try to ensure that values are computed and used correctly<br>Definition(def):<br>A location where a value for a variable is stored into memory.<br>Use:<br>A location where a variable’s value is accessed.</p>
+<p>####def(n) or def(e):<br>The set of variables that are defined by node n or edge e<br>use(n) or use(e):<br>The set of variables that are sued by node n or edge e<br>DU pair:<br>A pair of locations(li,lj) such that a variable v is defined at li and used at lj.</p>
+<p>####Def-clear:<br>A path from li to lj is def-clear with respect to variable v if v is not given another value on any of the nodes or edges in the path<br>Reach:<br>If there is a def-clear path from li to lj with respect to v, the def of v at li reaches the use at lj.<br>DU Path:<br>du-path: A simple subpath that is def-clear with respect to v from a def of v to a use of v<br>du(ni,nj,v):the set of du-paths from ni to nj<br>du(ni,v): the set of du-paths that start at ni<br>All-defs coverage(ADC): For each set of du-paths S=du(n,v), TR contains at least one path d in S.<br>All-uses coverage(AUC): For each set of du-paths to uses S=du(ni,nj,v), TR contains at least one path d in S.<br>All-du-paths coverage(ADUPC):For each set S=du(ni,nj,v),TR contains every path d in Satisfaction.</p>
+<p>###Junit单元测试</p>
+<p>##Black Box Testing</p>
+<h3 id="Random-Testing"><a href="#Random-Testing" class="headerlink" title="Random Testing"></a>Random Testing</h3><p>Problems in RT:Define input domain/Generate random sequence(Pseudo random sequence algorithm/Seed of pseudo random sequence algorithm/Randomness and Integrity Service(random.org))<br>Fuzz testing(Fuzzing):<br>自适应随机测试<br>A passed test, nearby tests may be passed<br>A failed test, nearby tests may be failed.<br>FSCS-ART algorithm<br>–randomly generate an input t, run t, add t to T1<br>–While(stop criteria not reached)<br>  –randomly generate k candidate input c1,….ck<br>  –for each candidate ci<br>     –Compute min distance di to T1<br>  –end for<br>  –select one candidate t with max distance<br>  –run t, add t to T<br>–end while  </p>
+<p>####Problem in ART:<br>distance<br>sampling(ART with enlarged input domain)</p>
+<p>####Anti-Radon Testing<br>Process: </p>
+<ol>
+<li>Select one test case randomly</li>
+<li>Select a test case with the maximum Sum of Hamming Distance to existed test cases</li>
+<li>Repeat</li>
+</ol>
+<p>###Equivalence Partition<br>Can be equally applied at several levels of testing<br>–Unit<br>–Integration<br>–System<br>Relatively easy to apply with no automation<br>Easy to adjust the procedure to get more or fewer tests</p>
+<p>####Input Domains<br>The input domain for a program contains all the possible inputs to that program.<br>For even small programs, the input domain is so large that it might as well be infinite.<br>Testing is fundamentally about choosing finites sets of values from the input domain.<br>Input parameters define the scope of the input domain<br>–Parameters to a method<br>–Data read from a file<br>–Global variables<br>–User level inputs<br>Partitioning Domains<br>–Domain D<br>–Partition scheme p of D<br>–The partition p defines a set of blocks, b1,b2,b3….bn<br>–The partition must satisfy two properties:<br>blocks must be pairwise disjoint(no overlap)<br>together the blocks cover the domain D(complete)</p>
+<p>####Two Approaches<br>Interface-based approach<br>–Develops characteristics directly from individual input parameters<br>–Simplest application<br>–Can be partially automated in some situations<br>Mechanically consider each parameter in isolation<br>This is an easy modeling technique and relies mostly on syntax<br>Ignores relationships among parameters</p>
+<p>Functionality-based approach<br>–Develops characteristics from a behavioral view of the program under test<br>–Harder to develop–requires more design effort<br>–May result in better tests, or fewer tests that are as effective</p>
+<p>Identify characteristics that correspond to the intended functionality<br>Requires more design effort from tester<br>Can incorporate domain and semantic knowledge<br>Can use relationships among parameters<br>Modeling can be based on requirements, not implementation<br>The same parameter may appear in multiple characteristics, so it’s harder to translate values to test cases</p>
+<p>###Boundary of Equivalent Classed</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/02/SoftwareTesting/" data-id="cjuuu0pl9001yhgvxbrgdl11s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-machinelearning1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/03/12/machinelearning1/" class="article-date">
@@ -92,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/03/12/machinelearning1/" data-id="cjutd6d2t0029kgvx703gfblx" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/03/12/machinelearning1/" data-id="cjuuu0plg0028hgvx6ph0fyhe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li></ul>
@@ -144,7 +280,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjutd6d3m003gkgvxi0rk2p26" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjuuu0pmn003yhgvxzsjno356" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -188,1391 +324,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjutd6d3d0032kgvxwn8r927h" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjuuu0pmg003nhgvxrvw9uh8n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ShellCommand" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/02/13/ShellCommand/" class="article-date">
-  <time datetime="2019-02-13T13:09:15.000Z" itemprop="datePublished">2019-02-13</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/02/13/ShellCommand/">ShellCommand</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/echoblog.github.io/2019/02/13/ShellCommand/Shell.png" alt="Shell"></p>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
-<li>C编写的程序，使用Linux 的桥梁</li>
-<li>是命令语言，也是程序设计语言</li>
-<li>shell 脚本是用shell编写的脚本程序</li>
-</ul>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
-<li>Bourne Shell(/usr/bin/sh 或者 /bin/sh)</li>
-<li>Bourne Again Shell（/bin/bash）</li>
-<li>C Shell（/usr/bin/csh）</li>
-<li>K Shell（/usr/bin/ksh）</li>
-<li>Shell for Root（/sbin/sh）</li>
-</ul>
-<h3 id="在一般情况下，人们并不区分-Bourne-Shell-和-Bourne-Again-Shell，所以，像-bin-sh，它同样也可以改为-bin-bash"><a href="#在一般情况下，人们并不区分-Bourne-Shell-和-Bourne-Again-Shell，所以，像-bin-sh，它同样也可以改为-bin-bash" class="headerlink" title="在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 #!/bin/sh，它同样也可以改为 #!/bin/bash"></a>在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 #!/bin/sh，它同样也可以改为 #!/bin/bash</h3><h3 id="指定用什么解释器运行脚本以及解释器所在的位置"><a href="#指定用什么解释器运行脚本以及解释器所在的位置" class="headerlink" title="#! 指定用什么解释器运行脚本以及解释器所在的位置"></a>#! 指定用什么解释器运行脚本以及解释器所在的位置</h3><ul>
-<li>有时候写 #!/usr/bin/python 还是不行，很简单，因为python解释器没有装在/usr/bin/目录，改成其所在目录就行了，或者更通用的方法是：<br>#!/usr/bin/env python</li>
-</ul>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ul>
-<li><p>可执行程序</p>
-<ul>
-<li>chmod +x ./test.sh  #使脚本具有执行权限<br>./test.sh  #执行脚本</li>
-<li>Note： 运行的时候，路径需要写名，要不然就会去path 里面去找，而path 是需要配置的， 一般只有/bin,/sbin, /usr/sbin 等再PATH 里面</li>
-</ul>
-</li>
-<li><p>作为解释器参数</p>
-<ul>
-<li>/bin/sh test.sh<br>/bin/php test.php</li>
-<li>Note： 这种方式不需要再第一行指定解释器信息</li>
-</ul>
-</li>
-</ul>
-<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
-<li><p>规则</p>
-<ul>
-<li><p>不需要有$符号</p>
-<ul>
-<li>如： name_1=”name”</li>
-</ul>
-</li>
-<li><p>变量名和等号之间不能有空格</p>
-</li>
-<li><p>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头</p>
-<ul>
-<li>如：_var</li>
-</ul>
-</li>
-<li><p>中间不能有空格，可以使用下划线（_）</p>
-</li>
-<li>不能使用标点符号</li>
-<li>不能使用bash里面的关键字（help 可以获取到）</li>
-</ul>
-</li>
-<li><p>使用变量</p>
-<ul>
-<li>your_name=”qinjx”<br>echo $your_name<br>echo ${your_name}</li>
-<li>note：最好给所有变量加上{}</li>
-</ul>
-</li>
-<li><p>相关操作</p>
-<ul>
-<li><p>只读</p>
-<ul>
-<li>readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变</li>
-<li>#!/bin/bash<br>myUrl=”<a href="http://www.google.com&quot;" target="_blank" rel="noopener">http://www.google.com&quot;</a><br>readonly myUrl<br>myUrl=”<a href="http://www.runoob.com&quot;" target="_blank" rel="noopener">http://www.runoob.com&quot;</a><br>运行报错/bin/sh: NAME: This variable is read only.</li>
-</ul>
-</li>
-<li><p>删除</p>
-<ul>
-<li>使用unset命令可以删除变量。 语法：unset variable_name. 变量被删除后不能再次使用，unset命令不能删除只读变量</li>
-<li>#!/bin/sh<br>myUrl=”<a href="http://www.runoob.com&quot;" target="_blank" rel="noopener">http://www.runoob.com&quot;</a><br>unset myUrl<br>echo $myUrl</li>
-</ul>
-</li>
-<li><p>变量类型</p>
-<ul>
-<li>局部变量 局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。</li>
-<li>环境变量 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。</li>
-<li>shell变量 shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
-<li><p>单引号（两个限制）</p>
-<ul>
-<li>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；</li>
-<li>单引号字串中不能出现单独一个的单引号（对单引号使用转义符后也不行），但可成对出现，作为字符串拼接使用。</li>
-</ul>
-</li>
-<li><p>双引号（优点）</p>
-<ul>
-<li>双引号里可以有变量</li>
-<li>双引号里可以出现转义字符</li>
-</ul>
-</li>
-<li><p>拼接字符串</p>
-<ul>
-<li><p>your_name=”runoob”</p>
-<h1 id="使用双引号拼接"><a href="#使用双引号拼接" class="headerlink" title="使用双引号拼接"></a>使用双引号拼接</h1><p>greeting=”hello, “$your_name” !”<br>greeting_1=”hello, ${your_name} !”<br>echo $greeting  $greeting_1</p>
-<ul>
-<li>hello, runoob ! hello, runoob !</li>
-</ul>
-</li>
-<li><p>your_name=”runoob”# 使用单引号拼接<br>greeting_2=’hello, ‘$your_name’ !’<br>greeting_3=’hello, ${your_name} !’<br>echo $greeting_2  $greeting_3</p>
-<ul>
-<li>hello, runoob ! hello, ${your_name} !</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>获取字符串长度</p>
-<ul>
-<li>string=”abcd”<br>echo ${<em>string} #输出 4，”#” 替换成</em>， 因为语法冲突</li>
-</ul>
-</li>
-<li><p>提取子字符串</p>
-<ul>
-<li>string=”runoob is a great site”<br>echo ${string:1:4} # 输出 unoo</li>
-</ul>
-</li>
-<li><p>查找子字符串</p>
-<ul>
-<li>查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)</li>
-<li>string=”runoob is a great site”<br>echo <code>expr index &quot;$string&quot; io</code>  # 输出 4</li>
-</ul>
-</li>
-</ul>
-<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ul>
-<li><p>定义</p>
-<ul>
-<li>bash支持一维数组（不支持多维数组），并且没有限定数组的大小。</li>
-<li>用括号来表示数组，数组元素用”空格”符号分割开（数组名=(值1 值2 … 值n)）</li>
-<li>array_name=(value0 value1 value2 value3)或者array_name=(<br>value0<br>value1<br>value2<br>value3<br>)</li>
-</ul>
-</li>
-<li><p>读取</p>
-<ul>
-<li>${数组名[下标]}</li>
-<li><p>使用 @ 符号可以获取数组中的所有元素</p>
-<ul>
-<li>echo ${array_name[@]}</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>获取数组长度</p>
-</li>
-</ul>
-<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
-<li><p>单行</p>
-<ul>
-<li>以 # 开头的行就是注释，会被解释器忽略。</li>
-<li>通过每一行加一个 # 号设置多行注释</li>
-</ul>
-</li>
-<li><p>多行</p>
-<ul>
-<li>这一段要注释的代码用一对花括号括起来，定义成一个函数，没有地方调用这个函数，这块代码就不会执行，达到了和注释一样的效果。</li>
-<li>:&lt;&lt;EOF<br>注释内容…<br>注释内容…<br>注释内容…<br>EOF</li>
-<li>:&lt;&lt;’<br>注释内容…<br>注释内容…<br>注释内容…<br>‘</li>
-<li>:&lt;&lt;!<br>注释内容…<br>注释内容…<br>注释内容…<br>!</li>
-</ul>
-</li>
-</ul>
-<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><ul>
-<li><p>Rules</p>
-<ul>
-<li>$#传递到脚本的参数个数</li>
-<li>$<em>以一个单字符串显示所有向脚本传递的参数。<br>如”$</em>“用「”」括起来的情况、以”$1 $2 … $n”的形式输出所有参数。传递一个参数</li>
-<li>$$脚本运行的当前进程ID号</li>
-<li>$! 后台运行的最后一个进程的ID号</li>
-<li>$@与$*相同，但是使用时加引号，并在引号中返回每个参数。<br>如”$@”用「”」括起来的情况、以”$1” “$2” … “$n” 的形式输出所有参数。 传递n个参数</li>
-<li>$- 显示Shell使用的当前选项，与set命令功能相同。</li>
-<li>$? 显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</li>
-</ul>
-</li>
-<li><p>Example</p>
-<ul>
-<li>#!/bin/bash</li>
-</ul>
-</li>
-</ul>
-<p>echo “– \$<em> 演示 —“<br>for i in “$</em>“; do<br>    echo $i<br>done</p>
-<p>echo “– \$@ 演示 —“<br>for i in “$@”; do<br>    echo $i<br>done</p>
-<pre><code>- $ chmod +x test.sh 
-</code></pre><p>$ ./test.sh 1 2 3<br>– $* 演示 —<br>1 2 3<br>– $@ 演示 —<br>1<br>2<br>3</p>
-<h3 id="数组-1"><a href="#数组-1" class="headerlink" title="数组"></a>数组</h3><ul>
-<li><p>Rules</p>
-<ul>
-<li>数组中可以存放多个值。Bash Shell 只支持一维数组（不支持多维数组），初始化时不需要定义数组大小（与 PHP 类似）。</li>
-<li>array_name=(value1 … valuen)</li>
-<li>${array_name[index]}</li>
-</ul>
-</li>
-<li><p>Apply</p>
-<ul>
-<li><p>Read</p>
-<ul>
-<li>my_array=(A B “C” D)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>echo “第一个元素为: ${my_array[0]}”<br>echo “第二个元素为: ${my_array[1]}”<br>echo “第三个元素为: ${my_array[2]}”<br>echo “第四个元素为: ${my_array[3]}”</p>
-<pre><code>- $ chmod +x test.sh 
-</code></pre><p>$ ./test.sh<br>第一个元素为: A<br>第二个元素为: B<br>第三个元素为: C<br>第四个元素为: D</p>
-<pre><code>- Extract all elements
-
-    - my_array[0]=A
-</code></pre><p>my_array[1]=B<br>my_array[2]=C<br>my_array[3]=D</p>
-<p>echo “数组的元素为: ${my_array[*]}”<br>echo “数组的元素为: ${my_array[@]}”</p>
-<pre><code>- $ chmod +x test.sh 
-</code></pre><p>$ ./test.sh<br>数组的元素为: A B C D<br>数组的元素为: A B C D</p>
-<pre><code>- Get length
-
-    - my_array[0]=A
-</code></pre><p>my_array[1]=B<br>my_array[2]=C<br>my_array[3]=D</p>
-<p>echo “数组元素个数为: ${<em>my_array[</em>]}”  “#” 替换成<em>， 因为语法冲突<br>echo “数组元素个数为: ${</em>my_array[@]}”   “#” 替换成*， 因为语法冲突</p>
-<pre><code>- $ chmod +x test.sh 
-</code></pre><p>$ ./test.sh<br>数组元素个数为: 4<br>数组元素个数为: 4</p>
-<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><ul>
-<li><p>Classifiy</p>
-<ul>
-<li><p>算数运算符</p>
-<ul>
-<li><code>expr $a + $b</code> </li>
-<li><code>expr $a - $b</code></li>
-<li><code>expr $a \* $b</code></li>
-<li><code>expr $b / $a</code> </li>
-<li><code>expr $b % $a</code> </li>
-<li>a=$b </li>
-<li>[ $a == $b ] </li>
-<li>[ $a != $b ]</li>
-</ul>
-</li>
-<li><p>关系运算符</p>
-<ul>
-<li>-eq/-ne/-gt/-lt/-ge/-le</li>
-</ul>
-</li>
-<li><p>布尔运算符</p>
-<ul>
-<li>[ ! false ] 返回 true。</li>
-<li>[ $a -lt 20 -o $b -gt 100 ] 返回 true。</li>
-<li>[ $a -lt 20 -a $b -gt 100 ] 返回 false</li>
-</ul>
-</li>
-<li><p>逻辑运算符</p>
-<ul>
-<li>[[ $a -lt 100 &amp;&amp; $b -gt 100 ]] 返回 false</li>
-<li>[[ $a -lt 100 || $b -gt 100 ]] 返回 true</li>
-</ul>
-</li>
-<li><p>字符串运算符</p>
-<ul>
-<li>=    检测两个字符串是否相等，相等返回 true。    [ $a = $b ] 返回 false。</li>
-<li>!=    检测两个字符串是否相等，不相等返回 true。    [ $a != $b ] 返回 true。</li>
-<li>-z    检测字符串长度是否为0，为0返回 true。    [ -z $a ] 返回 false。</li>
-<li>-n    检测字符串长度是否为0，不为0返回 true。    [ -n “$a” ] 返回 true。</li>
-<li>str    检测字符串是否为空，不为空返回 true。    [ $a ] 返回 true。</li>
-</ul>
-</li>
-<li><p>文件测试运算符</p>
-<ul>
-<li>-b file    检测文件是否是块设备文件，如果是，则返回 true。    [ -b $file ] 返回 false。</li>
-<li>-c file    检测文件是否是字符设备文件，如果是，则返回 true。    [ -c $file ] 返回 false。</li>
-<li>-d file    检测文件是否是目录，如果是，则返回 true。    [ -d $file ] 返回 false。</li>
-<li>-f file    检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。    [ -f $file ] 返回 true。</li>
-<li>-g file    检测文件是否设置了 SGID 位，如果是，则返回 true。    [ -g $file ] 返回 false。</li>
-<li>-k file    检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。    [ -k $file ] 返回 false。</li>
-<li>-p file    检测文件是否是有名管道，如果是，则返回 true。    [ -p $file ] 返回 false。</li>
-<li>-u file    检测文件是否设置了 SUID 位，如果是，则返回 true。    [ -u $file ] 返回 false。</li>
-<li>-r file    检测文件是否可读，如果是，则返回 true。    [ -r $file ] 返回 true。</li>
-<li>-w file    检测文件是否可写，如果是，则返回 true。    [ -w $file ] 返回 true。</li>
-<li>-x file    检测文件是否可执行，如果是，则返回 true。    [ -x $file ] 返回 true。</li>
-<li>-s file    检测文件是否为空（文件大小是否大于0），不为空返回 true。    [ -s $file ] 返回 true。</li>
-<li>-e file    检测文件（包括目录）是否存在，如果是，则返回 true。    [ -e $file ] 返回 true。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Rules</p>
-<ul>
-<li>原生bash不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用</li>
-<li>两个数相加(注意使用的是反引号 ` 而不是单引号 ‘)</li>
-<li>表达式和运算符之间要有空格，例如 2+2 是不对的，必须写成 2 + 2，这与我们熟悉的大多数编程语言不一样。</li>
-<li>完整的表达式要被 <code></code> 包含，注意这个字符不是常用的单引号，在 Esc 键下边</li>
-<li>条件表达式要放在方括号之间，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]</li>
-<li>乘号(*)前边必须加反斜杠()才能实现乘法运算；</li>
-<li>在 MAC 中 shell 的 expr 语法是：$((表达式))，此处表达式中的 “*” 不需要转义符号 “\” </li>
-</ul>
-</li>
-<li><p>Examples</p>
-</li>
-</ul>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><ul>
-<li><p>显示普通字符</p>
-<ul>
-<li>echo “It is a test”</li>
-</ul>
-</li>
-<li><p>显示转义字符</p>
-<ul>
-<li>echo “\”It is a test\””</li>
-</ul>
-</li>
-<li><p>显示变量</p>
-<ul>
-<li>read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量</li>
-</ul>
-</li>
-<li><p>显示换行</p>
-<ul>
-<li>echo -e “OK! \n” # -e 开启转义<br>echo “It is a test”</li>
-<li>OK!</li>
-</ul>
-</li>
-</ul>
-<p>It is a test</p>
-<ul>
-<li><p>显示不换行</p>
-<ul>
-<li>#!/bin/sh<br>echo -e “OK! \c” # -e 开启转义 \c 不换行<br>echo “It is a test”</li>
-<li>OK! It is a test</li>
-</ul>
-</li>
-<li><p>显示结果定向至文件</p>
-<ul>
-<li>echo “It is a test” &gt; myfile</li>
-</ul>
-</li>
-<li><p>原样输出字符串，不进行转义或取变量(用单引号)</p>
-</li>
-<li><p>显示命令执行结果</p>
-<ul>
-<li>echo <code>date</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><ul>
-<li><p>引言</p>
-<ul>
-<li>printf 命令模仿 C 程序库（library）里的 printf() 程序。</li>
-<li>printf 由 POSIX 标准所定义，因此使用 printf 的脚本比使用 echo 移植性好。</li>
-<li>printf 使用引用文本或空格分隔的参数，外面可以在 printf 中使用格式化字符串，还可以制定字符串的宽度、左右对齐方式等。默认 printf 不会像 echo 自动添加换行符，我们可以手动添加 \n。</li>
-</ul>
-</li>
-<li><p>Format</p>
-<ul>
-<li>printf  format-string  [arguments…]</li>
-<li>参数说明：</li>
-</ul>
-</li>
-</ul>
-<p>format-string: 为格式控制字符串<br>arguments: 为参数列表。</p>
-<ul>
-<li><p>Example</p>
-<ul>
-<li>%s %c %d %f都是格式替代符</li>
-</ul>
-</li>
-</ul>
-<h3 id="test"><a href="#test" class="headerlink" title="test"></a>test</h3><ul>
-<li><p>目的</p>
-<ul>
-<li>检查某个条件是否成立</li>
-</ul>
-</li>
-<li><p>数值测试</p>
-<ul>
-<li>num1=100<br>num2=100<br>if test $[num1] -eq $[num2]<br>then<br>echo ‘两个数相等！’<br>else<br>echo ‘两个数不相等！’<br>fi</li>
-<li>输出结果：</li>
-</ul>
-</li>
-</ul>
-<p>两个数相等！</p>
-<ul>
-<li><p>字符串测试</p>
-<ul>
-<li>num1=”ru1noob”<br>num2=”runoob”<br>if test $num1 = $num2<br>then<br>echo ‘两个字符串相等!’<br>else<br>echo ‘两个字符串不相等!’<br>fi</li>
-<li>输出结果：</li>
-</ul>
-</li>
-</ul>
-<p>两个字符串不相等!</p>
-<ul>
-<li><p>文本测试</p>
-<ul>
-<li><p>参数</p>
-<ul>
-<li>-e 文件名    如果文件存在则为真</li>
-<li>-r 文件名    如果文件存在且可读则为真</li>
-<li>-w 文件名    如果文件存在且可写则为真</li>
-<li>-x 文件名    如果文件存在且可执行则为真</li>
-<li>-s 文件名    如果文件存在且至少有一个字符则为真</li>
-<li>-d 文件名    如果文件存在且为目录则为真</li>
-<li>-f 文件名    如果文件存在且为普通文件则为真</li>
-<li>-c 文件名    如果文件存在且为字符型特殊文件则为真</li>
-<li>-b 文件名    如果文件存在且为块特殊文件则为真</li>
-</ul>
-</li>
-<li><p>另外，Shell还提供了与( -a )、或( -o )、非( ! )三个逻辑操作符用于将测试条件连接起来，其优先级为：”!”最高，”-a”次之，”-o”最低</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><ul>
-<li><p>If else</p>
-<ul>
-<li><p>if</p>
-<ul>
-<li>if condition<br>then<br>command1<br>command2<br>…<br>commandN<br>fi</li>
-<li>if [ $(ps -ef | grep -c “ssh”) -gt 1 ]; then echo “true”; fi</li>
-</ul>
-</li>
-<li><p>if else</p>
-<ul>
-<li>if condition<br>then<br>command1<br>command2<br>…<br>commandN<br>else<br>command<br>fi</li>
-</ul>
-</li>
-<li><p>if else-if else</p>
-<ul>
-<li>if condition1<br>then<br>command1<br>elif condition2<br>then<br>command2<br>else<br>commandN<br>fi</li>
-<li>a=10<br>b=20<br>if [ $a == $b ]<br>then<br>echo “a 等于 b”<br>elif [ $a -gt $b ]<br>then<br>echo “a 大于 b”<br>elif [ $a -lt $b ]<br>then<br>echo “a 小于 b”<br>else<br>echo “没有符合的条件”<br>fi</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>For</p>
-<ul>
-<li>for var in item1 item2 … itemN<br>do<br>command1<br>command2<br>…<br>commandN<br>done</li>
-<li>for var in item1 item2 … itemN; do command1; command2… done;</li>
-<li>当变量值在列表里，for循环即执行一次所有命令，使用变量名获取列表中的当前取值。命令可为任何有效的shell命令和语句。in列表可以包含替换、字符串和文件名。</li>
-</ul>
-</li>
-</ul>
-<p>in列表是可选的，如果不用它，for循环使用命令行的位置参数。</p>
-<pre><code>- for loop in 1 2 3 4 5
-</code></pre><p>do<br>    echo “The value is: $loop”<br>done</p>
-<pre><code>- for str in &apos;This is a string&apos;
-</code></pre><p>do<br>    echo $str<br>done</p>
-<ul>
-<li><p>while</p>
-<ul>
-<li>while condition<br>do<br>command<br>done</li>
-<li><p>无限循环</p>
-<ul>
-<li>while :<br>do<br>command<br>done</li>
-<li>while true<br>do<br>command<br>done</li>
-<li>for (( ; ; ))</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>until 循环</p>
-<ul>
-<li>until 循环执行一系列命令直至条件为 true 时停止。</li>
-</ul>
-</li>
-</ul>
-<p>until 循环与 while 循环在处理方式上刚好相反。</p>
-<p>一般 while 循环优于 until 循环，但在某些时候—也只是极少数情况下，until 循环更加有用。</p>
-<pre><code>- condition 一般为条件表达式，如果返回值为 false，则继续执行循环体内的语句，否则跳出循环。
-- until condition
-</code></pre><p>do<br>    command<br>done</p>
-<ul>
-<li><p>case</p>
-<ul>
-<li>Shell case语句为多选择语句。可以用case语句匹配一个值与一个模式，如果匹配成功，执行相匹配的命令。</li>
-<li>case 值 in<br>模式1)<br>command1<br>command2<br>…<br>commandN<br>;;<br>模式2）<br>command1<br>command2<br>…<br>commandN<br>;;<br>esac</li>
-<li>echo ‘输入 1 到 4 之间的数字:’<br>echo ‘你输入的数字为:’<br>read aNum<br>case $aNum in<br>1)  echo ‘你选择了 1’<br>;;<br>2)  echo ‘你选择了 2’<br>;;<br>3)  echo ‘你选择了 3’<br>;;<br>4)  echo ‘你选择了 4’<br>;;<br>*)  echo ‘你没有输入 1 到 4 之间的数字’<br>;;<br>esac</li>
-<li>esac<br>case的语法和C family语言差别很大，它需要一个esac（就是case反过来）作为结束标记，每个case分支用右圆括号，用两个分号表示break。</li>
-</ul>
-</li>
-<li><p>跳出循环</p>
-<ul>
-<li><p>break</p>
-<ul>
-<li>break命令允许跳出所有循环（终止执行后面的所有循环）。</li>
-<li>#!/bin/bash<br>while :<br>do<br>echo -n “输入 1 到 5 之间的数字:”<br>read aNum<br>case $aNum in<br>1|2|3|4|5) echo “你输入的数字为 $aNum!”<br>;;<br>*) echo “你输入的数字不是 1 到 5 之间的! 游戏结束”<br>  break<br>;;<br>esac<br>done</li>
-</ul>
-</li>
-<li><p>continue</p>
-<ul>
-<li>continue命令与break命令类似，只有一点差别，它不会跳出所有循环，仅仅跳出当前循环。</li>
-<li>#!/bin/bash<br>while :<br>do<br>echo -n “输入 1 到 5 之间的数字: “<br>read aNum<br>case $aNum in<br>1|2|3|4|5) echo “你输入的数字为 $aNum!”<br>;;<br>*) echo “你输入的数字不是 1 到 5 之间的!”<br>  continue<br>  echo “游戏结束”<br>;;<br>esac<br>done</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
-<li>[ function ] funname [()]</li>
-</ul>
-<p>{</p>
-<pre><code>action;
-
-[return int;]
-</code></pre><p>}</p>
-<pre><code>- 可以带function fun() 定义，也可以直接fun() 定义,不带任何参数
-- 参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255
-</code></pre><ul>
-<li><p>Example</p>
-<ul>
-<li>#!/bin/bash</li>
-</ul>
-</li>
-</ul>
-<p>demoFun(){<br>    echo “这是我的第一个 shell 函数!”<br>}<br>echo “—–函数开始执行—–”<br>demoFun<br>echo “—–函数执行完毕—–”</p>
-<pre><code>- funWithReturn(){
-echo &quot;这个函数会对输入的两个数字进行相加运算...&quot;
-echo &quot;输入第一个数字: &quot;
-read aNum
-echo &quot;输入第二个数字: &quot;
-read anotherNum
-echo &quot;两个数字分别为 $aNum 和 $anotherNum !&quot;
-return $(($aNum+$anotherNum))
-</code></pre><p>}<br>funWithReturn<br>echo “输入的两个数字之和为 $? !”</p>
-<ul>
-<li><p>函数参数</p>
-<ul>
-<li>在Shell中，调用函数时可以向其传递参数。在函数体内部，通过 $n 的形式来获取参数的值，例如，$1表示第一个参数，$2表示第二个参数…</li>
-<li>$10 不能获取第十个参数，获取第十个参数需要${10}。当n&gt;=10时，需要使用${n}来获取参数。</li>
-<li><p>常用</p>
-<ul>
-<li>$#    传递到脚本的参数个数</li>
-<li>$*    以一个单字符串显示所有向脚本传递的参数</li>
-<li>$$    脚本运行的当前进程ID号</li>
-<li>$!    后台运行的最后一个进程的ID号</li>
-<li>$@    与$*相同，但是使用时加引号，并在引号中返回每个参数。</li>
-<li>$-    显示Shell使用的当前选项，与set命令功能相同。</li>
-<li>$?    显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h3><ul>
-<li><p>命令</p>
-<ul>
-<li>command &gt; file    将输出重定向到 file。</li>
-<li>command &lt; file    将输入重定向到 file。</li>
-<li>command &gt;&gt; file    将输出以追加的方式重定向到 file。</li>
-<li>n &gt; file    将文件描述符为 n 的文件重定向到 file。</li>
-<li>n &gt;&gt; file    将文件描述符为 n 的文件以追加的方式重定向到 file。</li>
-<li>n &gt;&amp; m    将输出文件 m 和 n 合并。</li>
-<li>n &lt;&amp; m    将输入文件 m 和 n 合并。</li>
-<li>&lt;&lt; tag    将开始标记 tag 和结束标记 tag 之间的内容作为输入。</li>
-<li>需要注意的是文件描述符 0 通常是标准输入（STDIN），1 是标准输出（STDOUT），2 是标准错误输出（STDERR）。</li>
-</ul>
-</li>
-<li><p>输出重定向</p>
-<ul>
-<li>command1 &gt; file1</li>
-<li>上面这个命令执行command1然后将输出的内容存入file1。</li>
-</ul>
-</li>
-</ul>
-<p>注意任何file1内的已经存在的内容将被新内容替代。如果要将新内容添加在文件末尾，请使用&gt;&gt;操作符。</p>
-<pre><code>- echo@C3-QA-ECHO:~$ echo &quot;test&quot; &gt; test5.sh
-</code></pre><p>echo@C3-QA-ECHO:~$ cat test5.sh<br>test</p>
-<pre><code>- echo@C3-QA-ECHO:~$ echo &quot;hello&quot; &gt;&gt; test5.sh
-</code></pre><p>echo@C3-QA-ECHO:~$ cat test5.sh<br>test<br>hello</p>
-<ul>
-<li><p>输入重定向</p>
-<ul>
-<li>command1 &lt; file1</li>
-<li>这样，本来需要从键盘获取输入的命令会转移到文件读取内容。</li>
-</ul>
-</li>
-</ul>
-<p>注意：输出重定向是大于号(&gt;)，输入重定向是小于号(&lt;)。</p>
-<pre><code>- echo@C3-QA-ECHO:~$ wc -l &lt; test5.sh
-</code></pre><p>2<br>echo@C3-QA-ECHO:~$ cat test5.sh<br>test<br>hello</p>
-<pre><code>- echo@C3-QA-ECHO:~$ wc -l test5.sh
-</code></pre><p>2 test5.sh<br>echo@C3-QA-ECHO:~$</p>
-<ul>
-<li><p>扩展重定向</p>
-<ul>
-<li>标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。</li>
-<li>标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。</li>
-<li>标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。</li>
-<li>默认情况下，command &gt; file 将 stdout 重定向到 file，command &lt; file 将stdin 重定向到 file。</li>
-</ul>
-</li>
-<li><p>Here Document</p>
-<ul>
-<li>Here Document 是 Shell 中的一种特殊的重定向方式，用来将输入重定向到一个交互式 Shell 脚本或程序。</li>
-<li>command &lt;&lt; delimiter<br>document<br>delimiter</li>
-<li>它的作用是将两个 delimiter 之间的内容(document) 作为输入传递给 command。</li>
-<li>注意：</li>
-</ul>
-</li>
-</ul>
-<p>结尾的delimiter 一定要顶格写，前面不能有任何字符，后面也不能有任何字符，包括空格和 tab 缩进。<br>开始的delimiter前后的空格会被忽略掉。</p>
-<pre><code>- echo@C3-QA-ECHO:~$ wc -l &lt;&lt; EOF
-</code></pre><blockquote>
-<p>hELLO<br>World<br>!<br>EOF<br>3</p>
-<pre><code>- echo@C3-QA-ECHO:~$ cat &lt;&lt; EOF
-</code></pre><p>hello<br>end<br>you<br>at<br>EOF<br>hello<br>end<br>you<br>at</p>
-</blockquote>
-<ul>
-<li><p>/dev/null 文件</p>
-<ul>
-<li>如果希望执行某个命令，但又不希望在屏幕上显示输出结果，那么可以将输出重定向到 /dev/null：</li>
-</ul>
-</li>
-</ul>
-<p>$ command &gt; /dev/null</p>
-<pre><code>- /dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到&quot;禁止输出&quot;的效果。
-- 如果希望屏蔽 stdout 和 stderr，可以这样写：
-</code></pre><p>$ command &gt; /dev/null 2&gt;&amp;1</p>
-<pre><code>- 注意：0 是标准输入（STDIN），1 是标准输出（STDOUT），2 是标准错误输出（STDERR）。
-</code></pre><h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><ul>
-<li>Shell 文件包含的语法格式如下：</li>
-</ul>
-<p>. filename   # 注意点号(.)和文件名中间有一空格</p>
-<p>或</p>
-<p>source filename</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/13/ShellCommand/" data-id="cjutd6d2a001gkgvx7luyuff8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-resume" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/02/01/resume/" class="article-date">
-  <time datetime="2019-01-31T23:28:29.000Z" itemprop="datePublished">2019-02-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/02/01/resume/">resume</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><h3 id="软件开发"><a href="#软件开发" class="headerlink" title="软件开发"></a>软件开发</h3><ul>
-<li>需求分析</li>
-<li>概要设计</li>
-<li>详细设计</li>
-<li>Coding</li>
-<li>Debug</li>
-<li>单元测试</li>
-<li>集成测试</li>
-<li>发布</li>
-</ul>
-<h3 id="测试流程"><a href="#测试流程" class="headerlink" title="测试流程"></a>测试流程</h3><ul>
-<li>需求分析</li>
-<li>评审、沟通</li>
-<li><p>编写测试计划</p>
-<ul>
-<li>测试内容</li>
-<li><p>测试方法</p>
-<ul>
-<li><p>黑盒</p>
-<ul>
-<li>决策表</li>
-<li>等价类划分</li>
-<li>边界值分析</li>
-<li>因果法</li>
-<li>错误推测法</li>
-<li>功能图</li>
-<li>Ad-hoc法</li>
-</ul>
-</li>
-<li><p>白盒</p>
-<ul>
-<li>符号执行</li>
-<li>形式化方法</li>
-<li>基本路径</li>
-<li>组合覆盖</li>
-<li>条件覆盖</li>
-<li>判定覆盖</li>
-<li>语句覆盖</li>
-<li>代码审查</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>测试工具</p>
-</li>
-<li>人力评估</li>
-</ul>
-</li>
-<li><p>评审、完善</p>
-</li>
-<li>提取测试需求</li>
-<li><p>设计测试用例</p>
-<ul>
-<li>数据准备</li>
-</ul>
-</li>
-<li><p>评审、完善</p>
-</li>
-<li>搭建测试环境</li>
-<li>冒烟测试</li>
-<li><p>执行测试用例</p>
-<ul>
-<li>完善测试用例</li>
-</ul>
-</li>
-<li><p>报告输出</p>
-</li>
-<li>编写用户使用说明书</li>
-</ul>
-<h3 id="敏捷测试"><a href="#敏捷测试" class="headerlink" title="敏捷测试"></a>敏捷测试</h3><h3 id="流程改进"><a href="#流程改进" class="headerlink" title="流程改进"></a>流程改进</h3><ul>
-<li>问题</li>
-<li>如何改进</li>
-<li>怎样实施</li>
-</ul>
-<h3 id="测试类型"><a href="#测试类型" class="headerlink" title="测试类型"></a>测试类型</h3><ul>
-<li>API测试</li>
-<li>性能测试</li>
-<li>压力测试</li>
-<li>负载测试</li>
-<li>UI测试</li>
-<li>兼容性测试</li>
-<li>安全测试</li>
-<li>恢复测试</li>
-<li>可用性测试</li>
-<li>可靠性测试</li>
-<li>安装测试</li>
-<li>本地化测试</li>
-<li>国际化测试</li>
-</ul>
-<h3 id="测试阶段分类"><a href="#测试阶段分类" class="headerlink" title="测试阶段分类"></a>测试阶段分类</h3><ul>
-<li><p>单元测试</p>
-<ul>
-<li>Junit</li>
-</ul>
-</li>
-<li><p>集成测试</p>
-</li>
-<li>系统测试</li>
-<li>验收测试</li>
-<li>A测试</li>
-<li>B测试</li>
-<li>回归测试</li>
-<li>冒险测试</li>
-</ul>
-<h3 id="自动化环境"><a href="#自动化环境" class="headerlink" title="自动化环境"></a>自动化环境</h3><ul>
-<li><p>接口测试</p>
-<ul>
-<li>定义</li>
-<li>库</li>
-<li>语言</li>
-<li>分类</li>
-</ul>
-</li>
-<li><p>客户端</p>
-<ul>
-<li><p>库</p>
-<ul>
-<li><p>appium</p>
-<ul>
-<li>支持OSX， Windows以及linux系统， 使用同一套API来写自动化测试</li>
-<li><p>工作原理</p>
-<ul>
-<li><p>Appium-client(用各类语言写的测试脚本 )</p>
-<ul>
-<li>java-client</li>
-<li>python-client</li>
-<li>ruby-cli</li>
-</ul>
-</li>
-<li><p>Appium-server(安装appium的工具，用来监听client端的请求，转发请求并控制移动设备执行测试，默认开启并监听4723接口)</p>
-<ul>
-<li>appium.dmg</li>
-<li>AppiumForWindow.zip</li>
-</ul>
-</li>
-<li><p>移动设备</p>
-<ul>
-<li>Android 模拟器</li>
-<li>Android真机</li>
-<li>IOS 真机</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>过程</p>
-<ul>
-<li>在某台服务器上安装appium工具（server端），开启进程（默认4723接口）进行监听</li>
-<li>编写测试脚本，放置到服务器上，执行该测试脚本（相当于发送命令给server端）</li>
-<li>移动设备接收到server端发送过来的命令，执行指定的操作</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>python-uiautomator2(Android)</p>
-<ul>
-<li><p>原理</p>
-<ul>
-<li>python端</li>
-<li><p>移动设备</p>
-<ul>
-<li><p>atx-agent</p>
-<ul>
-<li>安卓真机</li>
-<li>安卓模拟机</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>过程</p>
-<ul>
-<li>在移动设备上安装atx-agent(守护进程), 随后atx-agent启动uiautomator2服务(默认7912端口)进行监听</li>
-<li>在PC上编写测试脚本并执行（相当于发送HTTP请求到移动设备的server端）</li>
-<li>移动设备通过WIFI或USB接收到PC上发来的HTTP请求，执行制定的操作</li>
-</ul>
-</li>
-<li><p><a href="https://testerhome.com/topics/11357" target="_blank" rel="noopener">https://testerhome.com/topics/11357</a></p>
-</li>
-</ul>
-</li>
-<li><p>requests</p>
-<ul>
-<li>get</li>
-<li>post</li>
-<li>put</li>
-<li>delete</li>
-</ul>
-</li>
-<li><p>selenium</p>
-<ul>
-<li><p>driver</p>
-<ul>
-<li>webdriver.chrome()</li>
-<li>wedriver.IE()</li>
-<li>webdriver.Firefox()</li>
-</ul>
-</li>
-<li><p>element</p>
-<ul>
-<li>bycss</li>
-<li>byid</li>
-<li>byxpath</li>
-<li>….</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>pyjson</p>
-<ul>
-<li>json.load()</li>
-<li><p>json.dumps()</p>
-<p>和python中各个类型进行转换<br>object&gt;dict</p>
-</li>
-</ul>
-</li>
-<li><p>xlrd</p>
-</li>
-<li>yaml</li>
-<li>pysql</li>
-<li>pytest</li>
-<li>pycurl</li>
-</ul>
-</li>
-<li><p>工具</p>
-<ul>
-<li>jenkins</li>
-<li>Allure report</li>
-<li>pytest</li>
-<li>fiddler</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>架构</p>
-<ul>
-<li>log, mysql, yaml, json, xml</li>
-<li>Base Class: Mobile, Web, API</li>
-<li><p>Project Base</p>
-<ul>
-<li>参数分离</li>
-<li>读取参数</li>
-</ul>
-</li>
-<li><p>Project Case</p>
-<ul>
-<li>precondition</li>
-<li>setup</li>
-<li>steps</li>
-<li>cleanup</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="项目经历-工作"><a href="#项目经历-工作" class="headerlink" title="项目经历/工作"></a>项目经历/工作</h2><h3 id="CDC-MP-MR"><a href="#CDC-MP-MR" class="headerlink" title="CDC MP/MR"></a>CDC MP/MR</h3><ul>
-<li>产品线</li>
-<li>数据展示在APP端，Web端</li>
-<li><p>通过蓝牙，BLE, BT</p>
-<ul>
-<li>配对</li>
-<li>数据传输（WIFI）</li>
-<li>USB/ANT 传输数据</li>
-</ul>
-</li>
-<li><p>和server 交互的部分</p>
-<ul>
-<li><p>丢包</p>
-<ul>
-<li>fidder</li>
-<li>API/ postman</li>
-<li>Sniffer</li>
-<li>查询后台log</li>
-<li>Debug 版本查看log</li>
-</ul>
-</li>
-<li><p>server连接错误</p>
-</li>
-<li>SSO </li>
-<li>OMT server</li>
-</ul>
-</li>
-</ul>
-<h3 id="CIQ-Music"><a href="#CIQ-Music" class="headerlink" title="CIQ Music"></a>CIQ Music</h3><ul>
-<li>明星产品</li>
-<li>5*6</li>
-<li><p>痛点</p>
-<ul>
-<li>本地化测试</li>
-<li>网络问题</li>
-<li><p>第三方交互问题</p>
-<ul>
-<li>API 接口</li>
-<li>Review 代码</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="流程改进-1"><a href="#流程改进-1" class="headerlink" title="流程改进"></a>流程改进</h3><h3 id="Auto-key相关"><a href="#Auto-key相关" class="headerlink" title="Auto key相关"></a>Auto key相关</h3><ul>
-<li>树莓派</li>
-<li>录制</li>
-</ul>
-<h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ul>
-<li><p>System</p>
-<ul>
-<li>cat /proc/cpuinfo</li>
-<li>date</li>
-</ul>
-</li>
-<li><p>shutdown</p>
-<ul>
-<li>shutdown -h now 关闭系统(1) </li>
-<li>init 0 关闭系统(2</li>
-<li>telinit 0 关闭系统(3) </li>
-<li>shutdown -h hours:minutes &amp; 按预定时间关闭系统 </li>
-<li>shutdown -c 取消按预定时间关闭系统 </li>
-<li>shutdown -r now 重启(1) </li>
-<li>reboot 重启(2) </li>
-</ul>
-</li>
-<li><p>files and directory</p>
-<ul>
-<li>cd/cd ../cd ../.. /cd ~user1</li>
-<li>cp/mv</li>
-<li>ln -s file1 lnk1 创建一个指向文件或目录的软链接 </li>
-<li>ln file1 lnk1 创建一个指向文件或目录的物理链接 </li>
-<li>pwd</li>
-<li>ls/ls -l</li>
-<li>tree/lstree</li>
-<li>mkdir/mkdir -p /tmp/dir1</li>
-<li>rm -rf</li>
-</ul>
-</li>
-<li><p>find</p>
-</li>
-<li>挂载一个文件系统 </li>
-<li><p>磁盘空间</p>
-<ul>
-<li>df -h 显示已经挂载的分区列表 </li>
-<li>ls -lSr |more 以尺寸大小排列文件和目录</li>
-</ul>
-</li>
-<li><p>用户和群组 </p>
-<ul>
-<li>groupadd group_name 创建一个新用户组 </li>
-<li>groupdel group_name 删除一个用户组 </li>
-<li>passwd 修改口令</li>
-</ul>
-</li>
-<li><p>文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消</p>
-<ul>
-<li>ls -lh 显示权限</li>
-<li>chown user1:group1 file1 改变一个文件的所有人和群组属性</li>
-<li>chattr +a file1 只允许以追加方式读写文件</li>
-</ul>
-</li>
-<li><p>查看文件内容 </p>
-<ul>
-<li>cat file1 从第一个字节开始正向查看文件的内容 </li>
-<li>more file1 查看一个长文件的内容 </li>
-<li>tail -2 file1 查看一个文件的最后两行 </li>
-<li>head -2 file1 查看一个文件的前两行 </li>
-<li>tail -f /var/log/messages 实时查看被添加到一个文件中的内容 </li>
-</ul>
-</li>
-<li><p>文本处理</p>
-<ul>
-<li>grep Aug /var/log/messages 在文件 ‘/var/log/messages’中查找关键词”Aug” </li>
-<li>grep ^Aug /var/log/messages 在文件 ‘/var/log/messages’中查找以”Aug”开始的词汇 </li>
-<li>sort file1 file2 排序两个文件的内容 </li>
-</ul>
-</li>
-<li><p>子主题 10</p>
-</li>
-</ul>
-<h3 id="curl-API"><a href="#curl-API" class="headerlink" title="curl(API)"></a>curl(API)</h3><h3 id="PowerShell"><a href="#PowerShell" class="headerlink" title="PowerShell"></a>PowerShell</h3><ul>
-<li>Get-Content</li>
-<li>Get-Process</li>
-<li>子主题 3</li>
-</ul>
-<h3 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h3><h2 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h2><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
-<li>测试策略</li>
-<li>测试风险</li>
-<li>测试资源/进度</li>
-<li>测试计划</li>
-<li>实验室</li>
-<li>测试团队</li>
-<li>测试覆盖</li>
-<li>测试报告</li>
-<li>模板</li>
-</ul>
-<h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><ul>
-<li>客户需求</li>
-<li>质量文化</li>
-<li>质量保证</li>
-<li>测试现实</li>
-<li>测试原则</li>
-<li>测试驱动</li>
-<li>成熟度模型</li>
-</ul>
-<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
-<li>缺陷报告</li>
-<li>缺陷生命周期</li>
-<li>缺陷跟踪</li>
-<li>趋势分析</li>
-<li>分布分析</li>
-<li>缺陷清除率</li>
-<li>质量评估</li>
-<li>缺陷预防</li>
-</ul>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
-<li><p>开发</p>
-<ul>
-<li>用例review</li>
-<li>工作流程确认</li>
-<li>测试报告</li>
-</ul>
-</li>
-<li><p>测试人员</p>
-<ul>
-<li>培训</li>
-<li><p>制定SOP</p>
-<ul>
-<li>测试环境</li>
-<li>版本</li>
-<li>内容</li>
-<li>如何准备数据</li>
-<li>回报问题template</li>
-<li>问题回报规则</li>
-<li>测试进度回报</li>
-<li>测试完成小结</li>
-</ul>
-</li>
-<li><p>管理</p>
-</li>
-</ul>
-</li>
-<li><p>跨地区</p>
-<ul>
-<li>合作方式</li>
-<li>流程规范</li>
-</ul>
-</li>
-<li><p>PM</p>
-<ul>
-<li>Meeting</li>
-<li>测试报告</li>
-</ul>
-</li>
-<li><p>UX</p>
-<ul>
-<li>需求</li>
-<li>meeting</li>
-<li>测试报告</li>
-</ul>
-</li>
-<li><p>客服</p>
-<ul>
-<li>培训</li>
-<li>trouble shooting</li>
-<li>流程规范</li>
-</ul>
-</li>
-</ul>
-<h2 id="一个测试系统需要测试的点"><a href="#一个测试系统需要测试的点" class="headerlink" title="一个测试系统需要测试的点"></a>一个测试系统需要测试的点</h2><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><h3 id="API-测试"><a href="#API-测试" class="headerlink" title="API 测试"></a>API 测试</h3><ul>
-<li><p>测试范围</p>
-<ul>
-<li>业务功能（包括正常、异常场景是否实现）</li>
-<li>业务规则（覆盖度是否全面）</li>
-<li>参数验证（边界、业务规则是否达到要求）</li>
-<li>异常场景（重复提交、并发提交、事务中断、多机环境、大数据量测试）</li>
-<li>性能测试（响应时间、吞吐量、并发数、资源要求）</li>
-<li>安全测试（权限验证、SQL注入等）</li>
-</ul>
-</li>
-<li><p>接口测试的重点</p>
-<ul>
-<li>检查接口返回的数据是否与预期结果一致。</li>
-<li>检查接口的容错性，假如传递数据的类型错误时是否可以处理。</li>
-<li>接口参数的边界值。例如，传递的参数足够大或为负数时，接口是否可以正常处理</li>
-<li>接口的性能，http请求接口大多与后端执行的SQL语句性能、算法等比较相关。</li>
-<li>接口的安全性，外部调用的接口尤为重要。</li>
-</ul>
-</li>
-<li><p>注意点</p>
-<ul>
-<li>子主题 1</li>
-<li>子主题 2</li>
-<li>子主题 3</li>
-<li>子主题 4</li>
-</ul>
-</li>
-</ul>
-<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
-<li><p>指标</p>
-<p>QPS（TPS）= 并发数/平均响应时间</p>
-<ul>
-<li>QPS（TPS）：每秒钟request/事务 数量</li>
-<li>并发数： 系统同时处理的request/事务数</li>
-<li>响应时间：  一般取平均响应时间</li>
-<li><p>日PV：每天访问的流量</p>
-<ul>
-<li>Nginx</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>做法</p>
-<ul>
-<li><p>系统</p>
-<ul>
-<li>CPU运算</li>
-<li>IO</li>
-<li>外部系统响应</li>
-</ul>
-</li>
-<li><p>关注点</p>
-<ul>
-<li><p>用户</p>
-<ul>
-<li>响应时间</li>
-</ul>
-</li>
-<li><p>管理员</p>
-<ul>
-<li>响应时间</li>
-<li>服务器资源使用情况是否合理</li>
-<li>应用服务器和数据库资源使用是否合理</li>
-<li>系统能否实现扩展</li>
-<li>系统最多支持多少用户访问、系统最大业务处理量是多少</li>
-<li>系统性能可能存在的瓶颈在哪里</li>
-<li>更换那些设备可以提高性能</li>
-<li>系统能否支持7×24小时的业务访问</li>
-</ul>
-</li>
-<li><p>开发者</p>
-<ul>
-<li>架构设计是否合理</li>
-<li>数据库设计是否合理</li>
-<li>代码是否存在性能方面的问题</li>
-<li>系统中是否有不合理的内存使用方式</li>
-<li>系统中是否存在不合理的线程同步方式</li>
-<li>系统中是否存在不合理的资源竞争</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>指标计算</p>
-<ul>
-<li><p>QPS</p>
-<ul>
-<li>网络传输时间：N1+N2+N3+N4</li>
-<li>应用服务器处理时间：A1+A3</li>
-<li>数据库服务器处理时间：A2</li>
-</ul>
-</li>
-<li><p>并发用户数</p>
-</li>
-<li>吞吐量</li>
-<li><p>性能计数器</p>
-<ul>
-<li>资源利用率</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>如何做好性能测试</p>
-<ul>
-<li><p>成员</p>
-<ul>
-<li>子主题 1</li>
-<li>子主题 2</li>
-<li>子主题 3</li>
-<li>子主题 4</li>
-</ul>
-</li>
-<li><p>子主题 2</p>
-</li>
-<li>子主题 3</li>
-<li>子主题 4</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>工具</p>
-<ul>
-<li>Nginx</li>
-<li>Jmeter</li>
-<li>Loadrunner</li>
-</ul>
-</li>
-</ul>
-<h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3><h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
-<li><p>Browser</p>
-<ul>
-<li>IE</li>
-<li>Firefox</li>
-<li>Chrome</li>
-<li>Safari</li>
-</ul>
-</li>
-<li><p>Mobile</p>
-<ul>
-<li>IOS</li>
-<li><p>Android</p>
-<ul>
-<li>Version</li>
-<li>Products</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>PC Sytems</p>
-<ul>
-<li>Windows</li>
-<li>MAC</li>
-</ul>
-</li>
-</ul>
-<h3 id="可用性测试"><a href="#可用性测试" class="headerlink" title="可用性测试"></a>可用性测试</h3><ul>
-<li>是否可以全用键盘操作，是否有快捷键</li>
-<li>输入用户名，密码后按回车，是否可以登陆</li>
-<li>输入框能否可以以Tab键切换</li>
-</ul>
-<h3 id="本地化测试"><a href="#本地化测试" class="headerlink" title="本地化测试"></a>本地化测试</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><ul>
-<li><p>服务器端接口测试</p>
-<ul>
-<li><p>ZAP 代理扫描</p>
-<ul>
-<li><p>SQL 注入</p>
-<ul>
-<li>通过正常WW 接口访问，制造SQL 语句</li>
-<li>需要查询IIS 日志习惯</li>
-<li>Insert</li>
-</ul>
-</li>
-<li><p>XSS 脚本攻击</p>
-</li>
-<li>CSRF 跨站请求伪造</li>
-<li>越权访问</li>
-</ul>
-</li>
-<li><p>结合需求，设计和代码，需求和设计本身带来的问题</p>
-<ul>
-<li>滥用密码恢复</li>
-<li>滥用可预测的标识符</li>
-<li>滥用高负载操作（DOS 攻击）</li>
-<li>滥用竞争关系（SQL 中操作）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>账户安全</p>
-<ul>
-<li><p>Login</p>
-<ul>
-<li>注册位数/密码明文暗文传输</li>
-<li>密码错误最大尝试次数</li>
-<li>是否允许多台设备同时登陆一个账号</li>
-<li>设备数量是否有限制</li>
-<li>同一账号发送请求的次数限制</li>
-<li>用户权限</li>
-<li>注销机制（用户注销后，任何需要调用身份验证的接口调用都不能成功）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据通信安全</p>
-<ul>
-<li>关键数据散列或者加密</li>
-<li>安全通信</li>
-<li>数字证书合法验证</li>
-<li>是否检验数据合法性</li>
-</ul>
-</li>
-<li><p>安装包测试</p>
-</li>
-<li>敏感信息测试</li>
-<li>软键盘挟持</li>
-<li>组建安全性</li>
-</ul>
-<p><em>XMind: ZEN - Trial Version</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/01/resume/" data-id="cjutd6d3h0038kgvxemt3ul67" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -1584,7 +340,7 @@ return $(($aNum+$anotherNum))
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/4/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/echoblog.github.io/page/6/">6</a><a class="page-number" href="/echoblog.github.io/page/7/">7</a><a class="page-number" href="/echoblog.github.io/page/8/">8</a><a class="extend next" rel="next" href="/echoblog.github.io/page/6/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/4/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/echoblog.github.io/page/6/">6</a><a class="page-number" href="/echoblog.github.io/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/9/">9</a><a class="extend next" rel="next" href="/echoblog.github.io/page/6/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1605,7 +361,7 @@ return $(($aNum+$anotherNum))
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
     </div>
   </div>
 
@@ -1615,7 +371,7 @@ return $(($aNum+$anotherNum))
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -1637,6 +393,14 @@ return $(($aNum+$anotherNum))
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/23/python10/">BDD--Lettuce</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
           </li>
         
@@ -1646,14 +410,6 @@ return $(($aNum+$anotherNum))
         
           <li>
             <a href="/echoblog.github.io/2019/04/21/python8/">Python Multiple Threading</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/21/python7/">Selenium Grid2</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
           </li>
         
       </ul>
