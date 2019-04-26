@@ -62,6 +62,110 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/23/python10/" class="article-date">
+  <time datetime="2019-04-23T12:37:24.000Z" itemprop="datePublished">2019-04-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/23/python10/">BDD--Lettuce</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="对比框架"><a href="#对比框架" class="headerlink" title="对比框架"></a>对比框架</h4><p>TDD: Test-Driven Development<br>TDD 原理是在开发功能代码之前，先编写单元测试用例代码，确定需要编写什么产品代码。TDD的基本思路是通过测试来驱动开发的进行，但测试驱动开发并不只是单纯的测试工作，而是把需求分析、设计和质量控制量化的过程。<br>TDD首先考虑使用需求（对象、功能、过程、接口等），主要是编写测试用例框架对功能的过程和接口进行设计，而测试框架可以持续进行验证。</p>
+<p>ATDD： Acceptance Test Driven Development</p>
+<p>BDD: Behavior Driven Development<br>主要从用户的需求出发，强调系统行为。包括验收测试和客户测试驱动等极限编程的实践，作为对测试驱动开发的回应。</p>
+<h4 id="不同语言下的BDD-框架"><a href="#不同语言下的BDD-框架" class="headerlink" title="不同语言下的BDD 框架"></a>不同语言下的BDD 框架</h4><p>Cucumber(Ruby)<br>Jdave(Java)<br>Beha(PHP)<br>Behave(Python) <a href="http://pythonhosted.org/behave" target="_blank" rel="noopener">http://pythonhosted.org/behave</a><br>Lettuce(Python)  <a href="http://Lettuce.it" target="_blank" rel="noopener">http://Lettuce.it</a></p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>通过装饰器来做base类，然后再写一些不一样的场景来实现测试用例的增加。</p>
+<p>通过场景可以完成测试用例的编写</p>
+<p>写行为的时候需要去匹配封装的那些行为。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/23/python10/" data-id="cjuy7fey0002mdkvxzpg2gn8f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/22/java1/" class="article-date">
+  <time datetime="2019-04-22T12:25:36.000Z" itemprop="datePublished">2019-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>支付问题： 用户》交易平台》第三方支付</p>
+<p>处理时长会导致请求被阻塞，以及系统支援的开销</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>使用多线程<br>怎样实现多线程？<br>内部和第三方实现多线程</p>
+<p>如果构建：<br>用户》交易平台》队列》线程》第三方支付<br>使用队列去做，异步轮询队列中的数据</p>
+<ol>
+<li>构建阻塞队列</li>
+<li>加线程池</li>
+<li>构建新的第三方支付服务</li>
+<li>提交payment 请求请求数据</li>
+<li>通过队列拿到请求，进行处理。阻塞获取队列中的</li>
+</ol>
+<h4 id="那些场景会使用到"><a href="#那些场景会使用到" class="headerlink" title="那些场景会使用到"></a>那些场景会使用到</h4><p>多线程能够合理的利用CPU资源区实现任务的并行处理，提升程序的性能处理</p>
+<p>IO 的处理： 网络IO和文件IO<br>IO 性能提升方法：<br>TOMCAT(BIO)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/22/java1/" data-id="cjuy7fexf0029dkvxzqkwjmnu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python9" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/21/python9/" class="article-date">
@@ -104,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjuuuuw3j0039gkvxf7zfbogp" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjuy7ff08003cdkvxd3933st6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -179,7 +283,7 @@ print(&quot;all ends: %s&quot; %ctime())
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjuuuuw3h0035gkvx9odoshye" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjuy7ff0d003hdkvx75b9vc74" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -254,107 +358,7 @@ print(&apos;end&apos;)
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjuuuuw3f0033gkvxba6wgb8w" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python6" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/20/python6/" class="article-date">
-  <time datetime="2019-04-20T14:55:09.000Z" itemprop="datePublished">2019-04-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/20/python6/">HTMLTestRunner</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h4><p><a href="http://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py" target="_blank" rel="noopener">http://tungwaiyip.info/software/HTMLTestRunner_0_8_2/HTMLTestRunner.py</a></p>
-<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
-<li>HTMLTestRunner是基于Python2 开发的，在Python3上使用，需要修改某些代码</li>
-<li>下载文件之后，需要把文件复制到Python的Lib目录下</li>
-<li>使用方法：使用main函数进行调用<br> suite = unittest.TestSuite()<br> suite.addTest(TestMethod(“test_add1”))<br> suite.addTest(TestMethod(“test_add2”))<br> fp = open(“./result.html”,”wb”)<br> runner = HTMLTestRunner(stream=fp, title=”result report”, description=u”Details”)<br> runner.run(suite)<br> fp.close()</li>
-</ol>
-<h4 id="Trouble-Shooting"><a href="#Trouble-Shooting" class="headerlink" title="Trouble Shooting"></a>Trouble Shooting</h4><ol>
-<li>Pycharm 中main函数不会执行的问题解决：<br>Root Cause: 因为没有设置运行设置，目前可以看到默认运行的设置是：pytest。所以执行该文件就不会运行到main 函数<br>1）修改执行configuration<br>2）Edit<br>3）有三个选择：<br>–Python<br>–Python tests<br>–Templates<br>4） 选择python, 点击添加，放入脚本路径，保存<br>5）执行，就可生成</li>
-</ol>
-<h4 id="报告优化"><a href="#报告优化" class="headerlink" title="报告优化"></a>报告优化</h4><ol>
-<li>增加注释</li>
-<li>注释有两种： comment和doc string。 其中前者是普通注释，后者用于函数，类和方法的描述<br>增加注释可以让报告阅读更容易</li>
-<li>增加时间戳可以让旧报告不会被覆盖。方法：<br>time.time() 获取当前时间戳<br>time.ctime() 当前时间的字符串形式<br>time.localtime() 当前时间的struct_time形式<br>time.strftime() 用来获取当前时间，可以将时间格式化为字符串。<br>比如：<br>now=time.time.strftime(“%Y-%m-%d %H_%M_%S”)<br>filename=’./‘+now+’result.html’</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/20/python6/" data-id="cjuuuuw3d002zgkvxel599ka9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-framework" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/18/java-framework/" class="article-date">
-  <time datetime="2019-04-18T12:47:24.000Z" itemprop="datePublished">2019-04-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/18/java-framework/">java-framework</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>JAVA 最小执行单位： 线程<br>局部变量表</p>
-<p>一个方法调用时一个栈帧<br>虚拟机栈 FILO<br>MethodOne:<br>–局部变量表<br>–操作数栈<br>–动态链接<br>–出口</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/java-framework/" data-id="cjuuuuw1m0020gkvxg24vwdv1" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjuy7fezy0038dkvx7jc1zmd7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -370,7 +374,7 @@ print(&apos;end&apos;)
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/9/">9</a><a class="extend next" rel="next" href="/echoblog.github.io/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/10/">10</a><a class="extend next" rel="next" href="/echoblog.github.io/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -423,6 +427,14 @@ print(&apos;end&apos;)
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/26/Performance3/">如何估计性能测试并发量</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/26/python11/">appium API</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/24/InterfaceTesting/">InterfaceTesting</a>
           </li>
         
@@ -432,14 +444,6 @@ print(&apos;end&apos;)
         
           <li>
             <a href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/23/python10/">BDD--Lettuce</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
           </li>
         
       </ul>

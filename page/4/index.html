@@ -62,6 +62,172 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/15/python4/" class="article-date">
+  <time datetime="2019-04-15T14:52:31.000Z" itemprop="datePublished">2019-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/15/python4/">model</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="自动化测试模型介绍"><a href="#自动化测试模型介绍" class="headerlink" title="自动化测试模型介绍"></a>自动化测试模型介绍</h3><h4 id="线性测试"><a href="#线性测试" class="headerlink" title="线性测试"></a>线性测试</h4><p>优点：无依赖关系，顺序<br>缺点： 开发/维护成本高<br>结构化：</p>
+<ol>
+<li>判断</li>
+<li>循环</li>
+</ol>
+<h4 id="模块化驱动测试"><a href="#模块化驱动测试" class="headerlink" title="模块化驱动测试"></a>模块化驱动测试</h4><p>重复操作独立成共同模块 </p>
+<h4 id="数据驱动测试"><a href="#数据驱动测试" class="headerlink" title="数据驱动测试"></a>数据驱动测试</h4><p>数据的参数化<br>输入数据的不同，结果也不同<br>比如不同用户的登陆，不同数据的传输</p>
+<h4 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h4><p>关键字==函数<br>def func()<br>如： Robot Framework<br>使用关键字，传输一些参数</p>
+<p>文件读取数据 txt：<br>from seleniu import webdriver<br>from time import sleep<br>files = open(‘data.txt’,’r’)<br>for li in files.readlines():<br>    dr= webdriver.Chrome()<br>    dr.get(‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>)<br>    dr.find_element_by_id(‘kw’).send_keys(line)<br>    sleep(3)<br>    dr.quit()</p>
+<p>读取用户名和密码<br>也可以直接for循环去读取<br>split可以去分割数据</p>
+<h4 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h4><p>import csv<br>csv.reader(file(file,’rb’))</p>
+<p>返回的是数组</p>
+<h4 id="读取xml文件"><a href="#读取xml文件" class="headerlink" title="读取xml文件"></a>读取xml文件</h4><p>import xml.dom.minicom<br>dom = xml.dom.minidom.parse(‘info.xml’)    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjuy7feyv002wdkvxaqvf27gh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-python3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/14/python3/" class="article-date">
+  <time datetime="2019-04-14T11:56:13.000Z" itemprop="datePublished">2019-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/14/python3/">webdriver_api</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="set-window-size"><a href="#set-window-size" class="headerlink" title="set_window_size()"></a>set_window_size()</h4><p>from selenium import webdriver<br>from time import  sleep<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://m.mail.10086.cn&quot;" target="_blank" rel="noopener">http://m.mail.10086.cn&quot;</a>)<br>dr.set_window_size(480,800)<br>sleep(3)<br>dr.quit()</p>
+<h4 id="maxmize-window"><a href="#maxmize-window" class="headerlink" title="maxmize_window()"></a>maxmize_window()</h4><h4 id="back-amp-forward"><a href="#back-amp-forward" class="headerlink" title="back() &amp;forward()"></a>back() &amp;forward()</h4><p>from selenium import webdriver<br>from time import  sleep<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.maximize_window()<br>dr.find_element_by_link_text(u”新闻”).click()<br>now_url = dr.current_url<br>print(now_url)<br>dr.back()<br>second_url = dr.current_url<br>dr.forward()<br>print(second_url)<br>sleep(3)<br>dr.quit()</p>
+<h4 id="click-amp-clear-amp-send-keys"><a href="#click-amp-clear-amp-send-keys" class="headerlink" title="click()&amp;clear()&amp;send_keys()"></a>click()&amp;clear()&amp;send_keys()</h4><p>click()在某些状况下可以和submit() 相互替换<br>size 返回元素的尺寸<br>text 返回文本文档<br>get_attribute(name) 获取属性值<br>is_displayed()设置该元素是否用户可见</p>
+<p>size=dr.find_element_by_link_text(u”新闻”).size<br>dr.find_element_by_link_text(u”新闻”).click()<br>text=dr.find_element_by_link_text(u”新闻”).text<br>attribute=dr.find_element_by_link_text(u”新闻”).get_attribute(“type”)<br>result=dr.find_element_by_link_text(u”新闻”).is_displayed()</p>
+<p>python中解决乱码问题的方法<br>import sys<br>reload(sys)<br>sys.setdefaultencoding(‘utf-8’)</p>
+<p>可以通过type找元素</p>
+<h4 id="Mouse-Event"><a href="#Mouse-Event" class="headerlink" title="Mouse Event"></a>Mouse Event</h4><p>click()<br>double_click() 双击<br>perform() 执行所有Action Chains 中的存储行为<br>context_click()  右击<br>drag_and_drop() 拖动<br>move_to_element() 鼠标悬停</p>
+<p>from selenium import webdriver<br>from selenium.webdriver.common.action_chains import ActionChains<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)</p>
+<p>right_click = dr.find_element_by_link_text(u”新闻”)</p>
+<p>#右击<br>ActionChains(dr).context_click(right_click).perform()</p>
+<p>#双击<br>ActionChains(dr).double_click(right_click).perform()</p>
+<p>#拖拽<br>ActionChains(dr).drag_and_drop(element,target).perform()<br>element: 源位置<br>target: 目标位置</p>
+<p>怎样定位右键菜单的元素？<br>作业：百度》搜索》设置》更改》保存</p>
+<p>from selenium import webdriver<br>import time<br>from selenium.webdriver.common.action_chains import ActionChains<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)</p>
+<p>ele=dr.find_element_by_link_text(u”设置”)</p>
+<h1 id="ele-dr-find-element-by-css-selector-“-setting-text”"><a href="#ele-dr-find-element-by-css-selector-“-setting-text”" class="headerlink" title="ele = dr.find_element_by_css_selector(“.setting-text”)"></a>ele = dr.find_element_by_css_selector(“.setting-text”)</h1><p>ActionChains(dr).move_to_element(ele).perform()<br>time.sleep(3)<br>ele2=dr.find_element_by_link_text(u”搜索设置”).click()<br>time.sleep(3)<br>dr.find_element_by_css_selector(“#s1_2”).click()<br>time.sleep(3)<br>dr.find_element_by_css_selector(“.prefpanelgo”).click()<br>dr.quit()</p>
+<h4 id="Keyboad-Event"><a href="#Keyboad-Event" class="headerlink" title="Keyboad Event"></a>Keyboad Event</h4><p>send_keys()<br>from selenium.webdriver.common.keys import Keys<br>send_keys(Keys.BACK_SPACE)<br>send_keys(Keys.ENTER)<br>send_keys(Keys.CONCTROL,’v’)</p>
+<p>相关文档： Selenium Python Bindings</p>
+<p>判断操作完成的一些线索：</p>
+<ol>
+<li>url</li>
+<li>页面元素</li>
+<li>文本信息</li>
+<li>title 信息</li>
+<li>标志性信息–退出/id</li>
+</ol>
+<h4 id="Waiting"><a href="#Waiting" class="headerlink" title="Waiting"></a>Waiting</h4><p>from selenium.webdriver.support import expected_conditions as EC<br>from selenium.webdriver.common.by import By<br>from selenium.webdriver.support.ui import WebDriverWait<br>from selenium import webdriver<br>from time import sleep<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)</p>
+<p>element = WebDriverWait(dr, 5, 0.5).until(EC.presence_of_all_elements_located(By.ID,””))</p>
+<p>“””<br>for i in range(10):<br>    el = dr.find_element_by_id().is_displayed()<br>    if el == ‘True’:<br>        el.click()<br>    else:<br>        sleep(0.5)<br>“””</p>
+<p>隐式等待：implictly_wait(30)<br>e.g:<br>from selenium import webdriver<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.implicitly_wait(30)</p>
+<p>element=dr.find_element_by_id(“kw”)<br>element.send_keys(u”权力的游戏”)<br>dr.find_element_by_id(“su”).click()<br>print(dr.current_url)<br>dr.quit()</p>
+<p>e.g1:<br>import time<br>from selenium import webdriver<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.implicitly_wait(30)</p>
+<p>print(time.ctime())<br>try:<br>    element=dr.find_element_by_id(“kwm”)<br>    element.send_keys(u”权力的游戏”)<br>    dr.find_element_by_id(“su”).click()<br>    print(dr.current_url)<br>except Exception  as e:<br>    print(e)<br>finally:<br>    print(time.ctime())<br>    dr.quit()</p>
+<h4 id="checkbox-操作"><a href="#checkbox-操作" class="headerlink" title="checkbox 操作"></a>checkbox 操作</h4><p>find_element_by_css_selector<br>find_elements_by_css_selector<br>get_attribute(type)可以判断获取元素的类型</p>
+<h4 id="frame多表单切换"><a href="#frame多表单切换" class="headerlink" title="frame多表单切换"></a>frame多表单切换</h4><p>driver.switch_to.frame(“id”)<br>只能使用id, 但如果没有id 属性，则可以使用xpath 来定位元素，在使用xpath所定位的element到frame 里面</p>
+<h4 id="多窗口切换"><a href="#多窗口切换" class="headerlink" title="多窗口切换"></a>多窗口切换</h4><p>跨域网站的访问<br>窗口句柄<br>driver.window_handles<br>driver.current_window_handle<br>driver.switch_to.window(handle)</p>
+<h4 id="alert-window"><a href="#alert-window" class="headerlink" title="alert window"></a>alert window</h4><p>使用switch_to_alert()方法定位到alert/confirm/prompt,然后使用text/accept/dismiss/send_keys等方法进行操作。<br>text：返回alert/confirm/prompt中的文字信息<br>accept(): 接受现有警告框<br>dismiss():解散现有警告框<br>send_keys(KeysToSend): 发送文本至警告框。</p>
+<p>driver.switch_to_alert().accept()</p>
+<h4 id="upload-files"><a href="#upload-files" class="headerlink" title="upload files"></a>upload files</h4><p>通过前端来判断</p>
+<ol>
+<li><p>send_keys 实现上传</p>
+</li>
+<li><p>AutoIt<br>下载：<a href="https://www.autoitscript.com/site/autoit/downloads/" target="_blank" rel="noopener">https://www.autoitscript.com/site/autoit/downloads/</a></p>
+</li>
+</ol>
+<p>使用AutoIt来进行元素识别，以及写脚本<br>.au3 的文件<br>文本脚本如下：<br>;ControlFocus(“title”, “text”,controlID) ComboBox = ComboBox Instance 1<br>ControlFocus(“打开”,””,”Edit1”)<br>;Wait 10 seconds for the Upload window to appear<br>WinWait(“[CLASS:#32770]”,””,10)<br>;Set the File name text on the Edit field<br>ControlSetText(“打开”,””,”Edit1”,”D:\BaiduNetdiskDownload\beibei\简历\resume.pdf”)<br>Sleep(2000)</p>
+<p>;Click on the open button<br>ControlClick(“打开”,””,”Button1”)</p>
+<p>保存文件为exe<br>然后再python脚本中进行上传<br>import os<br>os.system(“d:\upfile.exe”)<br>文档参考：<br>Selenium Python Building</p>
+<h4 id="Download-files"><a href="#Download-files" class="headerlink" title="Download files"></a>Download files</h4><p>例子上使用的是Firefox 浏览器<br>需要先设置浏览器的一些相关参数<br>about.config 页面可以查看</p>
+<h4 id="操作cookies"><a href="#操作cookies" class="headerlink" title="操作cookies"></a>操作cookies</h4><p>get_cookies() 获取所有cookies 信息<br>get_cookies(name) 返回有特定name值有cookies信息<br>add_cookies(cookie_dict) 添加cookies,必须有name和value值<br>delete_cookies(name) 删掉特定（部分）的cookie 信息<br>delete_all_cookies() 删除所有cookie信息</p>
+<p>from selenium import webdriver<br>dr=webdriver.Chrome()<br>dr.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>dr.implicitly_wait(30)<br>dr.add_cookie({‘name’:’key—aaaa’,’value’:’value—bbbbb’})<br>cookies = dr.get_cookies()<br>for cookie in cookies:<br>    print(“%s -&gt;%s” %(cookie[‘name’],cookie[“value”]))<br>print(cookies)<br>dr.quit()</p>
+<h4 id="调用Javascript"><a href="#调用Javascript" class="headerlink" title="调用Javascript"></a>调用Javascript</h4><p>js=””<br>driver.execute_script(js)</p>
+<p>如：<br>js=”window.scrollTo(0,450)”<br>或者js=”document.documentElement.scrollTop=10000”<br>如果遇到可以通过id 定位，但是不能通过send_keys()向文本框中输入文本信息，可以使用javascript代码完成输入。<br>如：<br>text=”input text”<br>js=”var sum=document.getElementById(‘id’);sum.value=’”+text+”‘;”<br>driver.execute_script(js)</p>
+<p>参看：<br><a href="http://www.w3school.com.cn/" target="_blank" rel="noopener">http://www.w3school.com.cn/</a> </p>
+<h4 id="关闭窗口"><a href="#关闭窗口" class="headerlink" title="关闭窗口"></a>关闭窗口</h4><p>driver.quit()<br>driver.close()</p>
+<h4 id="验证码"><a href="#验证码" class="headerlink" title="验证码"></a>验证码</h4><ol>
+<li>去掉验证码</li>
+<li>设置万能验证码</li>
+<li>验证码识别技术<br>Python-tesseract</li>
+<li>记录cookie</li>
+</ol>
+<h4 id="WebDriver原理"><a href="#WebDriver原理" class="headerlink" title="WebDriver原理"></a>WebDriver原理</h4><p>Webdriver是按照Server-Client模式设置<br>Server 端就是Remote Server, 可以是任意浏览器。<br>Client 端就是测试代码。<br>工作流程：</p>
+<ol>
+<li>WebDriver启动目标浏览器， 并绑定到指定端口。启动的浏览器实例将作为Webdriver 的remote server</li>
+<li>Client端通过CommandExcuter发送HTTPRequest给remote server的侦听端口（通信协议：the webdriver wire protocol）</li>
+<li>Remote Server 需要依赖原生的浏览器组件（如IEDriverServer.exe、chromedriver.exe）来转化浏览器的native调用。</li>
+</ol>
+<p>Python提供logging模块给运行中的应用提供了一个标准的信息接口。它提供了basicConfig()方法用于基本信息的定义。开启debug模块，就可以捕捉到客户端向服务器发送的请求。</p>
+<p>import logging<br>logging.basicConfig(level=logging.DEBUG)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjuy7fez50030dkvxa3l3vqf3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/14/python2/" class="article-date">
@@ -105,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjuuuuw33002ngkvxhzs7r44i" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjuy7fezk0032dkvx4oj9st7i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -163,7 +329,7 @@ return a
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjuuuuw2j002ggkvxc6cg5iat" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjuy7feyf002pdkvxvojafebg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -302,235 +468,7 @@ return a
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjuuuuw16001sgkvxb06aatbl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PerformanceTesting2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/" class="article-date">
-  <time datetime="2019-04-12T02:55:39.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Performance/">Performance</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>性能测试场景</p>
-<ol>
-<li>并发用户数</li>
-<li>性能瓶颈查找</li>
-<li>同一系统可以采用的架构选择</li>
-<li>功能上某一模块的用户并发数</li>
-</ol>
-<p>主要指标–用户角度</p>
-<ol>
-<li>响应时间<br>–2/5/10 原则<br>–过长等待时间会让客户焦躁不安</li>
-<li>稳定性<br>–HTTP 500<br>–数据库崩溃<br>–应用服务器前端<br>主要指标–系统角度</li>
-<li>网络运行请情况</li>
-<li>硬件配备情况</li>
-<li>软件的配置情况（应用服务器/数据库/系统）<br>mysql.my.ini<br>tomcat<br>JVM 的配置，采用的系统<br>主要指标–开发角度</li>
-<li>系统的框架设计不合理</li>
-<li>对应用的技术不熟悉</li>
-<li>数据库模型设计不合理</li>
-<li>SQL 语句实现性能低下</li>
-<li>开发人员经验不足（算法、代码规范、浪费时间）</li>
-</ol>
-<p>数据库联合查询是利用笛卡尔积</p>
-<p>实施过程</p>
-<ol>
-<li>了解性能测试的需求</li>
-<li>分析测试需求</li>
-<li>编写计划和用例</li>
-<li>相关资源准备</li>
-<li>脚本维护</li>
-<li>执行脚本</li>
-<li>分析结果</li>
-<li>性能优化</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjuuuuw0j0012gkvxwswzz6an" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PerformanceTesting1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/PerformanceTesting1/" class="article-date">
-  <time datetime="2019-04-12T02:21:00.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Performance/">Performance</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/12/PerformanceTesting1/">性能测试流程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/echoblog.github.io/2019/04/12/PerformanceTesting1/性能测试流程.png" alt="性能测试流程"></p>
-<h2 id="测试准备"><a href="#测试准备" class="headerlink" title="测试准备"></a>测试准备</h2><h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><ul>
-<li>用户有明确需求</li>
-<li>用户无明确需求</li>
-</ul>
-<h3 id="建立性能目标"><a href="#建立性能目标" class="headerlink" title="建立性能目标"></a>建立性能目标</h3><ul>
-<li><p>选取核心业务流程（重要程度/频繁）</p>
-<ul>
-<li>登陆</li>
-<li>提交表单</li>
-<li>Sync</li>
-</ul>
-</li>
-<li><p>并发用户数（TPS）</p>
-</li>
-<li>事务吞吐量需求</li>
-<li>响应时间需求</li>
-<li>系统占用资源需求</li>
-<li>可扩展性需求</li>
-</ul>
-<h3 id="了解应用软件"><a href="#了解应用软件" class="headerlink" title="了解应用软件"></a>了解应用软件</h3><ul>
-<li>系统体系架构</li>
-<li>采用的开发语言</li>
-<li>通信协议</li>
-<li>动态session</li>
-<li>验证码问题</li>
-</ul>
-<h3 id="了解软件部署平台"><a href="#了解软件部署平台" class="headerlink" title="了解软件部署平台"></a>了解软件部署平台</h3><ul>
-<li>物理部署（局域网/虚拟机）</li>
-<li>硬件架构（机型/CPU/MEM/IO/网络）</li>
-<li>操作系统（版本/关键内核参数）</li>
-<li>数据库（类型/版本/启动参数/存储布局）</li>
-<li>中间件（类型/线程数/内存参数）</li>
-<li>软件部署模式</li>
-</ul>
-<h3 id="建立系统负载模型"><a href="#建立系统负载模型" class="headerlink" title="建立系统负载模型"></a>建立系统负载模型</h3><ul>
-<li><p>业务层面</p>
-<ul>
-<li>核心业务流程吞吐量</li>
-<li>高峰期业务分布时段</li>
-</ul>
-</li>
-<li><p>系统负载</p>
-<ul>
-<li>高峰/平均场景吞吐量</li>
-<li>CPU/IO/MEM/NETWORK</li>
-</ul>
-</li>
-<li><p>数据来源</p>
-<ul>
-<li>服务器端监控</li>
-<li>数据库日志</li>
-<li>用户提出需求</li>
-</ul>
-</li>
-</ul>
-<h3 id="制定项目计划和方案"><a href="#制定项目计划和方案" class="headerlink" title="制定项目计划和方案"></a>制定项目计划和方案</h3><h2 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h2><h3 id="测试机环境"><a href="#测试机环境" class="headerlink" title="测试机环境"></a>测试机环境</h3><ul>
-<li>JDK</li>
-<li>Eclipse</li>
-<li>Jmeter</li>
-<li>各种监控工具</li>
-</ul>
-<h3 id="服务器环境"><a href="#服务器环境" class="headerlink" title="服务器环境"></a>服务器环境</h3><ul>
-<li>Linux 系统</li>
-<li>数据库</li>
-<li>应用服务</li>
-<li>各种监控工具</li>
-</ul>
-<h2 id="测试脚本开发"><a href="#测试脚本开发" class="headerlink" title="测试脚本开发"></a>测试脚本开发</h2><h3 id="LR-和Jmeter-类同"><a href="#LR-和Jmeter-类同" class="headerlink" title="LR 和Jmeter 类同"></a>LR 和Jmeter 类同</h3><h3 id="选取协议"><a href="#选取协议" class="headerlink" title="选取协议"></a>选取协议</h3><ul>
-<li>选取系统采用的协议</li>
-<li>为了测试变更流程</li>
-<li>使系统适应测试， 如去掉验证码</li>
-</ul>
-<h3 id="增强脚本"><a href="#增强脚本" class="headerlink" title="增强脚本"></a>增强脚本</h3><ul>
-<li>参数化用户输入</li>
-<li>关键数据</li>
-<li>增加事务</li>
-<li>增加检查点</li>
-</ul>
-<h3 id="调试脚本"><a href="#调试脚本" class="headerlink" title="调试脚本"></a>调试脚本</h3><ul>
-<li>Vugen 单次回放</li>
-<li>Vugen 多次回放</li>
-<li>Controller 单脚本多用户</li>
-<li>Controller 多脚本多用户</li>
-<li>查看日志回放</li>
-</ul>
-<h3 id="验证脚本"><a href="#验证脚本" class="headerlink" title="验证脚本"></a>验证脚本</h3><ul>
-<li>通过Loadrunner检查点验证</li>
-<li>通过查看后台服务器日志验证</li>
-<li>通过测试系统查看运行后变化</li>
-<li>利用sql 查询/插入/更改效果</li>
-</ul>
-<h2 id="测试后续跟踪"><a href="#测试后续跟踪" class="headerlink" title="测试后续跟踪"></a>测试后续跟踪</h2><h2 id="结果分析与调优"><a href="#结果分析与调优" class="headerlink" title="结果分析与调优"></a>结果分析与调优</h2><h2 id="测试执行"><a href="#测试执行" class="headerlink" title="测试执行"></a>测试执行</h2><h3 id="设置加压运行场景"><a href="#设置加压运行场景" class="headerlink" title="设置加压运行场景"></a>设置加压运行场景</h3><h3 id="监控操作系统-网络-数据库各个层面"><a href="#监控操作系统-网络-数据库各个层面" class="headerlink" title="监控操作系统/网络/数据库各个层面"></a>监控操作系统/网络/数据库各个层面</h3><ul>
-<li><p>Linux 监控</p>
-<ul>
-<li>监控工具： Nmon， Spoylight on Unix</li>
-<li><p>监控命令</p>
-<ul>
-<li>CPU 监控： top, uptime, dstat</li>
-<li>子主题 2</li>
-<li>子主题 3</li>
-<li>子主题 4</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>JVM 监控</p>
-</li>
-<li>数据库监控</li>
-<li>Windows 监控</li>
-</ul>
-<h3 id="监控应用运行状况-日志"><a href="#监控应用运行状况-日志" class="headerlink" title="监控应用运行状况/日志"></a>监控应用运行状况/日志</h3><h3 id="确认脱压机资源充分"><a href="#确认脱压机资源充分" class="headerlink" title="确认脱压机资源充分"></a>确认脱压机资源充分</h3><h3 id="抽查关键功能是否可用"><a href="#抽查关键功能是否可用" class="headerlink" title="抽查关键功能是否可用"></a>抽查关键功能是否可用</h3><h3 id="稳定性测试检查内训泄露"><a href="#稳定性测试检查内训泄露" class="headerlink" title="稳定性测试检查内训泄露"></a>稳定性测试检查内训泄露</h3><h2 id="测试数据准备"><a href="#测试数据准备" class="headerlink" title="测试数据准备"></a>测试数据准备</h2><h3 id="利用脚本自动生成数据"><a href="#利用脚本自动生成数据" class="headerlink" title="利用脚本自动生成数据"></a>利用脚本自动生成数据</h3><h3 id="利用测试工具生成数据"><a href="#利用测试工具生成数据" class="headerlink" title="利用测试工具生成数据"></a>利用测试工具生成数据</h3><p><em>XMind: ZEN - Trial Version</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting1/" data-id="cjuuuuw0g000zgkvxme2zswlc" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjuy7fewy001mdkvxs7fh8dfi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -546,7 +484,7 @@ return a
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/3/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/echoblog.github.io/page/5/">5</a><a class="page-number" href="/echoblog.github.io/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/9/">9</a><a class="extend next" rel="next" href="/echoblog.github.io/page/5/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/3/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/echoblog.github.io/page/5/">5</a><a class="page-number" href="/echoblog.github.io/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/10/">10</a><a class="extend next" rel="next" href="/echoblog.github.io/page/5/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -599,6 +537,14 @@ return a
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/26/Performance3/">如何估计性能测试并发量</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/04/26/python11/">appium API</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/24/InterfaceTesting/">InterfaceTesting</a>
           </li>
         
@@ -608,14 +554,6 @@ return a
         
           <li>
             <a href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/23/python10/">BDD--Lettuce</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
           </li>
         
       </ul>
