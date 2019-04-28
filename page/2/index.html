@@ -62,6 +62,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-viewquestions" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/24/viewquestions/" class="article-date">
+  <time datetime="2019-04-24T05:42:55.000Z" itemprop="datePublished">2019-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h4><ol>
+<li>左连接和右连接</li>
+</ol>
+<p>左连接，两张表。 返回包括左表中的所有记录和右表中联结字段相等的记录<br>左边有的，右边没有的为null</p>
+<p>右连接<br>返回包括右表中的所有记录和左表中联结字段相等的记录<br>左边没有的，右边有的为null</p>
+<p>内连接：显示左边右边共有的。</p>
+<ol start="2">
+<li>查询第二大的值<br>方法1：<br>select id from users where id not in (select Max(id) from users)order by id desc limit 1;</li>
+</ol>
+<p>方法2：<br>select * from users where id&lt;(select max(id) from users) limit 1</p>
+<p>7  联合表查询？插入数据？ 更新数据？<br>SELECT * FROM sh_index_hold<br>WHERE job1_id =<br>(<br>SELECT ID FROM job WHERE print_job_number<br>= ‘A01EP3’<br>);</p>
+<p>insert into table1(key1,key2,key3) values(‘’,’’,’’); commit；</p>
+<p>drop table1</p>
+<p>update tablename set key = “” where conditions</p>
+<p>主键是什么？<br>primary key,唯一关键字，表定义的一部分，一个表里面只有一个primary key<br>索引是什么？<br>索引是一种单独的、物理的对数据库表中一列或多列的值进行排序的一种存储结构，它是某个表中一列或若干列值的集合和相应的指向表中物理标识这些值的数据页的逻辑指针清单。</p>
+<h4 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h4><p>1.什么是装饰器<br>装饰器是Python 函数， 它可以让其他函数在不需要做任何代码变动的前提下增加额外功能对象。比如说学哈如日志、性能测试、事务处理、缓存、权限校验等场景。</p>
+<p>装饰器不能装饰静态方法<br>比如@logging装饰器可以在函数执行时额外输出日志，@cache装饰过的函数可以缓存计算结果等。</p>
+<ol start="2">
+<li>字典，元组，列表的差别<br>list是处理一组有序项目的数据结构，即你可以在一个列表中存储一个序列的项目。可改变，可嵌套。<br>list = [‘’,’’,’’]<br>元组： 不可表，通过圆括号存储。 可以嵌套。<br>zoo=(‘’,’’,’’)<br>字典：键值对方式存储。键/值是没有顺序的。<br>{‘’:’’,’’:’’,’’:’’}</li>
+</ol>
+<ol start="3">
+<li>递归</li>
+</ol>
+<p>举例，实现n阶乘<br>def fun(n):<br>    if n&gt;1:<br>        return n*fun(n-1)<br>    else:<br>        return 1</p>
+<ol start="4">
+<li>解释器<br>#!/usr/bin/python<br>指定用什么解释器运行脚本以及解释器所在的位置</li>
+</ol>
+<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>用来指定文件编码为utf-8的</p>
+<ol start="5">
+<li>self 是什么意思？<br>self在定义时需要定义，但是在调用时会自动传入。<br>self的名字并不是规定死的，但是最好还是按照约定是用self<br>self总是指调用时的类的实例。</li>
+</ol>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p> Linux 查看文件内容，编辑内容，修改内容， 查看滚动log， 查看一个文件前10 行，后十行？ 中间行？查看进程命令？ 修改文件可读可执行？<br>vim filename<br>cat filename<br>ps -ef | grep JAVA<br>chmod 777 filename</p>
+<p>cat filename | tail -n 10<br>cat filename | head -n 10<br>【一】从第3000行开始，显示1000行。即显示3000~3999行<br>cat filename | tail -n +3000 | head -n 1000</p>
+<p>【二】显示1000行到3000行<br>cat filename| head -n 3000 | tail -n +1000</p>
+<p>*注意两种方法的顺序</p>
+<p>分解：<br>    tail -n 1000：显示最后1000行<br>    tail -n +1000：从1000行开始显示，显示1000行以后的<br>    head -n 1000：显示前面1000行</p>
+<p>直接使用 netstat   -anp   |   grep  portno<br>即：netstat –apn | grep 8080</p>
+<p>查看进程：<br>1、ps 命令用于查看当前正在运行的进程。<br>grep 是搜索<br>例如： ps -ef | grep java<br>表示查看所有进程里 CMD 是 java 的进程信息<br>2、ps -aux | grep java<br>-aux 显示所有状态<br>ps</p>
+<ol start="3">
+<li>kill 命令用于终止进程<br>例如： kill -9 [PID]<br>-9 表示强迫进程立即停止<br>通常用 ps 查看进程 PID ，用 kill 命令终止进程</li>
+</ol>
+<p><a href="https://www.cnblogs.com/geekdc/p/5497919.html" target="_blank" rel="noopener">https://www.cnblogs.com/geekdc/p/5497919.html</a></p>
+<p>####　测试</p>
+<ol>
+<li>什么是负载测试？<br>负载测试是模拟实际软件系统所承受的负载条件的系统负荷，通过不断加载（如逐渐增加模拟用户的数量）或其它加载方式来观察不同负载下系统的响应时间和数据吞吐量、系统占用的资源（如CPU、内存）等，以检验系统的行为和特性，以发现系统可能存在的性能瓶颈、内存泄漏、不能实时同步等问题。负载测试更多地体现了一种方法或一种技术。</li>
+<li><p>什么是性能测试？</p>
+</li>
+<li><p>常用的参数<br>系统吞吐量几个重要参数：QPS（TPS）、并发数、响应时间， 请求时间</p>
+</li>
+</ol>
+<p>压力测试是在强负载（大数据量、大量并发用户等）下的测试，查看应用系统在峰值使用情况下操作行为，从而有效地发现系统的某项功能隐患、系统是否具有良好的容错能力和可恢复能力。压力测试分为高负载下的长时间（如24小时以上）的稳定性压力测试和极限负载情况下导致系统崩溃的破坏性压力测试。</p>
+<p>负载测试是通过改变系统负载方式、增加负载等来发现系统中所存在的性能问题。负载测试是一种测试方法，可以为性能测试、压力测试所采用。负载测试的加载方式也有很多种，可以根据测试需要来选择。<br>性能测试是为获取或验证系统性能指标而进行测试。多数情况下，性能测试会在不同负载情况下进行。<br>压力测试通常是在高负载情况下来对系统的稳定性进行测试，更有效地发现系统稳定性的隐患和系统在负载峰值的条件下功能隐患等。</p>
+<h4 id="HTTP，TCP-IP"><a href="#HTTP，TCP-IP" class="headerlink" title="HTTP，TCP/IP"></a>HTTP，TCP/IP</h4><ol>
+<li>get 和post 的区别？概念是什么？<br>我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</li>
+</ol>
+<p>运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。<br>GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。<br>GET和POST还有一个重大区别，简单的说：<br>GET产生一个TCP数据包；POST产生两个TCP数据包。<br>长的说：<br>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；<br>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
+<ol>
+<li>GET与POST都有自己的语义，不能随便混用。</li>
+<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
+<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。<br><a href="http://www.cnblogs.com/logsharing/p/8448446.html" target="_blank" rel="noopener">http://www.cnblogs.com/logsharing/p/8448446.html</a> </li>
+</ol>
+<p>语义上的区别：<br>GET - 获取指定资源，安全、幂等、可缓存。<br>POST - 根据请求对指定资源做处理，不安全、不幂等、大多数浏览器中不可缓存。<br>表现上的区别：<br>GET - 参数暴露、长度限制。<br>POST - 参数不暴露、长度无限制。<br>但长度限制并不是出自HTTP协议的规定，而是因为浏览器对URL有长度限制。🙃</p>
+<ol start="5">
+<li>python 中bin 的作用？</li>
+</ol>
+<p>？？bind<br>Bind是用来将控件事件与控件做绑定的，用self.Bind时，在后面的参数中你可以看到加入了控件，self.button.Bind没有，因为是直接使用了控件的Bind。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/viewquestions/" data-id="cjv1kpovg003wnwvxnjuar1tc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python10" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/23/python10/" class="article-date">
@@ -99,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/23/python10/" data-id="cjv1211tf002o9gvx3ernjomw" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/23/python10/" data-id="cjv1kpotx002unwvxv30est18" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -154,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/22/java1/" data-id="cjv1211sf00299gvx1bbvjaw6" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/22/java1/" data-id="cjv1kpoto002lnwvxm9cx582t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -208,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjv1211u9003g9gvxg4bzeixv" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjv1kpov0003cnwvxy4rwpgum" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -283,82 +391,7 @@ print(&quot;all ends: %s&quot; %ctime())
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjv1211u5003c9gvxmsvrxvsg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python7" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/21/python7/" class="article-date">
-  <time datetime="2019-04-21T07:51:31.000Z" itemprop="datePublished">2019-04-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/21/python7/">Selenium Grid2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>Grid 是用于设计进行分布式测试的工具。结构由一个hub 主节点和若干个node代理节点组成。 hub用来管理各个代理节点的注册和状态信息，并且接收远程客户端代码的请求调用，然后把请求的命令再转发给代理节点来执行。使用Grid远程执行测试的代码与直接调用Selenium Server 是一样的，知识环境启动的方式不一样，需要同时启动hub和至少一个node.</p>
-<p><img src="/echoblog.github.io/2019/04/21/python7/Grid.png" alt="Grid"></p>
-<h4 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h4><p><a href="https://www.seleniumhq.org/download/" target="_blank" rel="noopener">https://www.seleniumhq.org/download/</a><br>Selenium Standalone Server</p>
-<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><p>java -jar selenium-server-standalone-3.141.59.jar -role hub<br>java -jar selenium-server-standalone-3.141.59.jar -role node(默认端口是4444)<br>启动多个节点：<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5555<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5556<br>java -jar selenium-server-standalone-3.141.59.jar -role node -port 5557</p>
-<p>控制台地址：（指显示节点信息）<br><a href="http://127.0.0.1:4444/grid/console" target="_blank" rel="noopener">http://127.0.0.1:4444/grid/console</a></p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>单个浏览器调用<br>from selenium.webdriver import  Remote</p>
-<p>driver = Remote(command_executor=”<a href="http://127.0.0.1:4444/wd/hub&quot;" target="_blank" rel="noopener">http://127.0.0.1:4444/wd/hub&quot;</a>,<br>                desired_capabilities={‘platform’:’ANY’,<br>                                      ‘browserName’:’chrome’,<br>                                      ‘version’:’’,<br>                                      ‘javascriptEnabled’:True,</p>
-<pre><code>})
-</code></pre><p>driver.get(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>)<br>driver.find_element_by_id(“kw”).send_keys(“remote”)<br>driver.find_element_by_id(“su”).click()<br>driver.quit()<br>print(‘end’)</p>
-<p>多个节点上跑：<br>from selenium.webdriver import  Remote</p>
-<p>browser={‘<a href="http://127.0.0.1:4444/wd/hub&#39;:&#39;chrome&#39;" target="_blank" rel="noopener">http://127.0.0.1:4444/wd/hub&#39;:&#39;chrome&#39;</a>,<br>     ‘<a href="http://127.0.0.1:5555/wd/hub&#39;:&#39;internetexplore&#39;}" target="_blank" rel="noopener">http://127.0.0.1:5555/wd/hub&#39;:&#39;internetexplore&#39;}</a></p>
-<p>for hub,bro in browser.items():<br>    print(bro,hub)<br>    driver = Remote(command_executor=hub,<br>                    desired_capabilities={‘platform’:’ANY’,<br>                                          ‘browserName’:bro,<br>                                          ‘version’:’’,<br>                                          ‘javascriptEnabled’:True,</p>
-<pre><code>                })
-driver.get(&quot;http://www.baidu.com&quot;)
-driver.find_element_by_id(&quot;kw&quot;).send_keys(&quot;remote&quot;)
-driver.find_element_by_id(&quot;su&quot;).click()
-driver.quit()
-print(&apos;end&apos;)
-</code></pre><p>trouble shooting:<br>需要把相关的browser driver驱动放在python路径下</p>
-<h4 id="远程"><a href="#远程" class="headerlink" title="远程"></a>远程</h4><p>如果要在其他主机上启动node,则需要满足以下条件：</p>
-<ol>
-<li>本地hub主机与远程node主机之间可以ping通</li>
-<li>远程主机需要安装用例执行的浏览器及驱动。并且驱动再环境变量的path的目录下</li>
-<li>远程主机必须安装JAVA 环境，因为需要运行Selenium Server</li>
-</ol>
-<p>步骤：</p>
-<ol>
-<li>启动本地hub主机</li>
-<li>启动远程node主机， 需要指向的hub主机IP</li>
-<li>修改远程主机的IP地址及端口号，再其上面的firefox浏览下运行脚本</li>
-</ol>
-<p>其中：<br>HtmlUnit 和PhantomJS 是没有界面浏览器， 所以其运行速度非常快。</p>
-<p><img src="/echoblog.github.io/2019/04/21/python7/bowser_compare.png" alt="Browser">    </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python7/" data-id="cjv1211u4003a9gvxfajboyeo" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjv1kpov5003inwvx0sxpeiid" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -385,7 +418,7 @@ print(&apos;end&apos;)
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -395,7 +428,7 @@ print(&apos;end&apos;)
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
     </div>
   </div>
 
@@ -405,7 +438,7 @@ print(&apos;end&apos;)
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -427,6 +460,10 @@ print(&apos;end&apos;)
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/29/httpProtocol/">http-Protocol</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/26/Performance3/">如何估计性能测试并发量</a>
           </li>
         
@@ -440,10 +477,6 @@ print(&apos;end&apos;)
         
           <li>
             <a href="/echoblog.github.io/2019/04/24/TroubleShooting3/">TroubleShooting--多人收邮件不成功</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
           </li>
         
       </ul>

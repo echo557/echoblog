@@ -62,6 +62,667 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ShellCommand" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/02/13/ShellCommand/" class="article-date">
+  <time datetime="2019-02-13T13:09:15.000Z" itemprop="datePublished">2019-02-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/02/13/ShellCommand/">ShellCommand</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/echoblog.github.io/2019/02/13/ShellCommand/Shell.png" alt="Shell"></p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>C编写的程序，使用Linux 的桥梁</li>
+<li>是命令语言，也是程序设计语言</li>
+<li>shell 脚本是用shell编写的脚本程序</li>
+</ul>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>Bourne Shell(/usr/bin/sh 或者 /bin/sh)</li>
+<li>Bourne Again Shell（/bin/bash）</li>
+<li>C Shell（/usr/bin/csh）</li>
+<li>K Shell（/usr/bin/ksh）</li>
+<li>Shell for Root（/sbin/sh）</li>
+</ul>
+<h3 id="在一般情况下，人们并不区分-Bourne-Shell-和-Bourne-Again-Shell，所以，像-bin-sh，它同样也可以改为-bin-bash"><a href="#在一般情况下，人们并不区分-Bourne-Shell-和-Bourne-Again-Shell，所以，像-bin-sh，它同样也可以改为-bin-bash" class="headerlink" title="在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 #!/bin/sh，它同样也可以改为 #!/bin/bash"></a>在一般情况下，人们并不区分 Bourne Shell 和 Bourne Again Shell，所以，像 #!/bin/sh，它同样也可以改为 #!/bin/bash</h3><h3 id="指定用什么解释器运行脚本以及解释器所在的位置"><a href="#指定用什么解释器运行脚本以及解释器所在的位置" class="headerlink" title="#! 指定用什么解释器运行脚本以及解释器所在的位置"></a>#! 指定用什么解释器运行脚本以及解释器所在的位置</h3><ul>
+<li>有时候写 #!/usr/bin/python 还是不行，很简单，因为python解释器没有装在/usr/bin/目录，改成其所在目录就行了，或者更通用的方法是：<br>#!/usr/bin/env python</li>
+</ul>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><ul>
+<li><p>可执行程序</p>
+<ul>
+<li>chmod +x ./test.sh  #使脚本具有执行权限<br>./test.sh  #执行脚本</li>
+<li>Note： 运行的时候，路径需要写名，要不然就会去path 里面去找，而path 是需要配置的， 一般只有/bin,/sbin, /usr/sbin 等再PATH 里面</li>
+</ul>
+</li>
+<li><p>作为解释器参数</p>
+<ul>
+<li>/bin/sh test.sh<br>/bin/php test.php</li>
+<li>Note： 这种方式不需要再第一行指定解释器信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><ul>
+<li><p>规则</p>
+<ul>
+<li><p>不需要有$符号</p>
+<ul>
+<li>如： name_1=”name”</li>
+</ul>
+</li>
+<li><p>变量名和等号之间不能有空格</p>
+</li>
+<li><p>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头</p>
+<ul>
+<li>如：_var</li>
+</ul>
+</li>
+<li><p>中间不能有空格，可以使用下划线（_）</p>
+</li>
+<li>不能使用标点符号</li>
+<li>不能使用bash里面的关键字（help 可以获取到）</li>
+</ul>
+</li>
+<li><p>使用变量</p>
+<ul>
+<li>your_name=”qinjx”<br>echo $your_name<br>echo ${your_name}</li>
+<li>note：最好给所有变量加上{}</li>
+</ul>
+</li>
+<li><p>相关操作</p>
+<ul>
+<li><p>只读</p>
+<ul>
+<li>readonly 命令可以将变量定义为只读变量，只读变量的值不能被改变</li>
+<li>#!/bin/bash<br>myUrl=”<a href="http://www.google.com&quot;" target="_blank" rel="noopener">http://www.google.com&quot;</a><br>readonly myUrl<br>myUrl=”<a href="http://www.runoob.com&quot;" target="_blank" rel="noopener">http://www.runoob.com&quot;</a><br>运行报错/bin/sh: NAME: This variable is read only.</li>
+</ul>
+</li>
+<li><p>删除</p>
+<ul>
+<li>使用unset命令可以删除变量。 语法：unset variable_name. 变量被删除后不能再次使用，unset命令不能删除只读变量</li>
+<li>#!/bin/sh<br>myUrl=”<a href="http://www.runoob.com&quot;" target="_blank" rel="noopener">http://www.runoob.com&quot;</a><br>unset myUrl<br>echo $myUrl</li>
+</ul>
+</li>
+<li><p>变量类型</p>
+<ul>
+<li>局部变量 局部变量在脚本或命令中定义，仅在当前shell实例中有效，其他shell启动的程序不能访问局部变量。</li>
+<li>环境变量 所有的程序，包括shell启动的程序，都能访问环境变量，有些程序需要环境变量来保证其正常运行。必要的时候shell脚本也可以定义环境变量。</li>
+<li>shell变量 shell变量是由shell程序设置的特殊变量。shell变量中有一部分是环境变量，有一部分是局部变量，这些变量保证了shell的正常运行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
+<li><p>单引号（两个限制）</p>
+<ul>
+<li>单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的；</li>
+<li>单引号字串中不能出现单独一个的单引号（对单引号使用转义符后也不行），但可成对出现，作为字符串拼接使用。</li>
+</ul>
+</li>
+<li><p>双引号（优点）</p>
+<ul>
+<li>双引号里可以有变量</li>
+<li>双引号里可以出现转义字符</li>
+</ul>
+</li>
+<li><p>拼接字符串</p>
+<ul>
+<li><p>your_name=”runoob”</p>
+<h1 id="使用双引号拼接"><a href="#使用双引号拼接" class="headerlink" title="使用双引号拼接"></a>使用双引号拼接</h1><p>greeting=”hello, “$your_name” !”<br>greeting_1=”hello, ${your_name} !”<br>echo $greeting  $greeting_1</p>
+<ul>
+<li>hello, runoob ! hello, runoob !</li>
+</ul>
+</li>
+<li><p>your_name=”runoob”# 使用单引号拼接<br>greeting_2=’hello, ‘$your_name’ !’<br>greeting_3=’hello, ${your_name} !’<br>echo $greeting_2  $greeting_3</p>
+<ul>
+<li>hello, runoob ! hello, ${your_name} !</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取字符串长度</p>
+<ul>
+<li>string=”abcd”<br>echo ${<em>string} #输出 4，”#” 替换成</em>， 因为语法冲突</li>
+</ul>
+</li>
+<li><p>提取子字符串</p>
+<ul>
+<li>string=”runoob is a great site”<br>echo ${string:1:4} # 输出 unoo</li>
+</ul>
+</li>
+<li><p>查找子字符串</p>
+<ul>
+<li>查找字符 i 或 o 的位置(哪个字母先出现就计算哪个)</li>
+<li>string=”runoob is a great site”<br>echo <code>expr index &quot;$string&quot; io</code>  # 输出 4</li>
+</ul>
+</li>
+</ul>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><ul>
+<li><p>定义</p>
+<ul>
+<li>bash支持一维数组（不支持多维数组），并且没有限定数组的大小。</li>
+<li>用括号来表示数组，数组元素用”空格”符号分割开（数组名=(值1 值2 … 值n)）</li>
+<li>array_name=(value0 value1 value2 value3)或者array_name=(<br>value0<br>value1<br>value2<br>value3<br>)</li>
+</ul>
+</li>
+<li><p>读取</p>
+<ul>
+<li>${数组名[下标]}</li>
+<li><p>使用 @ 符号可以获取数组中的所有元素</p>
+<ul>
+<li>echo ${array_name[@]}</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取数组长度</p>
+</li>
+</ul>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><ul>
+<li><p>单行</p>
+<ul>
+<li>以 # 开头的行就是注释，会被解释器忽略。</li>
+<li>通过每一行加一个 # 号设置多行注释</li>
+</ul>
+</li>
+<li><p>多行</p>
+<ul>
+<li>这一段要注释的代码用一对花括号括起来，定义成一个函数，没有地方调用这个函数，这块代码就不会执行，达到了和注释一样的效果。</li>
+<li>:&lt;&lt;EOF<br>注释内容…<br>注释内容…<br>注释内容…<br>EOF</li>
+<li>:&lt;&lt;’<br>注释内容…<br>注释内容…<br>注释内容…<br>‘</li>
+<li>:&lt;&lt;!<br>注释内容…<br>注释内容…<br>注释内容…<br>!</li>
+</ul>
+</li>
+</ul>
+<h3 id="传参"><a href="#传参" class="headerlink" title="传参"></a>传参</h3><ul>
+<li><p>Rules</p>
+<ul>
+<li>$#传递到脚本的参数个数</li>
+<li>$<em>以一个单字符串显示所有向脚本传递的参数。<br>如”$</em>“用「”」括起来的情况、以”$1 $2 … $n”的形式输出所有参数。传递一个参数</li>
+<li>$$脚本运行的当前进程ID号</li>
+<li>$! 后台运行的最后一个进程的ID号</li>
+<li>$@与$*相同，但是使用时加引号，并在引号中返回每个参数。<br>如”$@”用「”」括起来的情况、以”$1” “$2” … “$n” 的形式输出所有参数。 传递n个参数</li>
+<li>$- 显示Shell使用的当前选项，与set命令功能相同。</li>
+<li>$? 显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</li>
+</ul>
+</li>
+<li><p>Example</p>
+<ul>
+<li>#!/bin/bash</li>
+</ul>
+</li>
+</ul>
+<p>echo “– \$<em> 演示 —“<br>for i in “$</em>“; do<br>    echo $i<br>done</p>
+<p>echo “– \$@ 演示 —“<br>for i in “$@”; do<br>    echo $i<br>done</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh 1 2 3<br>– $* 演示 —<br>1 2 3<br>– $@ 演示 —<br>1<br>2<br>3</p>
+<h3 id="数组-1"><a href="#数组-1" class="headerlink" title="数组"></a>数组</h3><ul>
+<li><p>Rules</p>
+<ul>
+<li>数组中可以存放多个值。Bash Shell 只支持一维数组（不支持多维数组），初始化时不需要定义数组大小（与 PHP 类似）。</li>
+<li>array_name=(value1 … valuen)</li>
+<li>${array_name[index]}</li>
+</ul>
+</li>
+<li><p>Apply</p>
+<ul>
+<li><p>Read</p>
+<ul>
+<li>my_array=(A B “C” D)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>echo “第一个元素为: ${my_array[0]}”<br>echo “第二个元素为: ${my_array[1]}”<br>echo “第三个元素为: ${my_array[2]}”<br>echo “第四个元素为: ${my_array[3]}”</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh<br>第一个元素为: A<br>第二个元素为: B<br>第三个元素为: C<br>第四个元素为: D</p>
+<pre><code>- Extract all elements
+
+    - my_array[0]=A
+</code></pre><p>my_array[1]=B<br>my_array[2]=C<br>my_array[3]=D</p>
+<p>echo “数组的元素为: ${my_array[*]}”<br>echo “数组的元素为: ${my_array[@]}”</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh<br>数组的元素为: A B C D<br>数组的元素为: A B C D</p>
+<pre><code>- Get length
+
+    - my_array[0]=A
+</code></pre><p>my_array[1]=B<br>my_array[2]=C<br>my_array[3]=D</p>
+<p>echo “数组元素个数为: ${<em>my_array[</em>]}”  “#” 替换成<em>， 因为语法冲突<br>echo “数组元素个数为: ${</em>my_array[@]}”   “#” 替换成*， 因为语法冲突</p>
+<pre><code>- $ chmod +x test.sh 
+</code></pre><p>$ ./test.sh<br>数组元素个数为: 4<br>数组元素个数为: 4</p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><ul>
+<li><p>Classifiy</p>
+<ul>
+<li><p>算数运算符</p>
+<ul>
+<li><code>expr $a + $b</code> </li>
+<li><code>expr $a - $b</code></li>
+<li><code>expr $a \* $b</code></li>
+<li><code>expr $b / $a</code> </li>
+<li><code>expr $b % $a</code> </li>
+<li>a=$b </li>
+<li>[ $a == $b ] </li>
+<li>[ $a != $b ]</li>
+</ul>
+</li>
+<li><p>关系运算符</p>
+<ul>
+<li>-eq/-ne/-gt/-lt/-ge/-le</li>
+</ul>
+</li>
+<li><p>布尔运算符</p>
+<ul>
+<li>[ ! false ] 返回 true。</li>
+<li>[ $a -lt 20 -o $b -gt 100 ] 返回 true。</li>
+<li>[ $a -lt 20 -a $b -gt 100 ] 返回 false</li>
+</ul>
+</li>
+<li><p>逻辑运算符</p>
+<ul>
+<li>[[ $a -lt 100 &amp;&amp; $b -gt 100 ]] 返回 false</li>
+<li>[[ $a -lt 100 || $b -gt 100 ]] 返回 true</li>
+</ul>
+</li>
+<li><p>字符串运算符</p>
+<ul>
+<li>=    检测两个字符串是否相等，相等返回 true。    [ $a = $b ] 返回 false。</li>
+<li>!=    检测两个字符串是否相等，不相等返回 true。    [ $a != $b ] 返回 true。</li>
+<li>-z    检测字符串长度是否为0，为0返回 true。    [ -z $a ] 返回 false。</li>
+<li>-n    检测字符串长度是否为0，不为0返回 true。    [ -n “$a” ] 返回 true。</li>
+<li>str    检测字符串是否为空，不为空返回 true。    [ $a ] 返回 true。</li>
+</ul>
+</li>
+<li><p>文件测试运算符</p>
+<ul>
+<li>-b file    检测文件是否是块设备文件，如果是，则返回 true。    [ -b $file ] 返回 false。</li>
+<li>-c file    检测文件是否是字符设备文件，如果是，则返回 true。    [ -c $file ] 返回 false。</li>
+<li>-d file    检测文件是否是目录，如果是，则返回 true。    [ -d $file ] 返回 false。</li>
+<li>-f file    检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。    [ -f $file ] 返回 true。</li>
+<li>-g file    检测文件是否设置了 SGID 位，如果是，则返回 true。    [ -g $file ] 返回 false。</li>
+<li>-k file    检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。    [ -k $file ] 返回 false。</li>
+<li>-p file    检测文件是否是有名管道，如果是，则返回 true。    [ -p $file ] 返回 false。</li>
+<li>-u file    检测文件是否设置了 SUID 位，如果是，则返回 true。    [ -u $file ] 返回 false。</li>
+<li>-r file    检测文件是否可读，如果是，则返回 true。    [ -r $file ] 返回 true。</li>
+<li>-w file    检测文件是否可写，如果是，则返回 true。    [ -w $file ] 返回 true。</li>
+<li>-x file    检测文件是否可执行，如果是，则返回 true。    [ -x $file ] 返回 true。</li>
+<li>-s file    检测文件是否为空（文件大小是否大于0），不为空返回 true。    [ -s $file ] 返回 true。</li>
+<li>-e file    检测文件（包括目录）是否存在，如果是，则返回 true。    [ -e $file ] 返回 true。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Rules</p>
+<ul>
+<li>原生bash不支持简单的数学运算，但是可以通过其他命令来实现，例如 awk 和 expr，expr 最常用</li>
+<li>两个数相加(注意使用的是反引号 ` 而不是单引号 ‘)</li>
+<li>表达式和运算符之间要有空格，例如 2+2 是不对的，必须写成 2 + 2，这与我们熟悉的大多数编程语言不一样。</li>
+<li>完整的表达式要被 <code></code> 包含，注意这个字符不是常用的单引号，在 Esc 键下边</li>
+<li>条件表达式要放在方括号之间，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]</li>
+<li>乘号(*)前边必须加反斜杠()才能实现乘法运算；</li>
+<li>在 MAC 中 shell 的 expr 语法是：$((表达式))，此处表达式中的 “*” 不需要转义符号 “\” </li>
+</ul>
+</li>
+<li><p>Examples</p>
+</li>
+</ul>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><ul>
+<li><p>显示普通字符</p>
+<ul>
+<li>echo “It is a test”</li>
+</ul>
+</li>
+<li><p>显示转义字符</p>
+<ul>
+<li>echo “\”It is a test\””</li>
+</ul>
+</li>
+<li><p>显示变量</p>
+<ul>
+<li>read 命令从标准输入中读取一行,并把输入行的每个字段的值指定给 shell 变量</li>
+</ul>
+</li>
+<li><p>显示换行</p>
+<ul>
+<li>echo -e “OK! \n” # -e 开启转义<br>echo “It is a test”</li>
+<li>OK!</li>
+</ul>
+</li>
+</ul>
+<p>It is a test</p>
+<ul>
+<li><p>显示不换行</p>
+<ul>
+<li>#!/bin/sh<br>echo -e “OK! \c” # -e 开启转义 \c 不换行<br>echo “It is a test”</li>
+<li>OK! It is a test</li>
+</ul>
+</li>
+<li><p>显示结果定向至文件</p>
+<ul>
+<li>echo “It is a test” &gt; myfile</li>
+</ul>
+</li>
+<li><p>原样输出字符串，不进行转义或取变量(用单引号)</p>
+</li>
+<li><p>显示命令执行结果</p>
+<ul>
+<li>echo <code>date</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><ul>
+<li><p>引言</p>
+<ul>
+<li>printf 命令模仿 C 程序库（library）里的 printf() 程序。</li>
+<li>printf 由 POSIX 标准所定义，因此使用 printf 的脚本比使用 echo 移植性好。</li>
+<li>printf 使用引用文本或空格分隔的参数，外面可以在 printf 中使用格式化字符串，还可以制定字符串的宽度、左右对齐方式等。默认 printf 不会像 echo 自动添加换行符，我们可以手动添加 \n。</li>
+</ul>
+</li>
+<li><p>Format</p>
+<ul>
+<li>printf  format-string  [arguments…]</li>
+<li>参数说明：</li>
+</ul>
+</li>
+</ul>
+<p>format-string: 为格式控制字符串<br>arguments: 为参数列表。</p>
+<ul>
+<li><p>Example</p>
+<ul>
+<li>%s %c %d %f都是格式替代符</li>
+</ul>
+</li>
+</ul>
+<h3 id="test"><a href="#test" class="headerlink" title="test"></a>test</h3><ul>
+<li><p>目的</p>
+<ul>
+<li>检查某个条件是否成立</li>
+</ul>
+</li>
+<li><p>数值测试</p>
+<ul>
+<li>num1=100<br>num2=100<br>if test $[num1] -eq $[num2]<br>then<br>echo ‘两个数相等！’<br>else<br>echo ‘两个数不相等！’<br>fi</li>
+<li>输出结果：</li>
+</ul>
+</li>
+</ul>
+<p>两个数相等！</p>
+<ul>
+<li><p>字符串测试</p>
+<ul>
+<li>num1=”ru1noob”<br>num2=”runoob”<br>if test $num1 = $num2<br>then<br>echo ‘两个字符串相等!’<br>else<br>echo ‘两个字符串不相等!’<br>fi</li>
+<li>输出结果：</li>
+</ul>
+</li>
+</ul>
+<p>两个字符串不相等!</p>
+<ul>
+<li><p>文本测试</p>
+<ul>
+<li><p>参数</p>
+<ul>
+<li>-e 文件名    如果文件存在则为真</li>
+<li>-r 文件名    如果文件存在且可读则为真</li>
+<li>-w 文件名    如果文件存在且可写则为真</li>
+<li>-x 文件名    如果文件存在且可执行则为真</li>
+<li>-s 文件名    如果文件存在且至少有一个字符则为真</li>
+<li>-d 文件名    如果文件存在且为目录则为真</li>
+<li>-f 文件名    如果文件存在且为普通文件则为真</li>
+<li>-c 文件名    如果文件存在且为字符型特殊文件则为真</li>
+<li>-b 文件名    如果文件存在且为块特殊文件则为真</li>
+</ul>
+</li>
+<li><p>另外，Shell还提供了与( -a )、或( -o )、非( ! )三个逻辑操作符用于将测试条件连接起来，其优先级为：”!”最高，”-a”次之，”-o”最低</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="More"><a href="#More" class="headerlink" title="More"></a>More</h2><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><ul>
+<li><p>If else</p>
+<ul>
+<li><p>if</p>
+<ul>
+<li>if condition<br>then<br>command1<br>command2<br>…<br>commandN<br>fi</li>
+<li>if [ $(ps -ef | grep -c “ssh”) -gt 1 ]; then echo “true”; fi</li>
+</ul>
+</li>
+<li><p>if else</p>
+<ul>
+<li>if condition<br>then<br>command1<br>command2<br>…<br>commandN<br>else<br>command<br>fi</li>
+</ul>
+</li>
+<li><p>if else-if else</p>
+<ul>
+<li>if condition1<br>then<br>command1<br>elif condition2<br>then<br>command2<br>else<br>commandN<br>fi</li>
+<li>a=10<br>b=20<br>if [ $a == $b ]<br>then<br>echo “a 等于 b”<br>elif [ $a -gt $b ]<br>then<br>echo “a 大于 b”<br>elif [ $a -lt $b ]<br>then<br>echo “a 小于 b”<br>else<br>echo “没有符合的条件”<br>fi</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>For</p>
+<ul>
+<li>for var in item1 item2 … itemN<br>do<br>command1<br>command2<br>…<br>commandN<br>done</li>
+<li>for var in item1 item2 … itemN; do command1; command2… done;</li>
+<li>当变量值在列表里，for循环即执行一次所有命令，使用变量名获取列表中的当前取值。命令可为任何有效的shell命令和语句。in列表可以包含替换、字符串和文件名。</li>
+</ul>
+</li>
+</ul>
+<p>in列表是可选的，如果不用它，for循环使用命令行的位置参数。</p>
+<pre><code>- for loop in 1 2 3 4 5
+</code></pre><p>do<br>    echo “The value is: $loop”<br>done</p>
+<pre><code>- for str in &apos;This is a string&apos;
+</code></pre><p>do<br>    echo $str<br>done</p>
+<ul>
+<li><p>while</p>
+<ul>
+<li>while condition<br>do<br>command<br>done</li>
+<li><p>无限循环</p>
+<ul>
+<li>while :<br>do<br>command<br>done</li>
+<li>while true<br>do<br>command<br>done</li>
+<li>for (( ; ; ))</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>until 循环</p>
+<ul>
+<li>until 循环执行一系列命令直至条件为 true 时停止。</li>
+</ul>
+</li>
+</ul>
+<p>until 循环与 while 循环在处理方式上刚好相反。</p>
+<p>一般 while 循环优于 until 循环，但在某些时候—也只是极少数情况下，until 循环更加有用。</p>
+<pre><code>- condition 一般为条件表达式，如果返回值为 false，则继续执行循环体内的语句，否则跳出循环。
+- until condition
+</code></pre><p>do<br>    command<br>done</p>
+<ul>
+<li><p>case</p>
+<ul>
+<li>Shell case语句为多选择语句。可以用case语句匹配一个值与一个模式，如果匹配成功，执行相匹配的命令。</li>
+<li>case 值 in<br>模式1)<br>command1<br>command2<br>…<br>commandN<br>;;<br>模式2）<br>command1<br>command2<br>…<br>commandN<br>;;<br>esac</li>
+<li>echo ‘输入 1 到 4 之间的数字:’<br>echo ‘你输入的数字为:’<br>read aNum<br>case $aNum in<br>1)  echo ‘你选择了 1’<br>;;<br>2)  echo ‘你选择了 2’<br>;;<br>3)  echo ‘你选择了 3’<br>;;<br>4)  echo ‘你选择了 4’<br>;;<br>*)  echo ‘你没有输入 1 到 4 之间的数字’<br>;;<br>esac</li>
+<li>esac<br>case的语法和C family语言差别很大，它需要一个esac（就是case反过来）作为结束标记，每个case分支用右圆括号，用两个分号表示break。</li>
+</ul>
+</li>
+<li><p>跳出循环</p>
+<ul>
+<li><p>break</p>
+<ul>
+<li>break命令允许跳出所有循环（终止执行后面的所有循环）。</li>
+<li>#!/bin/bash<br>while :<br>do<br>echo -n “输入 1 到 5 之间的数字:”<br>read aNum<br>case $aNum in<br>1|2|3|4|5) echo “你输入的数字为 $aNum!”<br>;;<br>*) echo “你输入的数字不是 1 到 5 之间的! 游戏结束”<br>  break<br>;;<br>esac<br>done</li>
+</ul>
+</li>
+<li><p>continue</p>
+<ul>
+<li>continue命令与break命令类似，只有一点差别，它不会跳出所有循环，仅仅跳出当前循环。</li>
+<li>#!/bin/bash<br>while :<br>do<br>echo -n “输入 1 到 5 之间的数字: “<br>read aNum<br>case $aNum in<br>1|2|3|4|5) echo “你输入的数字为 $aNum!”<br>;;<br>*) echo “你输入的数字不是 1 到 5 之间的!”<br>  continue<br>  echo “游戏结束”<br>;;<br>esac<br>done</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li>[ function ] funname [()]</li>
+</ul>
+<p>{</p>
+<pre><code>action;
+
+[return int;]
+</code></pre><p>}</p>
+<pre><code>- 可以带function fun() 定义，也可以直接fun() 定义,不带任何参数
+- 参数返回，可以显示加：return 返回，如果不加，将以最后一条命令运行结果，作为返回值。 return后跟数值n(0-255
+</code></pre><ul>
+<li><p>Example</p>
+<ul>
+<li>#!/bin/bash</li>
+</ul>
+</li>
+</ul>
+<p>demoFun(){<br>    echo “这是我的第一个 shell 函数!”<br>}<br>echo “—–函数开始执行—–”<br>demoFun<br>echo “—–函数执行完毕—–”</p>
+<pre><code>- funWithReturn(){
+echo &quot;这个函数会对输入的两个数字进行相加运算...&quot;
+echo &quot;输入第一个数字: &quot;
+read aNum
+echo &quot;输入第二个数字: &quot;
+read anotherNum
+echo &quot;两个数字分别为 $aNum 和 $anotherNum !&quot;
+return $(($aNum+$anotherNum))
+</code></pre><p>}<br>funWithReturn<br>echo “输入的两个数字之和为 $? !”</p>
+<ul>
+<li><p>函数参数</p>
+<ul>
+<li>在Shell中，调用函数时可以向其传递参数。在函数体内部，通过 $n 的形式来获取参数的值，例如，$1表示第一个参数，$2表示第二个参数…</li>
+<li>$10 不能获取第十个参数，获取第十个参数需要${10}。当n&gt;=10时，需要使用${n}来获取参数。</li>
+<li><p>常用</p>
+<ul>
+<li>$#    传递到脚本的参数个数</li>
+<li>$*    以一个单字符串显示所有向脚本传递的参数</li>
+<li>$$    脚本运行的当前进程ID号</li>
+<li>$!    后台运行的最后一个进程的ID号</li>
+<li>$@    与$*相同，但是使用时加引号，并在引号中返回每个参数。</li>
+<li>$-    显示Shell使用的当前选项，与set命令功能相同。</li>
+<li>$?    显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="输入-输出重定向"><a href="#输入-输出重定向" class="headerlink" title="输入/输出重定向"></a>输入/输出重定向</h3><ul>
+<li><p>命令</p>
+<ul>
+<li>command &gt; file    将输出重定向到 file。</li>
+<li>command &lt; file    将输入重定向到 file。</li>
+<li>command &gt;&gt; file    将输出以追加的方式重定向到 file。</li>
+<li>n &gt; file    将文件描述符为 n 的文件重定向到 file。</li>
+<li>n &gt;&gt; file    将文件描述符为 n 的文件以追加的方式重定向到 file。</li>
+<li>n &gt;&amp; m    将输出文件 m 和 n 合并。</li>
+<li>n &lt;&amp; m    将输入文件 m 和 n 合并。</li>
+<li>&lt;&lt; tag    将开始标记 tag 和结束标记 tag 之间的内容作为输入。</li>
+<li>需要注意的是文件描述符 0 通常是标准输入（STDIN），1 是标准输出（STDOUT），2 是标准错误输出（STDERR）。</li>
+</ul>
+</li>
+<li><p>输出重定向</p>
+<ul>
+<li>command1 &gt; file1</li>
+<li>上面这个命令执行command1然后将输出的内容存入file1。</li>
+</ul>
+</li>
+</ul>
+<p>注意任何file1内的已经存在的内容将被新内容替代。如果要将新内容添加在文件末尾，请使用&gt;&gt;操作符。</p>
+<pre><code>- echo@C3-QA-ECHO:~$ echo &quot;test&quot; &gt; test5.sh
+</code></pre><p>echo@C3-QA-ECHO:~$ cat test5.sh<br>test</p>
+<pre><code>- echo@C3-QA-ECHO:~$ echo &quot;hello&quot; &gt;&gt; test5.sh
+</code></pre><p>echo@C3-QA-ECHO:~$ cat test5.sh<br>test<br>hello</p>
+<ul>
+<li><p>输入重定向</p>
+<ul>
+<li>command1 &lt; file1</li>
+<li>这样，本来需要从键盘获取输入的命令会转移到文件读取内容。</li>
+</ul>
+</li>
+</ul>
+<p>注意：输出重定向是大于号(&gt;)，输入重定向是小于号(&lt;)。</p>
+<pre><code>- echo@C3-QA-ECHO:~$ wc -l &lt; test5.sh
+</code></pre><p>2<br>echo@C3-QA-ECHO:~$ cat test5.sh<br>test<br>hello</p>
+<pre><code>- echo@C3-QA-ECHO:~$ wc -l test5.sh
+</code></pre><p>2 test5.sh<br>echo@C3-QA-ECHO:~$</p>
+<ul>
+<li><p>扩展重定向</p>
+<ul>
+<li>标准输入文件(stdin)：stdin的文件描述符为0，Unix程序默认从stdin读取数据。</li>
+<li>标准输出文件(stdout)：stdout 的文件描述符为1，Unix程序默认向stdout输出数据。</li>
+<li>标准错误文件(stderr)：stderr的文件描述符为2，Unix程序会向stderr流中写入错误信息。</li>
+<li>默认情况下，command &gt; file 将 stdout 重定向到 file，command &lt; file 将stdin 重定向到 file。</li>
+</ul>
+</li>
+<li><p>Here Document</p>
+<ul>
+<li>Here Document 是 Shell 中的一种特殊的重定向方式，用来将输入重定向到一个交互式 Shell 脚本或程序。</li>
+<li>command &lt;&lt; delimiter<br>document<br>delimiter</li>
+<li>它的作用是将两个 delimiter 之间的内容(document) 作为输入传递给 command。</li>
+<li>注意：</li>
+</ul>
+</li>
+</ul>
+<p>结尾的delimiter 一定要顶格写，前面不能有任何字符，后面也不能有任何字符，包括空格和 tab 缩进。<br>开始的delimiter前后的空格会被忽略掉。</p>
+<pre><code>- echo@C3-QA-ECHO:~$ wc -l &lt;&lt; EOF
+</code></pre><blockquote>
+<p>hELLO<br>World<br>!<br>EOF<br>3</p>
+<pre><code>- echo@C3-QA-ECHO:~$ cat &lt;&lt; EOF
+</code></pre><p>hello<br>end<br>you<br>at<br>EOF<br>hello<br>end<br>you<br>at</p>
+</blockquote>
+<ul>
+<li><p>/dev/null 文件</p>
+<ul>
+<li>如果希望执行某个命令，但又不希望在屏幕上显示输出结果，那么可以将输出重定向到 /dev/null：</li>
+</ul>
+</li>
+</ul>
+<p>$ command &gt; /dev/null</p>
+<pre><code>- /dev/null 是一个特殊的文件，写入到它的内容都会被丢弃；如果尝试从该文件读取内容，那么什么也读不到。但是 /dev/null 文件非常有用，将命令的输出重定向到它，会起到&quot;禁止输出&quot;的效果。
+- 如果希望屏蔽 stdout 和 stderr，可以这样写：
+</code></pre><p>$ command &gt; /dev/null 2&gt;&amp;1</p>
+<pre><code>- 注意：0 是标准输入（STDIN），1 是标准输出（STDOUT），2 是标准错误输出（STDERR）。
+</code></pre><h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><ul>
+<li>Shell 文件包含的语法格式如下：</li>
+</ul>
+<p>. filename   # 注意点号(.)和文件名中间有一空格</p>
+<p>或</p>
+<p>source filename</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/13/ShellCommand/" data-id="cjv1kpost001pnwvxdgyhvofk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-resume" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/02/01/resume/" class="article-date">
@@ -771,7 +1432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/01/resume/" data-id="cjv1211ub003i9gvxgjxluxye" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/01/resume/" data-id="cjv1kpovc003rnwvx39hea462" class="article-share-link">Share</a>
       
       
     </footer>
@@ -881,7 +1542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study8/" data-id="cjv1211qc000x9gvxfw3e6lty" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study8/" data-id="cjv1kpos70012nwvx4js2xhec" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -1042,7 +1703,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study7/" data-id="cjv1211q9000t9gvxs9ms4gcp" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/27/MYSQL-Study7/" data-id="cjv1kporx000rnwvx0x6s46b8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -1228,112 +1889,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjv1211q7000r9gvx0f9fpuav" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MYSQL-Study5" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/01/26/MYSQL-Study5/" class="article-date">
-  <time datetime="2019-01-26T01:50:15.000Z" itemprop="datePublished">2019-01-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/01/26/MYSQL-Study5/">索引下</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引示意图.png" alt="(name,age)索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/InnoDB索引结构.png" alt="InnoDB索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图三.png" alt="图三"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图四.png" alt="图四"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引（下）.png" alt="索引（下）"></p>
-<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h4 id="如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？"><a href="#如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？" class="headerlink" title="如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？"></a>如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？</h4><h4 id="初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB"><a href="#初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB" class="headerlink" title="初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;"></a>初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;</h4><h4 id="insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’"><a href="#insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’" class="headerlink" title="insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);"></a>insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);</h4><h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><ul>
-<li>在k索引树上找到k=3的记录，取得ID=300</li>
-<li>再到ID索引树查到ID=300对应的R3</li>
-<li>在k索引树取下一个值k=5， 取得ID=500</li>
-<li>再回到ID 索引树查到ID=500对应的R4</li>
-<li>在k索引树取下一个值k=6， 不满足条件，循环结束</li>
-</ul>
-<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>如果执行语句select ID from T where k between 3 and 5， 这时候只需要查ID的值， 而ID 的值已经在k索引树上，因此可以直接提供查询结果，不需要回表。在这个查询里面，索引k已经“覆盖了”我们的查询需求，称为覆盖索引</li>
-<li>需要注意的是， 在引擎内部使用覆盖索引在索引k上其实读了3个记录，R3~R5(对应的索引k上的记录项)，但是对于mysql 的server 层来说，它就是找引擎拿到两条记录，因此mysql 认为扫描行数是2</li>
-</ul>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
-<li>减少树的搜索次数， 显著提升查询性能， 所以使用覆盖索引是一个常用的性能优化手段</li>
-</ul>
-<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><ul>
-<li>在一个市民信息表上，是否有必要将身份证号和名字建立联合索引？</li>
-<li>Create table ‘tuser’(‘id’ int(11) not null, ‘id_card’ varchar(32) default null, ‘name’ varchar(32) default null, ‘age’ int(11) default null, ‘ismale’ tinyint(1) default null, primary key (‘id’), key ‘id_card’ (‘id_card’), key ‘name_age’ (‘name’, ‘age’) ) ENGINE = InnoDB</li>
-<li>根据身份证号查询市民信息的需求，我们只需要在身份证号字段上建立索引就够，在建立一个（身份证，姓名）的联合索引，岂不是浪费空间？</li>
-<li>如果现在有一个高频请求，要根据身份证号查询姓名，这个联合索引就有意义。它可以在高频请求上用到覆盖索引， 不在需要需要回表查正航记录</li>
-</ul>
-<h2 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h2><h3 id="引子-1"><a href="#引子-1" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>B+树这种索引结构，可以利用索引的“最左前缀”， 来定位记录</li>
-<li>如（name,age）索引示意图， 可以看到索引项是按照索引定义里面出现的字段顺序排序的。</li>
-<li>当逻辑需求是查到所有名字是“张三”时，可以快速定位到ID4， 然后遍历得到所有需要的结果</li>
-<li>如果要查询所有名字第一个字是“张”， SQL 语句就是“where name like ‘张%’”。此时，可以查到第一个符合条件的记录是ID3， 然后向后遍历，直到不满足条件为止</li>
-</ul>
-<h3 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h3><ul>
-<li>在建立联合索引时， 如何安排索引内的字段顺序</li>
-<li>评估标准： 索引的复用能力。 </li>
-<li>第一原则， 如果通过调整顺序，可以少维护一个索引，那么这个顺序往往就是需要优先考虑采用的</li>
-<li>那么，如果既有联合查询，又有基于a,b各自的查询呢？查询条件里面只有b语句，时无法使用(a,b)这个联合索引的，这时候不得不维护另外一个索引，即（a,b）, (b)这两个</li>
-<li>空间原则： 如上面的市民表， name 字段大于age 字段，则建议创建一个（name, age）的联合索引和一个（age）的单字段索引</li>
-</ul>
-<h2 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h2><h3 id="引子-2"><a href="#引子-2" class="headerlink" title="引子"></a>引子</h3><ul>
-<li>如果满足最左前缀原则的时候，最左前缀可以用于在索引中定位记录。 如果不符合最左前缀的部分，怎样处理呢？</li>
-<li>如上面的连个索引（name, age）为例。需求： 检索表中“名字第一个字是张，而且年龄是10 的所有男孩”。 SQL：select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
-<li><p>执行步骤</p>
-<ul>
-<li>满足第一个条件，找到记录ID=3</li>
-<li>在MySQL 5.6 之前，只能从ID3 开始一个个回表，到主键索引上找出数据行，再对比字段值</li>
-<li>MYSQL 5.6 引入索引下推优化， 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数</li>
-<li>图三和图四是两个过程的流程图，每一个虚线箭头表示回表一次</li>
-<li>图3中，（name,age）索引里面去掉了age的值， 这个过程InnoDB 并不去去看age的值， 值是按顺序把“name第一个字是张”的记录一条条取出来回表。因此需要回表4次。</li>
-<li>图4跟图3的区别是： InnoDB 在（name,age）索引内部就判断了age 是否为10， 对于不为10的记录，直接判断并跳过。则需要回表2次</li>
-</ul>
-</li>
-</ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><h3 id="覆盖索引-1"><a href="#覆盖索引-1" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><ul>
-<li>select ID from T where k between 3 and 5</li>
-</ul>
-<h3 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h3><ul>
-<li>select ID from T where name like ‘张%’</li>
-</ul>
-<h3 id="索引下推-1"><a href="#索引下推-1" class="headerlink" title="索引下推"></a>索引下推</h3><ul>
-<li>select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
-</ul>
-<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="实际上主键索引也是可以使用多个字段的"><a href="#实际上主键索引也是可以使用多个字段的" class="headerlink" title="实际上主键索引也是可以使用多个字段的"></a>实际上主键索引也是可以使用多个字段的</h3><h3 id="如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB"><a href="#如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB" class="headerlink" title="如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;"></a>如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;</h3><h3 id="这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？"><a href="#这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？" class="headerlink" title="这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？"></a>这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？</h3><h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><ul>
-<li>主键a,b的聚簇索引组织顺序相当于order by a,b,也就是按a排序， 再按b排序，c 无序</li>
-<li>索引ca的组织是先按c排序，再按a排序， 同时记录主键（注意，这里不是ab， 而是只有b。 这个跟索引c的数据是一模一样的</li>
-<li>索引cb的组织是先按c排序，再按b排序，同时记录主键a</li>
-<li>因此 ca 可以去掉， cb需要保留</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study5/" data-id="cjv1211q4000n9gvx5tju47gl" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study6/" data-id="cjv1kport000nnwvx5o1w48sy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -1360,7 +1916,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -1370,7 +1926,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
     </div>
   </div>
 
@@ -1380,7 +1936,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 13.33px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 10px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 13.33px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 16.67px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -1402,6 +1958,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/04/29/httpProtocol/">http-Protocol</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/04/26/Performance3/">如何估计性能测试并发量</a>
           </li>
         
@@ -1415,10 +1975,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/24/TroubleShooting3/">TroubleShooting--多人收邮件不成功</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
           </li>
         
       </ul>
