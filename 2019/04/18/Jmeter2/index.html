@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Ying&#39;s Blog">
 <meta property="og:description" content="Jmeter 组件 sampler(采样器，基于通信协议，HTTP/FTP/SMTP) 计时器（Timer） 前置处理器和后置处理器(Pre/Post Processor, 基于采样器存在的作用下起效。在采样器执行之前或者之后执行。 可以取用响应中的一些数据， 可以通过xpath ， 正则表达式去取出) 断言（status code/string/type） Controller（IF/loop/">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-20T02:51:09.551Z">
+<meta property="og:updated_time" content="2019-04-28T13:11:00.571Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jmeter2">
 <meta name="twitter:description" content="Jmeter 组件 sampler(采样器，基于通信协议，HTTP/FTP/SMTP) 计时器（Timer） 前置处理器和后置处理器(Pre/Post Processor, 基于采样器存在的作用下起效。在采样器执行之前或者之后执行。 可以取用响应中的一些数据， 可以通过xpath ， 正则表达式去取出) 断言（status code/string/type） Controller（IF/loop/">
@@ -107,11 +107,27 @@
 <li>不同级别</li>
 <li>同一级别</li>
 </ol>
+<h4 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h4><p>测试计划的元素执行是有序的，可以通过以下方式执行</p>
+<ol>
+<li>配置节点</li>
+<li>前置处理器</li>
+<li>定时器</li>
+<li>取样器</li>
+<li>后置处理器（只有在结果可用情况下执行）</li>
+<li>断言（只在有结果可用情况下执行）</li>
+<li>监听器（只有在结果可用情况下执行）</li>
+</ol>
+<h4 id="Jmeter-与LoadRunner对比"><a href="#Jmeter-与LoadRunner对比" class="headerlink" title="Jmeter 与LoadRunner对比"></a>Jmeter 与LoadRunner对比</h4><ol>
+<li>Jmeter中的作用域非常关键</li>
+<li>Jmeter 需要使用人员介入的部分更多</li>
+<li>开发一个Jmeter性能脚本，实际上，就是根据场景需求，按照一定的作用域拼装组件</li>
+<li>LoadRunner 中是通过代码的位置和迭代的设置来控制执行顺序的</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjuy7lxjd0006xsvxysvm3p7e" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/18/Jmeter2/" data-id="cjv0z26vs00053gvxdn7qi9qc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
