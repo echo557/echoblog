@@ -5,15 +5,20 @@
   
 
   
-  <title>Archives | Ying&#39;s Blog</title>
+  <title>HTTP-Protocol基础 | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Ying&#39;s Blog">
-<meta property="og:url" content="https://echo557.github.io/echoblog.github.io/archives/page/9/index.html">
+  <meta name="description" content="URI,URL,URNURI：Uniform Resource Identifier/统一资源标志符-用来唯一标识互联网上的信息资源-包括URL和URN URL：Uniform Resource Locator/统一资源定位器schema: ftp/http路由：/path此类格式都叫URL，比如ftp协议 URN：永久统一资源定位符在资源移动之后还能被找到 报文（a） 请求报文–Method（如">
+<meta name="keywords" content="Protocol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP-Protocol基础">
+<meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
+<meta property="og:description" content="URI,URL,URNURI：Uniform Resource Identifier/统一资源标志符-用来唯一标识互联网上的信息资源-包括URL和URN URL：Uniform Resource Locator/统一资源定位器schema: ftp/http路由：/path此类格式都叫URL，比如ftp协议 URN：永久统一资源定位符在资源移动之后还能被找到 报文（a） 请求报文–Method（如">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-29T14:43:14.893Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ying&#39;s Blog">
+<meta name="twitter:title" content="HTTP-Protocol基础">
+<meta name="twitter:description" content="URI,URL,URNURI：Uniform Resource Identifier/统一资源标志符-用来唯一标识互联网上的信息资源-包括URL和URN URL：Uniform Resource Locator/统一资源定位器schema: ftp/http路由：/path此类格式都叫URL，比如ftp协议 URN：永久统一资源定位符在资源移动之后还能被找到 报文（a） 请求报文–Method（如">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -60,131 +65,73 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/echoblog.github.io/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2019/01/01/MYSQL-Study3/" class="archive-article-date">
-  <time datetime="2019-01-01T09:42:59.000Z" itemprop="datePublished">Jan 1</time>
+        <section id="main"><article id="post-httpProtocol2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/29/httpProtocol2/" class="article-date">
+  <time datetime="2019-04-29T14:13:14.000Z" itemprop="datePublished">2019-04-29</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2019/01/01/MYSQL-Study3/">隔离</a>
+    <h1 class="article-title" itemprop="name">
+      HTTP-Protocol基础
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="URI-URL-URN"><a href="#URI-URL-URN" class="headerlink" title="URI,URL,URN"></a>URI,URL,URN</h4><p>URI：Uniform Resource Identifier/统一资源标志符<br>-用来唯一标识互联网上的信息资源<br>-包括URL和URN</p>
+<p>URL：Uniform Resource Locator/统一资源定位器<br>schema: ftp/http<br>路由：/path<br>此类格式都叫URL，比如ftp协议</p>
+<p>URN：永久统一资源定位符<br>在资源移动之后还能被找到</p>
+<h4 id="报文"><a href="#报文" class="headerlink" title="报文"></a>报文</h4><p>（a） 请求报文<br>–Method（如Get）+ 路由信息（/path）+ HTTP/1.0(HTTP版本)<br>–HTTP Header</p>
+<p>（b）响应报文<br>– HTTP/1.0（版本）+status(200) + OK(Code的含义)<br>– HTTP Header<br>– HTTP Body（Body 和 Header之间有一个空行）</p>
+<h4 id="HTTP方法"><a href="#HTTP方法" class="headerlink" title="HTTP方法"></a>HTTP方法</h4><p>用来定义对于资源的操作<br>常用： GET, POST, PUT, DELETE</p>
+<p>HTTP code<br>–定义服务器对请求的处理结果<br>–各个区间的CODE有各自的语义<br>–好的HTTP服务可以通过CODE判断结果<br>200<br>401<br>404<br>500<br>503</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjv2hm8rj002euwvxbhwskd65" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/echoblog.github.io/2019/04/29/httpProtocol3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HTTP-Protocol解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/echoblog.github.io/2019/04/29/httpProtocol/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTTP-Protocol概要</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/echoblog.github.io/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2018/12/22/MYSQL-Study2/" class="archive-article-date">
-  <time datetime="2018-12-22T03:27:14.000Z" itemprop="datePublished">Dec 22</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2018/12/22/MYSQL-Study2/">MYSQL-Redo log &amp; Binlog</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/" class="archive-article-date">
-  <time datetime="2018-12-15T01:40:11.000Z" itemprop="datePublished">Dec 15</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL Study Framework - Basic logical</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2018/11/10/SQA-Task/" class="archive-article-date">
-  <time datetime="2018-11-10T09:45:07.000Z" itemprop="datePublished">Nov 10</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2018/11/10/SQA-Task/">SQA Task</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/echoblog.github.io/2018/10/21/Trouble-Shooting1/" class="archive-article-date">
-  <time datetime="2018-10-21T03:35:52.000Z" itemprop="datePublished">Oct 21</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/echoblog.github.io/2018/10/21/Trouble-Shooting1/">Trouble Shooting1 -Jenkins Cannot Send Out Email</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/archives/page/8/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/archives/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/archives/page/7/">7</a><a class="page-number" href="/echoblog.github.io/archives/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/echoblog.github.io/archives/page/10/">10</a><a class="extend next" rel="next" href="/echoblog.github.io/archives/page/10/">Next &raquo;</a>
-  </nav>
 
 </section>
         
