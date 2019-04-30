@@ -88,11 +88,30 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="创建一个简单的web服务"><a href="#创建一个简单的web服务" class="headerlink" title="创建一个简单的web服务"></a>创建一个简单的web服务</h4>
+        <h4 id="创建一个简单的web服务"><a href="#创建一个简单的web服务" class="headerlink" title="创建一个简单的web服务"></a>创建一个简单的web服务</h4><p>新建一个js 文件<br>const http = require(‘http’)<br>http.createServer(function(request,response){<br>    console.log(‘request come’, request.url)<br>    response.end(‘123’)<br>}).listen(8888)<br>console.log(‘server listening on 8888’)</p>
+<p>保存，通过node启动</p>
+<p>curl 可以显示很多请求</p>
+<p>跨域如何请求资源？</p>
+<h4 id="CORS跨域请求"><a href="#CORS跨域请求" class="headerlink" title="CORS跨域请求"></a>CORS跨域请求</h4><p>console里面可以查看前端的错误信息<br>跨域的处理时需要在js里设置<br>跨域需要服务起同意跨域<br>请求会发送，也响应了，浏览器只是解析会报错<br>方法一：<br>服务器增加<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’*’<br>})</p>
+<p>*表示所有网站都允许</p>
+<p>方法二：<br>json p<br>HTML 中设置</p>
+<script src="http://127.0.0.1:8888"></script>
+
+<h4 id="CORS跨域请求的限制"><a href="#CORS跨域请求的限制" class="headerlink" title="CORS跨域请求的限制"></a>CORS跨域请求的限制</h4><p>html中加入<br>fetch(‘<a href="http://localhost:8887/&#39;,{" target="_blank" rel="noopener">http://localhost:8887/&#39;,{</a><br>    method: ‘POST’,<br>    headers: {<br>        ‘x-Test-Cors’:’123’<br>    }<br>})</p>
+<p>CORS 预请求</p>
+<p>允许方法： GET/HEAD/POST<br>允许Content-Type:<br>–text/plain<br>–multipart/form-data<br>–application/x-www-form-urlencoded<br>其他限制：<br>–请求头限制<br>–XMLHttpRequestUpload对象均没有注册任何时间监听器<br>–请求中没有使用ReadableStream对象</p>
+<p>什么时预请求？<br>允许使用头<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’*’,<br>‘Access-Control-Allow-Headers’:’X-Test-Cors’<br>})</p>
+<p>允许使用方法<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’<em>‘,<br>‘Access-Control-Allow-Headers’:’X-Test-Cors’,<br>‘Access-Control-Allow-Methods’:’POST,PUT,Delete’<br>})<br>允许以下面方式进行跨域访问的最长时间<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’</em>‘,<br>‘Access-Control-Allow-Headers’:’X-Test-Cors’,<br>‘Access-Control-Allow-Methods’:’POST,PUT,Delete’,<br>‘Access-Control-Max-Age’:’1000’<br>})</p>
+<h4 id="缓存头"><a href="#缓存头" class="headerlink" title="缓存头"></a>缓存头</h4><p>限制作用，无强制性</p>
+<p>可缓存性<br>public<br>private<br>no-cache 需要通过服务器端验证</p>
+<p>到期<br>max-age = <seconds>  浏览器端生效<br>s-maxage=<seconds> 代理服务器生效<br>max-stale=<seconds> 发起请求方主动带的时间</seconds></seconds></seconds></p>
+<p>重新验证<br>must-revalidate 浏览器端生效<br>proxy-revalidate 用在指定缓存服务器中</p>
+<p>其他限制<br>no-store 本地不能缓存<br>no-transform </p>
+<h4 id="缓存验证"><a href="#缓存验证" class="headerlink" title="缓存验证"></a>缓存验证</h4>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol3/" data-id="cjv2hm8re0026uwvxgdjafli2" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol3/" data-id="cjv37e55g0028t0vxcm1j5mm9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -141,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjv2hm8rj002euwvxbhwskd65" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjv37e55q002nt0vxwr721jej" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -228,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjv2hm8rg0029uwvx9490bwuf" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjv37e55z0032t0vxc65admwo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -282,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjv2hm8ql000zuwvx2j95mzg3" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjv37e554001ot0vx6qmoxrnp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -324,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjv2hm8s80030uwvxw97antl7" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjv37e566003dt0vxz6x6t59d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
