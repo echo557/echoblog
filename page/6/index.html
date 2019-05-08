@@ -62,6 +62,145 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-autotesting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/12/autotesting/" class="article-date">
+  <time datetime="2019-04-12T05:12:12.000Z" itemprop="datePublished">2019-04-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/12/autotesting/">自动化框架搭建建议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/echoblog.github.io/2019/04/12/autotesting/自动化框架.png" alt="自动化框架"></p>
+<h2 id="手工VS自动化"><a href="#手工VS自动化" class="headerlink" title="手工VS自动化"></a>手工VS自动化</h2><h3 id="手工"><a href="#手工" class="headerlink" title="手工"></a>手工</h3><ul>
+<li>无法做到覆盖所有代码路径</li>
+<li>机械性、重复性</li>
+<li>无法短时间完成大量用例</li>
+<li><p>特点</p>
+<ul>
+<li>具有较好的异常处理能力</li>
+<li>基于测试用例，制造各种不同的逻辑判断</li>
+<li>步步跟踪，可以细致定位问题</li>
+<li>主要用来发现功能缺陷</li>
+</ul>
+</li>
+</ul>
+<h3 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h3><ul>
+<li>缩短测试周期</li>
+<li>提高效率，节约成本</li>
+<li>增加稳定性</li>
+<li><p>特点</p>
+<ul>
+<li>执行对象是脚本，任何一个判断都需要编码定义</li>
+<li>用例步骤之间关联性强</li>
+<li>保证产品主体功能正确和完整，提高效率</li>
+<li>阶段定位：冒烟测试和回归测试</li>
+</ul>
+</li>
+<li><p>注意事项</p>
+<ul>
+<li>自动化测试覆盖部分手工用例</li>
+<li>不要选择流程太复杂的用例，考虑到脚本开发成本。可以拆成多个用例</li>
+<li>选择的用例最好可以构建成场景</li>
+<li>选择用例带有目的性</li>
+<li>选取的用例是需要重复执行的部分</li>
+<li>主体流程可以做自动化脚本，便于回归</li>
+<li>自动化用例也可以区做配置检查，数据库检查</li>
+</ul>
+</li>
+<li><p>测试类型</p>
+<ul>
+<li>测试静态内容</li>
+<li><p>测试链接</p>
+<ul>
+<li>各个链接和验证预期页面是否存在</li>
+<li>链接改变/文件不时重定向 </li>
+</ul>
+</li>
+<li><p>功能测试</p>
+<ul>
+<li>登陆</li>
+<li>注册网站</li>
+<li>用户账户操作</li>
+<li>账户设置变化</li>
+<li>复杂数据检索操作</li>
+</ul>
+</li>
+<li><p>测试动态元素</p>
+</li>
+<li>Ajax的测试</li>
+</ul>
+</li>
+<li><p>原则</p>
+<ul>
+<li>一个用例为一个完整的场景，从用户登陆系统到最终退出并关闭浏览器</li>
+<li>一个测试用例只验证一个功能点</li>
+<li>尽量少可能编写逆向逻辑用例</li>
+<li>用例与用例之间尽量避免产生依赖</li>
+<li>一个用例测试完成后对测试场景还原</li>
+</ul>
+</li>
+</ul>
+<h2 id="工具-框架特征"><a href="#工具-框架特征" class="headerlink" title="工具/框架特征"></a>工具/框架特征</h2><h3 id="支持脚本化语言（Scripting-Language）"><a href="#支持脚本化语言（Scripting-Language）" class="headerlink" title="支持脚本化语言（Scripting Language）"></a>支持脚本化语言（Scripting Language）</h3><h3 id="对程序界面中对象得识别能力"><a href="#对程序界面中对象得识别能力" class="headerlink" title="对程序界面中对象得识别能力"></a>对程序界面中对象得识别能力</h3><h3 id="支持函数得可重用"><a href="#支持函数得可重用" class="headerlink" title="支持函数得可重用"></a>支持函数得可重用</h3><h3 id="支持外部函数库"><a href="#支持外部函数库" class="headerlink" title="支持外部函数库"></a>支持外部函数库</h3><h3 id="抽象层-将程序界面中得对象实体映射成逻辑对象"><a href="#抽象层-将程序界面中得对象实体映射成逻辑对象" class="headerlink" title="抽象层-将程序界面中得对象实体映射成逻辑对象"></a>抽象层-将程序界面中得对象实体映射成逻辑对象</h3><h3 id="支持数据驱动测试（Data-Driven-Test）"><a href="#支持数据驱动测试（Data-Driven-Test）" class="headerlink" title="支持数据驱动测试（Data-Driven Test）"></a>支持数据驱动测试（Data-Driven Test）</h3><h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h3 id="调试器（Debugger）"><a href="#调试器（Debugger）" class="headerlink" title="调试器（Debugger）"></a>调试器（Debugger）</h3><h3 id="源代码管理"><a href="#源代码管理" class="headerlink" title="源代码管理"></a>源代码管理</h3><h3 id="支持脚本的命令行（Command-Line）方式"><a href="#支持脚本的命令行（Command-Line）方式" class="headerlink" title="支持脚本的命令行（Command Line）方式"></a>支持脚本的命令行（Command Line）方式</h3><h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h2><h3 id="通用性"><a href="#通用性" class="headerlink" title="通用性"></a>通用性</h3><ul>
+<li><p>分层</p>
+<ul>
+<li>Case</li>
+<li>元素处理</li>
+<li>底层</li>
+<li>通用</li>
+<li>日志</li>
+<li>报告</li>
+<li>用途</li>
+<li>数据层</li>
+</ul>
+</li>
+<li><p>驱动式</p>
+</li>
+</ul>
+<h3 id="易维护性"><a href="#易维护性" class="headerlink" title="易维护性"></a>易维护性</h3><h3 id="定时处理"><a href="#定时处理" class="headerlink" title="定时处理"></a>定时处理</h3><h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><h2 id="框架驱动方式"><a href="#框架驱动方式" class="headerlink" title="框架驱动方式"></a>框架驱动方式</h2><h3 id="数据驱动"><a href="#数据驱动" class="headerlink" title="数据驱动"></a>数据驱动</h3><h3 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h3><h2 id="内部-外部框架"><a href="#内部-外部框架" class="headerlink" title="内部/外部框架"></a>内部/外部框架</h2><h3 id="内部框架"><a href="#内部框架" class="headerlink" title="内部框架"></a>内部框架</h3><ul>
+<li><p>即分层框架，目的在于更好的优化和管理测试用例、更便捷的进行数据、元素、脚本的维护和更快速的创建新脚本</p>
+<ul>
+<li>Junit(单线程)+Webdriver+grid</li>
+<li>Testng（多线程）+Webdriver+Maven（调用，编辑）+Ant+SVN/Git+Jenkins+xslt/reportng(组件)+Mail</li>
+</ul>
+</li>
+</ul>
+<h3 id="外部框架"><a href="#外部框架" class="headerlink" title="外部框架"></a>外部框架</h3><ul>
+<li>主要指以WebDriver为核心，辅以外部第三方框架和工具，用以实现持续集成、自动部署、脚本执行、远程调用、报告优化、邮件发送等功能性框架</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjvf6p3gi0026u4vxrrsk1x3e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-PerformanceTesting2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/" class="article-date">
@@ -124,7 +263,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjvce4unu001iogvxga3ljxmr" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjvf6p3fv001bu4vxr05htgo4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -278,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting1/" data-id="cjvce4unj0014ogvx7e2b3dd4" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting1/" data-id="cjvf6p3fq0015u4vxicul303i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -493,7 +632,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/functionTesting/" data-id="cjvce4uok002hogvxx3rae91b" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/functionTesting/" data-id="cjvf6p3gf0021u4vxq3viu89b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
@@ -536,60 +675,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/pict/" data-id="cjvce4uoz002sogvxcevm0jzr" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/pict/" data-id="cjvf6p3gz002uu4vxsibkvzcn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-seleniumIDE" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/08/seleniumIDE/" class="article-date">
-  <time datetime="2019-04-08T00:32:16.000Z" itemprop="datePublished">2019-04-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/08/seleniumIDE/">seleniumIDE</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需要下载和fireFox 配套使用</p>
-<p>####基本功能<br>录制<br>回放</p>
-<p>####步骤</p>
-<ol>
-<li>precondition</li>
-<li>steps</li>
-<li>assert</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/08/seleniumIDE/" data-id="cjvce4uro003vogvx6904wt3c" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
     </footer>
   </div>
@@ -633,7 +722,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 10px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 12.5px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 15px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12.5px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 17.5px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12.5px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 15px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 15px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12.5px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 17.5px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -655,6 +744,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
@@ -668,10 +761,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/29/httpProtocol2/">HTTP-Protocol基础</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/29/httpProtocol/">HTTP-Protocol概要</a>
           </li>
         
       </ul>

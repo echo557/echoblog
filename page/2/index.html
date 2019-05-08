@@ -62,6 +62,93 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-httpProtocol" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/29/httpProtocol/" class="article-date">
+  <time datetime="2019-04-28T23:08:53.000Z" itemprop="datePublished">2019-04-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/29/httpProtocol/">HTTP-Protocol概要</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h4><p>输入URL打开网页<br>AJAX获取数据<br>img标签加载图片</p>
+<p>Cache-Control<br>一般用法： max-age=100 对静态资源缓存100s<br>其他方法：</p>
+<ol>
+<li>设置Public,private可以控制在客户端或者代理服务端缓存</li>
+<li>must-revalidate 缓存过期后，需要在代理服务端验证通过后才可以继续使用缓存。</li>
+<li>no-cache, no-store是否设置使用缓存</li>
+</ol>
+<p>缓存验证：</p>
+<ol>
+<li>last-modified 配合if-modified-since</li>
+<li>etag配合if-none-match</li>
+</ol>
+<p>HTTP的header</p>
+<ol>
+<li>Content-Type、Content-Encoding等用来约束数据类型</li>
+<li>Cookie保持会话信息</li>
+<li>CORS实现跨域并保持安全性限制</li>
+</ol>
+<p>浏览器输入URL后HTTP请求返回的完整过程：</p>
+<ol>
+<li>startTime开始时间&gt;redirectStart(开始跳转)&gt;Redirect跳转&gt;redirectEnd</li>
+<li>fetchStart(fetch开始)&gt;App cache</li>
+<li>domianLookupStart域名解析开始&gt;DNS开始查找&gt;domianLookupEnd域名解析结束</li>
+<li>connectStart开始创建链接&gt;TCP 创建链接(secureConnectStart 开始创建安全链接)&gt;connectEnd创建链接结束</li>
+<li>requestStart开始发送请求&gt;Request 发送请求</li>
+<li>responseStart开始接收返回&gt;Response接收响应&gt;responseEnd接收返回结束</li>
+</ol>
+<h4 id="5层网络模型"><a href="#5层网络模型" class="headerlink" title="5层网络模型"></a>5层网络模型</h4><p>物理层： 定义设备如何传输数据<br>数据链路层：通信的实体间建立数据链路连接<br>网络层： 为数据在节点之间传输创建逻辑链路<br>传输层 TCP, UDP： </p>
+<ol>
+<li>为用户提供可靠的端到端（End-to-End）服务</li>
+<li>传输层向高层屏蔽了下层数据通信的细节<br>应用层 HTTP,FTP：</li>
+<li>为应用软件提供了很多服务</li>
+<li>构建于TCP 协议之上</li>
+<li>屏蔽网络传输相关细节</li>
+</ol>
+<h4 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h4><p>数据以字符串传输<br>持久连接<br>pipeline:同一个连接多个请求<br>服务端是按顺序返回（串行）<br>增加host 和一些其他命令：同一台物理服务器可以跑多个web服务（应用在集群中）<br>占用带宽比较多</p>
+<h4 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h4><p>数据以二进制传输<br>同一个连接里面发送多个请求不再需要按照顺序来<br>头信息压缩（可减少带宽占用）以及推送等提高效率的功能<br>HTTP2 和CSS，js 发送时并行的</p>
+<h4 id="HTTP-三次握手"><a href="#HTTP-三次握手" class="headerlink" title="HTTP 三次握手"></a>HTTP 三次握手</h4><p>需要创建TCP connector<br>TCP连接上可以发送多个请求</p>
+<ol>
+<li>HTTP1.0中TCP 在请求创建时创建，等到请求发送响应后，TCP 连接就会关闭</li>
+<li>HTTP1.1的连接可以通过声明一直保持<br>发送时可以并行<br>服务器返回<br>三次握手会有开销</li>
+<li>HTTP2中TCP连接是可以并发的，对于同一个服务器发起网页连接的时候，只需要一个TCP连接</li>
+</ol>
+<p>三次握手时序图<br>Client(发送SYN=1, Seq=X)&gt;Server<br>Client&lt;Server(发送SYN=1,ACK=X+1 Seq=Y)<br>Client(发ACK=Y+1 Seq=Z)&gt;Server</p>
+<p>数据包查看：Wireshark</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjvf6p3go002eu4vxe9rl5sin" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Performance3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/26/Performance3/" class="article-date">
@@ -104,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjvce4une000zogvx7goj75gu" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjvf6p3fj000xu4vx7xileord" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -146,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjvce4upl0031ogvx2cfmk02h" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjvf6p3h1002xu4vxgcdb2pni" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -227,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/" data-id="cjvce4um60001ogvxw3aknt88" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/" data-id="cjvf6p3dz0000u4vxk5fs642a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li></ul>
@@ -272,118 +359,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/TroubleShooting3/" data-id="cjvce4uo1001togvx0dcb01dh" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/TroubleShooting3/" data-id="cjvf6p3gq002hu4vx7tnrq0s5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-viewquestions" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/24/viewquestions/" class="article-date">
-  <time datetime="2019-04-24T05:42:55.000Z" itemprop="datePublished">2019-04-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/24/viewquestions/">面试的理论问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h4><ol>
-<li>左连接和右连接</li>
-</ol>
-<p>左连接，两张表。 返回包括左表中的所有记录和右表中联结字段相等的记录<br>左边有的，右边没有的为null</p>
-<p>右连接<br>返回包括右表中的所有记录和左表中联结字段相等的记录<br>左边没有的，右边有的为null</p>
-<p>内连接：显示左边右边共有的。</p>
-<ol start="2">
-<li>查询第二大的值<br>方法1：<br>select id from users where id not in (select Max(id) from users)order by id desc limit 1;</li>
-</ol>
-<p>方法2：<br>select * from users where id&lt;(select max(id) from users) limit 1</p>
-<p>7  联合表查询？插入数据？ 更新数据？<br>SELECT * FROM sh_index_hold<br>WHERE job1_id =<br>(<br>SELECT ID FROM job WHERE print_job_number<br>= ‘A01EP3’<br>);</p>
-<p>insert into table1(key1,key2,key3) values(‘’,’’,’’); commit；</p>
-<p>drop table1</p>
-<p>update tablename set key = “” where conditions</p>
-<p>主键是什么？<br>primary key,唯一关键字，表定义的一部分，一个表里面只有一个primary key<br>索引是什么？<br>索引是一种单独的、物理的对数据库表中一列或多列的值进行排序的一种存储结构，它是某个表中一列或若干列值的集合和相应的指向表中物理标识这些值的数据页的逻辑指针清单。</p>
-<h4 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h4><p>1.什么是装饰器<br>装饰器是Python 函数， 它可以让其他函数在不需要做任何代码变动的前提下增加额外功能对象。比如说学哈如日志、性能测试、事务处理、缓存、权限校验等场景。</p>
-<p>装饰器不能装饰静态方法<br>比如@logging装饰器可以在函数执行时额外输出日志，@cache装饰过的函数可以缓存计算结果等。</p>
-<ol start="2">
-<li>字典，元组，列表的差别<br>list是处理一组有序项目的数据结构，即你可以在一个列表中存储一个序列的项目。可改变，可嵌套。<br>list = [‘’,’’,’’]<br>元组： 不可表，通过圆括号存储。 可以嵌套。<br>zoo=(‘’,’’,’’)<br>字典：键值对方式存储。键/值是没有顺序的。<br>{‘’:’’,’’:’’,’’:’’}</li>
-</ol>
-<ol start="3">
-<li>递归</li>
-</ol>
-<p>举例，实现n阶乘<br>def fun(n):<br>    if n&gt;1:<br>        return n*fun(n-1)<br>    else:<br>        return 1</p>
-<ol start="4">
-<li>解释器<br>#!/usr/bin/python<br>指定用什么解释器运行脚本以及解释器所在的位置</li>
-</ol>
-<h1 id="coding-utf-8"><a href="#coding-utf-8" class="headerlink" title="-- coding: utf-8 --"></a>-<em>- coding: utf-8 -</em>-</h1><p>用来指定文件编码为utf-8的</p>
-<ol start="5">
-<li>self 是什么意思？<br>self在定义时需要定义，但是在调用时会自动传入。<br>self的名字并不是规定死的，但是最好还是按照约定是用self<br>self总是指调用时的类的实例。</li>
-</ol>
-<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p> Linux 查看文件内容，编辑内容，修改内容， 查看滚动log， 查看一个文件前10 行，后十行？ 中间行？查看进程命令？ 修改文件可读可执行？<br>vim filename<br>cat filename<br>ps -ef | grep JAVA<br>chmod 777 filename</p>
-<p>cat filename | tail -n 10<br>cat filename | head -n 10<br>【一】从第3000行开始，显示1000行。即显示3000~3999行<br>cat filename | tail -n +3000 | head -n 1000</p>
-<p>【二】显示1000行到3000行<br>cat filename| head -n 3000 | tail -n +1000</p>
-<p>*注意两种方法的顺序</p>
-<p>分解：<br>    tail -n 1000：显示最后1000行<br>    tail -n +1000：从1000行开始显示，显示1000行以后的<br>    head -n 1000：显示前面1000行</p>
-<p>直接使用 netstat   -anp   |   grep  portno<br>即：netstat –apn | grep 8080</p>
-<p>查看进程：<br>1、ps 命令用于查看当前正在运行的进程。<br>grep 是搜索<br>例如： ps -ef | grep java<br>表示查看所有进程里 CMD 是 java 的进程信息<br>2、ps -aux | grep java<br>-aux 显示所有状态<br>ps</p>
-<ol start="3">
-<li>kill 命令用于终止进程<br>例如： kill -9 [PID]<br>-9 表示强迫进程立即停止<br>通常用 ps 查看进程 PID ，用 kill 命令终止进程</li>
-</ol>
-<p><a href="https://www.cnblogs.com/geekdc/p/5497919.html" target="_blank" rel="noopener">https://www.cnblogs.com/geekdc/p/5497919.html</a></p>
-<p>####　测试</p>
-<ol>
-<li>什么是负载测试？<br>负载测试是模拟实际软件系统所承受的负载条件的系统负荷，通过不断加载（如逐渐增加模拟用户的数量）或其它加载方式来观察不同负载下系统的响应时间和数据吞吐量、系统占用的资源（如CPU、内存）等，以检验系统的行为和特性，以发现系统可能存在的性能瓶颈、内存泄漏、不能实时同步等问题。负载测试更多地体现了一种方法或一种技术。</li>
-<li><p>什么是性能测试？</p>
-</li>
-<li><p>常用的参数<br>系统吞吐量几个重要参数：QPS（TPS）、并发数、响应时间， 请求时间</p>
-</li>
-</ol>
-<p>压力测试是在强负载（大数据量、大量并发用户等）下的测试，查看应用系统在峰值使用情况下操作行为，从而有效地发现系统的某项功能隐患、系统是否具有良好的容错能力和可恢复能力。压力测试分为高负载下的长时间（如24小时以上）的稳定性压力测试和极限负载情况下导致系统崩溃的破坏性压力测试。</p>
-<p>负载测试是通过改变系统负载方式、增加负载等来发现系统中所存在的性能问题。负载测试是一种测试方法，可以为性能测试、压力测试所采用。负载测试的加载方式也有很多种，可以根据测试需要来选择。<br>性能测试是为获取或验证系统性能指标而进行测试。多数情况下，性能测试会在不同负载情况下进行。<br>压力测试通常是在高负载情况下来对系统的稳定性进行测试，更有效地发现系统稳定性的隐患和系统在负载峰值的条件下功能隐患等。</p>
-<h4 id="HTTP，TCP-IP"><a href="#HTTP，TCP-IP" class="headerlink" title="HTTP，TCP/IP"></a>HTTP，TCP/IP</h4><ol>
-<li>get 和post 的区别？概念是什么？<br>我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</li>
-</ol>
-<p>运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。<br>GET和POST本质上就是TCP链接，并无差别。但是由于HTTP的规定和浏览器/服务器的限制，导致他们在应用过程中体现出一些不同。<br>GET和POST还有一个重大区别，简单的说：<br>GET产生一个TCP数据包；POST产生两个TCP数据包。<br>长的说：<br>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；<br>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。</p>
-<ol>
-<li>GET与POST都有自己的语义，不能随便混用。</li>
-<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
-<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。<br><a href="http://www.cnblogs.com/logsharing/p/8448446.html" target="_blank" rel="noopener">http://www.cnblogs.com/logsharing/p/8448446.html</a> </li>
-</ol>
-<p>语义上的区别：<br>GET - 获取指定资源，安全、幂等、可缓存。<br>POST - 根据请求对指定资源做处理，不安全、不幂等、大多数浏览器中不可缓存。<br>表现上的区别：<br>GET - 参数暴露、长度限制。<br>POST - 参数不暴露、长度无限制。<br>但长度限制并不是出自HTTP协议的规定，而是因为浏览器对URL有长度限制。🙃</p>
-<ol start="5">
-<li>python 中bin 的作用？</li>
-</ol>
-<p>？？bind<br>Bind是用来将控件事件与控件做绑定的，用self.Bind时，在后面的参数中你可以看到加入了控件，self.button.Bind没有，因为是直接使用了控件的Bind。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/viewquestions/" data-id="cjvce4urz004eogvxyehiyzot" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
 
     </footer>
   </div>
@@ -427,7 +406,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 10px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 12.5px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 15px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12.5px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 17.5px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12.5px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 15px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 15px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12.5px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 17.5px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -449,6 +428,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
@@ -462,10 +445,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/04/29/httpProtocol2/">HTTP-Protocol基础</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/29/httpProtocol/">HTTP-Protocol概要</a>
           </li>
         
       </ul>
