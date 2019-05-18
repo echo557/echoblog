@@ -7,18 +7,18 @@
   
   <title>fiddler | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原理Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理 作用 了解http协议 接口测试，自动化的接口测试 Fiddlers 抓包可以判断时前端还是后端BUG  HTTP包：–请求报文   请求行   请求头   请求体–响应报文   状态行   响应头   响应体    51 min">
+  <meta name="description" content="原理Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理 作用 了解http协议 接口测试，自动化的接口测试 Fiddlers 抓包可以判断时前端还是后端BUG  HTTP包：–请求报文   请求行   请求头   请求体–响应报文   状态行   响应头   响应体 Fiddler 可以通过装插件的方式导出Jmeter的文件，以便导出之后来做Jmeter">
 <meta name="keywords" content="Performance">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fiddler">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/05/06/fiddler/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
-<meta property="og:description" content="原理Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理 作用 了解http协议 接口测试，自动化的接口测试 Fiddlers 抓包可以判断时前端还是后端BUG  HTTP包：–请求报文   请求行   请求头   请求体–响应报文   状态行   响应头   响应体    51 min">
+<meta property="og:description" content="原理Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理 作用 了解http协议 接口测试，自动化的接口测试 Fiddlers 抓包可以判断时前端还是后端BUG  HTTP包：–请求报文   请求行   请求头   请求体–响应报文   状态行   响应头   响应体 Fiddler 可以通过装插件的方式导出Jmeter的文件，以便导出之后来做Jmeter">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-06T15:05:07.885Z">
+<meta property="og:updated_time" content="2019-05-11T13:42:00.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="fiddler">
-<meta name="twitter:description" content="原理Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理 作用 了解http协议 接口测试，自动化的接口测试 Fiddlers 抓包可以判断时前端还是后端BUG  HTTP包：–请求报文   请求行   请求头   请求体–响应报文   状态行   响应头   响应体    51 min">
+<meta name="twitter:description" content="原理Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理 作用 了解http协议 接口测试，自动化的接口测试 Fiddlers 抓包可以判断时前端还是后端BUG  HTTP包：–请求报文   请求行   请求头   请求体–响应报文   状态行   响应头   响应体 Fiddler 可以通过装插件的方式导出Jmeter的文件，以便导出之后来做Jmeter">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -98,12 +98,22 @@
 <li>Fiddlers 抓包可以判断时前端还是后端BUG</li>
 </ol>
 <p>HTTP包：<br>–请求报文<br>   请求行<br>   请求头<br>   请求体<br>–响应报文<br>   状态行<br>   响应头<br>   响应体</p>
-<p>   51 min</p>
+<p>Fiddler 可以通过装插件的方式导出Jmeter的文件，以便导出之后来做Jmeter的接口测试。</p>
+<p>录制Jmeter文件的方法：<br>Badboy<br>Fiddler<br>Jmeter</p>
+<p>AutoResponder更改可以篡改某些信息。<br>使用场景：<br>对测试<br>–mock平台，可以模拟响应， 若开发没有完成接口开发的时候<br>–js可以进行前端页面的动态编程。 可以拦截服务器的脚本文件到本地》调试</p>
+<p>如果做：<br>拦截后到Auto Responder,<br>enable rules<br>unmatched requests passthrough</p>
+<p>Composer：可以发包功能,然后 execute去测试接口<br>类似的如： postman, jmeter</p>
+<p>App 抓包</p>
+<ol>
+<li>手机设置代理</li>
+<li>同一个网络</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>1.fiddler抓包判断是前端还是后端bug，通过有没有发包来判断。该应用场景较少。<br>result<br>200：接口请求成功<br>protocol：协议<br>Host：主机地址<br>URL：具体请求的哪一个资源<br>Body：请求数据时，发送的内容的大小<br>Content-Type:内容的类型<br>Caching：<br>2：开发不规范，没有接口文件的情况下，可导出jmeter文件，供jmeter做接口测试使用<br>3：autoResponseder：拦截服务器的脚本文件到本地-&gt;修改调试<br>4：Composer：可做接口测试<br>5：抓APP数据包：<br>a)将手机投屏到电脑（itools可以做到）<br>b)手机要设置代理，需安装证书<br>c)在同一个网络<br>d)fiddler要做特殊设置：<br>tools-options-&gt;https 全勾选<br>connection-&gt;Allow remote computers to connect<br>e)注意关闭过滤器Filters</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/fiddler/" data-id="cjvf6p3gc001yu4vx9pdr9vhq" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/fiddler/" data-id="cjvtlr7z3002o40vx18xvuvab" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -113,6 +123,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/echoblog.github.io/2019/05/13/Jmeter4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Jmeter4
+        
+      </div>
+    </a>
   
   
     <a href="/echoblog.github.io/2019/05/06/Jenkins/" id="article-nav-older" class="article-nav-link-wrap">
@@ -143,7 +162,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
     </div>
   </div>
 
@@ -153,7 +172,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12.5px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 15px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 15px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12.5px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 17.5px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -175,23 +194,23 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/05/13/Jmeter-Interface/">Jmeter_Interface</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/05/13/Jmeter4/">Jmeter4</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
           </li>
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/git/">git</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/29/httpProtocol3/">HTTP-Protocol解析</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/29/httpProtocol2/">HTTP-Protocol基础</a>
           </li>
         
       </ul>

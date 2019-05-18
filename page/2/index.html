@@ -62,6 +62,373 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/05/06/git/" class="article-date">
+  <time datetime="2019-05-06T13:12:47.000Z" itemprop="datePublished">2019-05-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/05/06/git/">git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Git-amp-GitHub"><a href="#Git-amp-GitHub" class="headerlink" title="Git&amp;GitHub"></a>Git&amp;GitHub</h1><h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><h3 id="SVN-vs-Git"><a href="#SVN-vs-Git" class="headerlink" title="SVN vs Git"></a>SVN vs Git</h3><ul>
+<li>SVN： centralization version control tool, incremental management, exist single point  fault </li>
+<li>Git:  distribute version control tool, system snapshot,  all versions can be managed in local</li>
+</ul>
+<h3 id="Version-control"><a href="#Version-control" class="headerlink" title="Version control"></a>Version control</h3><ul>
+<li>Version control</li>
+<li>Rights control</li>
+<li>History record</li>
+<li>Branch management</li>
+</ul>
+<h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><ul>
+<li>Workspace-&gt;（git add）Temporary zone&gt;（git commit）Local library</li>
+<li><p>Git and code trusttee</p>
+<ul>
+<li><p>VLAN</p>
+<ul>
+<li>GutLab</li>
+</ul>
+</li>
+<li><p>Outer net</p>
+<ul>
+<li>GitHub</li>
+<li>码云</li>
+</ul>
+</li>
+<li><p>Task: maintain remote library</p>
+</li>
+</ul>
+</li>
+<li><p>Library</p>
+<ul>
+<li><p>local library</p>
+<ul>
+<li>Initialize : git init</li>
+<li>.git initialized as a hiden director, can display by ls -lA</li>
+</ul>
+</li>
+<li><p>remote library</p>
+</li>
+</ul>
+</li>
+<li><p>Set Signature</p>
+<ul>
+<li>Function: distinguish different identities of developers</li>
+<li>Signature didn’t have relation with login account</li>
+</ul>
+</li>
+<li><p>Hash algorithm</p>
+<ul>
+<li><p>Hash  algorithm common</p>
+<ul>
+<li>Length of encrypt result is same </li>
+<li>Hash  algorithm confirmed, input data confirms then output would not change</li>
+<li>Hash  algorithm confirmed, input data changes then  output would change</li>
+<li>Hash  algorithm can  not reversible</li>
+</ul>
+</li>
+<li><p>Subtopic 2</p>
+</li>
+<li>Subtopic 3</li>
+</ul>
+</li>
+</ul>
+<h2 id="Git-Command"><a href="#Git-Command" class="headerlink" title="Git Command"></a>Git Command</h2><h3 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h3><ul>
+<li><p>Project/Library level</p>
+<ul>
+<li>git config  user.name  xxxx</li>
+<li>git.config user.email  <a href="mailto:xxxx@xxx.com" target="_blank" rel="noopener">xxxx@xxx.com</a></li>
+<li>cat ./git/config</li>
+</ul>
+</li>
+<li><p>System user level</p>
+<ul>
+<li>git config –global  user.name  xxxx</li>
+<li>git config –global  user.email  <a href="mailto:xxxx@xxx.com" target="_blank" rel="noopener">xxxx@xxx.com</a></li>
+<li>cat ~/.gitconfig</li>
+</ul>
+</li>
+<li><p>Level priority</p>
+<ul>
+<li>Project level’s priority is higher than system level</li>
+<li>Must have one signature</li>
+</ul>
+</li>
+<li><p>others</p>
+<ul>
+<li>git add filename (Add file in workspace to )</li>
+<li>git status (Check workspace/temporaryspace status)</li>
+<li>git rm –cached good.txt(Delete good.txt from cach zone)</li>
+<li>git commit -m “commit message” filename</li>
+<li><p>Check log</p>
+<ul>
+<li>git log<br>   commit 315eaf5b1ad6182d0dc3cd07fdc02dfd36ca6584 (HEAD -&gt; master)<br>Author: test_pro <a href="mailto:&#116;&#101;&#x73;&#x74;&#95;&#112;&#x72;&#111;&#64;&#116;&#101;&#115;&#116;&#46;&#99;&#111;&#109;" target="_blank" rel="noopener">&#116;&#101;&#x73;&#x74;&#95;&#112;&#x72;&#111;&#64;&#116;&#101;&#115;&#116;&#46;&#99;&#111;&#109;</a><br>Date:   Thu May 2 08:12:06 2019 +0800</li>
+</ul>
+<p>My first commit</p>
+<ul>
+<li><p>git log –pretty=oneline<br>aa7dcd1235d07c48a7fb2408c685bf109517b753 (HEAD -&gt; master) My third commit<br>bdf0dd51e4ae554519ddb60265c8c1abba11a8f5 My second commit<br>315eaf5b1ad6182d0dc3cd07fdc02dfd36ca6584 My first commit</p>
+</li>
+<li><p>git reflog</p>
+</li>
+<li>git log –oneline</li>
+</ul>
+</li>
+<li><p>In vim editor, set  nu could display cloumn</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Version-manage-Roll-back-amp-move-forward"><a href="#Version-manage-Roll-back-amp-move-forward" class="headerlink" title="Version manage(Roll back &amp; move forward)"></a>Version manage(Roll back &amp; move forward)</h3><ul>
+<li>HEAD</li>
+<li><p>Method</p>
+<ul>
+<li>git reset –hard xxxx</li>
+<li>git reset –hard HEAD^</li>
+<li>git reset –hard HEAD~n (roll back n steps)</li>
+</ul>
+</li>
+<li><p>reset  commad</p>
+<ul>
+<li>–soft(move pin in local workspace)</li>
+<li>–mixed(move pin in local workspace, and reset temporary space)</li>
+<li>–hard(move pin in local workspace, and reset temporary space and workspace)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Version-manage-Reset-after-delete"><a href="#Version-manage-Reset-after-delete" class="headerlink" title="Version manage(Reset after delete)"></a>Version manage(Reset after delete)</h3><ul>
+<li>predcondition:before delete,  files had updated to locl workspace</li>
+<li><p>git reset –hard xxxx</p>
+<ul>
+<li>delete action has already commited to local space, pin located to history record</li>
+<li>delete action has not commited to local space, pin located to use HEAD</li>
+</ul>
+</li>
+</ul>
+<h3 id="Compare"><a href="#Compare" class="headerlink" title="Compare"></a>Compare</h3><ul>
+<li><p>git diff filename</p>
+<ul>
+<li>compare workspace file to tempoeary space</li>
+</ul>
+</li>
+<li><p>git diff historyversion filename</p>
+<ul>
+<li>compare workspace file to local space file in history</li>
+</ul>
+</li>
+<li><p>git diff</p>
+<ul>
+<li>compare multiple file</li>
+</ul>
+</li>
+</ul>
+<h3 id="Branch"><a href="#Branch" class="headerlink" title="Branch"></a>Branch</h3><ul>
+<li><p>Advantage</p>
+<ul>
+<li>Multiple branch development, prompt efficient</li>
+<li>One branch failed has no effect to other braches</li>
+</ul>
+</li>
+<li><p>Command</p>
+<ul>
+<li>Create: git branch branchname</li>
+<li>Check : git branch -v</li>
+<li>Switch: git checkout branchname</li>
+<li><p>Merge:</p>
+<ul>
+<li>Switch to target branch: git checkout target_branchname</li>
+<li>Execute: git merge newcontent_branchname</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Conflict</p>
+<ul>
+<li>Step1: Edit file and delete special symbol</li>
+<li>Step2: Edit file until it satisfy  you ,quit file </li>
+<li>git add filename</li>
+<li><p>git commit -m “log information”</p>
+<ul>
+<li>Note: commit can not include filename</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Git-GUI-in-Eclipse"><a href="#Git-GUI-in-Eclipse" class="headerlink" title="Git GUI in Eclipse"></a>Git GUI in Eclipse</h2><h2 id="Environment-Build-of-Gitlab-Server"><a href="#Environment-Build-of-Gitlab-Server" class="headerlink" title="Environment Build of Gitlab Server"></a>Environment Build of Gitlab Server</h2><h2 id="Manage-Git"><a href="#Manage-Git" class="headerlink" title="Manage Git"></a>Manage Git</h2><h3 id="Registe-account-for-github"><a href="#Registe-account-for-github" class="headerlink" title="Registe account for github"></a>Registe account for github</h3><h3 id="Create-local-library"><a href="#Create-local-library" class="headerlink" title="Create local library"></a>Create local library</h3><h3 id="Build-new-respository"><a href="#Build-new-respository" class="headerlink" title="Build new respository"></a>Build new respository</h3><h3 id="Push-local-library-to-remote-library"><a href="#Push-local-library-to-remote-library" class="headerlink" title="Push local library to remote library"></a>Push local library to remote library</h3><ul>
+<li>git remote -v</li>
+<li>git remote add origin <a href="https://xxx.com" target="_blank" rel="noopener">https://xxx.com</a></li>
+<li>git push origin branchname</li>
+</ul>
+<h3 id="Clone-library-from-remote-to-local"><a href="#Clone-library-from-remote-to-local" class="headerlink" title="Clone library from remote to local"></a>Clone library from remote to local</h3><ul>
+<li>git clone remote_library_address</li>
+<li>ls -lA</li>
+</ul>
+<h3 id="add-members-to-group"><a href="#add-members-to-group" class="headerlink" title="add members to group"></a>add members to group</h3><ul>
+<li>In respositary&gt;Settings&gt;Collaborators&gt;Input users’ github account who wants to join group</li>
+<li>New Collaborators accept</li>
+</ul>
+<h3 id="Pull-remote-library-which-is-modified"><a href="#Pull-remote-library-which-is-modified" class="headerlink" title="Pull remote library which is modified"></a>Pull remote library which is modified</h3><ul>
+<li>pull = fetch+merge</li>
+<li>git fetch [remote library address name][remote branch name]</li>
+<li>git merge [remote library address name/remote branch name]</li>
+<li>git pull origin master</li>
+</ul>
+<h3 id="Solve-conflict"><a href="#Solve-conflict" class="headerlink" title="Solve conflict"></a>Solve conflict</h3><ul>
+<li>If change was not modified base on Github, cannot push, must be pulled down</li>
+<li>If conflicted, can be resovled by “branch conflict “</li>
+</ul>
+<h3 id="SSH-login"><a href="#SSH-login" class="headerlink" title="SSH login"></a>SSH login</h3><ul>
+<li>cd ~</li>
+<li>rm -r .ssh/</li>
+<li>ssh-keygen  -t rsa -C emailaddress</li>
+<li>cat id_rsa.pub, then copy the key , paste it to github SSH</li>
+<li>git remote ass origin_ssh sshaddress</li>
+</ul>
+<p><em>XMind: ZEN - Trial Version</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/git/" data-id="cjvtlr806003h40vx9lbq2m54" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-httpProtocol3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/29/httpProtocol3/" class="article-date">
+  <time datetime="2019-04-29T14:54:52.000Z" itemprop="datePublished">2019-04-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/29/httpProtocol3/">HTTP-Protocol解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="创建一个简单的web服务"><a href="#创建一个简单的web服务" class="headerlink" title="创建一个简单的web服务"></a>创建一个简单的web服务</h4><p>新建一个js 文件<br>const http = require(‘http’)<br>http.createServer(function(request,response){<br>    console.log(‘request come’, request.url)<br>    response.end(‘123’)<br>}).listen(8888)<br>console.log(‘server listening on 8888’)</p>
+<p>保存，通过node启动</p>
+<p>curl 可以显示很多请求</p>
+<p>跨域如何请求资源？</p>
+<h4 id="CORS跨域请求"><a href="#CORS跨域请求" class="headerlink" title="CORS跨域请求"></a>CORS跨域请求</h4><p>console里面可以查看前端的错误信息<br>跨域的处理时需要在js里设置<br>跨域需要服务起同意跨域<br>请求会发送，也响应了，浏览器只是解析会报错<br>方法一：<br>服务器增加<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’*’<br>})</p>
+<p>*表示所有网站都允许</p>
+<p>方法二：<br>json p<br>HTML 中设置</p>
+<script src="http://127.0.0.1:8888"></script>
+
+<h4 id="CORS跨域请求的限制"><a href="#CORS跨域请求的限制" class="headerlink" title="CORS跨域请求的限制"></a>CORS跨域请求的限制</h4><p>html中加入<br>fetch(‘<a href="http://localhost:8887/&#39;,{" target="_blank" rel="noopener">http://localhost:8887/&#39;,{</a><br>    method: ‘POST’,<br>    headers: {<br>        ‘x-Test-Cors’:’123’<br>    }<br>})</p>
+<p>CORS 预请求</p>
+<p>允许方法： GET/HEAD/POST<br>允许Content-Type:<br>–text/plain<br>–multipart/form-data<br>–application/x-www-form-urlencoded<br>其他限制：<br>–请求头限制<br>–XMLHttpRequestUpload对象均没有注册任何时间监听器<br>–请求中没有使用ReadableStream对象</p>
+<p>什么时预请求？<br>允许使用头<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’*’,<br>‘Access-Control-Allow-Headers’:’X-Test-Cors’<br>})</p>
+<p>允许使用方法<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’<em>‘,<br>‘Access-Control-Allow-Headers’:’X-Test-Cors’,<br>‘Access-Control-Allow-Methods’:’POST,PUT,Delete’<br>})<br>允许以下面方式进行跨域访问的最长时间<br>response.writeHead(200,{<br>‘Access-Control-Allow-Origin’:’</em>‘,<br>‘Access-Control-Allow-Headers’:’X-Test-Cors’,<br>‘Access-Control-Allow-Methods’:’POST,PUT,Delete’,<br>‘Access-Control-Max-Age’:’1000’<br>})</p>
+<h4 id="缓存头"><a href="#缓存头" class="headerlink" title="缓存头"></a>缓存头</h4><p>限制作用，无强制性</p>
+<p>可缓存性<br>public<br>private<br>no-cache 需要通过服务器端验证</p>
+<p>到期<br>max-age = <seconds>  浏览器端生效<br>s-maxage=<seconds> 代理服务器生效<br>max-stale=<seconds> 发起请求方主动带的时间</seconds></seconds></seconds></p>
+<p>重新验证<br>must-revalidate 浏览器端生效<br>proxy-revalidate 用在指定缓存服务器中</p>
+<p>其他限制<br>no-store 本地不能缓存<br>no-transform </p>
+<h4 id="缓存验证"><a href="#缓存验证" class="headerlink" title="缓存验证"></a>缓存验证</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol3/" data-id="cjvtlr80f003x40vxwv684jyj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-httpProtocol2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/29/httpProtocol2/" class="article-date">
+  <time datetime="2019-04-29T14:13:14.000Z" itemprop="datePublished">2019-04-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/29/httpProtocol2/">HTTP-Protocol基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="URI-URL-URN"><a href="#URI-URL-URN" class="headerlink" title="URI,URL,URN"></a>URI,URL,URN</h4><p>URI：Uniform Resource Identifier/统一资源标志符<br>-用来唯一标识互联网上的信息资源<br>-包括URL和URN</p>
+<p>URL：Uniform Resource Locator/统一资源定位器<br>schema: ftp/http<br>路由：/path<br>此类格式都叫URL，比如ftp协议</p>
+<p>URN：永久统一资源定位符<br>在资源移动之后还能被找到</p>
+<h4 id="报文"><a href="#报文" class="headerlink" title="报文"></a>报文</h4><p>（a） 请求报文<br>–Method（如Get）+ 路由信息（/path）+ HTTP/1.0(HTTP版本)<br>–HTTP Header</p>
+<p>（b）响应报文<br>– HTTP/1.0（版本）+status(200) + OK(Code的含义)<br>– HTTP Header<br>– HTTP Body（Body 和 Header之间有一个空行）</p>
+<h4 id="HTTP方法"><a href="#HTTP方法" class="headerlink" title="HTTP方法"></a>HTTP方法</h4><p>用来定义对于资源的操作<br>常用： GET, POST, PUT, DELETE</p>
+<p>HTTP code<br>–定义服务器对请求的处理结果<br>–各个区间的CODE有各自的语义<br>–好的HTTP服务可以通过CODE判断结果<br>1xx:通知<br>2xx: 成功<br>3xx：重定向<br>4xx：客户端错误<br>5xx: 服务端错误<br>200<br>401<br>404<br>500<br>503</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjvtlr808003m40vx3lgn1xtb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-httpProtocol" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/29/httpProtocol/" class="article-date">
@@ -137,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjvf6p3go002eu4vxe9rl5sin" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjvtlr7zv003540vxjmojuq0x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -191,178 +558,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjvf6p3fj000xu4vx7xileord" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjvtlr7xz002340vxzbtx7xij" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python11" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/26/python11/" class="article-date">
-  <time datetime="2019-04-26T14:13:49.000Z" itemprop="datePublished">2019-04-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/26/python11/">appium API</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjvf6p3h1002xu4vxgcdb2pni" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-InterfaceTesting" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/24/InterfaceTesting/" class="article-date">
-  <time datetime="2019-04-24T06:42:22.000Z" itemprop="datePublished">2019-04-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/24/InterfaceTesting/">InterfaceTesting</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>接口定义： 提供一套标准，服务和规范</p>
-<p>目的： 进行评估的系统或组件是否正确地传递数据及互相正确的控制。<br>互相正确的控制。</p>
-<p>时间： 应用或者功能开发的初期检验模块间调用的正确性和友好性</p>
-<p>接口分类：</p>
-<ol>
-<li>功能： 功能间和系统间<br>特点：<br>功能间接口： 一般系统的所有模块部署在同一服务器中，并且使用同一个数据库<br>方法： 常用黑盒测试， 注意接口数据在不同模块间的走向。 尤其注意接口间的逻辑控制关系。<br>比如：销售发货时，要检查库存的可用量，如可用量不足，则不允许发货   </li>
-</ol>
-<p>系统间接口： 通常情况下，不同系统部署在不同的服务器上，不仅采用不同的数据库，而且数据库类型还有可能不同<br>方法： 采用白盒测试方法， 关注的是系统间接口的实现方式<br>如：采用何种类型的接口文件，接口文件格式，以及接口文件处理方式等 </p>
-<ol start="2">
-<li>类型： 业务接口和数据接口</li>
-</ol>
-<p>业务接口：  系统或功能接口间有业务逻辑关系。<br>特点：接口间有业务逻辑的上下游关系，有可能会涉及跨系统或模块的逻辑控制，以及反向操作<br>方法： 通常采用黑盒测试方法，注重分析业务逻辑，采用路径覆盖法进行分析。并且一定要注意正向和反向操作的测试<br>比如erp系统中，采购入库后，会生成库存入库单，影响可用量或现存量等。也可称为联机接口</p>
-<p>数据接口：接口系统没有业务逻辑的上下游关系，只有接口数据的上下游关系。<br>特点：系统间只存在数据的上下游关系，而且数据都是进行批量处理<br>方法： 通常采用白盒测试方法。关注的是数据文件格式，以及记录数及内容等是否正确，还要考虑数据是否加密的问题<br>比如企业征信系统，要通过数据交换平台获取核心系统的数据。也可称为批量接口</p>
-<ol start="3">
-<li>接口数据： 单向和双向<br>单向：数据在接口中是单向流动，但根据具体实现方式又可以分为单向推或取两种方式。数据仓库与各系统间的接口基本上都是单向接口。一方面前端系统向数据仓库推送数据，一方面后端系统又主动取数据仓库提供的数据<br>特点：不管数据是单向推或取，一般都会有一个ftp地址，存放指定数据文件，并且有定时存取的规则。可在日志中查看存取结果<br>方法：通常采用黑盒测试和白盒测试相结合的方法。着重测试数据文件格式，是否按规则存取等。</li>
-</ol>
-<p>双向： 两个系统间的接口数据既有来，又有往。<br>特点：可以将不同数据方向的接口分开分析，当作两个单向接口。但要注意来往的数据通常具有关联性<br>方法： 通常采用黑盒测试和白盒测试相结合的方法。在测试时要着重来往数据的关联性，合理设计测试数据，制定测试执行计划<br>比如综合报文处理系统与核心系统，综合报文处理系统即接收核心系统发送的数据，又要将处理结果反馈给核心系统 </p>
-<p>接口测试的原理：通过测试程序模拟客户端向服务器发送请求报文，服务器接收请求报文后对相应的报文做出处理然后再把应答报文发送给客户端，客户端接收应答报文这一过程（request→response）</p>
-<p> 接口测试的流程：类似于功能测试，需求讨论→评审需求→确定需求→产出接口定义→根据需求文档及接口定义设计测试用例（测试用例主要从业务场景，功能以及异常测试几个方面考虑）→评审用例→执行测试</p>
-<p>接口测试的价值：降低成本，提高效率。接口测试能够提供系统复杂度上升情况下的低成本高效率的解决方案。它是一个完整的体系，还包括功能测试，性能测试等</p>
-<p>接口测试的适用范围：一般用于多个系统间的交互开发，或者拥有多个子系统的应用系统开发的测试。接口测试适用于为其他系统提供服务的底层框架系统和中心服务系统。主要测试这些对外部提供的接口的正确性和稳定性。它也同样适用于上层系统中服务层接口，测试难度随层级而上升。即越往上难度越大。</p>
-<p>接口测试用例的编写：</p>
-<ol>
-<li>如何简单设计接口测试的设计用例</li>
-</ol>
-<p>A) 明确出发点： 找出软件误漏为出发点，测试用例需要紧贴此线， 更容易找到问题所在。<br>B) 明确测试点： 选择好的测试对象。 （可将这些最外层的接口根据数据的流向分为进入和流出两类，进入系统的接口实际上是我们用例的执行调用的接口。可通过参数对这些接口进行调用，模拟外部的使用；而流出的接口则是我们用例真正该验证的点。数据从哪里流出，流出的状态如何，此时系统的状态都是作为测试目的所要着重关注的部分）<br>C）确认完整的测试对象功能： 确认外部接口提供给使用这些接口的外部用户什么样的功能，外部用户真正需要的时什么样的功能予以区别。用例的设计要严格按照测试对象功能设计才是正确的用例。</p>
-<ol start="2">
-<li><p>设计（接口测试用例有哪些要求）： 结构好， 可读性高， 渗透性强</p>
-</li>
-<li><p>测试用例包括的内容： 功能点， 测试环境， 测试数据， 执行操作以及预期结果<br>a)          接口测试测试的功能点：如果一个接口功能过于复杂时，可以对接口用例进行结构划分（如根据层次，平台，功能点等等），这样用例具有更好的可读性（接口划分原则为：以接口提供的功能点的不同进行合适粒度的划分，同一功能点的用例又可根据测试环境的不同，数据的不同进行用例的填充）</p>
-</li>
-</ol>
-<p>b)         接口测试用例的环境：程序内部环境和程序所调用的外部接口的环境。</p>
-<p>c)          关于接口测试测试数据：分为两部分：接口参数数据和用例执行所需系统数据。数据的设计、准备测试用例的数据不可马虎。通过好的测试数据查找问题，能极大的提高工作效率。接口参数数据需要对每个参数根据测试接口的实际功能进行分析，在符合业务逻辑的情况下进行逻辑组合排列，不要遗漏某些边界值和错误点的数据，这样用例更容易发现问题。</p>
-<p>d)         执行操作：即对所测接口的调用。</p>
-<p>e)          预期结果：根据需求进行验证，是衡量软件是否达到预期的标准。应该着重细致，每个用例均需验证，应该避免一个用例重复做相同的验证，提高测试用例的效率。</p>
-<ol start="4">
-<li></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/" data-id="cjvf6p3dz0000u4vxk5fs642a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-TroubleShooting3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/24/TroubleShooting3/" class="article-date">
-  <time datetime="2019-04-24T06:39:55.000Z" itemprop="datePublished">2019-04-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/24/TroubleShooting3/">TroubleShooting--多人收邮件不成功</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原因： python 中 是mailInfo[“to”]为逗号分隔的str类型，结果只有第一个邮件地址能收到邮件。</p>
-<p>解决方法：经过多次测试发现MIMEText()[“to”]的数据类型与sendmail(from_addrs,to_addrs,…)的to_addrs不同；前者为str类型，多个地址使用逗号分隔，后者为list类型。</p>
-<p>mailInfo = {<br>        “from”: “<a href="mailto:xxxx@xxx.com" target="_blank" rel="noopener">xxxx@xxx.com</a>“,<br>        “to”: “<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>,<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>,<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>“,<br>        “hostname”: “smtp.xxx.com”,<br>        “username”: “<a href="mailto:xxxx@xxx.com" target="_blank" rel="noopener">xxxx@xxx.com</a>“,<br>        “password”: “xxxxx”,<br>        “mailsubject”: “主题”,<br>        “mailtext”: “正文内容”,<br>        “mailencoding”: “utf-8”<br>    }<br>def sendsmtp(mailInfo):<br>    smtp = SMTP_SSL(mailInfo[“hostname”])<br>    smtp.set_debuglevel(1)<br>    smtp.ehlo(mailInfo[“hostname”])<br>    smtp.login(mailInfo[“username”], mailInfo[“password”])<br>    msg = MIMEText(mailInfo[“mailtext”], “plain”, mailInfo[“mailencoding”])<br>    msg[“Subject”] = Header(mailInfo[“mailsubject”], mailInfo[“mailencoding”])<br>    msg[“from”] = mailInfo[“from”]<br>    msg[“to”] = mailInfo[“to”]<br>    smtp.sendmail(mailInfo[“from”], mailInfo[“to”].split(‘,’), msg.as_string())<br>    smtp.quit()</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/TroubleShooting3/" data-id="cjvf6p3gq002hu4vx7tnrq0s5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li></ul>
 
     </footer>
   </div>
@@ -396,7 +595,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
     </div>
   </div>
 
@@ -406,7 +605,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12.5px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 15px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 15px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12.5px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 17.5px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
     </div>
   </div>
 
@@ -428,23 +627,23 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/05/13/Jmeter-Interface/">Jmeter_Interface</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/05/13/Jmeter4/">Jmeter4</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
           </li>
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/git/">git</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/29/httpProtocol3/">HTTP-Protocol解析</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/04/29/httpProtocol2/">HTTP-Protocol基础</a>
           </li>
         
       </ul>
