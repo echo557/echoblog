@@ -62,6 +62,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Performance3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/26/Performance3/" class="article-date">
+  <time datetime="2019-04-26T14:39:20.000Z" itemprop="datePublished">2019-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Performance/">Performance</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/26/Performance3/">如何估计性能测试并发量</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="性能业务需求调研"><a href="#性能业务需求调研" class="headerlink" title="性能业务需求调研"></a>性能业务需求调研</h4><p>单一需求：一天3W 订单，一天24小时。</p>
+<p>问题需要明确：<br>系统如何产生订单？有几个页面操作？<br>一个订单产生需要跳转4个页面。</p>
+<p>PV：Page View, 页面浏览数<br>80%的业务在20%时间内完成。比如：80%业务量，3w订单，一个订单需要4个PV，则是12W 业务量，20%时间：4.8h.即 pv/h=120000/4.8=25000. pv/s = 25000/60/60/4=2<br>那么峰值PV就是 12W/0.8=15W PV<br>峰值PV/S= 15W/4.8/60/60/4=</p>
+<p>复杂需求</p>
+<ol>
+<li>月营业额</li>
+<li>访问订单转化率, 10%</li>
+<li>媒体访问时间： 24h*80%</li>
+<li>生成每个订单平均选购商品数</li>
+<li>订单有效率： 85%</li>
+<li>平均浏览率（IP/PV）</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjvzcdycg001q2gvxtp2x5bbw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python11" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/26/python11/" class="article-date">
@@ -92,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjvtlr80l004440vxnq2xk0id" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjvzcdyg8003l2gvxdtkqvhl5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -173,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/" data-id="cjvtlr7ts000540vxb6r3vf0u" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/" data-id="cjvzcdyb5000a2gvx6fgz4xig" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li></ul>
@@ -218,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/TroubleShooting3/" data-id="cjvtlr7zx003840vx99szb2dt" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/TroubleShooting3/" data-id="cjvzcdycv002b2gvxk504y8kd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li></ul>
@@ -326,59 +380,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/viewquestions/" data-id="cjvtlr81r005g40vxlgw76yzh" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/viewquestions/" data-id="cjvzcdyh900502gvx5k82fzmi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python10" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/23/python10/" class="article-date">
-  <time datetime="2019-04-23T12:37:24.000Z" itemprop="datePublished">2019-04-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/23/python10/">BDD--Lettuce</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="对比框架"><a href="#对比框架" class="headerlink" title="对比框架"></a>对比框架</h4><p>TDD: Test-Driven Development<br>TDD 原理是在开发功能代码之前，先编写单元测试用例代码，确定需要编写什么产品代码。TDD的基本思路是通过测试来驱动开发的进行，但测试驱动开发并不只是单纯的测试工作，而是把需求分析、设计和质量控制量化的过程。<br>TDD首先考虑使用需求（对象、功能、过程、接口等），主要是编写测试用例框架对功能的过程和接口进行设计，而测试框架可以持续进行验证。</p>
-<p>ATDD： Acceptance Test Driven Development</p>
-<p>BDD: Behavior Driven Development<br>主要从用户的需求出发，强调系统行为。包括验收测试和客户测试驱动等极限编程的实践，作为对测试驱动开发的回应。</p>
-<h4 id="不同语言下的BDD-框架"><a href="#不同语言下的BDD-框架" class="headerlink" title="不同语言下的BDD 框架"></a>不同语言下的BDD 框架</h4><p>Cucumber(Ruby)<br>Jdave(Java)<br>Beha(PHP)<br>Behave(Python) <a href="http://pythonhosted.org/behave" target="_blank" rel="noopener">http://pythonhosted.org/behave</a><br>Lettuce(Python)  <a href="http://Lettuce.it" target="_blank" rel="noopener">http://Lettuce.it</a></p>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>通过装饰器来做base类，然后再写一些不一样的场景来实现测试用例的增加。</p>
-<p>通过场景可以完成测试用例的编写</p>
-<p>写行为的时候需要去匹配封装的那些行为。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/23/python10/" data-id="cjvtlr80o004840vx9arlplhr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
 
     </footer>
   </div>
@@ -391,7 +396,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/2/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><a class="page-number" href="/echoblog.github.io/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/echoblog.github.io/page/4/">4</a><a class="page-number" href="/echoblog.github.io/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/11/">11</a><a class="extend next" rel="next" href="/echoblog.github.io/page/4/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/2/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><a class="page-number" href="/echoblog.github.io/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/echoblog.github.io/page/4/">4</a><a class="page-number" href="/echoblog.github.io/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/12/">12</a><a class="extend next" rel="next" href="/echoblog.github.io/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -444,6 +449,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
           </li>
         
@@ -457,10 +466,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
       </ul>

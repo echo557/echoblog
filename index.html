@@ -62,6 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Jmeter6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/05/20/Jmeter6/" class="article-date">
+  <time datetime="2019-05-20T14:40:17.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>可以直接去应用在元件中</p>
+<h4 id="Bean-Shell-Sampler"><a href="#Bean-Shell-Sampler" class="headerlink" title="Bean Shell Sampler"></a>Bean Shell Sampler</h4><p><img src="/echoblog.github.io/2019/05/20/Jmeter6/1.png" alt="图一"></p>
+<p>执行JAVA 标准和表达式</p>
+<p><a href="http://www.beanshell.org/" target="_blank" rel="noopener">http://www.beanshell.org/</a></p>
+<p>代码1：<br>vars.put(“jmeter”,”test”);<br>返回：<br>JMeterVariables:<br>JMeterThread.last_sample_ok=true<br>JMeterThread.pack=org.apache.jmeter.threads.SamplePackage@3eebd1<br>START.HMS=211140<br>START.MS=1558444300278<br>START.YMD=20190521<br>TESTSTART.MS=1558444652239<br><strong>jm</strong>Thread Group__idx=0<br>jmeter=test</p>
+<p>代码2：<br>public static String go()<br>{<br>    vars.put(“jmeter”,”12345”);<br>    vars.put(“tom”,”cat”);<br>    return “1”;<br>}</p>
+<p>go()    </p>
+<p>代码3：<br>addClassPath(“”)</p>
+<p>可以调用本地的java包</p>
+<p><img src="/echoblog.github.io/2019/05/20/Jmeter6/6.png" alt="图一"><br><img src="/echoblog.github.io/2019/05/20/Jmeter6/7.png" alt="图一"></p>
+<h4 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h4><p>不同监听器通过不同的方式展示服务器响应信息，但是他们都将同样的原始数据记录到某个输出文件中。</p>
+<p>CSV和XML两种格式，其中CSV格式的磁盘占用比较小。<br>使用Jmeter注意作用域，仅仅对关心的采样器采集。<br>要保存最完整的结果，请使用XML格式保存。</p>
+<p>相关的属性文件：jmeter.save.saveservice.output_format</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/20/Jmeter6/" data-id="cjvzcdybh000l2gvx82fjibqq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Jmeter5" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/05/18/Jmeter5/" class="article-date">
@@ -91,11 +146,24 @@
         <h4 id="采样器"><a href="#采样器" class="headerlink" title="采样器"></a>采样器</h4><p>基于协议： HTTP, FTP, HTTPS 等</p>
 <p>HTTP Request： 常用HTTPCLient4<br>常用设置： jmeter.properties<br>Workbench 中的mirror server 可以帮助调试HTTP 请求<br>去请求文件下载，使用的是POST请求。如果需要保存server所推过来的文件/response保存下来，则可以添加一个listner 去把文件存储下来： Save Response to  a file， 下载之后jmeter 会将其保存在jmeter 的bin 目录下。</p>
 <p>如果想要通过jmeter上传文件，则也可以upload， 但一般情况下，jmeter 上传文件后消耗会到网络端，而不会很好的测试到server 的性能。</p>
+<p>默认解析器： htmlparser<br>通过htmlparser.classname<br>通过设置Retrive All Embedded Resources from HTML Files 和 Use Concurrent Pool 更真实的模拟负载</p>
+<p>URLS must match 可以帮忙过滤某些特定的url</p>
+<p>IP 欺骗&gt; Source Address<br>作为IP欺骗的地址，所使用的IP 地址不能是动态的，必须是静态的。</p>
+<p>File协议<br>可以读取到本地的文件，并读取出来。<br>加入后置处理器后，就可以进行使用。</p>
+<h4 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h4><p>那些需要参数化</p>
+<blockquote>
+<p>登陆认证信息<br>一些和时间相关的，违反时间约束的<br>一些受其他字段约束的<br>一些来自于其他数据源（如数据库的）<br>其他在系统运行过程中需要变动的</p>
+</blockquote>
+<p>变量是每个线程都有各自一份的，一个线程修改并不影响另一个线程。</p>
+<p>实现方式：<br>-通过CSV Data Set Config 组件<br>-User Defined Variables<br>-Test Plan 里面添加<br>–Foreach controller 组件生成的组件</p>
+<p>CSV Data Set Config组件：<br>-更容易理解和使用<br>-适合大数据使用场景</p>
+<p>如果recycle option 和stop Thread 都是false, 那么当到达文件尾部的时候，变量的数值被设置成<eof>,当然，这个可以通过修改属性文件中的csvdataset.eofstring 进行修改。</eof></p>
+<p>-</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/18/Jmeter5/" data-id="cjvtlr7uc000b40vxucgf7cs4" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/18/Jmeter5/" data-id="cjvzcdyba000f2gvxanyp0h4h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -141,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter-Interface/" data-id="cjvtlr7tx000640vxcv95hutp" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter-Interface/" data-id="cjvzcdyaz00042gvxj3v84a85" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li></ul>
@@ -201,11 +269,12 @@
 <li><p>If Controller</p>
 </li>
 </ol>
+<p><img src="/echoblog.github.io/2019/05/13/Jmeter4/for_each.png" alt="图一"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter4/" data-id="cjvtlr7ug000f40vxi1jhnexb" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter4/" data-id="cjvzcdyb7000b2gvxh0l8w58d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -265,110 +334,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/fiddler/" data-id="cjvtlr7z3002o40vx18xvuvab" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/fiddler/" data-id="cjvzcdyd8002j2gvxq4ynbmj8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Jenkins" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/05/06/Jenkins/" class="article-date">
-  <time datetime="2019-05-06T13:16:04.000Z" itemprop="datePublished">2019-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><h3 id="Phase"><a href="#Phase" class="headerlink" title="Phase"></a>Phase</h3><ul>
-<li>Continuous Integration</li>
-<li>Continuous Deployment</li>
-<li>Continuous Delivery</li>
-</ul>
-<h3 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h3><ul>
-<li>Reduce risk</li>
-<li>Reduce reproduction</li>
-<li>No place limitation</li>
-<li>Enhance the visibility of projects</li>
-<li>Increase confidence</li>
-</ul>
-<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><ul>
-<li><p>Jenkins</p>
-<ul>
-<li>Github </li>
-<li>Subversion</li>
-</ul>
-</li>
-<li><p>Hudson</p>
-<ul>
-<li>Github </li>
-<li>Subversion</li>
-</ul>
-</li>
-</ul>
-<h3 id="Web-Project-Deploy"><a href="#Web-Project-Deploy" class="headerlink" title="Web Project Deploy"></a>Web Project Deploy</h3><ul>
-<li>Manual:  pic1</li>
-<li>Auto:  pic2</li>
-</ul>
-<h2 id="Jenkins-SVN"><a href="#Jenkins-SVN" class="headerlink" title="Jenkins + SVN"></a>Jenkins + SVN</h2><h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><ul>
-<li>Install Linux system on virtual machine</li>
-<li>Version control child system</li>
-<li><p>CI child system</p>
-<ul>
-<li>Put jenkins.war  under Tomcat /webapps</li>
-<li>Open Tomcat /server.xml and update URL address encoding setting:   URIEncoding = “UTF-8”</li>
-</ul>
-</li>
-<li><p>Release child system(Tomcat)</p>
-<ul>
-<li>Path: /opt/tomcat/conf/tomcat-users.xml</li>
-<li>role settings</li>
-<li>username=””  password=””</li>
-</ul>
-</li>
-</ul>
-<h3 id="Jenkins-configure"><a href="#Jenkins-configure" class="headerlink" title="Jenkins configure"></a>Jenkins configure</h3><ul>
-<li>Global safety configuration</li>
-<li><p>Global tools configuration</p>
-<ul>
-<li>Git/Maven</li>
-</ul>
-</li>
-<li><p>Manage Plugin</p>
-</li>
-</ul>
-<h3 id="curl-command"><a href="#curl-command" class="headerlink" title="curl command"></a>curl command</h3><h2 id="Jenkins-Github"><a href="#Jenkins-Github" class="headerlink" title="Jenkins+Github"></a>Jenkins+Github</h2><p><em>XMind: ZEN - Trial Version</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/Jenkins/" data-id="cjvtlr7tp000440vxfrfu15hj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li></ul>
 
     </footer>
   </div>
@@ -381,7 +350,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/11/">11</a><a class="extend next" rel="next" href="/echoblog.github.io/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/echoblog.github.io/page/2/">2</a><a class="page-number" href="/echoblog.github.io/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/12/">12</a><a class="extend next" rel="next" href="/echoblog.github.io/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -434,6 +403,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
           </li>
         
@@ -447,10 +420,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
       </ul>

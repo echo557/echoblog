@@ -62,6 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/15/python4/" class="article-date">
+  <time datetime="2019-04-15T14:52:31.000Z" itemprop="datePublished">2019-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/15/python4/">model</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="自动化测试模型介绍"><a href="#自动化测试模型介绍" class="headerlink" title="自动化测试模型介绍"></a>自动化测试模型介绍</h3><h4 id="线性测试"><a href="#线性测试" class="headerlink" title="线性测试"></a>线性测试</h4><p>优点：无依赖关系，顺序<br>缺点： 开发/维护成本高<br>结构化：</p>
+<ol>
+<li>判断</li>
+<li>循环</li>
+</ol>
+<h4 id="模块化驱动测试"><a href="#模块化驱动测试" class="headerlink" title="模块化驱动测试"></a>模块化驱动测试</h4><p>重复操作独立成共同模块 </p>
+<h4 id="数据驱动测试"><a href="#数据驱动测试" class="headerlink" title="数据驱动测试"></a>数据驱动测试</h4><p>数据的参数化<br>输入数据的不同，结果也不同<br>比如不同用户的登陆，不同数据的传输</p>
+<h4 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h4><p>关键字==函数<br>def func()<br>如： Robot Framework<br>使用关键字，传输一些参数</p>
+<p>文件读取数据 txt：<br>from seleniu import webdriver<br>from time import sleep<br>files = open(‘data.txt’,’r’)<br>for li in files.readlines():<br>    dr= webdriver.Chrome()<br>    dr.get(‘<a href="http://www.baidu.com&#39;" target="_blank" rel="noopener">http://www.baidu.com&#39;</a>)<br>    dr.find_element_by_id(‘kw’).send_keys(line)<br>    sleep(3)<br>    dr.quit()</p>
+<p>读取用户名和密码<br>也可以直接for循环去读取<br>split可以去分割数据</p>
+<h4 id="读取csv文件"><a href="#读取csv文件" class="headerlink" title="读取csv文件"></a>读取csv文件</h4><p>import csv<br>csv.reader(file(file,’rb’))</p>
+<p>返回的是数组</p>
+<h4 id="读取xml文件"><a href="#读取xml文件" class="headerlink" title="读取xml文件"></a>读取xml文件</h4><p>import xml.dom.minicom<br>dom = xml.dom.minidom.parse(‘info.xml’)    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjvzcdygk00402gvxfsott65p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/14/python3/" class="article-date">
@@ -161,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjvtlr80y004m40vxni0djf0p" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjvzcdygh003v2gvxjzoj9qe0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -216,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjvtlr80t004f40vxd2sl4vp9" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjvzcdyga003n2gvxraaw1bpp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -274,7 +329,7 @@ return a
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjvtlr80r004c40vxqwirmxi1" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjvzcdygc003q2gvxos8h52sq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -413,81 +468,7 @@ return a
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjvtlr7zl003140vx5rhsomot" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PerformanceTesting2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/PerformanceTesting2/" class="article-date">
-  <time datetime="2019-04-12T02:55:39.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Performance/">Performance</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/12/PerformanceTesting2/">PerformanceTesting2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>性能测试场景</p>
-<ol>
-<li>并发用户数</li>
-<li>性能瓶颈查找</li>
-<li>同一系统可以采用的架构选择</li>
-<li>功能上某一模块的用户并发数</li>
-</ol>
-<p>主要指标–用户角度</p>
-<ol>
-<li>响应时间<br>–2/5/10 原则<br>–过长等待时间会让客户焦躁不安</li>
-<li>稳定性<br>–HTTP 500<br>–数据库崩溃<br>–应用服务器前端<br>主要指标–系统角度</li>
-<li>网络运行请情况</li>
-<li>硬件配备情况</li>
-<li>软件的配置情况（应用服务器/数据库/系统）<br>mysql.my.ini<br>tomcat<br>JVM 的配置，采用的系统<br>主要指标–开发角度</li>
-<li>系统的框架设计不合理</li>
-<li>对应用的技术不熟悉</li>
-<li>数据库模型设计不合理</li>
-<li>SQL 语句实现性能低下</li>
-<li>开发人员经验不足（算法、代码规范、浪费时间）</li>
-</ol>
-<p>数据库联合查询是利用笛卡尔积</p>
-<p>实施过程</p>
-<ol>
-<li>了解性能测试的需求</li>
-<li>分析测试需求</li>
-<li>编写计划和用例</li>
-<li>相关资源准备</li>
-<li>脚本维护</li>
-<li>执行脚本</li>
-<li>分析结果</li>
-<li>性能优化</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/PerformanceTesting2/" data-id="cjvtlr7yd002a40vxdpunlknc" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjvzcdydq002r2gvxfq2zx5dd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -503,7 +484,7 @@ return a
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/5/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/4/">4</a><a class="page-number" href="/echoblog.github.io/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/echoblog.github.io/page/7/">7</a><a class="page-number" href="/echoblog.github.io/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/11/">11</a><a class="extend next" rel="next" href="/echoblog.github.io/page/7/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/5/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/4/">4</a><a class="page-number" href="/echoblog.github.io/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/echoblog.github.io/page/7/">7</a><a class="page-number" href="/echoblog.github.io/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/12/">12</a><a class="extend next" rel="next" href="/echoblog.github.io/page/7/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -556,6 +537,10 @@ return a
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
           </li>
         
@@ -569,10 +554,6 @@ return a
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
       </ul>

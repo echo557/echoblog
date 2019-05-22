@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Ying&#39;s Blog">
 <meta property="og:description" content="采样器基于协议： HTTP, FTP, HTTPS 等 HTTP Request： 常用HTTPCLient4常用设置： jmeter.propertiesWorkbench 中的mirror server 可以帮助调试HTTP 请求去请求文件下载，使用的是POST请求。如果需要保存server所推过来的文件/response保存下来，则可以添加一个listner 去把文件存储下来： Save R">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-18T14:21:47.235Z">
+<meta property="og:updated_time" content="2019-05-20T14:37:28.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jmeter5">
 <meta name="twitter:description" content="采样器基于协议： HTTP, FTP, HTTPS 等 HTTP Request： 常用HTTPCLient4常用设置： jmeter.propertiesWorkbench 中的mirror server 可以帮助调试HTTP 请求去请求文件下载，使用的是POST请求。如果需要保存server所推过来的文件/response保存下来，则可以添加一个listner 去把文件存储下来： Save R">
@@ -94,11 +94,24 @@
         <h4 id="采样器"><a href="#采样器" class="headerlink" title="采样器"></a>采样器</h4><p>基于协议： HTTP, FTP, HTTPS 等</p>
 <p>HTTP Request： 常用HTTPCLient4<br>常用设置： jmeter.properties<br>Workbench 中的mirror server 可以帮助调试HTTP 请求<br>去请求文件下载，使用的是POST请求。如果需要保存server所推过来的文件/response保存下来，则可以添加一个listner 去把文件存储下来： Save Response to  a file， 下载之后jmeter 会将其保存在jmeter 的bin 目录下。</p>
 <p>如果想要通过jmeter上传文件，则也可以upload， 但一般情况下，jmeter 上传文件后消耗会到网络端，而不会很好的测试到server 的性能。</p>
+<p>默认解析器： htmlparser<br>通过htmlparser.classname<br>通过设置Retrive All Embedded Resources from HTML Files 和 Use Concurrent Pool 更真实的模拟负载</p>
+<p>URLS must match 可以帮忙过滤某些特定的url</p>
+<p>IP 欺骗&gt; Source Address<br>作为IP欺骗的地址，所使用的IP 地址不能是动态的，必须是静态的。</p>
+<p>File协议<br>可以读取到本地的文件，并读取出来。<br>加入后置处理器后，就可以进行使用。</p>
+<h4 id="参数化"><a href="#参数化" class="headerlink" title="参数化"></a>参数化</h4><p>那些需要参数化</p>
+<blockquote>
+<p>登陆认证信息<br>一些和时间相关的，违反时间约束的<br>一些受其他字段约束的<br>一些来自于其他数据源（如数据库的）<br>其他在系统运行过程中需要变动的</p>
+</blockquote>
+<p>变量是每个线程都有各自一份的，一个线程修改并不影响另一个线程。</p>
+<p>实现方式：<br>-通过CSV Data Set Config 组件<br>-User Defined Variables<br>-Test Plan 里面添加<br>–Foreach controller 组件生成的组件</p>
+<p>CSV Data Set Config组件：<br>-更容易理解和使用<br>-适合大数据使用场景</p>
+<p>如果recycle option 和stop Thread 都是false, 那么当到达文件尾部的时候，变量的数值被设置成<eof>,当然，这个可以通过修改属性文件中的csvdataset.eofstring 进行修改。</eof></p>
+<p>-</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/18/Jmeter5/" data-id="cjvtlr7uc000b40vxucgf7cs4" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/18/Jmeter5/" data-id="cjvzcdyba000f2gvxanyp0h4h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -108,6 +121,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/echoblog.github.io/2019/05/20/Jmeter6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Jmeter6
+        
+      </div>
+    </a>
   
   
     <a href="/echoblog.github.io/2019/05/13/Jmeter-Interface/" id="article-nav-older" class="article-nav-link-wrap">
@@ -170,6 +192,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
           </li>
         
@@ -183,10 +209,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
       </ul>

@@ -62,6 +62,106 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Jenkins" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/05/06/Jenkins/" class="article-date">
+  <time datetime="2019-05-06T13:16:04.000Z" itemprop="datePublished">2019-05-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><h3 id="Phase"><a href="#Phase" class="headerlink" title="Phase"></a>Phase</h3><ul>
+<li>Continuous Integration</li>
+<li>Continuous Deployment</li>
+<li>Continuous Delivery</li>
+</ul>
+<h3 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h3><ul>
+<li>Reduce risk</li>
+<li>Reduce reproduction</li>
+<li>No place limitation</li>
+<li>Enhance the visibility of projects</li>
+<li>Increase confidence</li>
+</ul>
+<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><ul>
+<li><p>Jenkins</p>
+<ul>
+<li>Github </li>
+<li>Subversion</li>
+</ul>
+</li>
+<li><p>Hudson</p>
+<ul>
+<li>Github </li>
+<li>Subversion</li>
+</ul>
+</li>
+</ul>
+<h3 id="Web-Project-Deploy"><a href="#Web-Project-Deploy" class="headerlink" title="Web Project Deploy"></a>Web Project Deploy</h3><ul>
+<li>Manual:  pic1</li>
+<li>Auto:  pic2</li>
+</ul>
+<h2 id="Jenkins-SVN"><a href="#Jenkins-SVN" class="headerlink" title="Jenkins + SVN"></a>Jenkins + SVN</h2><h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><ul>
+<li>Install Linux system on virtual machine</li>
+<li>Version control child system</li>
+<li><p>CI child system</p>
+<ul>
+<li>Put jenkins.war  under Tomcat /webapps</li>
+<li>Open Tomcat /server.xml and update URL address encoding setting:   URIEncoding = “UTF-8”</li>
+</ul>
+</li>
+<li><p>Release child system(Tomcat)</p>
+<ul>
+<li>Path: /opt/tomcat/conf/tomcat-users.xml</li>
+<li>role settings</li>
+<li>username=””  password=””</li>
+</ul>
+</li>
+</ul>
+<h3 id="Jenkins-configure"><a href="#Jenkins-configure" class="headerlink" title="Jenkins configure"></a>Jenkins configure</h3><ul>
+<li>Global safety configuration</li>
+<li><p>Global tools configuration</p>
+<ul>
+<li>Git/Maven</li>
+</ul>
+</li>
+<li><p>Manage Plugin</p>
+</li>
+</ul>
+<h3 id="curl-command"><a href="#curl-command" class="headerlink" title="curl command"></a>curl command</h3><h2 id="Jenkins-Github"><a href="#Jenkins-Github" class="headerlink" title="Jenkins+Github"></a>Jenkins+Github</h2><p><em>XMind: ZEN - Trial Version</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/Jenkins/" data-id="cjvzcdyb000052gvxyes91vgr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/05/06/git/" class="article-date">
@@ -180,7 +280,7 @@
 <li>git commit -m “commit message” filename</li>
 <li><p>Check log</p>
 <ul>
-<li>git log<br>   commit 315eaf5b1ad6182d0dc3cd07fdc02dfd36ca6584 (HEAD -&gt; master)<br>Author: test_pro <a href="mailto:&#116;&#101;&#x73;&#x74;&#95;&#112;&#x72;&#111;&#64;&#116;&#101;&#115;&#116;&#46;&#99;&#111;&#109;" target="_blank" rel="noopener">&#116;&#101;&#x73;&#x74;&#95;&#112;&#x72;&#111;&#64;&#116;&#101;&#115;&#116;&#46;&#99;&#111;&#109;</a><br>Date:   Thu May 2 08:12:06 2019 +0800</li>
+<li>git log<br>   commit 315eaf5b1ad6182d0dc3cd07fdc02dfd36ca6584 (HEAD -&gt; master)<br>Author: test_pro <a href="mailto:&#x74;&#x65;&#x73;&#116;&#95;&#112;&#114;&#111;&#64;&#116;&#101;&#x73;&#x74;&#x2e;&#x63;&#111;&#109;" target="_blank" rel="noopener">&#x74;&#x65;&#x73;&#116;&#95;&#112;&#114;&#111;&#64;&#116;&#101;&#x73;&#x74;&#x2e;&#x63;&#111;&#109;</a><br>Date:   Thu May 2 08:12:06 2019 +0800</li>
 </ul>
 <p>My first commit</p>
 <ul>
@@ -307,7 +407,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/git/" data-id="cjvtlr806003h40vx9lbq2m54" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/git/" data-id="cjvzcdyew00322gvx6q5iozhg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li></ul>
@@ -368,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol3/" data-id="cjvtlr80f003x40vxwv684jyj" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol3/" data-id="cjvzcdyfd00392gvxwzs3nfw1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -417,7 +517,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjvtlr808003m40vx3lgn1xtb" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjvzcdydg002m2gvxapjfdqc2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -504,64 +604,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjvtlr7zv003540vxjmojuq0x" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjvzcdydz002u2gvxn8sbl5su" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Performance3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/26/Performance3/" class="article-date">
-  <time datetime="2019-04-26T14:39:20.000Z" itemprop="datePublished">2019-04-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Performance/">Performance</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/26/Performance3/">如何估计性能测试并发量</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="性能业务需求调研"><a href="#性能业务需求调研" class="headerlink" title="性能业务需求调研"></a>性能业务需求调研</h4><p>单一需求：一天3W 订单，一天24小时。</p>
-<p>问题需要明确：<br>系统如何产生订单？有几个页面操作？<br>一个订单产生需要跳转4个页面。</p>
-<p>PV：Page View, 页面浏览数<br>80%的业务在20%时间内完成。比如：80%业务量，3w订单，一个订单需要4个PV，则是12W 业务量，20%时间：4.8h.即 pv/h=120000/4.8=25000. pv/s = 25000/60/60/4=2<br>那么峰值PV就是 12W/0.8=15W PV<br>峰值PV/S= 15W/4.8/60/60/4=</p>
-<p>复杂需求</p>
-<ol>
-<li>月营业额</li>
-<li>访问订单转化率, 10%</li>
-<li>媒体访问时间： 24h*80%</li>
-<li>生成每个订单平均选购商品数</li>
-<li>订单有效率： 85%</li>
-<li>平均浏览率（IP/PV）</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/Performance3/" data-id="cjvtlr7xz002340vxzbtx7xij" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
     </footer>
   </div>
@@ -574,7 +620,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/11/">11</a><a class="extend next" rel="next" href="/echoblog.github.io/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/12/">12</a><a class="extend next" rel="next" href="/echoblog.github.io/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -627,6 +673,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
           </li>
         
@@ -640,10 +690,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
       </ul>

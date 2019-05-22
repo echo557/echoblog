@@ -62,6 +62,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SoftwareTesting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/02/SoftwareTesting/" class="article-date">
+  <time datetime="2019-04-02T09:02:58.000Z" itemprop="datePublished">2019-04-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/02/SoftwareTesting/">SoftwareTesting</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="PIE-Module"><a href="#PIE-Module" class="headerlink" title="PIE Module"></a>PIE Module</h3><p>Execution/Reachability: Fault</p>
+<p>Infection: The state of the program must be incorrect. A test executing the fault may not produce error.<br>Propagation: The infected state must propagate to cause some output of the program to be incorrect. An error may not be propagated to the output!</p>
+<p>Test Case: Test Input(Test Data)/Test Oracle(Excepted Output)/Others(Environment)</p>
+<p>Verification:  The evaluation of whether or not a product, service, or system compiles with a regulation, requirement, specification, or imposed condition. It is often an internal process.<br>Validation: The assurance that a product, service, or system meets the needs of the customer and other identified stakeholders. It often involves acceptance and suitability with external customers.</p>
+<p>####Testing level:<br>Unit Level<br>Module Level<br>Integration Level<br>System Level<br>(Google Testing)</p>
+<p>##White Box Testing Method</p>
+<p>###Graph in Testing</p>
+<h4 id="Test-Path"><a href="#Test-Path" class="headerlink" title="Test Path"></a>Test Path</h4><p>A path that starts at an initial vertex and ends at a final vertex.<br>Test Paths represent execution of test cases<br>–Some test paths can be executed by many tests<br>–Some test paths cannot be executed by any cases</p>
+<p>####Reach<br>–Syntactic reach: A path exists in the graph<br>–Semantic reach: A test exists that can execute that path</p>
+<p>####Cover<br>A test path p covers a vertex v if v is in p<br>A test path p covers an edge e if e is in p<br>A test path p covers a subpath p’ if p’ is in p</p>
+<p>####Structural Coverage<br>Defined on a graph just in terms of vertices and edges<br>–Source code<br>–Requirement specification<br>–Design diagram</p>
+<p>####Data Flow Coverage</p>
+<h3 id="Test-Criteria"><a href="#Test-Criteria" class="headerlink" title="Test Criteria"></a>Test Criteria</h3><p>–Test Requirement(TR)<br>Describe properties of test paths</p>
+<p>–Test Criteria:<br>Rules that define test requirement</p>
+<p>–Satisfaction:<br>Given a set TR of test requirements for a criterion C,a set of tests satisfies C on a graph if and only if for every test requirement in TR, there is a test path in path(T) that meets the test requirement true</p>
+<p>###Structural Coverage</p>
+<p>####Vertex Coverage(VC)<br>–Test set T satisfies vertex coverage on graph G if and only if for every syntactically reachable vertex v in V, there is a path p in path(T) such that p covers v<br>–TR contains each reachable vertex in G</p>
+<p>####Edge Coverage(EC)<br>–Test set T satisfies vertex coverage on graph G if and only if for every syntactically reachable edge e in E, there is a path p in path(T) such that p covers e<br>–TR contains each reachable edge in G<br>满足EC即会满足VC， 但反之不一定</p>
+<p>####Covering Multiple Edges<br>–Edge-pair coverage requires pairs of edges<br>–Edge-Pairs Coverage(EPC): TR contains each reachable path of length to up 2, inclusive, in G.<br>–Complete Path Coverage(CPC): TR contains all paths in G.<br>–n-Path Coverage(nPC): TR contains each reachable path of length up to n, inclusive, in G.<br>VC(n=0),EC(n=1),EPC(n=2),CPC(n=无穷)</p>
+<p>####Subsume<br>–C1 subsumes C2, denoted by C1 &gt;=C2: For any T,if T satisfies C1 implies T satisfies C2.<br>–n1PC&gt;=n2PC if n1》=n2<br>– C1&gt;=C2 does not imply that T1 satisfying C1 can detect any fault detected by T2 which satisfies C2.</p>
+<p>###Control Flow Graph<br>A control flow graph(CFG) is a representation,using graph notation, of all paths that might be traversed through a program during its execution.</p>
+<p>Vertex:<br>–Statement<br>–Block<br>–Function<br>–Module</p>
+<p>Edge:<br>–Flow<br>–Jump<br>–Call</p>
+<p>if 语句<br>if-return 语句<br>while<br>for<br>break /continue<br>do</p>
+<p>###Data Flow</p>
+<p>####Beyond Structure<br>Goal: Try to ensure that values are computed and used correctly<br>Definition(def):<br>A location where a value for a variable is stored into memory.<br>Use:<br>A location where a variable’s value is accessed.</p>
+<p>####def(n) or def(e):<br>The set of variables that are defined by node n or edge e<br>use(n) or use(e):<br>The set of variables that are sued by node n or edge e<br>DU pair:<br>A pair of locations(li,lj) such that a variable v is defined at li and used at lj.</p>
+<p>####Def-clear:<br>A path from li to lj is def-clear with respect to variable v if v is not given another value on any of the nodes or edges in the path<br>Reach:<br>If there is a def-clear path from li to lj with respect to v, the def of v at li reaches the use at lj.<br>DU Path:<br>du-path: A simple subpath that is def-clear with respect to v from a def of v to a use of v<br>du(ni,nj,v):the set of du-paths from ni to nj<br>du(ni,v): the set of du-paths that start at ni<br>All-defs coverage(ADC): For each set of du-paths S=du(n,v), TR contains at least one path d in S.<br>All-uses coverage(AUC): For each set of du-paths to uses S=du(ni,nj,v), TR contains at least one path d in S.<br>All-du-paths coverage(ADUPC):For each set S=du(ni,nj,v),TR contains every path d in Satisfaction.</p>
+<p>###Junit单元测试</p>
+<p>##Black Box Testing</p>
+<h3 id="Random-Testing"><a href="#Random-Testing" class="headerlink" title="Random Testing"></a>Random Testing</h3><p>Problems in RT:Define input domain/Generate random sequence(Pseudo random sequence algorithm/Seed of pseudo random sequence algorithm/Randomness and Integrity Service(random.org))<br>Fuzz testing(Fuzzing):<br>自适应随机测试<br>A passed test, nearby tests may be passed<br>A failed test, nearby tests may be failed.<br>FSCS-ART algorithm<br>–randomly generate an input t, run t, add t to T1<br>–While(stop criteria not reached)<br>  –randomly generate k candidate input c1,….ck<br>  –for each candidate ci<br>     –Compute min distance di to T1<br>  –end for<br>  –select one candidate t with max distance<br>  –run t, add t to T<br>–end while  </p>
+<p>####Problem in ART:<br>distance<br>sampling(ART with enlarged input domain)</p>
+<p>####Anti-Radon Testing<br>Process: </p>
+<ol>
+<li>Select one test case randomly</li>
+<li>Select a test case with the maximum Sum of Hamming Distance to existed test cases</li>
+<li>Repeat</li>
+</ol>
+<p>###Equivalence Partition<br>Can be equally applied at several levels of testing<br>–Unit<br>–Integration<br>–System<br>Relatively easy to apply with no automation<br>Easy to adjust the procedure to get more or fewer tests</p>
+<p>####Input Domains<br>The input domain for a program contains all the possible inputs to that program.<br>For even small programs, the input domain is so large that it might as well be infinite.<br>Testing is fundamentally about choosing finites sets of values from the input domain.<br>Input parameters define the scope of the input domain<br>–Parameters to a method<br>–Data read from a file<br>–Global variables<br>–User level inputs<br>Partitioning Domains<br>–Domain D<br>–Partition scheme p of D<br>–The partition p defines a set of blocks, b1,b2,b3….bn<br>–The partition must satisfy two properties:<br>blocks must be pairwise disjoint(no overlap)<br>together the blocks cover the domain D(complete)</p>
+<p>####Two Approaches<br>Interface-based approach<br>–Develops characteristics directly from individual input parameters<br>–Simplest application<br>–Can be partially automated in some situations<br>Mechanically consider each parameter in isolation<br>This is an easy modeling technique and relies mostly on syntax<br>Ignores relationships among parameters</p>
+<p>Functionality-based approach<br>–Develops characteristics from a behavioral view of the program under test<br>–Harder to develop–requires more design effort<br>–May result in better tests, or fewer tests that are as effective</p>
+<p>Identify characteristics that correspond to the intended functionality<br>Requires more design effort from tester<br>Can incorporate domain and semantic knowledge<br>Can use relationships among parameters<br>Modeling can be based on requirements, not implementation<br>The same parameter may appear in multiple characteristics, so it’s harder to translate values to test cases</p>
+<p>###Boundary of Equivalent Classed</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/02/SoftwareTesting/" data-id="cjvzcdycn00202gvxnk0qrh2w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-machinelearning1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/03/12/machinelearning1/" class="article-date">
@@ -92,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/03/12/machinelearning1/" data-id="cjvtlr80a003p40vxrl2j5vxl" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/03/12/machinelearning1/" data-id="cjvzcdyf500362gvxhz8cuai4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li></ul>
@@ -144,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjvtlr81o005d40vxp0t28zi4" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/20/troubleshooting2019-2-20/" data-id="cjvzcdyh5004w2gvx4x7fwhtc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -188,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjvtlr81h005440vxop4qjqwg" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/14/trouble-shooting2/" data-id="cjvzcdyh0004o2gvxirzwc9ly" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -849,7 +935,7 @@ return $(($aNum+$anotherNum))
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/13/ShellCommand/" data-id="cjvtlr7z1002l40vxyjp6n96f" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/13/ShellCommand/" data-id="cjvzcdycs00272gvx5an6b2f2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -861,730 +947,11 @@ return $(($aNum+$anotherNum))
 
 
   
-    <article id="post-resume" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/02/01/resume/" class="article-date">
-  <time datetime="2019-01-31T23:28:29.000Z" itemprop="datePublished">2019-02-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/02/01/resume/">resume</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><h3 id="软件开发"><a href="#软件开发" class="headerlink" title="软件开发"></a>软件开发</h3><ul>
-<li>需求分析</li>
-<li>概要设计</li>
-<li>详细设计</li>
-<li>Coding</li>
-<li>Debug</li>
-<li>单元测试</li>
-<li>集成测试</li>
-<li>发布</li>
-</ul>
-<h3 id="测试流程"><a href="#测试流程" class="headerlink" title="测试流程"></a>测试流程</h3><ul>
-<li>需求分析</li>
-<li>评审、沟通</li>
-<li><p>编写测试计划</p>
-<ul>
-<li>测试内容</li>
-<li><p>测试方法</p>
-<ul>
-<li><p>黑盒</p>
-<ul>
-<li>决策表</li>
-<li>等价类划分</li>
-<li>边界值分析</li>
-<li>因果法</li>
-<li>错误推测法</li>
-<li>功能图</li>
-<li>Ad-hoc法</li>
-</ul>
-</li>
-<li><p>白盒</p>
-<ul>
-<li>符号执行</li>
-<li>形式化方法</li>
-<li>基本路径</li>
-<li>组合覆盖</li>
-<li>条件覆盖</li>
-<li>判定覆盖</li>
-<li>语句覆盖</li>
-<li>代码审查</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>测试工具</p>
-</li>
-<li>人力评估</li>
-</ul>
-</li>
-<li><p>评审、完善</p>
-</li>
-<li>提取测试需求</li>
-<li><p>设计测试用例</p>
-<ul>
-<li>数据准备</li>
-</ul>
-</li>
-<li><p>评审、完善</p>
-</li>
-<li>搭建测试环境</li>
-<li>冒烟测试</li>
-<li><p>执行测试用例</p>
-<ul>
-<li>完善测试用例</li>
-</ul>
-</li>
-<li><p>报告输出</p>
-</li>
-<li>编写用户使用说明书</li>
-</ul>
-<h3 id="敏捷测试"><a href="#敏捷测试" class="headerlink" title="敏捷测试"></a>敏捷测试</h3><h3 id="流程改进"><a href="#流程改进" class="headerlink" title="流程改进"></a>流程改进</h3><ul>
-<li>问题</li>
-<li>如何改进</li>
-<li>怎样实施</li>
-</ul>
-<h3 id="测试类型"><a href="#测试类型" class="headerlink" title="测试类型"></a>测试类型</h3><ul>
-<li>API测试</li>
-<li>性能测试</li>
-<li>压力测试</li>
-<li>负载测试</li>
-<li>UI测试</li>
-<li>兼容性测试</li>
-<li>安全测试</li>
-<li>恢复测试</li>
-<li>可用性测试</li>
-<li>可靠性测试</li>
-<li>安装测试</li>
-<li>本地化测试</li>
-<li>国际化测试</li>
-</ul>
-<h3 id="测试阶段分类"><a href="#测试阶段分类" class="headerlink" title="测试阶段分类"></a>测试阶段分类</h3><ul>
-<li><p>单元测试</p>
-<ul>
-<li>Junit</li>
-</ul>
-</li>
-<li><p>集成测试</p>
-</li>
-<li>系统测试</li>
-<li>验收测试</li>
-<li>A测试</li>
-<li>B测试</li>
-<li>回归测试</li>
-<li>冒险测试</li>
-</ul>
-<h3 id="自动化环境"><a href="#自动化环境" class="headerlink" title="自动化环境"></a>自动化环境</h3><ul>
-<li><p>接口测试</p>
-<ul>
-<li>定义</li>
-<li>库</li>
-<li>语言</li>
-<li>分类</li>
-</ul>
-</li>
-<li><p>客户端</p>
-<ul>
-<li><p>库</p>
-<ul>
-<li><p>appium</p>
-<ul>
-<li>支持OSX， Windows以及linux系统， 使用同一套API来写自动化测试</li>
-<li><p>工作原理</p>
-<ul>
-<li><p>Appium-client(用各类语言写的测试脚本 )</p>
-<ul>
-<li>java-client</li>
-<li>python-client</li>
-<li>ruby-cli</li>
-</ul>
-</li>
-<li><p>Appium-server(安装appium的工具，用来监听client端的请求，转发请求并控制移动设备执行测试，默认开启并监听4723接口)</p>
-<ul>
-<li>appium.dmg</li>
-<li>AppiumForWindow.zip</li>
-</ul>
-</li>
-<li><p>移动设备</p>
-<ul>
-<li>Android 模拟器</li>
-<li>Android真机</li>
-<li>IOS 真机</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>过程</p>
-<ul>
-<li>在某台服务器上安装appium工具（server端），开启进程（默认4723接口）进行监听</li>
-<li>编写测试脚本，放置到服务器上，执行该测试脚本（相当于发送命令给server端）</li>
-<li>移动设备接收到server端发送过来的命令，执行指定的操作</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>python-uiautomator2(Android)</p>
-<ul>
-<li><p>原理</p>
-<ul>
-<li>python端</li>
-<li><p>移动设备</p>
-<ul>
-<li><p>atx-agent</p>
-<ul>
-<li>安卓真机</li>
-<li>安卓模拟机</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>过程</p>
-<ul>
-<li>在移动设备上安装atx-agent(守护进程), 随后atx-agent启动uiautomator2服务(默认7912端口)进行监听</li>
-<li>在PC上编写测试脚本并执行（相当于发送HTTP请求到移动设备的server端）</li>
-<li>移动设备通过WIFI或USB接收到PC上发来的HTTP请求，执行制定的操作</li>
-</ul>
-</li>
-<li><p><a href="https://testerhome.com/topics/11357" target="_blank" rel="noopener">https://testerhome.com/topics/11357</a></p>
-</li>
-</ul>
-</li>
-<li><p>requests</p>
-<ul>
-<li>get</li>
-<li>post</li>
-<li>put</li>
-<li>delete</li>
-</ul>
-</li>
-<li><p>selenium</p>
-<ul>
-<li><p>driver</p>
-<ul>
-<li>webdriver.chrome()</li>
-<li>wedriver.IE()</li>
-<li>webdriver.Firefox()</li>
-</ul>
-</li>
-<li><p>element</p>
-<ul>
-<li>bycss</li>
-<li>byid</li>
-<li>byxpath</li>
-<li>….</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>pyjson</p>
-<ul>
-<li>json.load()</li>
-<li><p>json.dumps()</p>
-<p>和python中各个类型进行转换<br>object&gt;dict</p>
-</li>
-</ul>
-</li>
-<li><p>xlrd</p>
-</li>
-<li>yaml</li>
-<li>pysql</li>
-<li>pytest</li>
-<li>pycurl</li>
-</ul>
-</li>
-<li><p>工具</p>
-<ul>
-<li>jenkins</li>
-<li>Allure report</li>
-<li>pytest</li>
-<li>fiddler</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>架构</p>
-<ul>
-<li>log, mysql, yaml, json, xml</li>
-<li>Base Class: Mobile, Web, API</li>
-<li><p>Project Base</p>
-<ul>
-<li>参数分离</li>
-<li>读取参数</li>
-</ul>
-</li>
-<li><p>Project Case</p>
-<ul>
-<li>precondition</li>
-<li>setup</li>
-<li>steps</li>
-<li>cleanup</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="项目经历-工作"><a href="#项目经历-工作" class="headerlink" title="项目经历/工作"></a>项目经历/工作</h2><h3 id="CDC-MP-MR"><a href="#CDC-MP-MR" class="headerlink" title="CDC MP/MR"></a>CDC MP/MR</h3><ul>
-<li>产品线</li>
-<li>数据展示在APP端，Web端</li>
-<li><p>通过蓝牙，BLE, BT</p>
-<ul>
-<li>配对</li>
-<li>数据传输（WIFI）</li>
-<li>USB/ANT 传输数据</li>
-</ul>
-</li>
-<li><p>和server 交互的部分</p>
-<ul>
-<li><p>丢包</p>
-<ul>
-<li>fidder</li>
-<li>API/ postman</li>
-<li>Sniffer</li>
-<li>查询后台log</li>
-<li>Debug 版本查看log</li>
-</ul>
-</li>
-<li><p>server连接错误</p>
-</li>
-<li>SSO </li>
-<li>OMT server</li>
-</ul>
-</li>
-</ul>
-<h3 id="CIQ-Music"><a href="#CIQ-Music" class="headerlink" title="CIQ Music"></a>CIQ Music</h3><ul>
-<li>明星产品</li>
-<li>5*6</li>
-<li><p>痛点</p>
-<ul>
-<li>本地化测试</li>
-<li>网络问题</li>
-<li><p>第三方交互问题</p>
-<ul>
-<li>API 接口</li>
-<li>Review 代码</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="流程改进-1"><a href="#流程改进-1" class="headerlink" title="流程改进"></a>流程改进</h3><h3 id="Auto-key相关"><a href="#Auto-key相关" class="headerlink" title="Auto key相关"></a>Auto key相关</h3><ul>
-<li>树莓派</li>
-<li>录制</li>
-</ul>
-<h2 id="技能"><a href="#技能" class="headerlink" title="技能"></a>技能</h2><h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><ul>
-<li><p>System</p>
-<ul>
-<li>cat /proc/cpuinfo</li>
-<li>date</li>
-</ul>
-</li>
-<li><p>shutdown</p>
-<ul>
-<li>shutdown -h now 关闭系统(1) </li>
-<li>init 0 关闭系统(2</li>
-<li>telinit 0 关闭系统(3) </li>
-<li>shutdown -h hours:minutes &amp; 按预定时间关闭系统 </li>
-<li>shutdown -c 取消按预定时间关闭系统 </li>
-<li>shutdown -r now 重启(1) </li>
-<li>reboot 重启(2) </li>
-</ul>
-</li>
-<li><p>files and directory</p>
-<ul>
-<li>cd/cd ../cd ../.. /cd ~user1</li>
-<li>cp/mv</li>
-<li>ln -s file1 lnk1 创建一个指向文件或目录的软链接 </li>
-<li>ln file1 lnk1 创建一个指向文件或目录的物理链接 </li>
-<li>pwd</li>
-<li>ls/ls -l</li>
-<li>tree/lstree</li>
-<li>mkdir/mkdir -p /tmp/dir1</li>
-<li>rm -rf</li>
-</ul>
-</li>
-<li><p>find</p>
-</li>
-<li>挂载一个文件系统 </li>
-<li><p>磁盘空间</p>
-<ul>
-<li>df -h 显示已经挂载的分区列表 </li>
-<li>ls -lSr |more 以尺寸大小排列文件和目录</li>
-</ul>
-</li>
-<li><p>用户和群组 </p>
-<ul>
-<li>groupadd group_name 创建一个新用户组 </li>
-<li>groupdel group_name 删除一个用户组 </li>
-<li>passwd 修改口令</li>
-</ul>
-</li>
-<li><p>文件的权限 - 使用 “+” 设置权限，使用 “-“ 用于取消</p>
-<ul>
-<li>ls -lh 显示权限</li>
-<li>chown user1:group1 file1 改变一个文件的所有人和群组属性</li>
-<li>chattr +a file1 只允许以追加方式读写文件</li>
-</ul>
-</li>
-<li><p>查看文件内容 </p>
-<ul>
-<li>cat file1 从第一个字节开始正向查看文件的内容 </li>
-<li>more file1 查看一个长文件的内容 </li>
-<li>tail -2 file1 查看一个文件的最后两行 </li>
-<li>head -2 file1 查看一个文件的前两行 </li>
-<li>tail -f /var/log/messages 实时查看被添加到一个文件中的内容 </li>
-</ul>
-</li>
-<li><p>文本处理</p>
-<ul>
-<li>grep Aug /var/log/messages 在文件 ‘/var/log/messages’中查找关键词”Aug” </li>
-<li>grep ^Aug /var/log/messages 在文件 ‘/var/log/messages’中查找以”Aug”开始的词汇 </li>
-<li>sort file1 file2 排序两个文件的内容 </li>
-</ul>
-</li>
-<li><p>子主题 10</p>
-</li>
-</ul>
-<h3 id="curl-API"><a href="#curl-API" class="headerlink" title="curl(API)"></a>curl(API)</h3><h3 id="PowerShell"><a href="#PowerShell" class="headerlink" title="PowerShell"></a>PowerShell</h3><ul>
-<li>Get-Content</li>
-<li>Get-Process</li>
-<li>子主题 3</li>
-</ul>
-<h3 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h3><h2 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h2><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
-<li>测试策略</li>
-<li>测试风险</li>
-<li>测试资源/进度</li>
-<li>测试计划</li>
-<li>实验室</li>
-<li>测试团队</li>
-<li>测试覆盖</li>
-<li>测试报告</li>
-<li>模板</li>
-</ul>
-<h3 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h3><ul>
-<li>客户需求</li>
-<li>质量文化</li>
-<li>质量保证</li>
-<li>测试现实</li>
-<li>测试原则</li>
-<li>测试驱动</li>
-<li>成熟度模型</li>
-</ul>
-<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><ul>
-<li>缺陷报告</li>
-<li>缺陷生命周期</li>
-<li>缺陷跟踪</li>
-<li>趋势分析</li>
-<li>分布分析</li>
-<li>缺陷清除率</li>
-<li>质量评估</li>
-<li>缺陷预防</li>
-</ul>
-<h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
-<li><p>开发</p>
-<ul>
-<li>用例review</li>
-<li>工作流程确认</li>
-<li>测试报告</li>
-</ul>
-</li>
-<li><p>测试人员</p>
-<ul>
-<li>培训</li>
-<li><p>制定SOP</p>
-<ul>
-<li>测试环境</li>
-<li>版本</li>
-<li>内容</li>
-<li>如何准备数据</li>
-<li>回报问题template</li>
-<li>问题回报规则</li>
-<li>测试进度回报</li>
-<li>测试完成小结</li>
-</ul>
-</li>
-<li><p>管理</p>
-</li>
-</ul>
-</li>
-<li><p>跨地区</p>
-<ul>
-<li>合作方式</li>
-<li>流程规范</li>
-</ul>
-</li>
-<li><p>PM</p>
-<ul>
-<li>Meeting</li>
-<li>测试报告</li>
-</ul>
-</li>
-<li><p>UX</p>
-<ul>
-<li>需求</li>
-<li>meeting</li>
-<li>测试报告</li>
-</ul>
-</li>
-<li><p>客服</p>
-<ul>
-<li>培训</li>
-<li>trouble shooting</li>
-<li>流程规范</li>
-</ul>
-</li>
-</ul>
-<h2 id="一个测试系统需要测试的点"><a href="#一个测试系统需要测试的点" class="headerlink" title="一个测试系统需要测试的点"></a>一个测试系统需要测试的点</h2><h3 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h3><h3 id="API-测试"><a href="#API-测试" class="headerlink" title="API 测试"></a>API 测试</h3><ul>
-<li><p>测试范围</p>
-<ul>
-<li>业务功能（包括正常、异常场景是否实现）</li>
-<li>业务规则（覆盖度是否全面）</li>
-<li>参数验证（边界、业务规则是否达到要求）</li>
-<li>异常场景（重复提交、并发提交、事务中断、多机环境、大数据量测试）</li>
-<li>性能测试（响应时间、吞吐量、并发数、资源要求）</li>
-<li>安全测试（权限验证、SQL注入等）</li>
-</ul>
-</li>
-<li><p>接口测试的重点</p>
-<ul>
-<li>检查接口返回的数据是否与预期结果一致。</li>
-<li>检查接口的容错性，假如传递数据的类型错误时是否可以处理。</li>
-<li>接口参数的边界值。例如，传递的参数足够大或为负数时，接口是否可以正常处理</li>
-<li>接口的性能，http请求接口大多与后端执行的SQL语句性能、算法等比较相关。</li>
-<li>接口的安全性，外部调用的接口尤为重要。</li>
-</ul>
-</li>
-<li><p>注意点</p>
-<ul>
-<li>子主题 1</li>
-<li>子主题 2</li>
-<li>子主题 3</li>
-<li>子主题 4</li>
-</ul>
-</li>
-</ul>
-<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
-<li><p>指标</p>
-<p>QPS（TPS）= 并发数/平均响应时间</p>
-<ul>
-<li>QPS（TPS）：每秒钟request/事务 数量</li>
-<li>并发数： 系统同时处理的request/事务数</li>
-<li>响应时间：  一般取平均响应时间</li>
-<li><p>日PV：每天访问的流量</p>
-<ul>
-<li>Nginx</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>做法</p>
-<ul>
-<li><p>系统</p>
-<ul>
-<li>CPU运算</li>
-<li>IO</li>
-<li>外部系统响应</li>
-</ul>
-</li>
-<li><p>关注点</p>
-<ul>
-<li><p>用户</p>
-<ul>
-<li>响应时间</li>
-</ul>
-</li>
-<li><p>管理员</p>
-<ul>
-<li>响应时间</li>
-<li>服务器资源使用情况是否合理</li>
-<li>应用服务器和数据库资源使用是否合理</li>
-<li>系统能否实现扩展</li>
-<li>系统最多支持多少用户访问、系统最大业务处理量是多少</li>
-<li>系统性能可能存在的瓶颈在哪里</li>
-<li>更换那些设备可以提高性能</li>
-<li>系统能否支持7×24小时的业务访问</li>
-</ul>
-</li>
-<li><p>开发者</p>
-<ul>
-<li>架构设计是否合理</li>
-<li>数据库设计是否合理</li>
-<li>代码是否存在性能方面的问题</li>
-<li>系统中是否有不合理的内存使用方式</li>
-<li>系统中是否存在不合理的线程同步方式</li>
-<li>系统中是否存在不合理的资源竞争</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>指标计算</p>
-<ul>
-<li><p>QPS</p>
-<ul>
-<li>网络传输时间：N1+N2+N3+N4</li>
-<li>应用服务器处理时间：A1+A3</li>
-<li>数据库服务器处理时间：A2</li>
-</ul>
-</li>
-<li><p>并发用户数</p>
-</li>
-<li>吞吐量</li>
-<li><p>性能计数器</p>
-<ul>
-<li>资源利用率</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>如何做好性能测试</p>
-<ul>
-<li><p>成员</p>
-<ul>
-<li>子主题 1</li>
-<li>子主题 2</li>
-<li>子主题 3</li>
-<li>子主题 4</li>
-</ul>
-</li>
-<li><p>子主题 2</p>
-</li>
-<li>子主题 3</li>
-<li>子主题 4</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>工具</p>
-<ul>
-<li>Nginx</li>
-<li>Jmeter</li>
-<li>Loadrunner</li>
-</ul>
-</li>
-</ul>
-<h3 id="UI"><a href="#UI" class="headerlink" title="UI"></a>UI</h3><h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><ul>
-<li><p>Browser</p>
-<ul>
-<li>IE</li>
-<li>Firefox</li>
-<li>Chrome</li>
-<li>Safari</li>
-</ul>
-</li>
-<li><p>Mobile</p>
-<ul>
-<li>IOS</li>
-<li><p>Android</p>
-<ul>
-<li>Version</li>
-<li>Products</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>PC Sytems</p>
-<ul>
-<li>Windows</li>
-<li>MAC</li>
-</ul>
-</li>
-</ul>
-<h3 id="可用性测试"><a href="#可用性测试" class="headerlink" title="可用性测试"></a>可用性测试</h3><ul>
-<li>是否可以全用键盘操作，是否有快捷键</li>
-<li>输入用户名，密码后按回车，是否可以登陆</li>
-<li>输入框能否可以以Tab键切换</li>
-</ul>
-<h3 id="本地化测试"><a href="#本地化测试" class="headerlink" title="本地化测试"></a>本地化测试</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><ul>
-<li><p>服务器端接口测试</p>
-<ul>
-<li><p>ZAP 代理扫描</p>
-<ul>
-<li><p>SQL 注入</p>
-<ul>
-<li>通过正常WW 接口访问，制造SQL 语句</li>
-<li>需要查询IIS 日志习惯</li>
-<li>Insert</li>
-</ul>
-</li>
-<li><p>XSS 脚本攻击</p>
-</li>
-<li>CSRF 跨站请求伪造</li>
-<li>越权访问</li>
-</ul>
-</li>
-<li><p>结合需求，设计和代码，需求和设计本身带来的问题</p>
-<ul>
-<li>滥用密码恢复</li>
-<li>滥用可预测的标识符</li>
-<li>滥用高负载操作（DOS 攻击）</li>
-<li>滥用竞争关系（SQL 中操作）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>账户安全</p>
-<ul>
-<li><p>Login</p>
-<ul>
-<li>注册位数/密码明文暗文传输</li>
-<li>密码错误最大尝试次数</li>
-<li>是否允许多台设备同时登陆一个账号</li>
-<li>设备数量是否有限制</li>
-<li>同一账号发送请求的次数限制</li>
-<li>用户权限</li>
-<li>注销机制（用户注销后，任何需要调用身份验证的接口调用都不能成功）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据通信安全</p>
-<ul>
-<li>关键数据散列或者加密</li>
-<li>安全通信</li>
-<li>数字证书合法验证</li>
-<li>是否检验数据合法性</li>
-</ul>
-</li>
-<li><p>安装包测试</p>
-</li>
-<li>敏感信息测试</li>
-<li>软键盘挟持</li>
-<li>组建安全性</li>
-</ul>
-<p><em>XMind: ZEN - Trial Version</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/02/01/resume/" data-id="cjvtlr81n005a40vxiuudsusi" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/7/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/6/">6</a><a class="page-number" href="/echoblog.github.io/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/echoblog.github.io/page/9/">9</a><a class="page-number" href="/echoblog.github.io/page/10/">10</a><a class="page-number" href="/echoblog.github.io/page/11/">11</a><a class="extend next" rel="next" href="/echoblog.github.io/page/9/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/7/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/6/">6</a><a class="page-number" href="/echoblog.github.io/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/echoblog.github.io/page/9/">9</a><a class="page-number" href="/echoblog.github.io/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/12/">12</a><a class="extend next" rel="next" href="/echoblog.github.io/page/9/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1637,6 +1004,10 @@ return $(($aNum+$anotherNum))
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
           </li>
         
@@ -1650,10 +1021,6 @@ return $(($aNum+$anotherNum))
         
           <li>
             <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
           </li>
         
       </ul>
