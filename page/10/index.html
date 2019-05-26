@@ -62,6 +62,111 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MYSQL-Study5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/01/26/MYSQL-Study5/" class="article-date">
+  <time datetime="2019-01-26T01:50:15.000Z" itemprop="datePublished">2019-01-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/01/26/MYSQL-Study5/">索引下</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引示意图.png" alt="(name,age)索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/InnoDB索引结构.png" alt="InnoDB索引示意图"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图三.png" alt="图三"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/图四.png" alt="图四"><br><img src="/echoblog.github.io/2019/01/26/MYSQL-Study5/索引（下）.png" alt="索引（下）"></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><h4 id="如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？"><a href="#如果执行select-from-T-where-k-between-3-and-5-需要执行几次树的搜索操作，-会扫描多少行？" class="headerlink" title="如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？"></a>如果执行select * from T where k between 3 and 5, 需要执行几次树的搜索操作， 会扫描多少行？</h4><h4 id="初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB"><a href="#初始化语句：-create-table-T-ID-int-primary-key-k-int-not-null-default-0-s-varchar-16-not-null-default-‘’-indec-k-k-engine-InnoDB" class="headerlink" title="初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;"></a>初始化语句： create table T(ID int primary key, k int not null default 0, s varchar(16) not null default ‘’, indec k(k)) engine = InnoDB;</h4><h4 id="insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’"><a href="#insert-into-T-values-100-1-‘aa’-200-2-’bb’-300-3-’cc’-500-5-’ee’-600-6-’ff’-700-7-’gg’" class="headerlink" title="insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);"></a>insert into T values(100,1, ‘aa’),(200,2,’bb’),(300,3,’cc’),(500,5,’ee’),(600,6,’ff’),(700,7,’gg’);</h4><h3 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h3><ul>
+<li>在k索引树上找到k=3的记录，取得ID=300</li>
+<li>再到ID索引树查到ID=300对应的R3</li>
+<li>在k索引树取下一个值k=5， 取得ID=500</li>
+<li>再回到ID 索引树查到ID=500对应的R4</li>
+<li>在k索引树取下一个值k=6， 不满足条件，循环结束</li>
+</ul>
+<h2 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><ul>
+<li>如果执行语句select ID from T where k between 3 and 5， 这时候只需要查ID的值， 而ID 的值已经在k索引树上，因此可以直接提供查询结果，不需要回表。在这个查询里面，索引k已经“覆盖了”我们的查询需求，称为覆盖索引</li>
+<li>需要注意的是， 在引擎内部使用覆盖索引在索引k上其实读了3个记录，R3~R5(对应的索引k上的记录项)，但是对于mysql 的server 层来说，它就是找引擎拿到两条记录，因此mysql 认为扫描行数是2</li>
+</ul>
+<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>减少树的搜索次数， 显著提升查询性能， 所以使用覆盖索引是一个常用的性能优化手段</li>
+</ul>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><ul>
+<li>在一个市民信息表上，是否有必要将身份证号和名字建立联合索引？</li>
+<li>Create table ‘tuser’(‘id’ int(11) not null, ‘id_card’ varchar(32) default null, ‘name’ varchar(32) default null, ‘age’ int(11) default null, ‘ismale’ tinyint(1) default null, primary key (‘id’), key ‘id_card’ (‘id_card’), key ‘name_age’ (‘name’, ‘age’) ) ENGINE = InnoDB</li>
+<li>根据身份证号查询市民信息的需求，我们只需要在身份证号字段上建立索引就够，在建立一个（身份证，姓名）的联合索引，岂不是浪费空间？</li>
+<li>如果现在有一个高频请求，要根据身份证号查询姓名，这个联合索引就有意义。它可以在高频请求上用到覆盖索引， 不在需要需要回表查正航记录</li>
+</ul>
+<h2 id="最左前缀原则"><a href="#最左前缀原则" class="headerlink" title="最左前缀原则"></a>最左前缀原则</h2><h3 id="引子-1"><a href="#引子-1" class="headerlink" title="引子"></a>引子</h3><ul>
+<li>B+树这种索引结构，可以利用索引的“最左前缀”， 来定位记录</li>
+<li>如（name,age）索引示意图， 可以看到索引项是按照索引定义里面出现的字段顺序排序的。</li>
+<li>当逻辑需求是查到所有名字是“张三”时，可以快速定位到ID4， 然后遍历得到所有需要的结果</li>
+<li>如果要查询所有名字第一个字是“张”， SQL 语句就是“where name like ‘张%’”。此时，可以查到第一个符合条件的记录是ID3， 然后向后遍历，直到不满足条件为止</li>
+</ul>
+<h3 id="讨论-1"><a href="#讨论-1" class="headerlink" title="讨论"></a>讨论</h3><ul>
+<li>在建立联合索引时， 如何安排索引内的字段顺序</li>
+<li>评估标准： 索引的复用能力。 </li>
+<li>第一原则， 如果通过调整顺序，可以少维护一个索引，那么这个顺序往往就是需要优先考虑采用的</li>
+<li>那么，如果既有联合查询，又有基于a,b各自的查询呢？查询条件里面只有b语句，时无法使用(a,b)这个联合索引的，这时候不得不维护另外一个索引，即（a,b）, (b)这两个</li>
+<li>空间原则： 如上面的市民表， name 字段大于age 字段，则建议创建一个（name, age）的联合索引和一个（age）的单字段索引</li>
+</ul>
+<h2 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h2><h3 id="引子-2"><a href="#引子-2" class="headerlink" title="引子"></a>引子</h3><ul>
+<li>如果满足最左前缀原则的时候，最左前缀可以用于在索引中定位记录。 如果不符合最左前缀的部分，怎样处理呢？</li>
+<li>如上面的连个索引（name, age）为例。需求： 检索表中“名字第一个字是张，而且年龄是10 的所有男孩”。 SQL：select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
+<li><p>执行步骤</p>
+<ul>
+<li>满足第一个条件，找到记录ID=3</li>
+<li>在MySQL 5.6 之前，只能从ID3 开始一个个回表，到主键索引上找出数据行，再对比字段值</li>
+<li>MYSQL 5.6 引入索引下推优化， 可以在索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，减少回表次数</li>
+<li>图三和图四是两个过程的流程图，每一个虚线箭头表示回表一次</li>
+<li>图3中，（name,age）索引里面去掉了age的值， 这个过程InnoDB 并不去去看age的值， 值是按顺序把“name第一个字是张”的记录一条条取出来回表。因此需要回表4次。</li>
+<li>图4跟图3的区别是： InnoDB 在（name,age）索引内部就判断了age 是否为10， 对于不为10的记录，直接判断并跳过。则需要回表2次</li>
+</ul>
+</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><h3 id="覆盖索引-1"><a href="#覆盖索引-1" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><ul>
+<li>select ID from T where k between 3 and 5</li>
+</ul>
+<h3 id="前缀索引"><a href="#前缀索引" class="headerlink" title="前缀索引"></a>前缀索引</h3><ul>
+<li>select ID from T where name like ‘张%’</li>
+</ul>
+<h3 id="索引下推-1"><a href="#索引下推-1" class="headerlink" title="索引下推"></a>索引下推</h3><ul>
+<li>select * from tuser where name like ‘张%’ and age=10 and ismale =1;</li>
+</ul>
+<h2 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h2><h3 id="实际上主键索引也是可以使用多个字段的"><a href="#实际上主键索引也是可以使用多个字段的" class="headerlink" title="实际上主键索引也是可以使用多个字段的"></a>实际上主键索引也是可以使用多个字段的</h3><h3 id="如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB"><a href="#如表定义：-create-table-‘geek’-‘a’-int-11-not-null-‘b’-int-11-not-null-‘c’-int-11-not-null-‘d’-int-11-not-null-primary-key-‘a’-‘b’-key-‘c’-‘c’-key-‘ca’-‘c’-’a’-key-‘cb’-‘c’-‘b’-ENGINE-InnoDB" class="headerlink" title="如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;"></a>如表定义： create table ‘geek’(‘a’ int(11) not null, ‘b’ int(11) not null, ‘c’ int(11) not null, ‘d’ int(11) not null, primary key (‘a’, ‘b’), key ‘c’ (‘c’), key ‘ca’ (‘c’,’a’), key ‘cb’ (‘c’, ‘b’))ENGINE = InnoDB;</h3><h3 id="这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？"><a href="#这个表需要a-b-做连个主键索引，-但为什么还有‘ca’，‘cb’两个索引呢？" class="headerlink" title="这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？"></a>这个表需要a,b 做连个主键索引， 但为什么还有‘ca’，‘cb’两个索引呢？</h3><h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><ul>
+<li>主键a,b的聚簇索引组织顺序相当于order by a,b,也就是按a排序， 再按b排序，c 无序</li>
+<li>索引ca的组织是先按c排序，再按a排序， 同时记录主键（注意，这里不是ab， 而是只有b。 这个跟索引c的数据是一模一样的</li>
+<li>索引cb的组织是先按c排序，再按b排序，同时记录主键a</li>
+<li>因此 ca 可以去掉， cb需要保留</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/26/MYSQL-Study5/" data-id="cjw4ovfb60019j4vxxnst46eh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-LinuxCommand" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/01/20/LinuxCommand/" class="article-date">
@@ -94,7 +199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjvzcdybk000o2gvxtww2i5ib" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/20/LinuxCommand/" data-id="cjw4ovfai000rj4vx6f9wm5xv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li></ul>
@@ -186,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjvzcdybw00122gvxz9mg68so" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/07/MYSQL-Study4/" data-id="cjw4ovfay0013j4vx2y26ljgl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -278,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjvzcdybs000y2gvxxjrd14q2" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/01/01/MYSQL-Study3/" data-id="cjw4ovfau0010j4vx332xhdyd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -370,107 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjvzcdybn000s2gvxxf44y91x" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MYSQL-Study1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/" class="article-date">
-  <time datetime="2018-12-15T01:40:11.000Z" itemprop="datePublished">2018-12-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL Study Framework - Basic logical</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Framework</p>
-<p>In general, MYSQL include Server Layer and Storage Engine</p>
-<p><img src="/echoblog.github.io/2018/12/15/MYSQL-Study1/framework.png" alt="MYSQL-Study1"></p>
-<p>Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which contain<br>most of the core service function, and all the built-in functions(such as date, time,mathmatics and encryption functions),<br>all the cross-storage engine functionality are realized on this layer, like storage process, trigger and view</p>
-<p>Storage Engine Layer charges the storage and extract of data, whose framework is plug-in type, which support multiple storage engine such as InnoDB,MylSAM, Memory etc.<br>Currently, InnoDB is mainly used, it as default storage engine after MYSQL 5.5.5.<br>That means without defining an engine type, the default one is InnoDB when you create a table.<br>However you can assign other engines too, system would use memory engine if you used engine= memory when create table.<br>Different data storage methods are difference with using different storage engines, as well as function support.</p>
-<p>From the picture, it’s clear that all the storage engines share the same Server Layer.</p>
-<h4 id="Connectors"><a href="#Connectors" class="headerlink" title="Connectors"></a>Connectors</h4><p>First step, when you connect to the DataBase, connectors are meet firstly, which are getting connect, acquiring limitations, maintains and managing connection.<br>Command as:</p>
-<p>mysql -h$ip -P$port -u$user -p</p>
-<p>After finished this, input password in the interact dialogue, password can also behind -p, but it may lead your password leaked.<br>连接命令中，mysql 是客户端工具，用来与服务器建立连接。<br>完成TCP 握手之后，连接器开始认证身份，使用的就是刚输入的用户名和密码。</p>
-<p>.If account/password isn’t correct, you will received error info “Access denied for user”, then end execution by client program.<br>.If you passed the verification, connector will figure out your limitation. Permissions your account have are depend  on the limitations found now.</p>
-<p>这意味着，一个用户成功建立连接之后， 即便你使用管理员账号对其进行了修改，也无法影响已存在的连接权限。 修改完成后，需要再次建立连接，权限才可生效。</p>
-<p>连接完成后，如果没有后续动作，这个连接就处于空闲状态。你可以在show processlist 看到。 ， 其中。 command 列显示的是其状态。</p>
-<p>如果客户端太长时间没动静，连接器就会自动断开，这个时间由参数 wait_timeout 控制的，默认值是8小时。<br>若连接断开之后，客户端再次发送请求得话，会收到一个错误提醒：Lost connection to Mysql server during query。</p>
-<p>数据库里面，长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。<br>短连接，指每次执行完很少得几次查询就断开连接，下次查询再重新建立一个。</p>
-<p>建立连接得过程通常是比较复杂得，所以需要尽量减少建立连接得动作，也就是尽量使用长连接。<br>全部使用长连接后得可能问题， 有时候， MYSQL 占用内存涨得特别快，因为MYSQL 在执行过程中临时使用的内存是管理在连接对象里面的。<br>这些资源只有在断开连接才会释放， 长时间积累下来，可能会导致内存占用太大，被系统强行杀掉（OOM）， 从现象看就是MYSQL 异常重启。</p>
-<p>解决方案：</p>
-<ol>
-<li><p>定期断开长连接。 使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接， 之后要查询再重连接。</p>
-</li>
-<li><p>若使用的是MYSQL 5.7 或更新版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源。 这个过程不需要重连和重新做权限验证，但会将连接恢复到刚刚创建完成时的状态。</p>
-</li>
-</ol>
-<h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><p>建立完连接后，可以执行select 语句。 执行逻辑就会来到第二步： 查询缓存。</p>
-<p>mysql拿到查询请求后，会先到查询缓存看看，查看是否之前执行过这条语句. 之前执行过的语句以及结果可能会以key-vlaue对的形式，被直接缓存在内存中。key 是客户端工具，用来与服务器建立连接。<br>是查询语句， value 是查询结果。如能查询到，则value 结果可直接返回。</p>
-<p>若语句不在查询缓存中，就会继续执行后面的执行阶段。 执行完成后，执行结果会被存入查询缓存中。效率会很高。<br>但查询缓存往往弊大于利。</p>
-<p>查询缓存的失效会非常频繁， 只要有对一个表进行更新，此表的所有查询缓存会被清空。对于更新压力大的数据库来说， 查询缓存的命中率会非常低。<br>除非业务是一张静态表，很久才会更新一次，如一个系统配置表。</p>
-<p>好在MYSQL 也提供了这种“按需使用”的方式。 可将参数 query_cache_type 设置成DEMAND， 这样对于默认<br>SQL 语句都不使用查询缓存。 而对于要确定使用查询缓存的语句， 可以用SQL_CHACE显式指定， 如：</p>
-<p>select SQL_CACHE * from T where ID=10;</p>
-<p>Note： MYSQL 8.0 查询缓存功能被删掉。</p>
-<h4 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h4><p>MySQL 会对SQL 语句进行解析。</p>
-<p>分析器会做“语法分析”， MYSQL 需要识别里面的字符串分别是什么，代表什么。从select 关键字开始为查询语句， 然后是表名， 列名。<br>根据识别做语法分析，得出结果，语法分析器会根据语法规则，判断输入的SQL 语句是否满足MySQL 语法。（syntax）</p>
-<h4 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h4><p>执行之前需要进行优化器处理。</p>
-<p>优化器在表里面有多个索引的时候，决定使用哪个索引，或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。<br>如：<br>select * from t1 join t2 using(ID) where  t1.c = 10 and t2.d = 20;</p>
-<p>.既可以先从表t1 里面 取出 c = 10 的记录的ID 值， 再根据ID 值 关联到表t2, 再 判断t2 里面d的值是否是20<br>.也可以°t2里 d=20的ID 值， 再根据ID 值关联到t1, 再判断t1 里面c 的值是否等于10</p>
-<p>两种方法的逻辑结果一样， 但执行效率会不同， 而优化器的左右决定选择使用哪个方案。</p>
-<h4 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h4><p>开始执行的时候，需要判断用户是否对表T 有无执行查询权限，如没有，则返回没有权限的错误。</p>
-<p>ERROR 1142 (42000): SELECT command denied to user ‘’ for table ‘T’</p>
-<p>若有权限，则继续执行，打开表，执行器会根据表的引擎定义，去使用这个引擎提供的接口。</p>
-<p>如例子中， 表T ，ID 字段没有索引， 那么执行器的执行流程是：</p>
-<ol>
-<li>调用InnoDB 引擎接口取这个表的第一行， 判断 ID 值是否是10， 若不是，跳过， 若是则将这行存在结果集中</li>
-<li>调用引擎接口取“下一行”， 重复相同的判断逻辑， 直到取到这个表的最后一行。</li>
-<li>执行器将上述遍历过程中所有满足条件的行组成的记录集左右结果返回客户端。</li>
-</ol>
-<p>对于有索引的表，执行的逻辑也差不多。 第一次调用的是“取满足条件的第一行”这个接口， 之后循环取“满足的下一行”接口，这些接口都是引擎中已经定义好的。</p>
-<p>慢查询日志中有ROW_EXAMINED 的字段， 表示这个语句执行过程中扫描了多少行。这个值再执行器每次调用引擎获取数据行的时候累加的。</p>
-<p>在有些场景下， 执行器调用一次，在引擎内部则扫描了多行， 因此扫描引擎行数跟 rows_examined 并不是完全相同的。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>sql 的几个step：</p>
-<ol>
-<li><p>连接<br>连接管理模块，接受请求，连接进程获取用户权限</p>
-</li>
-<li><p>执行<br>查询缓存（不是必须）<br>分析器，分析语法，判断是否有错，识别关键字， 表name, row name<br>优化器， 决定使用哪个索引</p>
-</li>
-</ol>
-<p>执行器， 先查是否有权限查询，无返回无权限错误，有则打开表执行。调用引擎结果，存取结果集<br>最后收集结果集，返回给客户端。</p>
-<ol start="3">
-<li>等待，释放（长连接）， 最后重新连接请求。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="cjvzcdybq000v2gvxec65w33g" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/22/MYSQL-Study2/" data-id="cjw4ovfaq000wj4vxb1ypb1yh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -539,6 +544,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/26/Jmeter7/">Jmeter7</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
           </li>
         
@@ -552,10 +561,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/05/13/Jmeter4/">Jmeter4</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
           </li>
         
       </ul>

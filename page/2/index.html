@@ -62,6 +62,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-fiddler" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/05/06/fiddler/" class="article-date">
+  <time datetime="2019-05-06T14:05:19.000Z" itemprop="datePublished">2019-05-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理</p>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ol>
+<li>了解http协议</li>
+<li>接口测试，自动化的接口测试</li>
+<li>Fiddlers 抓包可以判断时前端还是后端BUG</li>
+</ol>
+<p>HTTP包：<br>–请求报文<br>   请求行<br>   请求头<br>   请求体<br>–响应报文<br>   状态行<br>   响应头<br>   响应体</p>
+<p>Fiddler 可以通过装插件的方式导出Jmeter的文件，以便导出之后来做Jmeter的接口测试。</p>
+<p>录制Jmeter文件的方法：<br>Badboy<br>Fiddler<br>Jmeter</p>
+<p>AutoResponder更改可以篡改某些信息。<br>使用场景：<br>对测试<br>–mock平台，可以模拟响应， 若开发没有完成接口开发的时候<br>–js可以进行前端页面的动态编程。 可以拦截服务器的脚本文件到本地》调试</p>
+<p>如果做：<br>拦截后到Auto Responder,<br>enable rules<br>unmatched requests passthrough</p>
+<p>Composer：可以发包功能,然后 execute去测试接口<br>类似的如： postman, jmeter</p>
+<p>App 抓包</p>
+<ol>
+<li>手机设置代理</li>
+<li>同一个网络</li>
+</ol>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>1.fiddler抓包判断是前端还是后端bug，通过有没有发包来判断。该应用场景较少。<br>result<br>200：接口请求成功<br>protocol：协议<br>Host：主机地址<br>URL：具体请求的哪一个资源<br>Body：请求数据时，发送的内容的大小<br>Content-Type:内容的类型<br>Caching：<br>2：开发不规范，没有接口文件的情况下，可导出jmeter文件，供jmeter做接口测试使用<br>3：autoResponseder：拦截服务器的脚本文件到本地-&gt;修改调试<br>4：Composer：可做接口测试<br>5：抓APP数据包：<br>a)将手机投屏到电脑（itools可以做到）<br>b)手机要设置代理，需安装证书<br>c)在同一个网络<br>d)fiddler要做特殊设置：<br>tools-options-&gt;https 全勾选<br>connection-&gt;Allow remote computers to connect<br>e)注意关闭过滤器Filters</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/fiddler/" data-id="cjw4ovfeo002ij4vxrbldwy8a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Jenkins" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/05/06/Jenkins/" class="article-date">
@@ -150,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/Jenkins/" data-id="cjvzcdyb000052gvxyes91vgr" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/Jenkins/" data-id="cjw4ovf9e0004j4vxi6usaq85" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li></ul>
@@ -280,7 +340,7 @@
 <li>git commit -m “commit message” filename</li>
 <li><p>Check log</p>
 <ul>
-<li>git log<br>   commit 315eaf5b1ad6182d0dc3cd07fdc02dfd36ca6584 (HEAD -&gt; master)<br>Author: test_pro <a href="mailto:&#x74;&#x65;&#x73;&#116;&#95;&#112;&#114;&#111;&#64;&#116;&#101;&#x73;&#x74;&#x2e;&#x63;&#111;&#109;" target="_blank" rel="noopener">&#x74;&#x65;&#x73;&#116;&#95;&#112;&#114;&#111;&#64;&#116;&#101;&#x73;&#x74;&#x2e;&#x63;&#111;&#109;</a><br>Date:   Thu May 2 08:12:06 2019 +0800</li>
+<li>git log<br>   commit 315eaf5b1ad6182d0dc3cd07fdc02dfd36ca6584 (HEAD -&gt; master)<br>Author: test_pro <a href="mailto:&#x74;&#x65;&#x73;&#116;&#x5f;&#x70;&#x72;&#x6f;&#x40;&#x74;&#101;&#x73;&#116;&#46;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x74;&#x65;&#x73;&#116;&#x5f;&#x70;&#x72;&#x6f;&#x40;&#x74;&#101;&#x73;&#116;&#46;&#99;&#x6f;&#109;</a><br>Date:   Thu May 2 08:12:06 2019 +0800</li>
 </ul>
 <p>My first commit</p>
 <ul>
@@ -407,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/git/" data-id="cjvzcdyew00322gvx6q5iozhg" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/git/" data-id="cjw4ovfev002qj4vx5hri6md5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li></ul>
@@ -468,7 +528,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol3/" data-id="cjvzcdyfd00392gvxwzs3nfw1" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol3/" data-id="cjw4ovfff0033j4vxdl2dcat3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -517,94 +577,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjvzcdydg002m2gvxapjfdqc2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-httpProtocol" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/29/httpProtocol/" class="article-date">
-  <time datetime="2019-04-28T23:08:53.000Z" itemprop="datePublished">2019-04-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/29/httpProtocol/">HTTP-Protocol概要</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="简单例子"><a href="#简单例子" class="headerlink" title="简单例子"></a>简单例子</h4><p>输入URL打开网页<br>AJAX获取数据<br>img标签加载图片</p>
-<p>Cache-Control<br>一般用法： max-age=100 对静态资源缓存100s<br>其他方法：</p>
-<ol>
-<li>设置Public,private可以控制在客户端或者代理服务端缓存</li>
-<li>must-revalidate 缓存过期后，需要在代理服务端验证通过后才可以继续使用缓存。</li>
-<li>no-cache, no-store是否设置使用缓存</li>
-</ol>
-<p>缓存验证：</p>
-<ol>
-<li>last-modified 配合if-modified-since</li>
-<li>etag配合if-none-match</li>
-</ol>
-<p>HTTP的header</p>
-<ol>
-<li>Content-Type、Content-Encoding等用来约束数据类型</li>
-<li>Cookie保持会话信息</li>
-<li>CORS实现跨域并保持安全性限制</li>
-</ol>
-<p>浏览器输入URL后HTTP请求返回的完整过程：</p>
-<ol>
-<li>startTime开始时间&gt;redirectStart(开始跳转)&gt;Redirect跳转&gt;redirectEnd</li>
-<li>fetchStart(fetch开始)&gt;App cache</li>
-<li>domianLookupStart域名解析开始&gt;DNS开始查找&gt;domianLookupEnd域名解析结束</li>
-<li>connectStart开始创建链接&gt;TCP 创建链接(secureConnectStart 开始创建安全链接)&gt;connectEnd创建链接结束</li>
-<li>requestStart开始发送请求&gt;Request 发送请求</li>
-<li>responseStart开始接收返回&gt;Response接收响应&gt;responseEnd接收返回结束</li>
-</ol>
-<h4 id="5层网络模型"><a href="#5层网络模型" class="headerlink" title="5层网络模型"></a>5层网络模型</h4><p>物理层： 定义设备如何传输数据<br>数据链路层：通信的实体间建立数据链路连接<br>网络层： 为数据在节点之间传输创建逻辑链路<br>传输层 TCP, UDP： </p>
-<ol>
-<li>为用户提供可靠的端到端（End-to-End）服务</li>
-<li>传输层向高层屏蔽了下层数据通信的细节<br>应用层 HTTP,FTP：</li>
-<li>为应用软件提供了很多服务</li>
-<li>构建于TCP 协议之上</li>
-<li>屏蔽网络传输相关细节</li>
-</ol>
-<h4 id="HTTP1-1"><a href="#HTTP1-1" class="headerlink" title="HTTP1.1"></a>HTTP1.1</h4><p>数据以字符串传输<br>持久连接<br>pipeline:同一个连接多个请求<br>服务端是按顺序返回（串行）<br>增加host 和一些其他命令：同一台物理服务器可以跑多个web服务（应用在集群中）<br>占用带宽比较多</p>
-<h4 id="HTTP2"><a href="#HTTP2" class="headerlink" title="HTTP2"></a>HTTP2</h4><p>数据以二进制传输<br>同一个连接里面发送多个请求不再需要按照顺序来<br>头信息压缩（可减少带宽占用）以及推送等提高效率的功能<br>HTTP2 和CSS，js 发送时并行的</p>
-<h4 id="HTTP-三次握手"><a href="#HTTP-三次握手" class="headerlink" title="HTTP 三次握手"></a>HTTP 三次握手</h4><p>需要创建TCP connector<br>TCP连接上可以发送多个请求</p>
-<ol>
-<li>HTTP1.0中TCP 在请求创建时创建，等到请求发送响应后，TCP 连接就会关闭</li>
-<li>HTTP1.1的连接可以通过声明一直保持<br>发送时可以并行<br>服务器返回<br>三次握手会有开销</li>
-<li>HTTP2中TCP连接是可以并发的，对于同一个服务器发起网页连接的时候，只需要一个TCP连接</li>
-</ol>
-<p>三次握手时序图<br>Client(发送SYN=1, Seq=X)&gt;Server<br>Client&lt;Server(发送SYN=1,ACK=X+1 Seq=Y)<br>Client(发ACK=Y+1 Seq=Z)&gt;Server</p>
-<p>数据包查看：Wireshark</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol/" data-id="cjvzcdydz002u2gvxn8sbl5su" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/29/httpProtocol2/" data-id="cjw4ovff4002yj4vx07xfi1xt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li></ul>
@@ -673,6 +646,10 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/26/Jmeter7/">Jmeter7</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
           </li>
         
@@ -686,10 +663,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/05/13/Jmeter4/">Jmeter4</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
           </li>
         
       </ul>

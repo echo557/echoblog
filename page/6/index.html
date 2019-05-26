@@ -62,6 +62,104 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/17/python5/" class="article-date">
+  <time datetime="2019-04-17T01:17:55.000Z" itemprop="datePublished">2019-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/17/python5/">unitest</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>unittest的学习</p>
+<p>assert() python所提供的方法， 第一份参数和第二进行比较，如果返回是true,则pass</p>
+<h4 id="unittest使用"><a href="#unittest使用" class="headerlink" title="unittest使用"></a>unittest使用</h4><p>test.py<br>import unittest<br>from comm.webCustomer.count import Count</p>
+<p>class TestMethod(unittest.TestCase):<br>    def setUp(self):<br>        print(“test case start”)</p>
+<pre><code>def tearDown(self):
+    print(&quot;test case end&quot;)
+
+def test_add1(self):
+    j = Count(2, 4)
+    add = j.add()
+    self.assertEqual(add, 7)
+
+def test_add2(self):
+    j = Count(2, 4)   
+    add = j.add()
+    self.assertEqual(add, 6)
+</code></pre><p>if <strong>name</strong>==”<strong>main</strong>“:<br>    unittest.main()</p>
+<p>调用实现的时候，还可以使用以下方法：</p>
+<pre><code>suite = unittest.TestSuite()
+suite.addTest(TestMethod(&quot;test_add1&quot;))
+suite.addTest(TestMethod(&quot;test_add2&quot;))
+runner = unittest.TextTestRunner()
+runner.run(suite)
+</code></pre><p>####　断言方法<br>assertEqual(a,b) 检查 a==b<br>assertNotEqual(a,b)    检查 a!=b<br>assertTrue(x)  检查bool(x) is True<br>assertFalse(x)   检查bool(x) is False<br>assertIs(a,b)  a is b<br>assertIsNot(a,b) a is not b<br>assertIsNotNone(x) x is none<br>assertIn(a,b) a in b<br>assertNotIn(a,b) a not in b<br>assertIsInstance(a,b) isinstance(a,b)<br>assertNotIsInstance(a,b)  not isinstance(a,b)</p>
+<p>使用方法：<br>assertEqual(first,second,msg=None)<br>判断第一个参数和第二个参数是否相等，如果不相等则测试失败。 msg是可选参数，用于定义测试失败时打印的信息。</p>
+<p>共同的测试类可以进行复用</p>
+<p>有多个类就需要建不同的文件</p>
+<h4 id="多个suite一起测试"><a href="#多个suite一起测试" class="headerlink" title="多个suite一起测试"></a>多个suite一起测试</h4><p>方法一：</p>
+<ol>
+<li>新建一个文件py 文件，导入testsuite包</li>
+<li>构建如下代码：<br>import unittest<br>from comm.webCustomer import webCustomer</li>
+</ol>
+<p>suite = unittest.TestSuite()<br>suite.addTest(webCustomer.TestMethod(“test_add1”))<br>suite.addTest(webCustomer.TestMethod(“test_add2”))<br>if <strong>name</strong>==”<strong>main</strong>“:<br>    runner = unittest.TextTestRunner()<br>    runner.run(suite)</p>
+<p>方法二：<br>使用discover的方法，discover 可以匹配到测试用例的测试套件<br>import unittest</p>
+<p>testunit = unittest.TestSuite()<br>test_dir = ‘D:\code\AUT\comm\webCustomer’<br>discover = unittest.defaultTestLoader.discover(test_dir,<br>                                               pattern=’test*.py’,<br>                                               top_level_dir=None)</p>
+<p>if <strong>name</strong>==”<strong>main</strong>“:<br>    runner = unittest.TextTestRunner()<br>    runner.run(discover)</p>
+<h4 id="测试用例归类"><a href="#测试用例归类" class="headerlink" title="测试用例归类"></a>测试用例归类</h4><p>注意点：</p>
+<ol>
+<li>需要以test 开头</li>
+<li>可以以不同的测试功能来进行分类</li>
+<li>可以参考功能测试的分类方法</li>
+</ol>
+<p>discover方法找的是所给目录下的匹配条件<br>是按照ascii🐴的顺序来找测试用例的<br>unittest.main() 也是按照ascii码来文件的</p>
+<h4 id="跳过测试和预期失败"><a href="#跳过测试和预期失败" class="headerlink" title="跳过测试和预期失败"></a>跳过测试和预期失败</h4><ol>
+<li>unitest.skip(reason) 无条件跳过装饰的测试，说明跳过测试的原因</li>
+<li>unitest.skipIf(condition,reason) 条件为真，跳过</li>
+<li>unitest.skipUnless(condition,reason) 除非条件为真，跳过</li>
+<li>unitest.exceptedFailure() 测试标记失败，不管结果是否真的失败，标记为失败</li>
+</ol>
+<h4 id="fixture"><a href="#fixture" class="headerlink" title="fixture"></a>fixture</h4><p>三个层级：</p>
+<ol>
+<li>模块 setUpModule()/tearDownModule()</li>
+<li>类 setUpClass()/tearDownClass()</li>
+<li>用例 setUp()/tearDown()</li>
+</ol>
+<p>####　总结<br>selenium　IDE可以帮助我们写单元测试脚本</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/17/python5/" data-id="cjw4ovfgt0043j4vxk2nkhydc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-python4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/15/python4/" class="article-date">
@@ -105,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjvzcdygk00402gvxfsott65p" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/15/python4/" data-id="cjw4ovfgr0041j4vxu5a25pm5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -216,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjvzcdygh003v2gvxjzoj9qe0" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python3/" data-id="cjw4ovfgo003xj4vx5262bpm0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -271,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjvzcdyga003n2gvxraaw1bpp" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/14/python2/" data-id="cjw4ovfgm003uj4vxgxjlbhn8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -329,149 +427,10 @@ return a
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjvzcdygc003q2gvxos8h52sq" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/python1/" data-id="cjw4ovfga003kj4vxdxst2w7t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-autotesting" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/12/autotesting/" class="article-date">
-  <time datetime="2019-04-12T05:12:12.000Z" itemprop="datePublished">2019-04-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/12/autotesting/">自动化框架搭建建议</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="/echoblog.github.io/2019/04/12/autotesting/自动化框架.png" alt="自动化框架"></p>
-<h2 id="手工VS自动化"><a href="#手工VS自动化" class="headerlink" title="手工VS自动化"></a>手工VS自动化</h2><h3 id="手工"><a href="#手工" class="headerlink" title="手工"></a>手工</h3><ul>
-<li>无法做到覆盖所有代码路径</li>
-<li>机械性、重复性</li>
-<li>无法短时间完成大量用例</li>
-<li><p>特点</p>
-<ul>
-<li>具有较好的异常处理能力</li>
-<li>基于测试用例，制造各种不同的逻辑判断</li>
-<li>步步跟踪，可以细致定位问题</li>
-<li>主要用来发现功能缺陷</li>
-</ul>
-</li>
-</ul>
-<h3 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h3><ul>
-<li>缩短测试周期</li>
-<li>提高效率，节约成本</li>
-<li>增加稳定性</li>
-<li><p>特点</p>
-<ul>
-<li>执行对象是脚本，任何一个判断都需要编码定义</li>
-<li>用例步骤之间关联性强</li>
-<li>保证产品主体功能正确和完整，提高效率</li>
-<li>阶段定位：冒烟测试和回归测试</li>
-</ul>
-</li>
-<li><p>注意事项</p>
-<ul>
-<li>自动化测试覆盖部分手工用例</li>
-<li>不要选择流程太复杂的用例，考虑到脚本开发成本。可以拆成多个用例</li>
-<li>选择的用例最好可以构建成场景</li>
-<li>选择用例带有目的性</li>
-<li>选取的用例是需要重复执行的部分</li>
-<li>主体流程可以做自动化脚本，便于回归</li>
-<li>自动化用例也可以区做配置检查，数据库检查</li>
-</ul>
-</li>
-<li><p>测试类型</p>
-<ul>
-<li>测试静态内容</li>
-<li><p>测试链接</p>
-<ul>
-<li>各个链接和验证预期页面是否存在</li>
-<li>链接改变/文件不时重定向 </li>
-</ul>
-</li>
-<li><p>功能测试</p>
-<ul>
-<li>登陆</li>
-<li>注册网站</li>
-<li>用户账户操作</li>
-<li>账户设置变化</li>
-<li>复杂数据检索操作</li>
-</ul>
-</li>
-<li><p>测试动态元素</p>
-</li>
-<li>Ajax的测试</li>
-</ul>
-</li>
-<li><p>原则</p>
-<ul>
-<li>一个用例为一个完整的场景，从用户登陆系统到最终退出并关闭浏览器</li>
-<li>一个测试用例只验证一个功能点</li>
-<li>尽量少可能编写逆向逻辑用例</li>
-<li>用例与用例之间尽量避免产生依赖</li>
-<li>一个用例测试完成后对测试场景还原</li>
-</ul>
-</li>
-</ul>
-<h2 id="工具-框架特征"><a href="#工具-框架特征" class="headerlink" title="工具/框架特征"></a>工具/框架特征</h2><h3 id="支持脚本化语言（Scripting-Language）"><a href="#支持脚本化语言（Scripting-Language）" class="headerlink" title="支持脚本化语言（Scripting Language）"></a>支持脚本化语言（Scripting Language）</h3><h3 id="对程序界面中对象得识别能力"><a href="#对程序界面中对象得识别能力" class="headerlink" title="对程序界面中对象得识别能力"></a>对程序界面中对象得识别能力</h3><h3 id="支持函数得可重用"><a href="#支持函数得可重用" class="headerlink" title="支持函数得可重用"></a>支持函数得可重用</h3><h3 id="支持外部函数库"><a href="#支持外部函数库" class="headerlink" title="支持外部函数库"></a>支持外部函数库</h3><h3 id="抽象层-将程序界面中得对象实体映射成逻辑对象"><a href="#抽象层-将程序界面中得对象实体映射成逻辑对象" class="headerlink" title="抽象层-将程序界面中得对象实体映射成逻辑对象"></a>抽象层-将程序界面中得对象实体映射成逻辑对象</h3><h3 id="支持数据驱动测试（Data-Driven-Test）"><a href="#支持数据驱动测试（Data-Driven-Test）" class="headerlink" title="支持数据驱动测试（Data-Driven Test）"></a>支持数据驱动测试（Data-Driven Test）</h3><h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><h3 id="调试器（Debugger）"><a href="#调试器（Debugger）" class="headerlink" title="调试器（Debugger）"></a>调试器（Debugger）</h3><h3 id="源代码管理"><a href="#源代码管理" class="headerlink" title="源代码管理"></a>源代码管理</h3><h3 id="支持脚本的命令行（Command-Line）方式"><a href="#支持脚本的命令行（Command-Line）方式" class="headerlink" title="支持脚本的命令行（Command Line）方式"></a>支持脚本的命令行（Command Line）方式</h3><h2 id="基本原则"><a href="#基本原则" class="headerlink" title="基本原则"></a>基本原则</h2><h3 id="通用性"><a href="#通用性" class="headerlink" title="通用性"></a>通用性</h3><ul>
-<li><p>分层</p>
-<ul>
-<li>Case</li>
-<li>元素处理</li>
-<li>底层</li>
-<li>通用</li>
-<li>日志</li>
-<li>报告</li>
-<li>用途</li>
-<li>数据层</li>
-</ul>
-</li>
-<li><p>驱动式</p>
-</li>
-</ul>
-<h3 id="易维护性"><a href="#易维护性" class="headerlink" title="易维护性"></a>易维护性</h3><h3 id="定时处理"><a href="#定时处理" class="headerlink" title="定时处理"></a>定时处理</h3><h3 id="持续集成"><a href="#持续集成" class="headerlink" title="持续集成"></a>持续集成</h3><h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><h3 id="测试结果"><a href="#测试结果" class="headerlink" title="测试结果"></a>测试结果</h3><h2 id="框架驱动方式"><a href="#框架驱动方式" class="headerlink" title="框架驱动方式"></a>框架驱动方式</h2><h3 id="数据驱动"><a href="#数据驱动" class="headerlink" title="数据驱动"></a>数据驱动</h3><h3 id="关键字驱动"><a href="#关键字驱动" class="headerlink" title="关键字驱动"></a>关键字驱动</h3><h2 id="内部-外部框架"><a href="#内部-外部框架" class="headerlink" title="内部/外部框架"></a>内部/外部框架</h2><h3 id="内部框架"><a href="#内部框架" class="headerlink" title="内部框架"></a>内部框架</h3><ul>
-<li><p>即分层框架，目的在于更好的优化和管理测试用例、更便捷的进行数据、元素、脚本的维护和更快速的创建新脚本</p>
-<ul>
-<li>Junit(单线程)+Webdriver+grid</li>
-<li>Testng（多线程）+Webdriver+Maven（调用，编辑）+Ant+SVN/Git+Jenkins+xslt/reportng(组件)+Mail</li>
-</ul>
-</li>
-</ul>
-<h3 id="外部框架"><a href="#外部框架" class="headerlink" title="外部框架"></a>外部框架</h3><ul>
-<li>主要指以WebDriver为核心，辅以外部第三方框架和工具，用以实现持续集成、自动部署、脚本执行、远程调用、报告优化、邮件发送等功能性框架</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/12/autotesting/" data-id="cjvzcdydq002r2gvxfq2zx5dd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
 
     </footer>
   </div>
@@ -537,6 +496,10 @@ return a
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/05/26/Jmeter7/">Jmeter7</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
           </li>
         
@@ -550,10 +513,6 @@ return a
         
           <li>
             <a href="/echoblog.github.io/2019/05/13/Jmeter4/">Jmeter4</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
           </li>
         
       </ul>
