@@ -62,6 +62,174 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-python11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/26/python11/" class="article-date">
+  <time datetime="2019-04-26T14:13:49.000Z" itemprop="datePublished">2019-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/26/python11/">appium API</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h4><h4 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h4><h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/26/python11/" data-id="cjz3cwnzb0042tsvxq2ob91vp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-InterfaceTesting" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/24/InterfaceTesting/" class="article-date">
+  <time datetime="2019-04-24T06:42:22.000Z" itemprop="datePublished">2019-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/24/InterfaceTesting/">InterfaceTesting</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接口定义： 提供一套标准，服务和规范</p>
+<p>目的： 进行评估的系统或组件是否正确地传递数据及互相正确的控制。<br>互相正确的控制。</p>
+<p>时间： 应用或者功能开发的初期检验模块间调用的正确性和友好性</p>
+<p>接口分类：</p>
+<ol>
+<li>功能： 功能间和系统间<br>特点：<br>功能间接口： 一般系统的所有模块部署在同一服务器中，并且使用同一个数据库<br>方法： 常用黑盒测试， 注意接口数据在不同模块间的走向。 尤其注意接口间的逻辑控制关系。<br>比如：销售发货时，要检查库存的可用量，如可用量不足，则不允许发货   </li>
+</ol>
+<p>系统间接口： 通常情况下，不同系统部署在不同的服务器上，不仅采用不同的数据库，而且数据库类型还有可能不同<br>方法： 采用白盒测试方法， 关注的是系统间接口的实现方式<br>如：采用何种类型的接口文件，接口文件格式，以及接口文件处理方式等 </p>
+<ol start="2">
+<li>类型： 业务接口和数据接口</li>
+</ol>
+<p>业务接口：  系统或功能接口间有业务逻辑关系。<br>特点：接口间有业务逻辑的上下游关系，有可能会涉及跨系统或模块的逻辑控制，以及反向操作<br>方法： 通常采用黑盒测试方法，注重分析业务逻辑，采用路径覆盖法进行分析。并且一定要注意正向和反向操作的测试<br>比如erp系统中，采购入库后，会生成库存入库单，影响可用量或现存量等。也可称为联机接口</p>
+<p>数据接口：接口系统没有业务逻辑的上下游关系，只有接口数据的上下游关系。<br>特点：系统间只存在数据的上下游关系，而且数据都是进行批量处理<br>方法： 通常采用白盒测试方法。关注的是数据文件格式，以及记录数及内容等是否正确，还要考虑数据是否加密的问题<br>比如企业征信系统，要通过数据交换平台获取核心系统的数据。也可称为批量接口</p>
+<ol start="3">
+<li>接口数据： 单向和双向<br>单向：数据在接口中是单向流动，但根据具体实现方式又可以分为单向推或取两种方式。数据仓库与各系统间的接口基本上都是单向接口。一方面前端系统向数据仓库推送数据，一方面后端系统又主动取数据仓库提供的数据<br>特点：不管数据是单向推或取，一般都会有一个ftp地址，存放指定数据文件，并且有定时存取的规则。可在日志中查看存取结果<br>方法：通常采用黑盒测试和白盒测试相结合的方法。着重测试数据文件格式，是否按规则存取等。</li>
+</ol>
+<p>双向： 两个系统间的接口数据既有来，又有往。<br>特点：可以将不同数据方向的接口分开分析，当作两个单向接口。但要注意来往的数据通常具有关联性<br>方法： 通常采用黑盒测试和白盒测试相结合的方法。在测试时要着重来往数据的关联性，合理设计测试数据，制定测试执行计划<br>比如综合报文处理系统与核心系统，综合报文处理系统即接收核心系统发送的数据，又要将处理结果反馈给核心系统 </p>
+<p>接口测试的原理：通过测试程序模拟客户端向服务器发送请求报文，服务器接收请求报文后对相应的报文做出处理然后再把应答报文发送给客户端，客户端接收应答报文这一过程（request→response）</p>
+<p> 接口测试的流程：类似于功能测试，需求讨论→评审需求→确定需求→产出接口定义→根据需求文档及接口定义设计测试用例（测试用例主要从业务场景，功能以及异常测试几个方面考虑）→评审用例→执行测试</p>
+<p>接口测试的价值：降低成本，提高效率。接口测试能够提供系统复杂度上升情况下的低成本高效率的解决方案。它是一个完整的体系，还包括功能测试，性能测试等</p>
+<p>接口测试的适用范围：一般用于多个系统间的交互开发，或者拥有多个子系统的应用系统开发的测试。接口测试适用于为其他系统提供服务的底层框架系统和中心服务系统。主要测试这些对外部提供的接口的正确性和稳定性。它也同样适用于上层系统中服务层接口，测试难度随层级而上升。即越往上难度越大。</p>
+<p>接口测试用例的编写：</p>
+<ol>
+<li>如何简单设计接口测试的设计用例</li>
+</ol>
+<p>A) 明确出发点： 找出软件误漏为出发点，测试用例需要紧贴此线， 更容易找到问题所在。<br>B) 明确测试点： 选择好的测试对象。 （可将这些最外层的接口根据数据的流向分为进入和流出两类，进入系统的接口实际上是我们用例的执行调用的接口。可通过参数对这些接口进行调用，模拟外部的使用；而流出的接口则是我们用例真正该验证的点。数据从哪里流出，流出的状态如何，此时系统的状态都是作为测试目的所要着重关注的部分）<br>C）确认完整的测试对象功能： 确认外部接口提供给使用这些接口的外部用户什么样的功能，外部用户真正需要的时什么样的功能予以区别。用例的设计要严格按照测试对象功能设计才是正确的用例。</p>
+<ol start="2">
+<li><p>设计（接口测试用例有哪些要求）： 结构好， 可读性高， 渗透性强</p>
+</li>
+<li><p>测试用例包括的内容： 功能点， 测试环境， 测试数据， 执行操作以及预期结果<br>a)          接口测试测试的功能点：如果一个接口功能过于复杂时，可以对接口用例进行结构划分（如根据层次，平台，功能点等等），这样用例具有更好的可读性（接口划分原则为：以接口提供的功能点的不同进行合适粒度的划分，同一功能点的用例又可根据测试环境的不同，数据的不同进行用例的填充）</p>
+</li>
+</ol>
+<p>b)         接口测试用例的环境：程序内部环境和程序所调用的外部接口的环境。</p>
+<p>c)          关于接口测试测试数据：分为两部分：接口参数数据和用例执行所需系统数据。数据的设计、准备测试用例的数据不可马虎。通过好的测试数据查找问题，能极大的提高工作效率。接口参数数据需要对每个参数根据测试接口的实际功能进行分析，在符合业务逻辑的情况下进行逻辑组合排列，不要遗漏某些边界值和错误点的数据，这样用例更容易发现问题。</p>
+<p>d)         执行操作：即对所测接口的调用。</p>
+<p>e)          预期结果：根据需求进行验证，是衡量软件是否达到预期的标准。应该着重细致，每个用例均需验证，应该避免一个用例重复做相同的验证，提高测试用例的效率。</p>
+<ol start="4">
+<li></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/InterfaceTesting/" data-id="cjz3cwnuv000atsvxhtpli4md" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-TroubleShooting3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/04/24/TroubleShooting3/" class="article-date">
+  <time datetime="2019-04-24T06:39:55.000Z" itemprop="datePublished">2019-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/04/24/TroubleShooting3/">TroubleShooting--多人收邮件不成功</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原因： python 中 是mailInfo[“to”]为逗号分隔的str类型，结果只有第一个邮件地址能收到邮件。</p>
+<p>解决方法：经过多次测试发现MIMEText()[“to”]的数据类型与sendmail(from_addrs,to_addrs,…)的to_addrs不同；前者为str类型，多个地址使用逗号分隔，后者为list类型。</p>
+<p>mailInfo = {<br>        “from”: “<a href="mailto:xxxx@xxx.com" target="_blank" rel="noopener">xxxx@xxx.com</a>“,<br>        “to”: “<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>,<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>,<a href="mailto:xxx@xxx.com" target="_blank" rel="noopener">xxx@xxx.com</a>“,<br>        “hostname”: “smtp.xxx.com”,<br>        “username”: “<a href="mailto:xxxx@xxx.com" target="_blank" rel="noopener">xxxx@xxx.com</a>“,<br>        “password”: “xxxxx”,<br>        “mailsubject”: “主题”,<br>        “mailtext”: “正文内容”,<br>        “mailencoding”: “utf-8”<br>    }<br>def sendsmtp(mailInfo):<br>    smtp = SMTP_SSL(mailInfo[“hostname”])<br>    smtp.set_debuglevel(1)<br>    smtp.ehlo(mailInfo[“hostname”])<br>    smtp.login(mailInfo[“username”], mailInfo[“password”])<br>    msg = MIMEText(mailInfo[“mailtext”], “plain”, mailInfo[“mailencoding”])<br>    msg[“Subject”] = Header(mailInfo[“mailsubject”], mailInfo[“mailencoding”])<br>    msg[“from”] = mailInfo[“from”]<br>    msg[“to”] = mailInfo[“to”]<br>    smtp.sendmail(mailInfo[“from”], mailInfo[“to”].split(‘,’), msg.as_string())<br>    smtp.quit()</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/TroubleShooting3/" data-id="cjz3cwnyg002vtsvx03s3qtfl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-viewquestions" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/04/24/viewquestions/" class="article-date">
@@ -158,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/viewquestions/" data-id="cjw51395h0077k0vxl7cwcbfk" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/24/viewquestions/" data-id="cjz3cwo0a005itsvxvelg22j4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
@@ -207,191 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/23/python10/" data-id="cjw513937003kk0vxuya3ej99" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/22/java1/" class="article-date">
-  <time datetime="2019-04-22T12:25:36.000Z" itemprop="datePublished">2019-04-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/22/java1/">并发原理和实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p>支付问题： 用户》交易平台》第三方支付</p>
-<p>处理时长会导致请求被阻塞，以及系统支援的开销</p>
-<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>使用多线程<br>怎样实现多线程？<br>内部和第三方实现多线程</p>
-<p>如果构建：<br>用户》交易平台》队列》线程》第三方支付<br>使用队列去做，异步轮询队列中的数据</p>
-<ol>
-<li>构建阻塞队列</li>
-<li>加线程池</li>
-<li>构建新的第三方支付服务</li>
-<li>提交payment 请求请求数据</li>
-<li>通过队列拿到请求，进行处理。阻塞获取队列中的</li>
-</ol>
-<h4 id="那些场景会使用到"><a href="#那些场景会使用到" class="headerlink" title="那些场景会使用到"></a>那些场景会使用到</h4><p>多线程能够合理的利用CPU资源区实现任务的并行处理，提升程序的性能处理</p>
-<p>IO 的处理： 网络IO和文件IO<br>IO 性能提升方法：<br>TOMCAT(BIO)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/22/java1/" data-id="cjw51392z0037k0vxuubmi4t9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python9" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/21/python9/" class="article-date">
-  <time datetime="2019-04-21T14:22:00.000Z" itemprop="datePublished">2019-04-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/21/python9/">Page-Object设计模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ol>
-<li>减少代码重复</li>
-<li>提高测试用例的可读性</li>
-<li>提高测试用例的可维护性，特别是针对UI 变化频繁的项目</li>
-</ol>
-<h4 id="怎样设计"><a href="#怎样设计" class="headerlink" title="怎样设计"></a>怎样设计</h4><ol>
-<li>构造page类</li>
-<li>创建项目相关的页面类</li>
-<li>创建测试用例函数</li>
-<li>创建main函数来执行用例，以及传参</li>
-</ol>
-<p>note: 为了参数分离，传参的部分也可以放在相关的配置文件上</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python9/" data-id="cjw51393r004bk0vxkffcnqaa" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-python8" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/04/21/python8/" class="article-date">
-  <time datetime="2019-04-21T10:31:46.000Z" itemprop="datePublished">2019-04-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Python/">Python</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/04/21/python8/">Python Multiple Threading</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="多线程技术"><a href="#多线程技术" class="headerlink" title="多线程技术"></a>多线程技术</h4><ol>
-<li>thread 提供了低级别的、原始的线程以及一个简单的锁</li>
-<li>threading 基于Java的线性涉及的. 锁（lock）和条件变量（condition）再JAVA 中是对象的基本行为（每一个对象都自带了锁和条件变量），而在Python中则是独立的对象。</li>
-</ol>
-<p>我们应该避免thread 模块，因为它不支持守护线程。<br>threading支持守护线程。</p>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>Example 1:<br>from time import sleep,ctime<br>import threading</p>
-<p>def music(func,loop):<br>    for i in range(loop):<br>        print(“I was listen to %s! %s” %(func,ctime()))<br>        sleep(2)</p>
-<p>def movie(func,loop):<br>    for i in range(loop):<br>        print(“I was watching at %s! %s” %(func,ctime()))<br>        sleep(2)</p>
-<p>#create threads lists<br>threads =[]</p>
-<p>#create Thread() by threading<br>t1 = threading.Thread(target=music, args=(‘Listen’,2))<br>threads.append(t1)</p>
-<p>t2 = threading.Thread(target=movie, args=(‘watching good movie’,2))<br>threads.append(t2)</p>
-<p>if <strong>name</strong>==”<strong>main</strong>“:</p>
-<p>#start threads<br>    for t in threads:<br>        t.start()</p>
-<p>#keep threads<br>    for t in threads:<br>        t.join()</p>
-<pre><code>print(&quot;all ends: %s&quot; %ctime())
-</code></pre><p>Example 2:<br>当线程很多的时候如何解决问题<br>from time import sleep,ctime<br>import threading</p>
-<p>def super_player(file_,time):<br>    for i in range(2):<br>        print(“I was listen to %s! %s” %(file_,ctime()))<br>        sleep(time)</p>
-<p>lists={‘Test1’:3,’Test2’:5,’Test3’:6}</p>
-<p>threads =[]<br>files = range(len(lists))<br>for file_,time in lists.items():<br>    t = threading.Thread(target=super_player, args=(file_,time))<br>    threads.append(t)</p>
-<p>if <strong>name</strong>==”<strong>main</strong>“:<br>    for t in threads:<br>        t.start()</p>
-<pre><code>for t in threads:
-    t.join()
-
-print(&quot;all ends: %s&quot; %ctime())
-</code></pre><p>当然，我们还可以自定义线程<br>class MyThread(threading.Thread):<br>    def <strong>init</strong>(self, func, args,name=’’):<br>        threading.Thread.<strong>init</strong>(self)<br>        self.func = func<br>        self.args = args<br>        self.name = name</p>
-<pre><code>def run(self):
-    self.func(*self.args)
-</code></pre><h4 id="多线程技术multiprocessing"><a href="#多线程技术multiprocessing" class="headerlink" title="多线程技术multiprocessing"></a>多线程技术multiprocessing</h4><p>multiprocessing提供了本地和远程的并发性，有效地沟通全局解释锁(Global Interceptor Lock, GIL)来使用进程。<br>multiprocessing 可以利用硬件地多处理器来进行工作。支持Unix 和 Windows</p>
-<p>修改上面地例子，将threading模块中地Thread方法替换为multiprocessing 模块地Process 即可</p>
-<h4 id="Pipe-和Queue"><a href="#Pipe-和Queue" class="headerlink" title="Pipe 和Queue"></a>Pipe 和Queue</h4><p>multiprocessing提供IPC（进程间通信），效率更高。<br>优先考虑Pipe和Queue，避免使用Lock/Event/Semaphore/Condition 等同步方式（因为他们占据的不是用户进程的资料）</p>
-<h4 id="应用在自动化测试"><a href="#应用在自动化测试" class="headerlink" title="应用在自动化测试"></a>应用在自动化测试</h4><p>多线程执行测试用例<br>比如：<br>使用不同的浏览器去搜索不同的内容，并返回结果</p>
-<p>多线程分布式执行测试用例<br>配合Selenium Grid 来进行使用    </p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>多线程测试可以用在性能测试中，可以结合性能测试的方向来进行思考</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/21/python8/" data-id="cjw51393q0049k0vxrhbxmtdh" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/04/23/python10/" data-id="cjz3cwnzg004atsvxi721zohr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li></ul>
@@ -418,7 +402,7 @@ print(&quot;all ends: %s&quot; %ctime())
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Lanuage/">Lanuage</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/ProjectManagement/">ProjectManagement</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -428,7 +412,7 @@ print(&quot;all ends: %s&quot; %ctime())
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/PMP/">PMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/js/">js</a></li></ul>
     </div>
   </div>
 
@@ -438,7 +422,7 @@ print(&quot;all ends: %s&quot; %ctime())
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/PMP/" style="font-size: 10px;">PMP</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a> <a href="/echoblog.github.io/tags/js/" style="font-size: 10px;">js</a>
     </div>
   </div>
 
@@ -447,7 +431,7 @@ print(&quot;all ends: %s&quot; %ctime())
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
     </div>
   </div>
 
@@ -460,23 +444,23 @@ print(&quot;all ends: %s&quot; %ctime())
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/08/09/ProjectLeadership/">ProjectLeadership</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/07/07/MYSQL-Study9/">MYSQL-Study9</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/06/03/Javascript1/">Javascript1</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/05/26/Jmeter7/">Jmeter7 - 扩展插件</a>
           </li>
         
           <li>
             <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/18/Jmeter5/">Jmeter5</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/13/Jmeter-Interface/">Jmeter_Interface</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/13/Jmeter4/">Jmeter4</a>
           </li>
         
       </ul>
