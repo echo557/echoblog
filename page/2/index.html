@@ -62,6 +62,116 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Jmeter7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/05/26/Jmeter7/" class="article-date">
+  <time datetime="2019-05-26T08:36:26.000Z" itemprop="datePublished">2019-05-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/05/26/Jmeter7/">Jmeter7 - 扩展插件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTTP Authorization Manager<br>HTTP 协议采用的是Base64校验加密用户名密码</p>
+<p>监控tomcat<br>使用tomcat Probe – Lambda Probe</p>
+<p>Jmeter-plugins.org</p>
+<p>Jmeter 分布式<br>需要注意：</p>
+<ol>
+<li>注意控制台的负载</li>
+<li>所有负载生成器上安装相同版本的Jmeter</li>
+<li>所有负载生成器上安装相同版本的Java</li>
+<li>防火墙和杀毒软件</li>
+<li>确保所有机器在同一子网</li>
+</ol>
+<p><img src="/echoblog.github.io/2019/05/26/Jmeter7/1.png" alt="图一"><br><img src="/echoblog.github.io/2019/05/26/Jmeter7/2.png" alt="图二"><br><img src="/echoblog.github.io/2019/05/26/Jmeter7/3.png" alt="图三"><br><img src="/echoblog.github.io/2019/05/26/Jmeter7/4.png" alt="图四"><br><img src="/echoblog.github.io/2019/05/26/Jmeter7/5.png" alt="图五"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/26/Jmeter7/" data-id="ck1j8sfqi000tikvxmzs3ul8h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Jmeter6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2019/05/20/Jmeter6/" class="article-date">
+  <time datetime="2019-05-20T14:40:17.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>可以直接去应用在元件中</p>
+<h4 id="Bean-Shell-Sampler"><a href="#Bean-Shell-Sampler" class="headerlink" title="Bean Shell Sampler"></a>Bean Shell Sampler</h4><p><img src="/echoblog.github.io/2019/05/20/Jmeter6/1.png" alt="图一"></p>
+<p>执行JAVA 标准和表达式</p>
+<p><a href="http://www.beanshell.org/" target="_blank" rel="noopener">http://www.beanshell.org/</a></p>
+<p>代码1：<br>vars.put(“jmeter”,”test”);<br>返回：<br>JMeterVariables:<br>JMeterThread.last_sample_ok=true<br>JMeterThread.pack=org.apache.jmeter.threads.SamplePackage@3eebd1<br>START.HMS=211140<br>START.MS=1558444300278<br>START.YMD=20190521<br>TESTSTART.MS=1558444652239<br><strong>jm</strong>Thread Group__idx=0<br>jmeter=test</p>
+<p>代码2：<br>public static String go()<br>{<br>    vars.put(“jmeter”,”12345”);<br>    vars.put(“tom”,”cat”);<br>    return “1”;<br>}</p>
+<p>go()    </p>
+<p>代码3：<br>addClassPath(“”)</p>
+<p>可以调用本地的java包</p>
+<p><img src="/echoblog.github.io/2019/05/20/Jmeter6/6.png" alt="图六"><br><img src="/echoblog.github.io/2019/05/20/Jmeter6/7.png" alt="图七"></p>
+<h4 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h4><p>不同监听器通过不同的方式展示服务器响应信息，但是他们都将同样的原始数据记录到某个输出文件中。</p>
+<p>CSV和XML两种格式，其中CSV格式的磁盘占用比较小。<br>使用Jmeter注意作用域，仅仅对关心的采样器采集。<br>要保存最完整的结果，请使用XML格式保存。</p>
+<p>相关的属性文件：jmeter.save.saveservice.output_format</p>
+<p>Tika download<br><img src="/echoblog.github.io/2019/05/20/Jmeter6/8.png" alt="图八"><br><img src="/echoblog.github.io/2019/05/20/Jmeter6/9.png" alt="图九"><br><img src="/echoblog.github.io/2019/05/20/Jmeter6/10.png" alt="图十"><br><img src="/echoblog.github.io/2019/05/20/Jmeter6/11.png" alt="图十一"><br><img src="/echoblog.github.io/2019/05/20/Jmeter6/12.png" alt="图十二"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/20/Jmeter6/" data-id="ck1j8sfqf000rikvxi400hpgn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Jmeter5" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2019/05/18/Jmeter5/" class="article-date">
@@ -108,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/18/Jmeter5/" data-id="cjz3cwnv1000ftsvxih4c3twh" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/18/Jmeter5/" data-id="ck1j8sfqc000nikvx4u7p0ymw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
@@ -154,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter-Interface/" data-id="cjz3cwnue0001tsvx40apmnom" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter-Interface/" data-id="ck1j8sfpu0005ikvxmwl4tbml" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li></ul>
@@ -219,170 +329,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter4/" data-id="cjz3cwnv4000htsvxl95y8n93" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/13/Jmeter4/" data-id="ck1j8sfqa000likvxv6bfqhpc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fiddler" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/05/06/fiddler/" class="article-date">
-  <time datetime="2019-05-06T14:05:19.000Z" itemprop="datePublished">2019-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/05/06/fiddler/">fiddler</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>Fiddler 作为可以修改系统代理， Fiddler 可以自动修改IE 和Chrome的代理</p>
-<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><ol>
-<li>了解http协议</li>
-<li>接口测试，自动化的接口测试</li>
-<li>Fiddlers 抓包可以判断时前端还是后端BUG</li>
-</ol>
-<p>HTTP包：<br>–请求报文<br>   请求行<br>   请求头<br>   请求体<br>–响应报文<br>   状态行<br>   响应头<br>   响应体</p>
-<p>Fiddler 可以通过装插件的方式导出Jmeter的文件，以便导出之后来做Jmeter的接口测试。</p>
-<p>录制Jmeter文件的方法：<br>Badboy<br>Fiddler<br>Jmeter</p>
-<p>AutoResponder更改可以篡改某些信息。<br>使用场景：<br>对测试<br>–mock平台，可以模拟响应， 若开发没有完成接口开发的时候<br>–js可以进行前端页面的动态编程。 可以拦截服务器的脚本文件到本地》调试</p>
-<p>如果做：<br>拦截后到Auto Responder,<br>enable rules<br>unmatched requests passthrough</p>
-<p>Composer：可以发包功能,然后 execute去测试接口<br>类似的如： postman, jmeter</p>
-<p>App 抓包</p>
-<ol>
-<li>手机设置代理</li>
-<li>同一个网络</li>
-</ol>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>1.fiddler抓包判断是前端还是后端bug，通过有没有发包来判断。该应用场景较少。<br>result<br>200：接口请求成功<br>protocol：协议<br>Host：主机地址<br>URL：具体请求的哪一个资源<br>Body：请求数据时，发送的内容的大小<br>Content-Type:内容的类型<br>Caching：<br>2：开发不规范，没有接口文件的情况下，可导出jmeter文件，供jmeter做接口测试使用<br>3：autoResponseder：拦截服务器的脚本文件到本地-&gt;修改调试<br>4：Composer：可做接口测试<br>5：抓APP数据包：<br>a)将手机投屏到电脑（itools可以做到）<br>b)手机要设置代理，需安装证书<br>c)在同一个网络<br>d)fiddler要做特殊设置：<br>tools-options-&gt;https 全勾选<br>connection-&gt;Allow remote computers to connect<br>e)注意关闭过滤器Filters</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/fiddler/" data-id="cjz3cwnyq0039tsvxsttu7shr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Jenkins" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2019/05/06/Jenkins/" class="article-date">
-  <time datetime="2019-05-06T13:16:04.000Z" itemprop="datePublished">2019-05-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/Tools/">Tools</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2019/05/06/Jenkins/">Jenkins</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Theory"><a href="#Theory" class="headerlink" title="Theory"></a>Theory</h2><h3 id="Phase"><a href="#Phase" class="headerlink" title="Phase"></a>Phase</h3><ul>
-<li>Continuous Integration</li>
-<li>Continuous Deployment</li>
-<li>Continuous Delivery</li>
-</ul>
-<h3 id="Advantage"><a href="#Advantage" class="headerlink" title="Advantage"></a>Advantage</h3><ul>
-<li>Reduce risk</li>
-<li>Reduce reproduction</li>
-<li>No place limitation</li>
-<li>Enhance the visibility of projects</li>
-<li>Increase confidence</li>
-</ul>
-<h3 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h3><ul>
-<li><p>Jenkins</p>
-<ul>
-<li>Github </li>
-<li>Subversion</li>
-</ul>
-</li>
-<li><p>Hudson</p>
-<ul>
-<li>Github </li>
-<li>Subversion</li>
-</ul>
-</li>
-</ul>
-<h3 id="Web-Project-Deploy"><a href="#Web-Project-Deploy" class="headerlink" title="Web Project Deploy"></a>Web Project Deploy</h3><ul>
-<li>Manual:  pic1</li>
-<li>Auto:  pic2</li>
-</ul>
-<h2 id="Jenkins-SVN"><a href="#Jenkins-SVN" class="headerlink" title="Jenkins + SVN"></a>Jenkins + SVN</h2><h3 id="System"><a href="#System" class="headerlink" title="System"></a>System</h3><ul>
-<li>Install Linux system on virtual machine</li>
-<li>Version control child system</li>
-<li><p>CI child system</p>
-<ul>
-<li>Put jenkins.war  under Tomcat /webapps</li>
-<li>Open Tomcat /server.xml and update URL address encoding setting:   URIEncoding = “UTF-8”</li>
-</ul>
-</li>
-<li><p>Release child system(Tomcat)</p>
-<ul>
-<li>Path: /opt/tomcat/conf/tomcat-users.xml</li>
-<li>role settings</li>
-<li>username=””  password=””</li>
-</ul>
-</li>
-</ul>
-<h3 id="Jenkins-configure"><a href="#Jenkins-configure" class="headerlink" title="Jenkins configure"></a>Jenkins configure</h3><ul>
-<li>Global safety configuration</li>
-<li><p>Global tools configuration</p>
-<ul>
-<li>Git/Maven</li>
-</ul>
-</li>
-<li><p>Manage Plugin</p>
-</li>
-</ul>
-<h3 id="curl-command"><a href="#curl-command" class="headerlink" title="curl command"></a>curl command</h3><h2 id="Jenkins-Github"><a href="#Jenkins-Github" class="headerlink" title="Jenkins+Github"></a>Jenkins+Github</h2><p><em>XMind: ZEN - Trial Version</em></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/05/06/Jenkins/" data-id="cjz3cwnup0006tsvxby4nx84w" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li></ul>
 
     </footer>
   </div>
@@ -395,7 +345,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/12/">12</a><a class="extend next" rel="next" href="/echoblog.github.io/page/3/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="page-number current">2</span><a class="page-number" href="/echoblog.github.io/page/3/">3</a><a class="page-number" href="/echoblog.github.io/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/13/">13</a><a class="extend next" rel="next" href="/echoblog.github.io/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -406,7 +356,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Lanuage/">Lanuage</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/ProjectManagement/">ProjectManagement</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Lanuage/">Lanuage</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/ProjectManagement/">ProjectManagement</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Strategy/">Strategy</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -416,7 +366,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/PMP/">PMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/js/">js</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Integration/">Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/PMP/">PMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/js/">js</a></li></ul>
     </div>
   </div>
 
@@ -426,7 +376,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/PMP/" style="font-size: 10px;">PMP</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a> <a href="/echoblog.github.io/tags/js/" style="font-size: 10px;">js</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Integration/" style="font-size: 10px;">Integration</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/PMP/" style="font-size: 10px;">PMP</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a> <a href="/echoblog.github.io/tags/js/" style="font-size: 10px;">js</a>
     </div>
   </div>
 
@@ -435,7 +385,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
     </div>
   </div>
 
@@ -448,6 +398,14 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/09/25/git-week1/">git_week1</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/08/20/IntegrationStratergy/">IntegrationStrategy</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/08/09/ProjectLeadership/">ProjectLeadership</a>
           </li>
         
@@ -457,14 +415,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/06/03/Javascript1/">Javascript1</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/26/Jmeter7/">Jmeter7 - 扩展插件</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
           </li>
         
       </ul>

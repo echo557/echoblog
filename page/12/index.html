@@ -62,6 +62,149 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-MYSQL-Study1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2018/12/15/MYSQL-Study1/" class="article-date">
+  <time datetime="2018-12-15T01:40:11.000Z" itemprop="datePublished">2018-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2018/12/15/MYSQL-Study1/">MYSQL Study Framework - Basic logical</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Framework</p>
+<p>In general, MYSQL include Server Layer and Storage Engine</p>
+<p><img src="/echoblog.github.io/2018/12/15/MYSQL-Study1/framework.png" alt="MYSQL-Study1"></p>
+<p>Server Layer including Connectors, Query Cache, Analyzer, Optimizer, Actuator etc, which contain<br>most of the core service function, and all the built-in functions(such as date, time,mathmatics and encryption functions),<br>all the cross-storage engine functionality are realized on this layer, like storage process, trigger and view</p>
+<p>Storage Engine Layer charges the storage and extract of data, whose framework is plug-in type, which support multiple storage engine such as InnoDB,MylSAM, Memory etc.<br>Currently, InnoDB is mainly used, it as default storage engine after MYSQL 5.5.5.<br>That means without defining an engine type, the default one is InnoDB when you create a table.<br>However you can assign other engines too, system would use memory engine if you used engine= memory when create table.<br>Different data storage methods are difference with using different storage engines, as well as function support.</p>
+<p>From the picture, it’s clear that all the storage engines share the same Server Layer.</p>
+<h4 id="Connectors"><a href="#Connectors" class="headerlink" title="Connectors"></a>Connectors</h4><p>First step, when you connect to the DataBase, connectors are meet firstly, which are getting connect, acquiring limitations, maintains and managing connection.<br>Command as:</p>
+<p>mysql -h$ip -P$port -u$user -p</p>
+<p>After finished this, input password in the interact dialogue, password can also behind -p, but it may lead your password leaked.<br>连接命令中，mysql 是客户端工具，用来与服务器建立连接。<br>完成TCP 握手之后，连接器开始认证身份，使用的就是刚输入的用户名和密码。</p>
+<p>.If account/password isn’t correct, you will received error info “Access denied for user”, then end execution by client program.<br>.If you passed the verification, connector will figure out your limitation. Permissions your account have are depend  on the limitations found now.</p>
+<p>这意味着，一个用户成功建立连接之后， 即便你使用管理员账号对其进行了修改，也无法影响已存在的连接权限。 修改完成后，需要再次建立连接，权限才可生效。</p>
+<p>连接完成后，如果没有后续动作，这个连接就处于空闲状态。你可以在show processlist 看到。 ， 其中。 command 列显示的是其状态。</p>
+<p>如果客户端太长时间没动静，连接器就会自动断开，这个时间由参数 wait_timeout 控制的，默认值是8小时。<br>若连接断开之后，客户端再次发送请求得话，会收到一个错误提醒：Lost connection to Mysql server during query。</p>
+<p>数据库里面，长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。<br>短连接，指每次执行完很少得几次查询就断开连接，下次查询再重新建立一个。</p>
+<p>建立连接得过程通常是比较复杂得，所以需要尽量减少建立连接得动作，也就是尽量使用长连接。<br>全部使用长连接后得可能问题， 有时候， MYSQL 占用内存涨得特别快，因为MYSQL 在执行过程中临时使用的内存是管理在连接对象里面的。<br>这些资源只有在断开连接才会释放， 长时间积累下来，可能会导致内存占用太大，被系统强行杀掉（OOM）， 从现象看就是MYSQL 异常重启。</p>
+<p>解决方案：</p>
+<ol>
+<li><p>定期断开长连接。 使用一段时间，或者程序里面判断执行过一个占用内存的大查询后，断开连接， 之后要查询再重连接。</p>
+</li>
+<li><p>若使用的是MYSQL 5.7 或更新版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源。 这个过程不需要重连和重新做权限验证，但会将连接恢复到刚刚创建完成时的状态。</p>
+</li>
+</ol>
+<h4 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h4><p>建立完连接后，可以执行select 语句。 执行逻辑就会来到第二步： 查询缓存。</p>
+<p>mysql拿到查询请求后，会先到查询缓存看看，查看是否之前执行过这条语句. 之前执行过的语句以及结果可能会以key-vlaue对的形式，被直接缓存在内存中。key 是客户端工具，用来与服务器建立连接。<br>是查询语句， value 是查询结果。如能查询到，则value 结果可直接返回。</p>
+<p>若语句不在查询缓存中，就会继续执行后面的执行阶段。 执行完成后，执行结果会被存入查询缓存中。效率会很高。<br>但查询缓存往往弊大于利。</p>
+<p>查询缓存的失效会非常频繁， 只要有对一个表进行更新，此表的所有查询缓存会被清空。对于更新压力大的数据库来说， 查询缓存的命中率会非常低。<br>除非业务是一张静态表，很久才会更新一次，如一个系统配置表。</p>
+<p>好在MYSQL 也提供了这种“按需使用”的方式。 可将参数 query_cache_type 设置成DEMAND， 这样对于默认<br>SQL 语句都不使用查询缓存。 而对于要确定使用查询缓存的语句， 可以用SQL_CHACE显式指定， 如：</p>
+<p>select SQL_CACHE * from T where ID=10;</p>
+<p>Note： MYSQL 8.0 查询缓存功能被删掉。</p>
+<h4 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h4><p>MySQL 会对SQL 语句进行解析。</p>
+<p>分析器会做“语法分析”， MYSQL 需要识别里面的字符串分别是什么，代表什么。从select 关键字开始为查询语句， 然后是表名， 列名。<br>根据识别做语法分析，得出结果，语法分析器会根据语法规则，判断输入的SQL 语句是否满足MySQL 语法。（syntax）</p>
+<h4 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h4><p>执行之前需要进行优化器处理。</p>
+<p>优化器在表里面有多个索引的时候，决定使用哪个索引，或者在一个语句有多表关联（join）的时候，决定各个表的连接顺序。<br>如：<br>select * from t1 join t2 using(ID) where  t1.c = 10 and t2.d = 20;</p>
+<p>.既可以先从表t1 里面 取出 c = 10 的记录的ID 值， 再根据ID 值 关联到表t2, 再 判断t2 里面d的值是否是20<br>.也可以°t2里 d=20的ID 值， 再根据ID 值关联到t1, 再判断t1 里面c 的值是否等于10</p>
+<p>两种方法的逻辑结果一样， 但执行效率会不同， 而优化器的左右决定选择使用哪个方案。</p>
+<h4 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h4><p>开始执行的时候，需要判断用户是否对表T 有无执行查询权限，如没有，则返回没有权限的错误。</p>
+<p>ERROR 1142 (42000): SELECT command denied to user ‘’ for table ‘T’</p>
+<p>若有权限，则继续执行，打开表，执行器会根据表的引擎定义，去使用这个引擎提供的接口。</p>
+<p>如例子中， 表T ，ID 字段没有索引， 那么执行器的执行流程是：</p>
+<ol>
+<li>调用InnoDB 引擎接口取这个表的第一行， 判断 ID 值是否是10， 若不是，跳过， 若是则将这行存在结果集中</li>
+<li>调用引擎接口取“下一行”， 重复相同的判断逻辑， 直到取到这个表的最后一行。</li>
+<li>执行器将上述遍历过程中所有满足条件的行组成的记录集左右结果返回客户端。</li>
+</ol>
+<p>对于有索引的表，执行的逻辑也差不多。 第一次调用的是“取满足条件的第一行”这个接口， 之后循环取“满足的下一行”接口，这些接口都是引擎中已经定义好的。</p>
+<p>慢查询日志中有ROW_EXAMINED 的字段， 表示这个语句执行过程中扫描了多少行。这个值再执行器每次调用引擎获取数据行的时候累加的。</p>
+<p>在有些场景下， 执行器调用一次，在引擎内部则扫描了多行， 因此扫描引擎行数跟 rows_examined 并不是完全相同的。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>sql 的几个step：</p>
+<ol>
+<li><p>连接<br>连接管理模块，接受请求，连接进程获取用户权限</p>
+</li>
+<li><p>执行<br>查询缓存（不是必须）<br>分析器，分析语法，判断是否有错，识别关键字， 表name, row name<br>优化器， 决定使用哪个索引</p>
+</li>
+</ol>
+<p>执行器， 先查是否有权限查询，无返回无权限错误，有则打开表执行。调用引擎结果，存取结果集<br>最后收集结果集，返回给客户端。</p>
+<ol start="3">
+<li>等待，释放（长连接）， 最后重新连接请求。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/12/15/MYSQL-Study1/" data-id="ck1j8sfqp0010ikvx6mzio5cs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SQA-Task" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/echoblog.github.io/2018/11/10/SQA-Task/" class="article-date">
+  <time datetime="2018-11-10T09:45:07.000Z" itemprop="datePublished">2018-11-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/echoblog.github.io/2018/11/10/SQA-Task/">SQA Task</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="SQA-Task"><a href="#SQA-Task" class="headerlink" title="SQA Task"></a>SQA Task</h2><p><img src="/echoblog.github.io/2018/11/10/SQA-Task/SQA Task.bmp" alt="SQA-Task"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/11/10/SQA-Task/" data-id="ck1j8sfrz0028ikvxivqj980w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Trouble-Shooting1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/echoblog.github.io/2018/10/21/Trouble-Shooting1/" class="article-date">
@@ -107,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Trouble-Shooting1/" data-id="cjz3cwnyj002ztsvxd47f7mf8" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Trouble-Shooting1/" data-id="ck1j8sfse002hikvx1g1b8opw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li></ul>
@@ -150,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Security-Test/" data-id="cjz3cwnxh002ftsvxe9vbvoan" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/Security-Test/" data-id="ck1j8sfs7002aikvx63d3vj9i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
@@ -193,130 +336,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/SQA-Workflow/" data-id="cjz3cwnx10028tsvx9i25drq7" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/21/SQA-Workflow/" data-id="ck1j8sfrr0024ikvxezc0hmuf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Auto-Framwork-Building" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/" class="article-date">
-  <time datetime="2018-10-20T08:10:57.000Z" itemprop="datePublished">2018-10-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/SQA/">SQA</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/">Pytest+ Jenkins + Allure Auto Framework Building</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Prepare"><a href="#Prepare" class="headerlink" title="Prepare"></a>Prepare</h2><p>Windows 10 </p>
-<h3 id="Software-Plugins"><a href="#Software-Plugins" class="headerlink" title="Software/Plugins"></a>Software/Plugins</h3><p>python3<br>jenkins<br>java<br>allure</p>
-<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="Python-install"><a href="#Python-install" class="headerlink" title="Python install"></a>Python install</h3><ol>
-<li>download exe from <a href="https://www.python.org/downloads/release/python-370/" target="_blank" rel="noopener">https://www.python.org/downloads/release/python-370/</a></li>
-<li>install</li>
-<li>environment configuration setting:</li>
-<li>Compter&gt; System&gt;Advance System Settings&gt;Environment&gt;Path<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/environment.png" alt="Configure Setting"></li>
-<li>Check python installed or not， input python<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/python version.png" alt="Python Version"></li>
-</ol>
-<h3 id="Java-install"><a href="#Java-install" class="headerlink" title="Java install"></a>Java install</h3><ol>
-<li>download package from <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a></li>
-<li>install </li>
-<li>environment configuration setting:</li>
-<li>same as java</li>
-<li>Check java installed or not， input java -version in cmd<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/java version.png" alt="JAVA Version"></li>
-</ol>
-<h3 id="Tomcat-installation"><a href="#Tomcat-installation" class="headerlink" title="Tomcat installation"></a>Tomcat installation</h3><ol>
-<li>Download tomcat</li>
-<li><a href="https://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi</a><br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/tomcat install.png" alt="Tomcat Install"></li>
-</ol>
-<h3 id="Jenkins-installation"><a href="#Jenkins-installation" class="headerlink" title="Jenkins installation"></a>Jenkins installation</h3><ol>
-<li>download : <a href="https://jenkins.io/download/" target="_blank" rel="noopener">https://jenkins.io/download/</a></li>
-<li><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></li>
-<li>install the plungins which are recommanded, and set administors </li>
-<li>login<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/jenkins start.png" alt="Jenkins Start"></li>
-</ol>
-<h3 id="Allure-installation"><a href="#Allure-installation" class="headerlink" title="Allure installation"></a>Allure installation</h3><h2 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h2><ol>
-<li>Cannot run the software mainly due to the paths are not correct</li>
-<li>Jenkins can not run always due to the port is occupied</li>
-<li>If you forget you‘re jenkins’ administors password, you can do the following steps</li>
-</ol>
-<p>One situation: password isn’t changed<br>A}Enter in  ..\Jenkins\secrets, open initialAdminPassword file, copy password<br>B}Visit Jenkins webpage, enter admin and the password<br>C}Login and change the password </p>
-<p>Second situation: password is changed<br>A)Delete config.xml under Jenkins file and save<br><img src="/echoblog.github.io/2018/10/20/Auto-Framwork-Building/xml.png" alt="xml"><br>B} Rebbot Jenkins service<br>C} Enter main page&gt; “System Management” &gt; “Configure Global Security”<br>D} Enable “Enable Security”<br>E} Check “Jenkins’ user database”, save<br>F} Enter main page&gt; “System Management” &gt; “Manage Users”<br>G} Enter “User list”<br>H} Modify password, then login again</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/20/Auto-Framwork-Building/" data-id="cjz3cwnva000ltsvxfjgo2hr9" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-IELTS" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/echoblog.github.io/2018/10/20/IELTS/" class="article-date">
-  <time datetime="2018-10-20T08:06:35.000Z" itemprop="datePublished">2018-10-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/echoblog.github.io/categories/English/">English</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/echoblog.github.io/2018/10/20/IELTS/">IELTS</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Ielts-Speaking"><a href="#Ielts-Speaking" class="headerlink" title="Ielts Speaking"></a>Ielts Speaking</h2><p><img src="/echoblog.github.io/2018/10/20/IELTS/Ielts Speaking.bmp" alt="Ielts Speaking"><br><img src="/echoblog.github.io/2018/10/20/IELTS/Ielts Speaking.mmap" alt="Ielts Speaking"></p>
-<h2 id="Ielts-Writing-Task1"><a href="#Ielts-Writing-Task1" class="headerlink" title="Ielts Writing Task1"></a>Ielts Writing Task1</h2><p><img src="/echoblog.github.io/2018/10/20/IELTS/Ielts Writing Task1.bmp" alt="Ielts Writing Task1"><br><img src="/echoblog.github.io/2018/10/20/IELTS/Ielts Writing Task1.mmap" alt="Ielts Writing Task1"></p>
-<h2 id="Ielts-Writing-Task2"><a href="#Ielts-Writing-Task2" class="headerlink" title="Ielts Writing Task2"></a>Ielts Writing Task2</h2><p><img src="/echoblog.github.io/2018/10/20/IELTS/Ielts Writing Task2.bmp" alt="Ielts Writing Task1"><br><img src="/echoblog.github.io/2018/10/20/IELTS/Ielts Writing Task2.mmap" alt="Ielts Writing Task2"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2018/10/20/IELTS/" data-id="cjz3cwnuk0004tsvxb5bg06yt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li></ul>
 
     </footer>
   </div>
@@ -329,7 +352,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/11/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/10/">10</a><a class="page-number" href="/echoblog.github.io/page/11/">11</a><span class="page-number current">12</span>
+    <a class="extend prev" rel="prev" href="/echoblog.github.io/page/11/">&laquo; Prev</a><a class="page-number" href="/echoblog.github.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/echoblog.github.io/page/10/">10</a><a class="page-number" href="/echoblog.github.io/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/echoblog.github.io/page/13/">13</a><a class="extend next" rel="next" href="/echoblog.github.io/page/13/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -340,7 +363,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Lanuage/">Lanuage</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/ProjectManagement/">ProjectManagement</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/AutoTesting/">AutoTesting</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/English/">English</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/HTTP/">HTTP</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Jmeter/">Jmeter</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Lanuage/">Lanuage</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Learning/">Learning</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/MYSQL/">MYSQL</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Operation-System/">Operation System</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Performance/">Performance</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/ProjectManagement/">ProjectManagement</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/SQA/">SQA</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Strategy/">Strategy</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Tools/">Tools</a></li><li class="category-list-item"><a class="category-list-link" href="/echoblog.github.io/categories/Trouble-shooting/">Trouble-shooting</a></li></ul>
     </div>
   </div>
 
@@ -350,7 +373,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/PMP/">PMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/js/">js</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Automation/">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/CI/">CI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/English/">English</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Integration/">Integration</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Interface/">Interface</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Machine-Leaning/">Machine Leaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/PMP/">PMP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Performance/">Performance</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Protocol/">Protocol</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/QA/">QA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/SQA/">SQA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Scripts/">Scripts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TestingMethod/">TestingMethod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Tools/">Tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/Trouble-Shooting/">Trouble Shooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/TroubleShooting/">TroubleShooting</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/View/">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/echoblog.github.io/tags/js/">js</a></li></ul>
     </div>
   </div>
 
@@ -360,7 +383,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/PMP/" style="font-size: 10px;">PMP</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a> <a href="/echoblog.github.io/tags/js/" style="font-size: 10px;">js</a>
+      <a href="/echoblog.github.io/tags/Automation/" style="font-size: 10px;">Automation</a> <a href="/echoblog.github.io/tags/CI/" style="font-size: 12px;">CI</a> <a href="/echoblog.github.io/tags/English/" style="font-size: 10px;">English</a> <a href="/echoblog.github.io/tags/Integration/" style="font-size: 10px;">Integration</a> <a href="/echoblog.github.io/tags/Interface/" style="font-size: 10px;">Interface</a> <a href="/echoblog.github.io/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/echoblog.github.io/tags/Machine-Leaning/" style="font-size: 10px;">Machine Leaning</a> <a href="/echoblog.github.io/tags/PMP/" style="font-size: 10px;">PMP</a> <a href="/echoblog.github.io/tags/Performance/" style="font-size: 16px;">Performance</a> <a href="/echoblog.github.io/tags/Protocol/" style="font-size: 14px;">Protocol</a> <a href="/echoblog.github.io/tags/QA/" style="font-size: 20px;">QA</a> <a href="/echoblog.github.io/tags/SQA/" style="font-size: 12px;">SQA</a> <a href="/echoblog.github.io/tags/Scripts/" style="font-size: 18px;">Scripts</a> <a href="/echoblog.github.io/tags/TestingMethod/" style="font-size: 10px;">TestingMethod</a> <a href="/echoblog.github.io/tags/Tools/" style="font-size: 10px;">Tools</a> <a href="/echoblog.github.io/tags/Trouble-Shooting/" style="font-size: 10px;">Trouble Shooting</a> <a href="/echoblog.github.io/tags/TroubleShooting/" style="font-size: 10px;">TroubleShooting</a> <a href="/echoblog.github.io/tags/View/" style="font-size: 10px;">View</a> <a href="/echoblog.github.io/tags/js/" style="font-size: 10px;">js</a>
     </div>
   </div>
 
@@ -369,7 +392,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/echoblog.github.io/archives/2018/10/">October 2018</a></li></ul>
     </div>
   </div>
 
@@ -382,6 +405,14 @@
       <ul>
         
           <li>
+            <a href="/echoblog.github.io/2019/09/25/git-week1/">git_week1</a>
+          </li>
+        
+          <li>
+            <a href="/echoblog.github.io/2019/08/20/IntegrationStratergy/">IntegrationStrategy</a>
+          </li>
+        
+          <li>
             <a href="/echoblog.github.io/2019/08/09/ProjectLeadership/">ProjectLeadership</a>
           </li>
         
@@ -391,14 +422,6 @@
         
           <li>
             <a href="/echoblog.github.io/2019/06/03/Javascript1/">Javascript1</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/26/Jmeter7/">Jmeter7 - 扩展插件</a>
-          </li>
-        
-          <li>
-            <a href="/echoblog.github.io/2019/05/20/Jmeter6/">Jmeter6</a>
           </li>
         
       </ul>
