@@ -7,17 +7,17 @@
   
   <title>git_week1 | Ying&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="git checkout branch 创建branch">
+  <meta name="description" content="如何初始化git  initgit remote add origin https://github.com/echo557/git_study1.gitgit add .git commit -m commentgit push –set-upstream origin mastergit branch –set-upstream-to=origin/ master  报错：$ git pul">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git_week1">
 <meta property="og:url" content="https://echo557.github.io/echoblog.github.io/2019/09/25/git-week1/index.html">
 <meta property="og:site_name" content="Ying&#39;s Blog">
-<meta property="og:description" content="git checkout branch 创建branch">
+<meta property="og:description" content="如何初始化git  initgit remote add origin https://github.com/echo557/git_study1.gitgit add .git commit -m commentgit push –set-upstream origin mastergit branch –set-upstream-to=origin/ master  报错：$ git pul">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-09T12:20:56.693Z">
+<meta property="og:updated_time" content="2019-10-09T14:11:17.841Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git_week1">
-<meta name="twitter:description" content="git checkout branch 创建branch">
+<meta name="twitter:description" content="如何初始化git  initgit remote add origin https://github.com/echo557/git_study1.gitgit add .git commit -m commentgit push –set-upstream origin mastergit branch –set-upstream-to=origin/ master  报错：$ git pul">
   
     <link rel="alternate" href="/echoblog.github.io/atom.xml" title="Ying&#39;s Blog" type="application/atom+xml">
   
@@ -87,13 +87,24 @@
     <div class="article-entry" itemprop="articleBody">
       
         <ol>
-<li>git checkout branch 创建branch</li>
+<li>如何初始化<br>git  init<br>git remote add origin <a href="https://github.com/echo557/git_study1.git" target="_blank" rel="noopener">https://github.com/echo557/git_study1.git</a><br>git add .<br>git commit -m comment<br>git push –set-upstream origin master<br>git branch –set-upstream-to=origin/<branch> master</branch></li>
 </ol>
+<p>报错：<br>$ git pull<br>fatal: refusing to merge unrelated histories<br>分析：<br>他们是两个不同的项目，要把两个不同的项目合并，git需要添加一句代码.<br>解决：<br>$ git pull origin master –allow-unrelated-histories</p>
+<ol start="2">
+<li>git checkout branch 创建branch<br>–branch 是一个lable<br>–A branch is a set of commits that trace back to the project’s first commit<br>–Checkout involves updating HEAD and updating the working tree<br>–A detached HEAD reference points directly to a commit<br>–Fix a detached HEAD by creating a branch</li>
+</ol>
+<p>git branch -b branchname  ： HEAD 指针指向branchname<br>git branch -d   branchname： Delete branch</p>
+<ol start="3">
+<li>git reflog： return a local list<br>git log –oneline –graph –all</li>
+<li>merging</li>
+</ol>
+<p>–Fast-forward merge : Moves the base branch label to the tip of the topic branch<br>Condition: must in one line<br>Steps:<br>1)checkout master<br>2)Merge featureX<br>3)Delete the featureX branch</p>
+<p>–Merge commit<br>–Squash merge<br>–Rebase</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://echo557.github.io/echoblog.github.io/2019/09/25/git-week1/" data-id="ck1j8sftc002rikvx7ky4cc4i" class="article-share-link">Share</a>
+      <a data-url="https://echo557.github.io/echoblog.github.io/2019/09/25/git-week1/" data-id="ck1jd1wmb002z4kvxmphwy21f" class="article-share-link">Share</a>
       
       
     </footer>
